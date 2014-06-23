@@ -9,3 +9,7 @@ ISDSWorkshop.Rproj
 # R data files from past sessions
 .Rdata
 .Rproj.user
+
+
+# Ignore derivative files
+vignettes/*.html
