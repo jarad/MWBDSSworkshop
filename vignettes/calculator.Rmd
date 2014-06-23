@@ -1,0 +1,57 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{An Introduction to the corrplot package}
+-->
+
+# Calculator functions in R
+
+
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(out.extra='style="display:block; margin: auto"', fig.align="center")
+```
+
+
+# Basic calculator functions in R
+
+
+```{r}
+1+1
+1-1
+4/2
+4*2
+```
+
+
+Advanced calculator functions in R
+----------------------------------
+
+```{r}
+sqrt(4)
+cos(2*pi)
+abs(-4)
+log(10)
+log10(10)
+```
+
+
+Using variables
+---------------
+
+```{r}
+a = 2
+b = 3
+a*b
+```
+
+
+Using variables
+---------------
+
+```{r}
+number_of_cases = 10
+population = 1000
+attack_rate = number_of_cases / population
+attack_rate
+```
