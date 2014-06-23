@@ -13,3 +13,4 @@ ISDSWorkshop.Rproj
 
 # Ignore derivative files
 vignettes/*.html
+vignettes/*.md
