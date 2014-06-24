@@ -7,5 +7,8 @@ Author: Jarad Niemi
 Maintainer: Jarad Niemi <niemi@iastate.edu>
 Description: This package provides demos for the Introduction to R Workshop at the International Society for Disease Surveillance. 
 License: GPL (>= 2)
+VignetteBuilder: knitr
 Depends: 
   R (>= 3.0.0)
+Suggests:
+  knitr
