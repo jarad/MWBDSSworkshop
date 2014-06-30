@@ -5,7 +5,7 @@ vignettes/*.md
 
 # Files created by roxygenise
 man/*.Rd
-!man/ISDSWorkshop.Rd
+!man/ISDSWorkshop-package.Rd
 
 
 # History files
