@@ -1,5 +1,6 @@
 
-*.html
+vignettes/*.html
+vignettes/*.md
 
 # History files
 .Rhistory
