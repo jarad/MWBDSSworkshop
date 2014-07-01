@@ -1,14 +1,15 @@
 Package: ISDSWorkshop
 Type: Package
-Title: ISDS Workshop 
+Title: ISDS Workshop
 Version: 0.1
 Date: 2014-06-30
 Author: Jarad Niemi
 Maintainer: Jarad Niemi <niemi@iastate.edu>
-Description: An R package for slides and R code for the International Society for Disease Surveillance R workshop.
+Description: An R package for slides and R code for the International Society
+    for Disease Surveillance R workshop.
 License: GPL (> 2)
-Suggests: 
-  ggplot2,
-  reshape2,
-  knitr,
-  plyr
+Suggests:
+    ggplot2,
+    reshape2,
+    knitr,
+    plyr
