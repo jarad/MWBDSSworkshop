@@ -1,5 +1,5 @@
 ---
-title: "Index"
+title: "Introduction to R"
 output:
   html_document:
     toc: true
@@ -61,9 +61,9 @@ Multiple lines can be run in sequence by selecting them and then using `Ctrl-R` 
 
 
 
-# Using this documentation
+# Activity
 
 One of the most effective ways to use this documentation is to cut-and-paste the commands into a script and then execute them. 
 
-Practice with this [activity](activity/intro.html).
+Practice with this [activity](intro-activity.html).
 

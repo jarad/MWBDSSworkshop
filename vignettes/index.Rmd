@@ -7,30 +7,29 @@ output:
 
 <!--
 %\VignetteEngine{knitr::rmarkdown}
-%\VignetteIndexEntry{Index}
+%\VignetteIndexEntry{Activity Index}
 -->
-
 
 # Introduction to R
 
-## [Introduction to R](intro.html)
-## Using R as a calculator
-## Data types in R
-## Data frames in R
-## Summarizing information
-## Getting help
+- [Introduction to R](intro.html) ([activity](intro-activity.html))
+- [Using R as a calculator](calculator.html) ([activity](calculator-activity.html))
+- Data types in R
+- Data frames in R
+- Summarizing information
+- Getting help
 
 
 
 # Graphics with R (ggplot2)
 
-## Reshaping data frames in R
+- Reshaping data frames in R
 
 
 
 # Advanced graphics with R (ggplot2)
 
-## Reading external files
+- Reading external files
 
 
 
