@@ -7,6 +7,7 @@ Author: Jarad Niemi
 Maintainer: Jarad Niemi <niemi@iastate.edu>
 Description: An R package for slides and R code for the International Society
     for Disease Surveillance R workshop.
+VignetteBuilder: knitr
 License: GPL (> 2)
 Suggests:
     ggplot2,
