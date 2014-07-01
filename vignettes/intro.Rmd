@@ -1,0 +1,69 @@
+---
+title: "Index"
+output:
+  html_document:
+    toc: true
+---
+
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Introduction to R}
+-->
+
+
+# Introduction to R
+
+For an extremely detailed introduction, please see
+
+```{r, eval=FALSE}
+help.start()
+```
+
+In this documentation, the above command will be executed at the command prompt, see below. 
+
+
+# R interface
+
+In contrast to many other statistical software packages that use a point-and-click interface, e.g. SPSS, JMP, Stata, etc, R has a command-line interface. The command line has a command prompt, e.g. `>`, see below.
+
+```{r, eval=FALSE}
+>
+```
+
+This means, that you will be entering commands on this command line and hitting enter to execute them, e.g. 
+
+```{r, eval=FALSE}
+help()
+```
+
+Use the `up arrow` to recover past commands.
+
+```{r, eval=FALSE}
+hepl()
+help() # Use up arrow and fix
+```
+
+
+# R GUI (or [RStudio](http://www.rstudio.com/))
+
+Most likely, you are using a graphical user interface (GUI) and therefore, in addition, to the command line, you also have a windowed version of R with some point-and-click options, e.g. File, Edit, and Help.
+
+In particular, there is an editor to create a new R script. So rather than entering commands on the command line, you will write commands in the script and then send those commands to the command line using `Ctrl-R` (PC) or `Command-Enter` (Mac).
+
+```{r}
+a = 1 
+b = 2
+a+b
+```
+
+Multiple lines can be run in sequence by selecting them and then using `Ctrl-R` (PC) or `Command-Enter` (Mac).
+
+
+
+
+# Using this documentation
+
+One of the most effective ways to use this documentation is to cut-and-paste the commands into a script and then execute them. 
+
+Practice with this [activity](activity/intro.html).
+
