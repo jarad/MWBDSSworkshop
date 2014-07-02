@@ -1,1 +1,3 @@
 ISDSWorkshop.Rproj
+^.*\.Rproj$
+^\.Rproj\.user$
