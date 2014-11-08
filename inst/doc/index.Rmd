@@ -1,0 +1,37 @@
+---
+output: pdf_document
+---
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Activity Index}
+-->
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE, cache.path = 'DocumentName_cache/', fig.path='figure/')
+```
+
+# Introduction to R
+
+- [Introduction to R](intro.html) ([activity](intro-activity.html))
+- [Using R as a calculator](calculator.html) ([activity](calculator-activity.html))
+- Data types in R
+- Data frames in R
+- Summarizing information
+- Getting help
+
+
+
+# Graphics with R (ggplot2)
+
+- Reshaping data frames in R
+
+
+
+# Advanced graphics with R (ggplot2)
+
+- Reading external files
+
+
+
+
+# Algorithms for disease surveillance

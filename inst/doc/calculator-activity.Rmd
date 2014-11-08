@@ -1,0 +1,45 @@
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{R Calculator activity}
+-->
+
+
+# Bayes' Rule
+
+Suppose an individual tests positive for a disease, what is the probability the individual has the disease? Let 
+
+- $D$ indicates the individual has the disease
+- $N$ means the individual does not have the disease
+- $+$ indicates a positive test result
+- $-$ indicates a negative test 
+
+The above probability can be calculated using [Bayes' Rule](http://en.wikipedia.org/wiki/Bayes%27_rule):
+
+\[ P(D|+) = \frac{P(+|D)P(D)}{P(+|D)P(D)+P(+|N)P(N)} = \frac{P(+|D)P(D)}{P(+|D)P(D)+(1-P(-|N))\times(1-P(D))} \]
+
+where
+
+- $P(+|D)$ is the [sensitivity](http://en.wikipedia.org/wiki/Sensitivity_and_specificity) of the test
+- $P(-|N)$ is the [specificity](http://en.wikipedia.org/wiki/Sensitivity_and_specificity) of the test
+- $P(D)$ is the [prevalence](http://en.wikipedia.org/wiki/Prevalence) of the disease
+
+# Activity 
+
+Calculate the probability the individual has the disease if the test is positive when
+
+- the specificity of the test is 0.99, 
+- the sensistivity of the test is 0.95, and
+- the prevalence of the disease is 0.001.
+
+```{r}
+specificity = 0.99
+sensitivity = 0.95
+prevalence = 0.001
+probability = (specificity*prevalence) / (specificity*prevalence + (1-sensitivity)*(1-prevalence))
+probability
+```
+
+Yes, it is only about 2%!
+
+Return to [calculator slides](calculator.html).
+
