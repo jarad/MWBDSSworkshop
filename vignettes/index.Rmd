@@ -2,6 +2,9 @@
 %\VignetteEngine{knitr::rmarkdown}
 %\VignetteIndexEntry{Activity Index}
 -->
+```{r setup, include=FALSE}
+library(knitr)
+```
 
 # Introduction to R
 
