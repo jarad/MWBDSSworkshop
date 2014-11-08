@@ -6,7 +6,7 @@ output:
 ---
 
 <!--
-%\VignetteEngine{knitr::rmarkdown}
+%\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Activity Index}
 -->
 
