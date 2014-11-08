@@ -8,9 +8,12 @@ Maintainer: Jarad Niemi <niemi@iastate.edu>
 Description: An R package for slides and R code for the International Society
     for Disease Surveillance R workshop.
 VignetteBuilder: knitr
+Depends:
+    R (>= 3)
 License: GPL (> 2)
 Suggests:
     ggplot2,
-    reshape2,
     knitr,
-    plyr
+    plyr,
+    reshape2,
+    rmarkdown
