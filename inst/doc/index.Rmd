@@ -1,5 +1,8 @@
 ---
-output: pdf_document
+title: "Index"
+output:
+  html_document:
+    toc: true
 ---
 <!--
 %\VignetteEngine{knitr::knitr}
@@ -7,7 +10,6 @@ output: pdf_document
 -->
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache=TRUE, cache.path = 'DocumentName_cache/', fig.path='figure/')
 ```
 
 # Introduction to R
