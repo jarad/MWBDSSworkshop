@@ -3,6 +3,9 @@
 #' A data set containing fictitious patient data for gastrointestinal (GI)
 #' visits to an emergency department (ER). 
 #' 
+#' @name GI
+#' @docType data
+#' @author Ian Painter <\url{ipainter@uw.edu}>
 #' \itemize{
 #'   \item id. patient id
 #'   \item date. date of visit to ER
@@ -13,7 +16,7 @@
 #'   \item chief_complain. free text chief complaint
 #'   \item syndrome. syndromic surveillance code 
 #' }
-#' 
+#' @keywords datasets
+#' @usage data(GI)
 #' @format A data frame with 21244 rows and 8 columns
-#' @name GI
 NULL
