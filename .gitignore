@@ -15,3 +15,5 @@ vignettes/*.md
 
 # RStudio file
 ISDSWorkshop.Rproj
+
+inst/
