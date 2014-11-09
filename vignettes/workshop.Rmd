@@ -1,14 +1,11 @@
 ---
-title: "Index"
+title: "Training Outline"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Training Outline}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
-<!--
-
--->
 
 # ISDS Introduction to R for Biosurveillance Pre-conference Training
 
