@@ -1,0 +1,27 @@
+---
+title: "Introduction to R - Activity Solutions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to R - Activity Solutions}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r}
+x = 1:10
+y = rep(c(1,2), each=5)
+m = lm(y~x)
+s = summary(m)
+```
+
+Now, look at the result of each line
+
+```{r}
+x
+y
+m
+s
+s$r.squared
+```
+
+For those who are familiar with linear regression, this may look familiar. 

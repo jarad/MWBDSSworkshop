@@ -1,14 +1,11 @@
 ---
 title: "Introduction to R"
-output:
-  html_document:
-    toc: true
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Training Outline}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
-
-<!--
-%\VignetteEngine{knitr::rmarkdown}
-%\VignetteIndexEntry{Introduction to R}
--->
 
 
 # Introduction to R
@@ -61,9 +58,28 @@ Multiple lines can be run in sequence by selecting them and then using `Ctrl-R` 
 
 
 
-# Activity
+## Activity
 
 One of the most effective ways to use this documentation is to cut-and-paste the commands into a script and then execute them. 
 
-Practice with this [activity](intro-activity.html).
+Cut-and-paste the following commands into a **new script** and then run those commands directly from the script using `Ctrl-R` (PC) or `Command-Enter` (Mac).
+
+```{r}
+x = 1:10
+y = rep(c(1,2), each=5)
+m = lm(y~x)
+s = summary(m)
+```
+
+Now, look at the result of each line
+
+```{r, eval=FALSE}
+x
+y
+m
+s
+s$r.squared
+```
+
+[Solution](intro-solution.html).
 
