@@ -1,17 +1,16 @@
 ---
-title: "Calculator"
-output:
-  html_document:
-    toc: true
+title: "Using R as a calculator"
+author: "Jarad Niemi"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using R as a calculator}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
-<!--
-%\VignetteEngine{knitr::rmarkdown}
-%\VignetteIndexEntry{Using R as a calculator}
--->
+# Using R as a calculator
 
-
-# Basic calculator operations
+## Basic calculator operations
 
 All basic calculator operations can be performed in R. 
 
@@ -24,7 +23,7 @@ All basic calculator operations can be performed in R.
 
 
 
-# Advanced calculator operations
+## Advanced calculator operations
 
 Many advanced calculator operations are also available.
 
@@ -39,7 +38,7 @@ log(10,base=10)
 
 
 
-# Using variables
+## Using variables
 
 A real advantage to using R rather than a calculator (or calculator app) is the ability to store quantities using variables.
 
@@ -54,7 +53,7 @@ a*b
 
 
 
-# Using informative variable names
+## Using informative variable names
 
 While using variables alone is useful, it is much more useful to use informative variables names.
 
@@ -72,9 +71,33 @@ attack_rate
 
 
 
-# Activity
+## Activity - Bayes' Rule
 
-Practice using the calculator functionality of R with this [activity](calculator-activity.html).
+Suppose an individual tests positive for a disease, what is the probability the individual has the disease? Let 
+
+- $D$ indicates the individual has the disease
+- $N$ means the individual does not have the disease
+- $+$ indicates a positive test result
+- $-$ indicates a negative test 
+
+The above probability can be calculated using [Bayes' Rule](http://en.wikipedia.org/wiki/Bayes%27_rule):
+
+\[ P(D|+) = \frac{P(+|D)P(D)}{P(+|D)P(D)+P(+|N)P(N)} = \frac{P(+|D)P(D)}{P(+|D)P(D)+(1-P(-|N))\times(1-P(D))} \]
+
+where
+
+- $P(+|D)$ is the [sensitivity](http://en.wikipedia.org/wiki/Sensitivity_and_specificity) of the test
+- $P(-|N)$ is the [specificity](http://en.wikipedia.org/wiki/Sensitivity_and_specificity) of the test
+- $P(D)$ is the [prevalence](http://en.wikipedia.org/wiki/Prevalence) of the disease
+
+Calculate the probability the individual has the disease if the test is positive when
+
+- the specificity of the test is 0.99, 
+- the sensistivity of the test is 0.95, and
+- the prevalence of the disease is 0.001.
+
+
+When you have completed the activity, compare your results to the [solutions](calculator-solution.html).
 
 
 

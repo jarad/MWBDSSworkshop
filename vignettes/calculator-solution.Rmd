@@ -1,0 +1,30 @@
+---
+title: "Using R as a calculator - activity solution"
+author: "Jarad Niemi"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using R as a calculator - activity solution}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+
+# Bayes Rule' - Solution
+
+Calculate the probability the individual has the disease if the test is positive when
+
+- the specificity of the test is 0.99, 
+- the sensistivity of the test is 0.95, and
+- the prevalence of the disease is 0.001.
+
+```{r}
+specificity = 0.99
+sensitivity = 0.95
+prevalence = 0.001
+probability = (specificity*prevalence) / (specificity*prevalence + (1-sensitivity)*(1-prevalence))
+probability
+```
+
+Yes, it is only about 2%!
+
+

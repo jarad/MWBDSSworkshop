@@ -1,18 +1,19 @@
 ---
 title: "Training Outline"
+author: "Jarad Niemi"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Training Outline}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
 ---
 
 # ISDS Introduction to R for Biosurveillance Pre-conference Training
 
 ## Introduction to R
 
-- [Introduction to R](intro.html) ([activity](intro-activity.html))
-- [Using R as a calculator](calculator.html) ([activity](calculator-activity.html))
+- [Introduction to R](intro.html) 
+- [Using R as a calculator](calculator.html)
 - Reading data into R
   - Reading directly from Excel
 - Descriptive statistics

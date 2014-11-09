@@ -1,5 +1,7 @@
 ---
 title: "Introduction to R - Activity Solutions"
+author: "Jarad Niemi"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to R - Activity Solutions}

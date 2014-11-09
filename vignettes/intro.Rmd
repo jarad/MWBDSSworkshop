@@ -1,8 +1,10 @@
 ---
 title: "Introduction to R"
+author: "Jarad Niemi"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Training Outline}
+  %\VignetteIndexEntry{Introduction to R}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
