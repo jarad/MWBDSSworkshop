@@ -10,8 +10,8 @@
 #'  @author Jarad Niemi <\url{http://jarad.me}>
 #'  @export
 #'  @examples
-#'  workshop()
 #'  \dontrun{
+#'  workshop()
 #'  workshop(write_data = FALSE)
 #'  workshop(clean = FALSE) 
 #'  }
