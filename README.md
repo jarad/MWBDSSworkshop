@@ -11,11 +11,11 @@ Please go to <http://www.r-project.org/> and click on [download R](http://cran.r
 
 ### Windows
 
-Click on `base` and then the link to Download R X.X.X for Windows (where the X will be numbers representing the current version of R). Install this program like any other program on Windows using the all defaults.
+Click on **base** and then the link to Download R X.X.X for Windows (where the X will be numbers representing the current version of R). Install this program like any other program on Windows using the all defaults.
 
 ### (Mac) OS X
 
-Click on the appropriate `.pkg` file depending on which version of Mac OS X you are using. Install this program like any other program on OS X using the all defaults. 
+Click on the appropriate **.pkg** file depending on which version of Mac OS X you are using. Install this program like any other program on OS X using the all defaults. 
 
 ### Linux
 
@@ -23,7 +23,7 @@ If you are using Linux, then I trust you know what you are doing. You can instal
 
 ## Install RStudio
 
-Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct platform under "Installers for ALL Platforms". Install like any other program. 
+Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct platform under **Installers for ALL Platforms**. Install like any other program. 
 
 
 # Install the ISDSWorkshop R package
