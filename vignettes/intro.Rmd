@@ -4,7 +4,6 @@ output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Training Outline}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
 ---
 
 
@@ -81,5 +80,5 @@ s
 s$r.squared
 ```
 
-[Solution](intro-solution.html).
+When you have completed the activity, compare your results to the [solutions](intro-solution.html).
 
