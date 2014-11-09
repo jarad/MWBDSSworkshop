@@ -6,10 +6,12 @@ output:
 ---
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Activity Index}
+%\VignetteIndexEntry{Workshop Index}
 -->
 
-# Introduction to R
+# ISDS R Workshop
+
+## Introduction to R
 
 - [Introduction to R](intro.html) ([activity](intro-activity.html))
 - [Using R as a calculator](calculator.html) ([activity](calculator-activity.html))
@@ -20,17 +22,17 @@ output:
 
 
 
-# Graphics with R (ggplot2)
+## Graphics with R (ggplot2)
 
 - Reshaping data frames in R
 
 
 
-# Advanced graphics with R (ggplot2)
+## Advanced graphics with R (ggplot2)
 
 - Reading external files
 
 
 
 
-# Algorithms for disease surveillance
+## Algorithms for disease surveillance
