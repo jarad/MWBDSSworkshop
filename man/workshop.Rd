@@ -16,8 +16,8 @@ workshop(write_data = TRUE, clean = TRUE, launch_index = TRUE)
 A function that prepares the workshop.
 }
 \examples{
-\dontrun{
- workshop()
+workshop()
+ \dontrun{
  workshop(write_data = FALSE)
  workshop(clean = FALSE)
  }

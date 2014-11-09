@@ -10,10 +10,10 @@ vignette: >
 
 # ISDS Introduction to R for Biosurveillance Pre-conference Training
 
-## Introduction to R
+## [Introduction to R](intro.html)
 
-- [Introduction to R](intro.html) 
-- [Using R as a calculator](calculator.html)
+- Introduction to R
+- Using R as a calculator
 - Reading data into R
   - Reading directly from Excel
 - Descriptive statistics
