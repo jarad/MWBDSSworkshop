@@ -5,7 +5,7 @@
 #' 
 #' @name GI
 #' @docType data
-#' @author Ian Painter <\url{ipainter@uw.edu}>
+#' @author Ian Painter 
 #' \itemize{
 #'   \item id. patient id
 #'   \item date. date of visit to ER
