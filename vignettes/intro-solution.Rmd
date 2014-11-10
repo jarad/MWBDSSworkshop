@@ -10,7 +10,7 @@ vignette: >
 
 
 
-# Introduction
+# <a name="introduction"></a> Introduction
 
 ```{r}
 x = 1:10
