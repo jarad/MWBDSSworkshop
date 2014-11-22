@@ -235,7 +235,7 @@ library(ISDSWorkshop)
 
 This package contains a function to help you get started. 
 
-```{r}
+```{r, warning=FALSE}
 workshop()
 ```
 
