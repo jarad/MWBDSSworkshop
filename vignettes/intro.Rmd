@@ -183,14 +183,15 @@ where
 Calculate the probability the individual has the disease if the test is positive when
 
 - the specificity of the test is 0.99, 
-- the sensistivity of the test is 0.95, and
+- the sensitivity of the test is 0.95, and
 - the prevalence of the disease is 0.001.
 
 
 When you have completed the activity, compare your results to the [solutions](intro-solution.html#calculator).
 
 ```{r, echo=FALSE}
-# Put your answer here.
+# Find the probability the individual has the disease if 
+# specificity is 0.99, sensitivity is 0.95, and prevalence is 0.001
 ```
 
 
@@ -270,12 +271,12 @@ csv stands for comma-separated value file and is a standard file format for data
 GI = read.csv("GI.csv")
 ```
 
-This created a data.frame object in R called GI. 
+This created a `data.frame` object in R called GI. 
 
 
 ## read.table
 
-The read.table function is a much more general function for reading data into R and it has many options. We could have gotten the same results, if we had used the following code:
+The read.table function is a more general function for reading data into R and it has many options. We could have gotten the same results, if we had used the following code:
 
 ```{r, tidy=FALSE}
 GI2 = read.table("GI.csv", 
@@ -283,7 +284,7 @@ GI2 = read.table("GI.csv",
                  sep=",")     # The column delimiter is a comma.
 ```
 
-To check if they are equal, use the following
+To check if the two data sets are equal, use the following
 
 ```{r}
 all.equal(GI, GI2)
@@ -298,7 +299,6 @@ There are a number of functions that will provide information about a data.frame
 ```{r}
 dim(GI)
 names(GI)
-summary(GI)
 head(GI)
 tail(GI)
 ```
@@ -340,6 +340,266 @@ d = read.table("filename.csv", # Make sure to change filename>to your filename a
 
 
 ```{r, echo=FALSE}
-# Put your answer here.
+# Put your code here to read in your own csv file
 ```
 
+
+
+# Descriptive statistics
+
+When reading your data set into R, you will likely want to perform some descriptive statistics. The single most useful command to assess the whole data set is the `summary()` command:
+
+```{r}
+summary(GI)
+```
+
+
+
+## Descriptive statistics for continuous (numeric) variables
+
+To access a single column in the `data.frame` use  
+
+```{r, eval=FALSE}
+GI$age
+GI[,5] # Since age is the 5th column
+```
+
+Here are a number of descriptive statistics for `age`
+
+```{r}
+min(GI$age)
+max(GI$age)
+mean(GI$age)
+median(GI$age)
+quantile(GI$age, c(.025,.25,.5,.75,.975))
+```
+
+Anything look odd here?
+
+## Descriptive statistics for categorical (non-numeric) variables
+
+The `table` function provides the number of observations at each level of the categorical variable.
+
+```{r}
+table(GI$facility)
+```
+
+Apparently there is only 1 observation from facility 259, was that a typo?
+
+
+
+## Subsetting the data
+
+Rather than having descriptive statistics for the dataset as a whole, we may be interested in descriptive statistics for a `subset` of the data. 
+
+The following code creates a new `data.frame` that only contains observations from facility 37:
+
+```{r}
+GI_37 = subset(GI, facility==37)
+nrow(GI_37) # Number of rows (observations) in the new data set
+```
+
+Notice the double equal sign!
+
+The following code creates a new `data.frame` that only contains observations with chief_complaint "Abd Pain":
+
+```{r}
+GI_AbdPain = subset(GI, chief_complaint == "Abd Pain")
+nrow(GI_AbdPain)
+```
+
+Notice that when the variable is a not numeric, we need to put level in quotes.
+
+### Alternative way to subset
+
+```{r}
+GI_37a = GI[GI$facility==37,]
+all.equal(GI_37, GI_37a)
+GI_AbdPain1 = GI[GI$chief_complaint == "Abd Pain",]
+all.equal(GI_AbdPain, GI_AbdPain1)
+```
+
+### Advanced subsetting
+
+We can subset continuous variables with using other logical statements
+
+```{r, eval=FALSE}
+subset(GI, age <   5)
+subset(GI, age >= 60)
+subset(GI, chief_complaint %in% c("Abd Pain","ABD PAIN"))
+subset(GI, !(facility %in% c(37,66))) # facility is NOT 37 or 66
+```
+
+
+
+## Descriptive statistics on the subset
+
+Now we can calculate descriptive statistics on this subset, e.g.
+
+```{r}
+summary(GI_37$age)
+summary(GI_AbdPain$age)
+```
+
+
+
+## Activity
+
+Find the min, max, mean, and median age for zipcode 20032.
+
+```{r, echo=FALSE}
+# Find the min, max, mean, and median age for zipcode 20032.
+```
+
+
+When you have completed the activity, compare your results to the [solutions](intro-solution.html#descriptive).
+
+
+
+
+
+# Graphical statistics
+
+Here we focus on the graphical options for the base package in R. Later we will use the ggplot2 package:
+
+- Histograms (`hist`)
+- Boxplots (`boxplot`)
+- Scatter plots (`plot`)
+- Bar charts (`barplot`)
+
+
+## Histograms
+
+For continuous variables, histograms are useful for visualizing the distribution of the variable
+
+```{r}
+hist(GI$age)
+```
+
+When there is a lot of data, you will typically want more bins
+
+```{r}
+hist(GI$age, 50)
+```
+
+You can also specify your own bins
+
+```{r}
+hist(GI$age, 0:158)
+```
+
+
+## Boxplots
+
+Boxplots are another way to visualize the distribution for continuous variables.
+
+```{r}
+boxplot(GI$age)
+```
+
+Now we can see the outliers. 
+
+
+### Multiple boxplots
+
+Here we create separate boxplots for each facility and label the x and y axes. 
+
+```{r}
+boxplot(age~facility, GI, xlab="Facility", ylab="Age")
+```
+
+
+## Scatterplots
+
+Scatterplots are useful for looking at the relationship of two continuous variables. 
+
+```{r}
+GI$date = as.Date(GI$date)
+plot(age~date, GI)
+```
+
+We will talk more later about dealing with dates later.
+
+
+## Bar charts
+
+For looking at the counts of categorical variables, we use bar charts.
+
+```{r}
+counts = table(GI$facility)
+barplot(counts, xlab="Facility", ylab="Count", main="Number of observations at each facility")
+```
+
+## Activity
+
+Construct a histogram and boxplot for age at facility 37.
+
+```{r, echo=FALSE}
+# Construct a histogram and boxplot for age at facility 37.
+```
+
+Construct a bar chart for the zipcode at facility 37.
+
+```{r, echo=FALSE}
+# Construct a bar chart for the zipcode at facility 37.
+```
+
+
+When you have completed the activity, compare your results to the [solutions](intro-solution.html#graphical).
+
+
+
+
+# Getting help
+
+As you work with R, there will be many times when you need to get help. 
+
+My basic approach is 
+ 
+1. Use the help contained within R
+1. Perform an internet search for an answer
+1. Find somebody else who knows
+
+In both cases, knowing the R keywords, e.g. a function name, will be extremely helpful.
+
+
+## Help within R I
+
+If you know the function name, then you can use `?<function>`, e.g.
+
+```{r, echo=FALSE}
+?mean
+```
+
+The structure of help is 
+- Description: quick description of what the function does
+- Usage: the arguments, their order, and default values (if any)
+- Arguments: more thorough description about the arguments
+- Value: what the funtion returns
+- See Also: similar functions
+- Examples: examples of how to use the function
+
+
+## Help within R II
+
+If you cannot remember the function name, then you can use `help.search("<something>")`, e.g.
+
+```{r, echo=FALSE}
+help.search("mean")
+```
+
+Depending on how many packages you have loaded, you will find a lot or a little here. 
+
+
+
+## Internet search for R help
+
+I typically do `<something> R`, e.g. 
+
+    calculate mean R
+
+The useful sites are 
+
+- <http://stackoverflow.com/questions/tagged/r>
+- <http://www.cookbook-r.com/>
+- <http://www.ats.ucla.edu/stat/r/>
