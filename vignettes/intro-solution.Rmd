@@ -57,6 +57,10 @@ Yes, it is only about 2%!
 
 # <a name="descriptive"></a> Descriptive statistics
 
+```{r, echo=FALSE}
+GI = read.csv("GI.csv")
+```
+
 ```{r}
 # Min, max, mean, and median age for zipcode 20032.
 GI_20032 = subset(GI, zipcode==20032)
