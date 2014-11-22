@@ -58,6 +58,7 @@ Yes, it is only about 2%!
 # <a name="descriptive"></a> Descriptive statistics
 
 ```{r, echo=FALSE}
+library(ISDSWorkshop)
 data(GI)
 write.csv(GI, file="GI.csv", row.names=FALSE)
 GI = read.csv("GI.csv")
