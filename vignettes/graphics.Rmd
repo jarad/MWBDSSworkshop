@@ -1,0 +1,297 @@
+---
+title: "Graphics in R (ggplot2)"
+author: "Jarad Niemi"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+  pdf_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Graphics in R (ggplot2)}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+
+Before we get back into graphics, it is important to understand some of the fundamentals behind what R is doing. Please open the `graphics.R` script in your working directory. 
+
+# Data types
+
+Objects in R can be broadly classified as according to their dimensions:
+
+- scalar
+- vector
+- matrix
+- array (higher dimensionl matrix)
+
+and according to the type of variable they contain:
+
+- numeric
+- character
+- logical
+- factor
+
+
+## Scalars
+
+Scalars only have a single value assigned to the object in R. 
+
+```{r}
+a = 3.14159265 
+b = "ISDS Workshop" 
+c = TRUE
+```
+
+Print the object
+
+```{r}
+a
+b
+c
+```
+
+
+## Vectors
+
+The `c()` function creates a vector in R
+
+```{r}
+a = c(1,2,-5,3.6)
+b = c("ISDS","Workshop")
+c = c(TRUE, FALSE, TRUE)
+```
+
+To determine the length of a vector in R use `length()`
+
+```{r}
+length(a)
+length(b)
+length(c)
+```
+
+
+### Vector construction
+
+Create a numeric vector that is a sequence
+```{r}
+1:10
+5:-2
+seq(2,23,by=3)
+```
+
+Another useful function to create vectors is `rep()`
+
+```{r}
+rep(1:4, times = 2)
+rep(1:4, each  = 2)
+rep(1:4, each  = 2, times = 2)
+```
+
+
+### Accessing vector elements 
+
+Elements of a vector can be access using the index 
+
+```{r}
+a = c("one","two","three","four","five")
+a[2:4]
+a[c(3,5)]
+a[rep(3,4)]
+```
+
+or by using a logical vector
+
+```{r}
+a[c(TRUE, TRUE, FALSE, FALSE, FALSE)]
+```
+
+You can also remove elements
+
+```{r}
+a[-1]
+```
+
+
+## Matrices
+
+Matrices can be constructed using `cbind()`, `rbind()`, and `matrix()`:
+
+```{r}
+m1 = cbind(c(1,2), c(3,4))       # Row bind
+m2 = rbind(c(1,3), c(2,4))       # Column bind
+all.equal(m1, m2)
+m3 = matrix(1:4, nrow=2, ncol=2)
+all.equal(m1,m3)
+m4 = matrix(1:4, nrow=2, ncol=2, byrow=TRUE)
+all.equal(m3, m4)
+m3
+m4
+```
+
+
+### Accessing matrix elements
+
+Elements of a matrix can be accessed using their indices `[row,column]`
+
+```{r}
+m = matrix(1:12, nrow=3, ncol=4)
+m
+m[2,3]
+```
+
+Multiple elements can be accessed at once
+
+```{r}
+m[1:2,3:4]
+```
+
+If no row (column) index is provided, then the whole row (column) is accessed.
+
+```{r}
+m[1:2,]
+```
+
+Like vectors, you can eliminate rows (or columns)
+
+```{r}
+m[-c(3,4),]
+```
+
+Be careful not to forget the comma
+
+```{r}
+m[1:2]
+```
+
+
+## Cannot mix types 
+
+You cannot mix types within a vector, matrix, or array
+
+```{r}
+c(1,"a")
+```
+
+The number 1 is in quotes indicating that R is treating it as a character rather than a numeric.
+
+```{r}
+c(TRUE, 1, FALSE)
+```
+
+The logicals are converted to numeric (0 for FALSE and 1 for TRUE).
+
+```{r}
+c(TRUE, 1, "a")
+```
+
+## Activity
+
+Reconstruct the following matrix using the matrix function, then 
+
+1. Print the element in the 3rd-row and 4th column
+1. Print the 2nd column
+1. Print all but the 4th row
+
+```{r}
+m = rbind(c(1, 12, 8, 6),
+          c(4, 10, 2, 9),
+          c(11, 3, 5, 7))
+m
+```
+
+```{r, echo=FALSE}
+# Reconstruct the matrix 
+
+# Print the element in the 3rd-row and 4th column
+
+# Print the 2nd column
+
+# Print all but the 3rd row
+```
+
+
+
+
+
+# Data frames
+
+A `data.frame` is a special type of matrix that allows different data types in different columns.
+
+We have already seen a data frame with our GI data set. Let's read this data in again and take a look.
+
+```{r}
+GI = read.csv("GI.csv")
+dim(GI)
+```
+
+If the above didn't work, try
+
+```{r, eval=FALSE}
+workshop()
+GI = read.csv("GI.csv")
+dim(GI)
+```
+
+
+## Access `data.frame` elements
+
+Data frames can be accessed just like matrices
+
+```{r}
+GI[1:2, 3:4]
+```
+
+but can also be accessed by column names
+
+```{r}
+GI[1:2, c("facility","icd9","gender")]
+```
+
+
+## Different data types in different columns
+
+The function `str()` allows you to see the structure of any object in R
+
+```{r}
+str(GI)
+```
+
+
+
+## Factor
+
+A factor is a data type that represents a categorical variable in a `data.frame`. 
+
+The default is for any character vector to be converted to a factor when read into a `data.frame` in R. 
+
+Internally, R codes a factor as an integer and then keeps a table that contains the conversion from that integer into the actual value of the factor.
+
+```{r}
+nlevels(GI$gender)
+levels(GI$gender)
+GI$gender[1:3]
+as.numeric(GI$gender[1:3])
+```
+
+
+## Dates
+
+In order to use dates properly, they need to be converted into type `Date`. 
+
+```{r}
+GI$date = as.Date(GI$date)
+str(GI$date)
+```
+
+`as.Date()` will attempt to read dates as "%Y-%m-%d" then "%Y/%m/%d". If neither work, it will give an error. (see `?as.Date`)
+
+You can specify other date patterns, e.g. 
+
+```{r, eval=FALSE}
+as.Date("12/09/14", format="%m/%d/%y")
+```
+
+
+## Activity 
+
+
