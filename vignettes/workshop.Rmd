@@ -31,11 +31,6 @@ vignette: >
 
 ## Advanced graphics with R (ggplot2)
 
-- Cleaning data
-- 
-
-
-
 
 ## Algorithms for disease surveillance
 
