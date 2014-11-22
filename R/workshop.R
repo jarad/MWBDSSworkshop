@@ -1,6 +1,7 @@
 #'  A function that prepares the workshop.
 #' 
-#'  @param write_data logical. If TRUE, writes the GI data set to a csv file.
+#'  @param write_data logical. If TRUE, writes the GI data set to a csv file in the current working directory.
+#'  @param write_scripts logical. If TRUE, writes the workshop R scripts to the current working directory.
 #'  @param clean logical. If TRUE, removes all objects created by the function from the R workspace.
 #'  @param launch_index logical. If TRUE, launches the workshop html index.
 #'  @details The function uses the \code{\link{data}} function to load the \code{\link{GI}} data set and 
@@ -16,14 +17,17 @@
 #'  workshop(write_data = FALSE)
 #'  workshop(clean = FALSE) 
 #'  }
-workshop = function(write_data = TRUE, clean = TRUE, launch_index=TRUE) {
+workshop = function(write_data = TRUE, write_scripts=TRUE, clean = TRUE, launch_index=TRUE) {
   if (write_data) {
     data('GI', package='ISDSWorkshop', envir=environment())
     write.csv(GI, file="GI.csv", row.names=FALSE)
     if (clean) rm('GI')
   }
   
-  file.copy(from = paste(find.package("ISDSWorkshop"),"/doc/intro.R", sep=""), to = "intro.R")
+  if (write_scripts) {
+    file.copy(from = paste(find.package("ISDSWorkshop"),"/doc/intro.R", sep=""), to = "intro.R")
+    file.copy(from = paste(find.package("ISDSWorkshop"),"/doc/intro.R", sep=""), to = "graphics.R")
+  }
   
   vignette('workshop')
 }
