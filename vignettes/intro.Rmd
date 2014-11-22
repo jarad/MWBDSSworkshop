@@ -600,6 +600,8 @@ I typically do `<something> R`, e.g.
 
 The useful sites are 
 
+- <http://www.statmethods.net/>
+- <http://www.r-tutor.com/r-introduction>
 - <http://stackoverflow.com/questions/tagged/r>
 - <http://www.cookbook-r.com/>
 - <http://www.ats.ucla.edu/stat/r/>
