@@ -23,5 +23,7 @@ workshop = function(write_data = TRUE, clean = TRUE, launch_index=TRUE) {
     if (clean) rm('GI')
   }
   
+  file.copy(from = paste(find.package("ISDSWorkshop"),"/doc/intro.R", sep=""), to = "intro.R")
+  
   vignette('workshop')
 }
