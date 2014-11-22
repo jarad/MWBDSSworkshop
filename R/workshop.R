@@ -18,7 +18,7 @@
 #'  }
 workshop = function(write_data = TRUE, clean = TRUE, launch_index=TRUE) {
   if (write_data) {
-    data('GI', package='ISDSWorkshop')
+    data('GI', package='ISDSWorkshop', envir=environment())
     write.csv(GI, file="GI.csv", row.names=FALSE)
     if (clean) rm('GI')
   }
