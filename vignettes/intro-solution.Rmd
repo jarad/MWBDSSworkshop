@@ -86,7 +86,7 @@ summary(GI_20032$age)
 
 Construct a histogram and boxplot for age at facility 37.
 
-```{r, echo=FALSE}
+```{r}
 # Construct a histogram and boxplot for age at facility 37.
 GI_37 = subset(GI, facility==37)
 hist(GI_37$age)
@@ -95,14 +95,14 @@ boxplot(GI_37$age)
 
 Construct a bar chart for the zipcode at facility 37.
 
-```{r, echo=FALSE}
+```{r}
 # Construct a bar chart for the zipcode at facility 37.
 barplot(table(GI_37$zipcode))
 ```
 
 Perhaps this plot isn't so useful. Maybe it would be better to just use the first 3 zipcode digits
 
-```{r, echo=FALSE}
+```{r}
 # Construct a bar chart for the first three digits of zipcode at facility 37.
 barplot(table(trunc(GI_37$zipcode/100)))
 ```
