@@ -64,7 +64,27 @@ table(GI$icd9code)
 # <a name="aggregate"></a> Aggregate activity
 
 ```{r}
-# Aggregate our GI data set by gender, ageC, and icd9code (the ones created in the last activity).
+# Aggregate the GI data set by gender, ageC, and icd9code (the ones created in the last activity).
 ddply(GI, .(gender, ageC, icd9code), summarize, total = length(id))
 ```
 
+
+
+# <a name="ggplot2"></a> ggplot2 activity
+
+Construct a histogram and boxplot for age at facility 37 using ggplot2.
+
+```{r, echo=FALSE}
+# Construct a histogram for age at facility 37.
+ggplot(subset(GI, facility==37), aes(x=age)) + geom_histogram(binwidth=1)
+
+# Construct a boxplot for age at facility 37. 
+ggplot(subset(GI, facility==37), aes(x=1, y=age)) + geom_boxplot()
+```
+
+Construct a bar chart for the zipcode at facility 37 using ggplot2
+
+```{r, echo=FALSE}
+# Construct a bar chart for the zipcode at facility 37.
+ggplot(subset(GI, facility=37), aes(x=trunc(zipcode/100))) + geom_bar(binwidth=1)
+```

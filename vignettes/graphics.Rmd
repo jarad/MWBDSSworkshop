@@ -408,14 +408,14 @@ ddply(m,                  # We need to use the melted version of the data set
 ```
 
 
-## Aggregating our GI data set
+## Aggregating the GI data set
 
-Let's aggregate our GI data set by week, gender, and age category.
+Let's aggregate the GI data set by week, gender, and age category.
 
 First, we need to create weeks
 
 ```{r}
-GI$date = as.Date(GI$date) # Make sure our dates are actually dates
+GI$date = as.Date(GI$date) # Make sure the dates are actually dates
 GI$week = cut(GI$date, 
               breaks="weeks", 
               start.on.monday=TRUE) 
@@ -434,11 +434,11 @@ GI_count
 
 ## Activity
 
-Aggregate our GI dta set by gender, ageC, and icd9code (the ones created in the last activity).
+Aggregate the GI data set by gender, ageC, and icd9code (the ones created in the last activity).
 
 
 ```{r, echo=FALSE}
-# Aggregate our GI dta set by gender, ageC, and icd9code (the ones created in the last activity).
+# Aggregate our GI data set by gender, ageC, and icd9code (the ones created in the last activity).
 ```
 
 
@@ -448,4 +448,183 @@ When you have completed the activity, compare your results to the [solutions](gr
 
 
 
-# 
+# Basics of `ggplot2`
+
+Once you have your data in long format, you can use the `ggplot2` package for graphics.
+
+Load the `ggplot2` package
+```{r}
+library(ggplot2)
+```
+
+
+## Histogram
+
+A basic histogram in ggplot
+
+```{r}
+ggplot(GI, aes(x = age)) + geom_histogram(binwidth=1)
+```
+
+
+## Boxplots
+
+A basic boxplot
+
+```{r}
+ggplot(GI, aes(x = 1, y = age)) + geom_boxplot()
+```
+
+
+## Multiple boxplots
+
+```{r}
+ggplot(GI, aes(x = facility, y = age)) + geom_boxplot()
+```
+
+
+
+## Scatterplots
+
+```{r}
+ggplot(GI, aes(x=date, y=age)) + geom_point()
+```
+
+## Bar charts
+
+With ggplot, there is no need to count first.
+
+```{r}
+ggplot(GI, aes(x=facility)) + geom_bar()
+```
+
+
+
+## Activity
+
+
+Construct a histogram and boxplot for age at facility 37 using ggplot2.
+
+```{r, echo=FALSE}
+# Construct a histogram for age at facility 37.
+
+# Construct a boxplot for age at facility 37. 
+```
+
+Construct a bar chart for the zipcode at facility 37 using ggplot2
+
+```{r, echo=FALSE}
+# Construct a bar chart for the first three digits of zipcode at facility 37.
+```
+
+
+When you have completed the activity, compare your results to the [solutions](graphics-solution.html#ggplot2).
+
+
+
+
+# Customizing ggplot2 plots
+
+There are many ways to customize the appearance of ggplot2 plots:
+
+- Colors
+- Labels
+- Titles
+- Characters
+- Line types
+- Themes
+
+
+
+## Colors
+
+```{r}
+ggplot(GI, aes(x = age)) + geom_histogram(binwidth=1, color='red',   fill='blue')
+ggplot(GI, aes(x = age)) + geom_histogram(binwidth=1, color='white', fill='orange')
+```
+
+```{r}
+ggplot(GI, aes(x=date, y=age)) + geom_point(color='purple')
+```
+
+
+## Labels
+
+```{r}
+ggplot(GI, aes(x = facility, y = age)) + 
+  geom_boxplot() + 
+  labs(x='Facility ID', y='Age (in years)', title='Age by Facility ID')
+```
+
+
+## Characters
+
+```{r}
+ggplot(GI, aes(x=date, y=age)) + geom_point(shape=2, color='red')
+```
+
+ggplot2 uses the same shape codes as base graphics, see
+
+```{r, eval=FALSE}
+?points
+```
+
+
+## Line types
+
+```{r}
+g = ggplot(ddply(GI, .(week), summarize, count=length(id)),
+       aes(x=as.numeric(week), y=count)) +
+  labs(x='Week #', y='Weekly count')
+
+g + geom_line()
+g + geom_line(size=2, color='firebrick', linetype=2)
+```
+
+## Themes
+
+```{r}
+g = g+geom_line(size=1, color='firebrick')
+g + theme_bw()
+```
+
+For other themes, see
+
+```{r, eval=FALSE}
+?theme
+?theme_bw
+```
+
+
+
+
+# Getting help on ggplot2
+
+Although the general R help can still be used, e.g. 
+
+```{r, eval=FALSE}
+?ggplot
+?geom_point
+```
+
+It is much more helpful to google for an answer
+
+    geom_point 
+    ggplot line colors
+
+The top hits will all have the code along with what the code produces
+
+## Helpful sites
+
+These sites all provide code. The first two also provide the plots that are produced.
+
+- <http://docs.ggplot2.org/current/>
+- <http://www.cookbook-r.com/Graphs/>
+- <http://stackoverflow.com/questions/tagged/ggplot2>
+
+
+
+## Activity
+
+Play around with ggplot2 to see what kind of changes you can make.
+
