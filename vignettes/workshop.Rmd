@@ -8,7 +8,9 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
-# ISDS Introduction to R for Biosurveillance Pre-conference Training
+# International Society for Disease Surveillance
+# Introduction to R for Biosurveillance 
+# Pre-conference Training
 
 ## [Introduction to R](intro.html)
 
@@ -32,12 +34,12 @@ vignette: >
 - [Customizing (colors, characters, lines)](graphics.html#customizing)
 - [Getting help on ggplot2](graphics.html#help)
 
-## Advanced graphics with R (ggplot2)
+## [Advanced graphics with R (ggplot2)](advanced_graphics.html)
 
 - Faceting
 - Exporting graphs
 
-## Algorithms for disease surveillance
+## Advanced biosurveillance
 
 - Exporting tables to Word
 

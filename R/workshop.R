@@ -27,6 +27,7 @@ workshop = function(write_data = TRUE, write_scripts=TRUE, clean = TRUE, launch_
   if (write_scripts) {
     file.copy(from = paste(find.package("ISDSWorkshop"),"/doc/intro.R", sep=""), to = "intro.R")
     file.copy(from = paste(find.package("ISDSWorkshop"),"/doc/intro.R", sep=""), to = "graphics.R")
+    file.copy(from = paste(find.package("ISDSWorkshop"),"/doc/intro.R", sep=""), to = "advanced_graphics.R")
   }
   
   vignette('workshop')

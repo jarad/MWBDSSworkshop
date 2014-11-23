@@ -1,0 +1,13 @@
+---
+title: "Advanced Graphics in R (ggplot2) - Activity Solutions"
+author: "Jarad Niemi"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Advanced Graphics in R (ggplot2) - Activity Solutions}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+
+
+# 
