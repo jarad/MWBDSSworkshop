@@ -1,11 +1,10 @@
 #'  A function that prepares the workshop.
 #' 
-#'  @param write_data logical. If TRUE, writes the GI data set to a csv file in the current working directory.
+#'  @param write_data string. Write these data sets.
 #'  @param write_scripts logical. If TRUE, writes the workshop R scripts to the current working directory.
-#'  @param clean logical. If TRUE, removes all objects created by the function from the R workspace.
 #'  @param launch_index logical. If TRUE, launches the workshop html index.
-#'  @details The function uses the \code{\link{data}} function to load the \code{\link{GI}} data set and 
-#'    then uses the \code{\link{write.csv}} function to write it to a file. 
+#'  @details By default, the function uses the \code{\link{data}} function to load data sets and 
+#'    then uses the \code{\link{write.csv}} function to write them to a file. 
 #'    It then launches the \code{\link{ISDSWorkshop}} html index 
 #'    using the \code{\link{vignette}} function. 
 #'  @seealso \code{\link{data}},\code{\link{GI}},\code{\link{write.csv}},\code{\link{ISDSWorkshop}}
@@ -17,18 +16,27 @@
 #'  workshop(write_data = FALSE)
 #'  workshop(clean = FALSE) 
 #'  }
-workshop = function(write_data = TRUE, write_scripts=TRUE, clean = TRUE, launch_index=TRUE) {
-  if (write_data) {
+workshop = function(write_data = "GI", write_scripts=NULL, launch_index=TRUE) {
+  
+  # Write data
+  if ("GI" %in% write_data) {
     data('GI', package='ISDSWorkshop', envir=environment())
     write.csv(GI, file="GI.csv", row.names=FALSE)
-    if (clean) rm('GI')
   }
   
-  if (write_scripts) {
-    file.copy(from = paste(find.package("ISDSWorkshop"),"/doc/intro.R", sep=""), to = "intro.R")
-    file.copy(from = paste(find.package("ISDSWorkshop"),"/doc/intro.R", sep=""), to = "graphics.R")
-    file.copy(from = paste(find.package("ISDSWorkshop"),"/doc/intro.R", sep=""), to = "advanced_graphics.R")
+  if ("icd9" %in% write_data) {
+    data('icd9', package='ISDSWorkshop', envir=environment())
+    write.csv(icd9, file='icd9.csv', row.names=FALSE)
   }
   
-  vignette('workshop')
+  # Write scripts
+  if (is.null(write_scripts)) 
+    write_scripts = paste("intro","graphics","advanced_graphics")
+  
+  for (script in write_scripts) 
+    file.copy(from = paste(find.package("ISDSWorkshop"), "/doc/", script, ".R", sep=""),
+              to   = paste(script,".R", sep=""))
+  
+  # Launch workshop index
+  if (launch_index) vignette('workshop')
 }
