@@ -13,8 +13,91 @@ vignette: >
 ---
 
 
-Please open the `advanced_graphics.R` script in your working directory. 
+# <a name="workflow"></a> Workflow
 
+The typical workflow in R is 
+
+1. Start R
+1. Choose your working directory
+1. Open a script
+
+## Choose your working directory 
+
+```{r, eval=FALSE}
+setwd(choose.dir())
+```
+
+## Start the workshop
+
+Now start the workshop to get your data files and scripts set up. Typically you would choose your working directory to be where you actually have your data and scripts.
+
+```{r}
+library(ISDSWorkshop)
+workshop(write_data = c("GI","icd9"))
+```
+
+## Open the script
+
+Open the  `advanced_graphics.R` script and read in the data set.
+
+
+
+Notice that the top of the script has all of the packages that you will use 
+
+```{r}
+# Pretend this is the top of the script
+library(plyr)
+library(ggplot2)
+```
+
+
+## Read in the data
+
+You will typically have a script that reads in the data and converts variables. 
+
+This time we will use the `mutate()` function from the `plyr` package. This function allows you to create new columns in a `data.frame`.
+
+```{r}
+# Read in csv files
+GI = read.csv('GI.csv')
+icd9df = read.csv("icd9.csv")
+
+# Mutate data.frame
+GI = mutate(GI,
+            date      = as.Date(date),
+            weekC     = cut(date, breaks="weeks"),
+            week      = as.numeric(weekC),
+            facility  = as.factor(facility),
+            icd9class = factor(cut(icd9, 
+                            breaks = icd9df$code_cutpoint, 
+                            labels = icd9df$classification[-nrow(icd9df)], 
+                            right  = TRUE)),
+            ageC      = cut(age, 
+                            breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
+            zip3      = trunc(zipcode/100))
+
+```
+
+
+## Reading other scripts
+
+If the script to read in the data is extensive, it may be better to separate your scripts into two different files. Then, in the second file, i.e. the one that does an analysis, you can `source()` the one that just reads in the data, e.g.
+
+```{r}
+source("read_data.R")
+```
+
+
+## Check the data
+
+At this point, I typically check the data to make sure it is what I think it is. 
+I usually do this in interactive mode, i.e. not in a script.
+
+```{r}
+dim(GI)
+str(GI)
+summary(GI)
+```
 
 
 # 
