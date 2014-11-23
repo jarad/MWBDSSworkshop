@@ -3,10 +3,13 @@
 \alias{workshop}
 \title{A function that prepares the workshop.}
 \usage{
-workshop(write_data = TRUE, clean = TRUE, launch_index = TRUE)
+workshop(write_data = TRUE, write_scripts = TRUE, clean = TRUE,
+  launch_index = TRUE)
 }
 \arguments{
-\item{write_data}{logical. If TRUE, writes the GI data set to a csv file.}
+\item{write_data}{logical. If TRUE, writes the GI data set to a csv file in the current working directory.}
+
+\item{write_scripts}{logical. If TRUE, writes the workshop R scripts to the current working directory.}
 
 \item{clean}{logical. If TRUE, removes all objects created by the function from the R workspace.}
 
@@ -15,9 +18,15 @@ workshop(write_data = TRUE, clean = TRUE, launch_index = TRUE)
 \description{
 A function that prepares the workshop.
 }
+\details{
+The function uses the \code{\link{data}} function to load the \code{\link{GI}} data set and
+   then uses the \code{\link{write.csv}} function to write it to a file.
+   It then launches the \code{\link{ISDSWorkshop}} html index
+   using the \code{\link{vignette}} function.
+}
 \examples{
-workshop()
- \dontrun{
+\dontrun{
+ workshop()
  workshop(write_data = FALSE)
  workshop(clean = FALSE)
  }
@@ -26,9 +35,6 @@ workshop()
 Jarad Niemi <\url{http://jarad.me}>
 }
 \seealso{
-The function uses the \code{\link{data}} function to load the \code{\link{GI}} data set and
-   then uses the \code{\link{write.csv}} function to write it to a file.
-   It then launches the \code{\link{ISDSWorkshop}} html index
-   using the \code{\link{vignette}} function.
+\code{\link{data}},\code{\link{GI}},\code{\link{write.csv}},\code{\link{ISDSWorkshop}}
 }
 
