@@ -221,17 +221,20 @@ A `data.frame` is a special type of matrix that allows different data types in d
 
 We have already seen a data frame with our GI data set. Let's read this data in again and take a look.
 
+```{r, echo=FALSE}
+library(ISDSWorkshop)
+workshop(write_scripts=FALSE, launch_index=FALSE)
+```
+
 ```{r}
 GI = read.csv("GI.csv")
 dim(GI)
 ```
 
-If the above didn't work, try
+If the above didn't work, run the following first, then retry. 
 
 ```{r, eval=FALSE}
-workshop()
-GI = read.csv("GI.csv")
-dim(GI)
+workshop(write_scripts=FALSE, launch_index=FALSE)
 ```
 
 
