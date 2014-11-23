@@ -36,6 +36,7 @@ vignette: >
 
 ## [Advanced graphics with R (ggplot2)](advanced_graphics.html)
 
+- [Workflow](advanced_graphics.html#workflow)
 - Faceting
 - Exporting graphs
 
