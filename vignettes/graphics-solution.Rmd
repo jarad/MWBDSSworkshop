@@ -42,16 +42,29 @@ library(ISDSWorkshop)
 data(GI)
 write.csv(GI, file="GI.csv", row.names=FALSE)
 GI = read.csv("GI.csv")
+GI$ageC = cut(GI$age, c(-Inf, 5, 18, 45 ,60, Inf)) 
 ```
 
 ```{r}
 # Create icd9code
-cuts = c(0, 140, 240, 280, 290, 320, 360, 390, 460, 520, 580, 630, 680, 710, 740, 760, 780, 800, Inf)
+cuts = c(0, 140, 240, 280, 290, 320, 360, 390, 460, 520, 580, 630, 680, 710, 740, 760, 780, 800, 1000, Inf)
 GI$icd9code = cut(GI$icd9, cuts, right=FALSE)
 
 # Find the icd9code that is most numerous
 # There are many ways to do this
 table(GI$icd9code)
+
+# Eliminate zeros
+GI$icd9code = factor(GI$icd9code)
+table(GI$icd9code)
 ```
 
+
+
+# <a name="aggregate"></a> Aggregate activity
+
+```{r}
+# Aggregate our GI data set by gender, ageC, and icd9code (the ones created in the last activity).
+ddply(GI, .(gender, ageC, icd9code), summarize, total = length(id))
+```
 

@@ -335,3 +335,117 @@ Create a new variable in the GI data set called `icd9code` that cuts icd9 at 0, 
 
 When you have completed the activity, compare your results to the [solutions](graphics-solution.html#factor).
 
+
+
+
+# Reshaping data frames in R
+
+There are two general representations of tabular data.
+
+Wide:
+```{r, echo=FALSE}
+d = data.frame(week=1:3, GI=c(246,195,212), ILI=c(948, 1020, 1024))
+d
+```
+which is a succinct representation of the data
+
+Long:
+```{r, echo=FALSE}
+library(reshape2)
+melt(d, id.vars="week", variable.name="syndrome", value.name="count")
+```
+which is the form most statistical software wants, i.e. there is only one column for the response (count).
+
+
+## Wide to long
+
+The `reshape2` package provides functions to convert between the two representations. First, we need to load the package
+
+```{r}
+library(reshape2)
+```
+
+Create the wide `data.frame`:
+```{r}
+d = data.frame(week=1:3, GI=c(246,195,212), ILI=c(948, 1020, 1024))
+```
+
+To turn the `data.frame` into long format, use `melt()`
+
+```{r}
+m = melt(d, id.vars    = "week",     # The variables you want to remain on the columns
+         variable.name = "syndrome", # The name for the variable column
+         value.name    = "count")    # The name for the response column
+m
+```
+
+
+## Long to wide
+
+If we want to convert back, use `dcast()`
+
+```{r}
+dcast(m, week ~ syndrome) # Notice that we do not use the count (value) column at all
+```
+
+
+# Aggregating data frames in R
+
+The GI data set that we have is already in long format and each row is an individual. 
+We may want to aggregate this information. To do so, we will use the `ddply()` function in the `plyr` package.
+
+```{r}
+library(plyr)
+```
+
+For example, perhaps we wanted to know the total number of GI or ILI cases across the 3 weeks:
+
+```{r}
+ddply(m,                  # We need to use the melted version of the data set
+      .(syndrome),        # Do the following for each syndrome
+      summarize,          # Summarize 
+      total = sum(count)) # Calculate `total` which is the sum of count for each syndrome
+```
+
+
+## Aggregating our GI data set
+
+Let's aggregate our GI data set by week, gender, and age category.
+
+First, we need to create weeks
+
+```{r}
+GI$date = as.Date(GI$date) # Make sure our dates are actually dates
+GI$week = cut(GI$date, 
+              breaks="weeks", 
+              start.on.monday=TRUE) 
+```
+
+Now we can summarize
+
+```{r}
+GI_count = ddply(GI, 
+                 .(week, gender, ageC),
+                 summarize,
+                 total = length(id))    # Count the number of lines in each week-gender-ageC combination
+GI_count
+```
+
+
+## Activity
+
+Aggregate our GI dta set by gender, ageC, and icd9code (the ones created in the last activity).
+
+
+```{r, echo=FALSE}
+# Aggregate our GI dta set by gender, ageC, and icd9code (the ones created in the last activity).
+```
+
+
+When you have completed the activity, compare your results to the [solutions](graphics-solution.html#aggregate).
+
+
+
+
+
+# 
