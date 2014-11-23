@@ -535,7 +535,9 @@ barplot(counts, xlab="Facility", ylab="Count", main="Number of observations at e
 Construct a histogram and boxplot for age at facility 37.
 
 ```{r, echo=FALSE}
-# Construct a histogram and boxplot for age at facility 37.
+# Construct a histogram for age at facility 37.
+
+# Construct a boxplot for age at facility 37. 
 ```
 
 Construct a bar chart for the zipcode at facility 37.
@@ -600,8 +602,8 @@ I typically do `<something> R`, e.g.
 
 The useful sites are 
 
-- <http://www.statmethods.net/>
-- <http://www.r-tutor.com/r-introduction>
-- <http://stackoverflow.com/questions/tagged/r>
 - <http://www.cookbook-r.com/>
+- <http://www.r-tutor.com/r-introduction>
+- <http://www.statmethods.net/>
+- <http://stackoverflow.com/questions/tagged/r>
 - <http://www.ats.ucla.edu/stat/r/>

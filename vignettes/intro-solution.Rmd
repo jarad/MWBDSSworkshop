@@ -90,6 +90,8 @@ Construct a histogram and boxplot for age at facility 37.
 # Construct a histogram and boxplot for age at facility 37.
 GI_37 = subset(GI, facility==37)
 hist(GI_37$age)
+
+# Construct a boxplot for age at facility 37.
 boxplot(GI_37$age)
 ```
 
