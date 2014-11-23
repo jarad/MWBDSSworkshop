@@ -15,7 +15,7 @@ vignette: >
 
 Before we get back into graphics, it is important to understand some of the fundamentals behind what R is doing. Please open the `graphics.R` script in your working directory. 
 
-# Data types
+# <a name="types"></a> Data types
 
 Objects in R can be broadly classified as according to their dimensions:
 
@@ -215,7 +215,7 @@ When you have completed the activity, compare your results to the [solutions](gr
 
 
 
-# Data frames
+# <a name="frames"></a> Data frames
 
 A `data.frame` is a special type of matrix that allows different data types in different columns.
 
@@ -260,7 +260,7 @@ str(GI)
 
 
 
-## Factor
+## <a name="factor"></a> Factor
 
 A factor is a data type that represents a categorical variable in a `data.frame`. 
 
@@ -299,7 +299,7 @@ This created a new variable in the GI `data.frame` called `ageC`. `Inf` represen
 
 
 
-## Dates
+## <a name="dates"></a> Dates
 
 In order to use dates properly, they need to be converted into type `Date`. 
 
@@ -338,7 +338,7 @@ When you have completed the activity, compare your results to the [solutions](gr
 
 
 
-# Reshaping data frames in R
+# <a name="reshaping"></a> Reshaping data frames in R
 
 There are two general representations of tabular data.
 
@@ -389,7 +389,7 @@ dcast(m, week ~ syndrome) # Notice that we do not use the count (value) column a
 ```
 
 
-# Aggregating data frames in R
+# <a name="aggregating"></a> Aggregating data frames in R
 
 The GI data set that we have is already in long format and each row is an individual. 
 We may want to aggregate this information. To do so, we will use the `ddply()` function in the `plyr` package.
@@ -448,7 +448,7 @@ When you have completed the activity, compare your results to the [solutions](gr
 
 
 
-# Basics of `ggplot2`
+# <a name="ggplot2"></a> Basics of `ggplot2`
 
 Once you have your data in long format, you can use the `ggplot2` package for graphics.
 
@@ -458,9 +458,14 @@ library(ggplot2)
 ```
 
 
+
 ## Histogram
 
 A basic histogram in ggplot
+
+```{r, eval=FALSE, echo=FALSE}
+qplot(data=GI, x=age, geom="histogram", binwidth=1)
+```
 
 ```{r}
 ggplot(GI, aes(x = age)) + geom_histogram(binwidth=1)
@@ -523,7 +528,7 @@ When you have completed the activity, compare your results to the [solutions](gr
 
 
 
-# Customizing ggplot2 plots
+# <a name="customizing"></a> Customizing ggplot2 plots
 
 There are many ways to customize the appearance of ggplot2 plots:
 
@@ -598,7 +603,7 @@ For other themes, see
 
 
 
-# Getting help on ggplot2
+# <a name="help"></a> Getting help on ggplot2
 
 Although the general R help can still be used, e.g. 
 
@@ -612,7 +617,7 @@ It is much more helpful to google for an answer
     geom_point 
     ggplot line colors
 
-The top hits will all have the code along with what the code produces
+The top hits will all have the code along with what the code produces.
 
 ## Helpful sites
 

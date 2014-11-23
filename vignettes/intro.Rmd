@@ -13,7 +13,7 @@ vignette: >
 ---
 
 
-# Introduction to R
+# <a name="intro"></a> Introduction to R 
 
 ## Detailed introduction
 
@@ -95,7 +95,7 @@ When you have completed the activity, compare your results to the [solutions](in
 
 
 
-# Using R as a calculator
+# <a name="calculator"></a> Using R as a calculator
 
 ## Basic calculator operations
 
@@ -196,7 +196,7 @@ When you have completed the activity, compare your results to the [solutions](in
 
 
 
-# Reading data into R
+# <a name="reading"></a> Reading data into R
 
 In this section, we will learn how to read in csv or Excel files into R. We focus on csv files because less can go wrong. 
 
@@ -304,7 +304,7 @@ tail(GI)
 ```
 
 
-### Reading an Excel xlsx file into R
+### <a name="excel"></a> Reading an Excel xlsx file into R
 
 Reading an Excel xlsx file into R is done using the `read.xlsx` function from the [xlsx](http://cran.r-project.org/web/packages/xlsx/index.html) R package. Unfortunately many scenarios can cause this process to not work. Thus, we do not focus on it in an introductory R course. When it works, it looks like this
 
@@ -317,7 +317,7 @@ or
 d = read.xlsx("filename.xlsx", sheetName="sheetName")
 ```
 
-
+If these don't work, you can `Save as...` a csv file in Excel.
 
 
 ## Activity 
@@ -345,7 +345,7 @@ d = read.table("filename.csv", # Make sure to change filename>to your filename a
 
 
 
-# Descriptive statistics
+# <a name="descriptive"></a> Descriptive statistics
 
 When reading your data set into R, you will likely want to perform some descriptive statistics. The single most useful command to assess the whole data set is the `summary()` command:
 
@@ -458,7 +458,7 @@ When you have completed the activity, compare your results to the [solutions](in
 
 
 
-# Graphical statistics
+# <a name="graphical"></a> Graphical statistics
 
 Here we focus on the graphical options for the base package in R. Later we will use the ggplot2 package:
 
@@ -552,7 +552,7 @@ When you have completed the activity, compare your results to the [solutions](in
 
 
 
-# Getting help
+# <a name="help"></a> Getting help
 
 As you work with R, there will be many times when you need to get help. 
 
