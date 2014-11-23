@@ -12,7 +12,7 @@ vignette: >
 
 # <a name="matrix"></a> Matrix activity
 
-```{r, echo=FALSE}
+```{r}
 m = rbind(c(1, 12, 8, 6),
           c(4, 10, 2, 9),
           c(11, 3, 5, 7))
@@ -32,3 +32,26 @@ n[,2]
 # Print all but the 3rd row
 n[-4,]
 ```
+
+
+
+# <a name="factor"></a> Factor activity
+
+```{r, echo=FALSE}
+library(ISDSWorkshop)
+data(GI)
+write.csv(GI, file="GI.csv", row.names=FALSE)
+GI = read.csv("GI.csv")
+```
+
+```{r}
+# Create icd9code
+cuts = c(0, 140, 240, 280, 290, 320, 360, 390, 460, 520, 580, 630, 680, 710, 740, 760, 780, 800, Inf)
+GI$icd9code = cut(GI$icd9, cuts, right=FALSE)
+
+# Find the icd9code that is most numerous
+# There are many ways to do this
+table(GI$icd9code)
+```
+
+
