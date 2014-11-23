@@ -25,6 +25,7 @@ vignette: >
 - Data types
 - Data frames
 - Reshaping data frames in R
+- Aggregating data frames in R
 - Basics of ggplot2
 - Customizing (colors, characters, faceting)
 - Getting help on ggplot2
@@ -33,5 +34,7 @@ vignette: >
 
 
 ## Algorithms for disease surveillance
+
+- Exporting tables to Word
 
 
