@@ -1,3 +1,5 @@
 - Add csv file for others to try to read in in intro activity
 - Change gender to sex
 - Reconstruct GI data set so there are patterns to find
+- Make sure all activities are properly labeled and solutions correspond
+- Make sure all links work
