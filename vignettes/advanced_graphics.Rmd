@@ -36,7 +36,7 @@ Now start the workshop to get your data files and scripts set up. Typically you 
 
 ```{r}
 library(ISDSWorkshop)
-workshop(write_data = c("GI","icd9"), write_scripts=NULL)
+workshop(write_data = c("GI","icd9"), write_scripts=NULL, launch_index=FALSE)
 ```
 
 ## Open the script
