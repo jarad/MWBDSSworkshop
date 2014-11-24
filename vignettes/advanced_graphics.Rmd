@@ -366,13 +366,13 @@ mid   = subset(GI, date >= two_dates[1] & date < two_dates[2])
 Now make plots
 
 ```{r}
-early_w = ddply(early, .(weekD), summarize, count = length(id))
-late_w  = ddply(late,  .(weekD), summarize, count = length(id))
-mid_w   = ddply(mid,   .(weekD), summarize, count = length(id))
+early_w = ddply(early, .(week), summarize, count = length(id))
+late_w  = ddply(late,  .(week), summarize, count = length(id))
+mid_w   = ddply(mid,   .(week), summarize, count = length(id))
 
-g1 = ggplot(early_w, aes(x=weekD, y=count)) + geom_point()
-g2 = ggplot(late_w,  aes(x=weekD, y=count)) + geom_point()
-g3 = ggplot(mid_w,   aes(x=weekD, y=count)) + geom_point()
+g1 = ggplot(early_w, aes(x=week, y=count)) + geom_point()
+g2 = ggplot(late_w,  aes(x=week, y=count)) + geom_point()
+g3 = ggplot(mid_w,   aes(x=week, y=count)) + geom_point()
 ```
 
 To arrange multiple plots, use the `grid.arrange` function in the `gridExtra` package.
