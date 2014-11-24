@@ -289,9 +289,9 @@ table(GI$facility)
 ```
 
 
-### Converting back to the original factor
+### Converting back to the original numeric variable
 
-To obtain the original levels of the factor use `as.character()` and `as.numeric()`
+To obtain the original numeric variable use `as.character()` and `as.numeric()`
 
 ```{r}
 as.character(GI$facility)             # This returns the levels as a character vector
