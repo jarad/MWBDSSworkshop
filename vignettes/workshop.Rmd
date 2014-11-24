@@ -48,5 +48,4 @@ vignette: >
 
 - Algorithms <http://surveillance.r-forge.r-project.org/>
 - Exporting tables to Word
-
-
+- Installing packages from github
