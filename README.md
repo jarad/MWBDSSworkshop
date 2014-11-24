@@ -29,5 +29,5 @@ Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct
 # Install the ISDSWorkshop R package
 
 1. Start RStudio (or R GUI if you did not install RStudio). 
-1. At the command prompt (`>`) in the Console window, type `install.packages("ISDSWorkshop")`.
+1. At the command prompt (`>`) in the Console window, type `install.packages("ISDSWorkshop")`. This will install a number of other packages including ggplot2, gridExtra, knitr, plyr, reshape2, and rmarkdown.
 1. To check that everything installed properly, type `library(ISDSWorkshop)` at the command prompt. If there is no message, then everything installed properly.
