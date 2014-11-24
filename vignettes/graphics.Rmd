@@ -631,7 +631,7 @@ Although the general R help can still be used, e.g.
 It is much more helpful to google for an answer
 
     geom_point 
-    ggplot line colors
+    ggplot2 line colors
 
 The top hits will all have the code along with what the code produces.
 
