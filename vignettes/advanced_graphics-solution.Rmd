@@ -61,7 +61,7 @@ ggplot(GI_wa, aes(x=week, y=count, shape=ageC, color=ageC)) + geom_point()
 
 
 
-# <a name="faet"></a> Activity - weekly GI counts by zip3 and ageC
+# <a name="facet"></a> Activity - weekly GI counts by zip3 and ageC
 
 Construct a plot of weekly GI counts by zip3 and ageC. 
 
@@ -73,3 +73,20 @@ GI_za = ddply(GI, .(week, zip3, ageC), summarize, count=length(id))
 ggplot(GI_za, aes(x=week, y=count)) + geom_point() + facet_grid(ageC~zip3)
 ```
 
+
+
+
+# <a name="subsetting"></a> Activity - subsetted graphs
+
+Construct a plot for those in zipcode 206xx in 2008. 
+
+```{r}
+# Subset the data to zipcode 206xx between Jan 1, 2008 and Dec 31, 2008
+zip206 = subset(GI, zip3==206 & date >= as.Date("2008-01-01") & date <= as.Date("2008-12-31"))
+
+# Aggregate the date for each week in this time frame
+zip206_w = ddply(zip206, .(week), summarize, count = length(id))
+
+# Construct the plot of weekly GI counts in zipcode 206xx.
+ggplot(zip206_w, aes(x=week, y=count)) + geom_point()
+```
