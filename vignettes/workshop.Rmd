@@ -42,7 +42,7 @@ vignette: >
 - [Faceting](advanced_graphics.html#faceting)
 - [Subsetting](advanced_graphics.html#subsetting)
 - [Making professional looking graphics](advanced_graphics.html#professional)
-- Exporting graphs
+  - [Exporting graphs](advanced_graphics.html#exporting)
 
 ## Advanced biosurveillance
 

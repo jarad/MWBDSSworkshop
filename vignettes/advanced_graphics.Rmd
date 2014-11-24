@@ -399,3 +399,105 @@ Construct a plot for those in zipcode 206xx between Jan 1, 2008 and Dec 31, 2008
 ```
 
 When you have completed the activity, compare your results to the [solutions](advanced_graphics-solution.html#subsetting).
+
+
+
+# <a name="professional"></a> Making professional looking graphics
+
+To make the graphics we are producing look professional, we will need to [customize](graphics.html#customizing) the graph according to the final production platform, e.g. website, word document, pdf document, etc. This will be highly specific to your use. Nonetheless, likely you will use the following `ggplot2` functions:
+
+- `scale_color_manual`
+- `labs`
+- `theme`
+
+But there are many others. One thing you will notice is that we can keep updating the graph by updating the R object that holds the graph. 
+
+## Base graphic
+
+Let's start with the following graph
+
+```{r}
+GI$weekD = as.Date(GI$weekC) 
+GI_sum = ddply(GI, .(weekD, gender, ageC), summarize, count = length(id))
+ggplot(GI_sum, aes(x=weekD, y=count, color=gender)) + geom_point(size=3) + facet_grid(ageC~., scales="free_y")
+```
+
+## Change age category labels
+
+The easiest way to change some of the labels on the graph is to change the underlying data. Here we change the levels associated with the `ageC` variable. 
+
+```{r}
+levels(GI_sum$ageC)
+levels(GI_sum$ageC) = paste("Age:", c("<5","5-18","18-45","45-60",">60"))
+table(GI_sum$ageC)
+```
+
+```{r}
+g = ggplot(GI_sum, aes(x=weekD, y=count, color=gender)) + geom_point(size=3) + facet_grid(ageC~., scales="free_y")
+g
+```
+
+`g` is the R object that contains the graph
+
+
+## Change colors 
+
+Intuitive colors can make a graph easier to read. 
+
+```{r}
+g = g + scale_color_manual(values=c("hotpink","blue"), name='Sex')
+g
+```
+
+
+## Change title and axis labels
+
+Use proper names and capitalization in title and axis labels.
+
+```{r}
+g = g + labs(title="Weekly GI cases", x="Year", y="Weekly count") 
+g
+```
+
+## Try alternate themes
+
+Try alternate themes:
+
+```{r}
+g = g + theme_bw()
+g
+```
+
+To see a list of possibilities:
+
+```{r, eval=FALSE}
+?theme_bw
+```
+
+
+## Adjust font sizes
+
+Depending on the final platform, font sizes may need to be adjusted.
+
+```{r}
+g = g + theme(title=element_text(size=rel(2)),
+              text = element_text(size=16),
+              legend.background = element_rect(fill="white", size=.5, color="black"))
+g
+```
+
+
+## <a name="exporting"></a> Exporting graphs
+
+To export the graphs, use the `ggsave()` function which saves the last plot that you displayed. As a default, it uses the size of the current graphics device, but you will likely want to modify this. 
+
+```{r}
+g
+ggsave("plot.pdf")
+```
+
+If you look in your current working directory, you will see the plot.pdf file. 
+
+```{r}
+ggsave("plot.pdf", width=14, height=8)
+```
