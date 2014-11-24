@@ -1,7 +1,7 @@
 #'  A function that prepares the workshop.
 #' 
 #'  @param write_data string. Write these data sets.
-#'  @param write_scripts logical. If TRUE, writes the workshop R scripts to the current working directory.
+#'  @param write_scripts string. write these data sets
 #'  @param launch_index logical. If TRUE, launches the workshop html index.
 #'  @details By default, the function uses the \code{\link{data}} function to load data sets and 
 #'    then uses the \code{\link{write.csv}} function to write them to a file. 
@@ -16,7 +16,9 @@
 #'  workshop(write_data = FALSE)
 #'  workshop(clean = FALSE) 
 #'  }
-workshop = function(write_data = "GI", write_scripts=NULL, launch_index=TRUE) {
+workshop = function(write_data = "GI", 
+                    write_scripts=c("intro","graphics","advanced_graphics"), 
+                    launch_index=TRUE) {
   
   # Write data
   if ("GI" %in% write_data) {
@@ -30,9 +32,6 @@ workshop = function(write_data = "GI", write_scripts=NULL, launch_index=TRUE) {
   }
   
   # Write scripts
-  if (is.null(write_scripts)) 
-    write_scripts = paste("intro","graphics","advanced_graphics")
-  
   for (script in write_scripts) 
     file.copy(from = paste(find.package("ISDSWorkshop"), "/doc/", script, ".R", sep=""),
               to   = paste(script,".R", sep=""))
