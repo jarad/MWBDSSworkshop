@@ -8,6 +8,68 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+```{r, echo=FALSE}
+library(ISDSWorkshop)
+library(ggplot2)
+library(plyr)
+
+workshop(write_data = c("GI","icd9"), write_scripts=NULL)
+
+# Read in csv files
+GI = read.csv('GI.csv')
+icd9df = read.csv("icd9.csv")
+
+# Mutate data.frame
+GI = mutate(GI,
+            date      = as.Date(date),
+            weekC     = cut(date, breaks="weeks"),
+            week      = as.numeric(weekC),
+            facility  = as.factor(facility),
+            icd9class = factor(cut(icd9, 
+                            breaks = icd9df$code_cutpoint, 
+                            labels = icd9df$classification[-nrow(icd9df)], 
+                            right  = TRUE)),
+            ageC      = cut(age, 
+                            breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
+            zip3      = trunc(zipcode/100))
+```
 
 
-# 
+# <a name="Date"></a> Activity - convert back to dates
+
+```{r}
+# Create weekD variable in GI data set
+GI$weekD = as.Date(GI$weekC)
+str(GI$weekD)
+```
+
+
+
+# <a name="graph"></a> Activity - weekly GI cases by ageC
+
+```{r}
+# Construct a data set aggregated by week and age category
+GI_wa = ddply(GI, .(week, ageC), summarize, count = length(id))
+
+# Construct a plot to look at weekly GI cases by age category
+ggplot(GI_wa, aes(x=week, y=count, color=ageC)) + geom_point()
+
+ggplot(GI_wa, aes(x=week, y=count, shape=ageC)) + geom_point()
+
+ggplot(GI_wa, aes(x=week, y=count, shape=ageC, color=ageC)) + geom_point()
+```
+
+
+
+# <a name="faet"></a> Activity - weekly GI counts by zip3 and ageC
+
+Construct a plot of weekly GI counts by zip3 and ageC. 
+
+```{r}
+# Construct data set 
+GI_za = ddply(GI, .(week, zip3, ageC), summarize, count=length(id))
+
+# Construct plot of weekly GI counts by zip3 and ageC
+ggplot(GI_za, aes(x=week, y=count)) + geom_point() + facet_grid(ageC~zip3)
+```
+

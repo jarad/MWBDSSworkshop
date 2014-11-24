@@ -20,6 +20,9 @@ The typical workflow in R is
 1. Start R
 1. Choose your working directory
 1. Open a script
+1. Read in data
+1. Check data (interactively)
+1. Do analysis
 
 ## Choose your working directory 
 
@@ -33,14 +36,12 @@ Now start the workshop to get your data files and scripts set up. Typically you 
 
 ```{r}
 library(ISDSWorkshop)
-workshop(write_data = c("GI","icd9"))
+workshop(write_data = c("GI","icd9"), write_scripts=NULL)
 ```
 
 ## Open the script
 
-Open the  `advanced_graphics.R` script and read in the data set.
-
-
+Open the  `advanced_graphics.R` script.
 
 Notice that the top of the script has all of the packages that you will use 
 
@@ -53,7 +54,7 @@ library(ggplot2)
 
 ## Read in the data
 
-You will typically have a script that reads in the data and converts variables. 
+Typically, you will have a script that reads in the data and converts variables. 
 
 This time we will use the `mutate()` function from the `plyr` package. This function allows you to create new columns in a `data.frame`.
 
@@ -75,15 +76,16 @@ GI = mutate(GI,
             ageC      = cut(age, 
                             breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
             zip3      = trunc(zipcode/100))
-
 ```
+
+
 
 
 ## Reading other scripts
 
 If the script to read in the data is extensive, it may be better to separate your scripts into two different files. Then, in the second file, i.e. the one that does an analysis, you can `source()` the one that just reads in the data, e.g.
 
-```{r}
+```{r, eval=FALSE}
 source("read_data.R")
 ```
 
@@ -100,4 +102,159 @@ summary(GI)
 ```
 
 
-# 
+## Activity
+
+Create a new variable in the GI data set called `weekD` that is a `Date` object with each observation having the Monday of the week for that observation. Check that it is actually a date using the `str()` function.
+
+```{r, echo=FALSE}
+# Create weekD variable in GI data set
+```
+
+
+When you have completed the activity, compare your results to the [solutions](advanced_graphics-solution.html#Date).
+
+
+
+# <a name="graph_workflow"></a> Graph workflow
+
+Now to construct a graph, the simple workflow is
+
+1. Construct an appropriate data set
+1. Construct the graph
+
+
+## Construct the data set
+
+Suppose we want to plot the number of weekly GI cases by facility. We need to aggregate the data by week and facility. 
+
+```{r}
+GI_wf = ddply(GI, .(week, facility), summarize, count = length(id))
+```
+
+In interactive mode, you should verify that this data set is correct, e.g. 
+
+```{r, eval=FALSE}
+nrow(GI_wf) # Should have number of weeks times number of facilities rows
+ncol(GI_wf) # Should have 3 columns: week, facility, count
+dim(GI_wf)
+head(GI_wf)
+tail(GI_wf)
+summary(GI_wf)
+summary(GI_wf$facility)
+```
+
+## Construct the graph
+
+Now, we would like week on the x-axis and count on the y-axis. 
+
+```{r}
+ggplot(GI_wf, aes(x=week, y=count)) + geom_point()
+```
+
+But, clearly we need to distinguish the facilities. 
+
+
+## Try colors and shapes to distinguish facilities
+
+Colors:
+
+```{r}
+ggplot(GI_wf, aes(x=week, y=count, color=facility)) + geom_point()
+```
+
+Shapes:
+
+```{r}
+ggplot(GI_wf, aes(x=week, y=count, shape=facility)) + geom_point()
+```
+
+ggplot only plots 6 different shapes and provides a warning
+
+
+## Activity - weekly GI counts by age category
+
+Construct a data set and then a plot to look at weekly GI cases by age category.
+
+```{r, echo=FALSE}
+# Construct a data set aggregated by week and age category
+
+# Construct a plot to look at weekly GI cases by age category.
+```
+
+When you have completed the activity, compare your results to the [solutions](advanced_graphics-solution.html#graph).
+
+
+
+# <a name="faceting"></a> Faceting
+
+Faceting is a technique to view many small graphs on a single page.
+
+In ggplot, there are two different ways to construct facets: `facet_wrap()` and `facet_grid()`. The former performs the faceting for a single variable and constructs the matrix of plots automatically. The latter performs faceting for two variables putting one vertically and the other horizontally.
+
+
+## Faceting on a single variable
+
+When there are many levels of a single variable, `facet_wrap()` can often allow comparisons across that variable.
+
+```{r}
+ggplot(GI_wf, aes(x=week, y=count)) + geom_point() + facet_wrap(~facility)
+```
+
+By default, faceting forces all axes to be exactly the same. If you want the axis to automatically scale for each facet, 
+
+```{r}
+ggplot(GI_wf, aes(x=week, y=count)) + geom_point() + facet_wrap(~facility, scales="free")
+```
+
+## Faceting on two variables
+
+When there are two variables (with not very many levels in each), `facet_grid()` can allow relevant comparisons.
+
+Suppose we are interested in weekly GI counts by gender and age category. First, construct the data set
+
+```{r}
+GI_sa = ddply(GI, .(week, gender, ageC), summarize, count = length(id))
+```
+
+Next, construct the plot using `facet_grid(row~column)` syntax.
+
+```{r}
+ggplot(GI_sa, aes(x=week, y=count)) + geom_point() + facet_grid(gender~ageC)
+```
+
+## Using faceting and colors/shapes
+
+Alternatively, we could use faceting together with colors/shapes
+
+```{r}
+ggplot(GI_sa, aes(x=week, y=count, shape=gender, color=gender)) + geom_point() + facet_wrap(~ageC)
+```
+
+
+## Activity - weekly GI counts by zip3 and ageC
+
+Construct a plot of weekly GI counts by zip3 and ageC. 
+
+```{r, echo=FALSE}
+# Construct a plot of weekly GI counts by zip3 and ageC. 
+```
+
+When you have completed the activity, compare your results to the [solutions](advanced_graphics-solution.html#facet).
+
+
+
+
+# <a name="subsetting"></a> Subsetting
+
+Often our data set is large and we would like to [subset the data](intro.html#subsetting) to focus on a particular group or time frame.
+
+Suppose we are only interested in counts specifically for infectious and parasitic diseases.
+
+```{r}
+IPD = subset(GI, icd9class == "infectious and parasitic disease")
+summary(IPD$icd9class)
+```
+
+
+
+
