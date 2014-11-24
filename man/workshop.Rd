@@ -3,15 +3,13 @@
 \alias{workshop}
 \title{A function that prepares the workshop.}
 \usage{
-workshop(write_data = TRUE, write_scripts = TRUE, clean = TRUE,
-  launch_index = TRUE)
+workshop(write_data = "GI", write_scripts = c("intro", "graphics",
+  "advanced_graphics"), launch_index = TRUE)
 }
 \arguments{
-\item{write_data}{logical. If TRUE, writes the GI data set to a csv file in the current working directory.}
+\item{write_data}{string. Write these data sets.}
 
-\item{write_scripts}{logical. If TRUE, writes the workshop R scripts to the current working directory.}
-
-\item{clean}{logical. If TRUE, removes all objects created by the function from the R workspace.}
+\item{write_scripts}{string. write these data sets}
 
 \item{launch_index}{logical. If TRUE, launches the workshop html index.}
 }
@@ -19,8 +17,8 @@ workshop(write_data = TRUE, write_scripts = TRUE, clean = TRUE,
 A function that prepares the workshop.
 }
 \details{
-The function uses the \code{\link{data}} function to load the \code{\link{GI}} data set and
-   then uses the \code{\link{write.csv}} function to write it to a file.
+By default, the function uses the \code{\link{data}} function to load data sets and
+   then uses the \code{\link{write.csv}} function to write them to a file.
    It then launches the \code{\link{ISDSWorkshop}} html index
    using the \code{\link{vignette}} function.
 }
