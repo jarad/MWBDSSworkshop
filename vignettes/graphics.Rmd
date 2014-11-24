@@ -289,6 +289,17 @@ table(GI$facility)
 ```
 
 
+### Converting back to the original factor
+
+To obtain the original levels of the factor use `as.character()` and `as.numeric()`
+
+```{r}
+as.character(GI$facility)             # This returns the levels as a character vector
+as.numeric(GI$facility)               # This returns the numeric encoding
+as.numeric(as.character(GI$facility)) # This returns the original numeric factor levels
+```
+
+
 ### Creating your own factor
 
 Use the `cut()` function to create a factor from a continuous variable.
@@ -299,6 +310,8 @@ table(GI$ageC)
 ```
 
 This created a new variable in the GI `data.frame` called `ageC`. `Inf` represents infinity.
+
+
 
 
 
