@@ -12,6 +12,7 @@ Depends:
 License: GPL (> 2)
 Suggests:
     ggplot2,
+    gridExtra,
     knitr,
     plyr,
     reshape2,
