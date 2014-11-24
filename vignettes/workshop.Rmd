@@ -19,6 +19,7 @@ vignette: >
 - [Reading data into R](intro.html#reading)
   - [Reading directly from Excel](intro.html#excel)
 - [Descriptive statistics](intro.html#descriptive)
+  - [Subsetting the data](intro.html#subsetting)
 - [Graphical statistics](intro.html#graphical)
 - [Getting help](intro.html#help)
 
@@ -37,11 +38,14 @@ vignette: >
 ## [Advanced graphics with R (ggplot2)](advanced_graphics.html)
 
 - [Workflow](advanced_graphics.html#workflow)
-- Faceting
+- [Workflow for constructing a graph](advanced_graphics.html#graph_workflow)
+- [Faceting](advanced_graphics.html#faceting)
+- [Subsetting](advanced_graphics.html#subsetting)
 - Exporting graphs
 
 ## Advanced biosurveillance
 
+- Algorithms <http://surveillance.r-forge.r-project.org/>
 - Exporting tables to Word
 
 

@@ -388,7 +388,7 @@ Apparently there is only 1 observation from facility 259, was that a typo?
 
 
 
-## Subsetting the data
+## <a name="subsetting"></a> Subsetting the data
 
 Rather than having descriptive statistics for the dataset as a whole, we may be interested in descriptive statistics for a `subset` of the data. 
 
