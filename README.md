@@ -39,7 +39,7 @@ Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct
 
 ## Start the workshop
 
-To start the workshop (this will be done at the [ISDS pre-conference training](http://www.syndromic.org/annual-conference/2014-isds-conference)), start R and type
+To start the workshop (this will be done at the [ISDS pre-conference training](http://www.syndromic.org/annual-conference/2014-isds-conference)), start R, change your working directory, and type
 
     library(ISDSWorkshop)
     workshop()
