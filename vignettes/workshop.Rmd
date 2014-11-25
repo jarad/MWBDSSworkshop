@@ -51,3 +51,4 @@ vignette: >
 - Installing packages from github
 - Maps
 - Shiny apps <http://spark.rstudio.com/ejahanpour/SampleData/>
+- functions
