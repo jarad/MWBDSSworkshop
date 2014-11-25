@@ -23,12 +23,14 @@ workshop = function(write_data = "GI",
   # Write data
   if ("GI" %in% write_data) {
     data('GI', package='ISDSWorkshop', envir=environment())
-    write.csv(GI, file="GI.csv", row.names=FALSE)
+    write.csv(get('GI', envir = environment(), 
+                  file="GI.csv", row.names=FALSE)
   }
   
   if ("icd9" %in% write_data) {
     data('icd9', package='ISDSWorkshop', envir=environment())
-    write.csv(icd9, file='icd9.csv', row.names=FALSE)
+    write.csv(get('icd9', envir = environment(), 
+                  file='icd9.csv', row.names=FALSE)
   }
   
   # Write scripts
