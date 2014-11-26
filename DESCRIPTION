@@ -22,5 +22,6 @@ Suggests:
     maps,
     plyr,
     reshape2,
-    rmarkdown
+    rmarkdown,
+    SpatialEpi
 VignetteBuilder: knitr
