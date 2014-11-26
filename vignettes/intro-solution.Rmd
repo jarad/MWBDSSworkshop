@@ -8,6 +8,12 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+```{r, echo=FALSE}
+library(ISDSWorkshop)
+workshop(write_data = c("GI","fluTrends"), 
+         write_scripts=NULL, 
+         launch_index=FALSE)
+```
 
 
 # <a name="introduction"></a> Introduction
@@ -52,15 +58,36 @@ probability
 Yes, it is only about 2%!
 
 
+# <a name="read"></a> Read csv file
 
+Read in the `fluTrends.csv` file.
+
+```{r}
+# Read in the csv file
+fluTrends = read.csv('fluTrends.csv')
+names(fluTrends)
+
+# To maintain pretty column names, use 
+fluTrends = read.csv('fluTrends.csv', check.names=FALSE)
+names(fluTrends)
+# unfortunately these names won't work with the 
+# fluTrends$colname syntax
+```
+
+Read in the `fluTrends.txt` file directly from its URL.
+
+```{r}
+# Read in the txt file directly from its URL
+fluTrends2 = read.csv('http://www.google.org/flutrends/us/data.txt',
+                      skip = 11,
+                      check.names=FALSE)
+all.equal(fluTrends, fluTrends2)
+```
 
 
 # <a name="descriptive"></a> Descriptive statistics
 
 ```{r, echo=FALSE}
-library(ISDSWorkshop)
-data(GI)
-write.csv(GI, file="GI.csv", row.names=FALSE)
 GI = read.csv("GI.csv")
 ```
 

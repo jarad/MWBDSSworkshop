@@ -186,14 +186,12 @@ Calculate the probability the individual has the disease if the test is positive
 - the sensitivity of the test is 0.95, and
 - the prevalence of the disease is 0.001.
 
-
-When you have completed the activity, compare your results to the [solutions](intro-solution.html#calculator).
-
 ```{r, echo=FALSE}
 # Find the probability the individual has the disease if 
 # specificity is 0.99, sensitivity is 0.95, and prevalence is 0.001
 ```
 
+When you have completed the activity, compare your results to the [solutions](intro-solution.html#calculator).
 
 
 # <a name="reading"></a> Reading data into R
@@ -276,7 +274,7 @@ This created a `data.frame` object in R called GI.
 
 ## read.table
 
-The read.table function is a more general function for reading data into R and it has many options. We could have gotten the same results, if we had used the following code:
+The read.table function is a more general function for reading data into R and it has many options. We could have gotten the same results if we had used the following code:
 
 ```{r, tidy=FALSE}
 GI2 = read.table("GI.csv", 
@@ -322,9 +320,9 @@ If these don't work, you can `Save as...` a csv file in Excel.
 
 ## Activity 
 
-If you brought your own Excel file, open it and save a sheet as a csv file in your working directory. If you brought your own csv file, save it in your working directory. 
+If you brought your own Excel file, open it and save a sheet as a csv file in your working directory. If you brought your own csv file, save it in your working directory. If you did not bring your own file, use the `fluTrends.csv` file in your working directory. 
 
-Try to use the read.csv function to read it into R. There are a number of different options in the csv file that may be useful:
+Try to use the read.csv function to read the file into R. There are a number of different options in the csv file that may be useful:
 
 ```{r, eval=FALSE, tidy=FALSE}
 d = read.table("filename.csv", # Make sure to change filename>to your filename and 
@@ -336,13 +334,18 @@ d = read.table("filename.csv", # Make sure to change filename>to your filename a
 ```
 
 
-
-
-
 ```{r, echo=FALSE}
-# Put your code here to read in your own csv file
+# Read in the csv file
 ```
 
+If you have extra time, try to read in the file <http://www.google.org/flutrends/us/data.txt> directly. 
+
+```{r, echo=FALSE}
+# Read in the txt file directly from its URL
+```
+
+
+When you have completed the activity, compare your results to the [solutions](intro-solution.html#read).
 
 
 # <a name="descriptive"></a> Descriptive statistics
