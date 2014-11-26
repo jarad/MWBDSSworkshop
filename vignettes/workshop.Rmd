@@ -41,7 +41,7 @@ vignette: >
 - [Workflow for constructing a graph](advanced_graphics.html#graph_workflow)
 - [Faceting](advanced_graphics.html#faceting)
 - [Subsetting](advanced_graphics.html#subsetting)
-- [Making professional looking graphics](advanced_graphics.html#professional)
+- [Making professional graphics](advanced_graphics.html#professional)
   - [Exporting graphs](advanced_graphics.html#exporting)
 
 ## Advanced biosurveillance

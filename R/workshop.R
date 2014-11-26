@@ -16,24 +16,36 @@
 #'  workshop(write_data = FALSE)
 #'  workshop(clean = FALSE) 
 #'  }
-workshop = function(write_data = "GI", 
-                    write_scripts=c("intro","graphics","advanced_graphics"), 
+workshop = function(write_data = 'all', 
+                    write_scripts='all', 
                     launch_index=TRUE) {
   
   # Write data
+  if (write_data == 'all') 
+    write_data = c('GI','icd9','fluTrends')
+  
   if ("GI" %in% write_data) {
     data('GI', package='ISDSWorkshop', envir=environment())
     write.csv(get('GI', envir = environment()), 
-                  file="GI.csv", row.names=FALSE)
+              file="GI.csv", row.names=FALSE)
   }
   
   if ("icd9" %in% write_data) {
     data('icd9', package='ISDSWorkshop', envir=environment())
     write.csv(get('icd9', envir = environment()), 
-                  file='icd9.csv', row.names=FALSE)
+              file='icd9.csv', row.names=FALSE)
+  }
+  
+  if ("fluTrends" %in% write_data) {
+    data('fluTrends', package='ISDSWorkshop', envir=environment())
+    write.csv(get('fluTrends', envir=environment()),
+              file = 'fluTrends.csv', envir=environment())
   }
   
   # Write scripts
+  if (write_scripts == 'all') 
+    write_scripts = c("intro","graphics","advanced_graphics")
+  
   for (script in write_scripts) 
     file.copy(from = paste(find.package("ISDSWorkshop"), "/doc/", script, ".R", sep=""),
               to   = paste(script,".R", sep=""))
