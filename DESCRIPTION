@@ -19,6 +19,7 @@ Suggests:
     ggplot2,
     gridExtra,
     knitr,
+    maps,
     plyr,
     reshape2,
     rmarkdown

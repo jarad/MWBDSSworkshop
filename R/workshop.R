@@ -44,7 +44,7 @@ workshop = function(write_data = 'all',
   
   # Write scripts
   if (write_scripts == 'all') 
-    write_scripts = c("intro","graphics","advanced_graphics")
+    write_scripts = c("intro","graphics","advanced_graphics","biosurveillance")
   
   for (script in write_scripts) 
     file.copy(from = paste(find.package("ISDSWorkshop"), "/doc/", script, ".R", sep=""),

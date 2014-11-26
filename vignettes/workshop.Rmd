@@ -48,7 +48,7 @@ vignette: >
 
 - Algorithms <http://surveillance.r-forge.r-project.org/>
 - Exporting tables to Word
-- Installing packages from github
-- Maps
+- [Maps](biosurveillance.html#maps)
+- [Packages](biosurveillance.html#packages)
 - Shiny apps <http://spark.rstudio.com/ejahanpour/SampleData/>
 - functions

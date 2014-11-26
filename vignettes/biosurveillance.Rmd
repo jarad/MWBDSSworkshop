@@ -1,0 +1,178 @@
+---
+title: "Advanced Biosurveillance"
+author: "Jarad Niemi"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+  pdf_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Advanced Biosurveillance}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r}
+library(ggplot2)
+library(plyr)
+library(maps)
+library(reshape2)
+library(ISDSWorkshop)
+workshop()
+```
+
+# <a name="maps"></a> Maps
+
+The packages `ggplot2` and `maps` can be used together to make maps.
+
+Map of the continental US
+```{r}
+states = map_data("state")
+ggplot(states, aes(x=long, y=lat, group=group)) + geom_polygon()
+```
+
+Map of the counties in the continental US
+```{r}
+counties = map_data("county")
+ggplot(counties, aes(x=long, y=lat, group=group)) + geom_polygon()
+```
+
+Map of the counties in Iowa
+```{r}
+counties = map_data("county")
+ggplot(subset(counties, region=="iowa"), 
+       aes(x=long, y=lat, group=group)) + geom_polygon()
+```
+
+## Construct an appropriate data set
+
+To make an informative map, we need to add data. 
+
+```{r}
+fluTrends = read.csv("fluTrends.csv")
+fluTrends$Date = as.Date(fluTrends$Date)
+```
+
+For simplicity, only keep the most recent data on states. 
+
+```{r}
+nr = nrow(fluTrends)
+flu_w = fluTrends[(nr-11):nr, c(1,3:53)]
+dim(flu_w)
+```
+
+Reshape to long format
+
+```{r}
+flu_l = melt(flu_w, id.var='Date',
+             variable.name='region', # to match map_data
+             value.name='index')
+```
+
+## Combine data with map_data
+
+The region names in `map_data` are lower case, so use `tolower()` to convert all the region names in flu_l to lowercase. Then the `map_data` and fluTrends data are merged using `merge()`. 
+
+```{r}
+head(unique(states$region))
+flu_l$region = tolower(flu_l$region)
+flu_l = merge(states, flu_l, sort=FALSE, by='region')
+```
+
+## Make the plots
+
+Most recent Google Flu Trend data.
+
+```{r}
+mx_date = max(flu_l$Date)
+ggplot(subset(flu_l, Date == mx_date), 
+       aes(x=long, y=lat, group=group, fill=index)) + 
+  geom_polygon() + 
+  labs(title=paste('Google Flu Trends on', mx_date), x='', y='') +
+  theme_minimal() + 
+  theme(legend.title = element_blank()) +
+  coord_map("cylindrical") 
+```
+
+Last 12 weeks.
+
+```{r}
+ggplot(flu_l, 
+       aes(x=long, y=lat, group=group, fill=index)) + 
+  geom_polygon() + 
+  labs(title='Google Flu Trends', x='', y='') +
+  theme_minimal() + 
+  theme(legend.title = element_blank()) +
+  facet_wrap(~Date) + 
+  coord_map("cylindrical")
+```
+
+
+## Activity 
+
+Try removing or modifying the code to determine what elements of the map are affected.
+
+
+
+
+
+# <a name="Packages"></a> Packages
+
+A package provides additional functionality besides what base installation of R provides. You have already used a number of additional packages:
+
+- ggplot2
+- plyr
+- reshape2
+
+The Comprehensive R Archive Network (CRAN) has over 6,000 packages. These packages can be installed using the `install.packages()` function, e.g. 
+
+```{r, eval=FALSE}
+install.packages("ggplot2")
+```
+
+For many reasons, packages may not be on CRAN but may be available from other sources:
+
+- [Github](http://github.com/)
+- [Bioconductor](http://www.bioconductor.org/)
+- Source
+
+
+## Github
+
+To install a package from github, you can use the `install_github()` function from the `devtools` package. For example,
+
+```{r, eval=FALSE}
+# install.packages("devtools")
+library(devtools)
+install_github('nandadorea/vetsyn')
+```
+
+## Bioconductor 
+
+Bioconductor is a provides tools for high-throughput genomic data. There are over 900 packages available from bioconductor. To install bioconductor, use 
+
+```{r, eval=FALSE}
+source("http://bioconductor.org/biocLite.R")
+biocLite()
+```
+
+Then to install a package from bioconductor use 
+
+```{r, eval=FALSE}
+biocLite("edgeR")
+```
+
+The bioconductor repository may be useful in the future for public health officials.
+
+
+## Source
+
+All packages can be installed from their source. If a package is not available in a repository, then this is the only way to install the package. To install from source download the source file (.tar.gz) and then use the `install.packages()` function with arguments `repos=NULl` and `type="source"`. 
+
+```{r, eval=FALSE}
+install.packages("ISDSWorkshop_0.1.tar.gz", 
+                 repos = NULL, 
+                 type  = "source")
+```
+
+
