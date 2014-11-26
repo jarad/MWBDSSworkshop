@@ -18,11 +18,15 @@ library(plyr)
 library(reshape2)
 library(ISDSWorkshop)
 workshop(launch_index=FALSE)
+```
 
+```{r}
 # Read csv files
 GI     = read.csv("GI.csv")
 icd9df = read.csv("icd9.csv")
+```
 
+```{r}
 # Mutate data.frame
 GI = mutate(GI,
             date      = as.Date(date),
@@ -297,6 +301,8 @@ The `SpatialEpi` package implements the Kulldorff cluster detection method in th
 
 Setting up the analysis (taken directly from the example)
 ```{r}
+library(SpatialEpi)
+
 ## Load Pennsylvania Lung Cancer Data
 data(pennLC)
 data <- pennLC$data

@@ -10,9 +10,7 @@ vignette: >
 
 ```{r, echo=FALSE}
 library(ISDSWorkshop)
-workshop(write_data = c("GI","fluTrends"), 
-         write_scripts=NULL, 
-         launch_index=FALSE)
+workshop(launch_index=FALSE)
 ```
 
 

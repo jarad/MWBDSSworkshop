@@ -9,16 +9,20 @@ vignette: >
 ---
 
 ```{r, echo=FALSE}
-library(ISDSWorkshop)
 library(ggplot2)
 library(plyr)
+library(ISDSWorkshop)
 
-workshop(write_data = c("GI","icd9"), write_scripts=NULL, launch_index=FALSE)
+workshop(launch_index  = FALSE)
+```
 
+```{r, echo=FALSE}
 # Read in csv files
-GI = read.csv('GI.csv')
+GI     = read.csv('GI.csv')
 icd9df = read.csv("icd9.csv")
+```
 
+```{r, echo=FALSE}
 # Mutate data.frame
 GI = mutate(GI,
             date      = as.Date(date),
@@ -26,9 +30,9 @@ GI = mutate(GI,
             week      = as.numeric(weekC),
             facility  = as.factor(facility),
             icd9class = factor(cut(icd9, 
-                            breaks = icd9df$code_cutpoint, 
-                            labels = icd9df$classification[-nrow(icd9df)], 
-                            right  = TRUE)),
+                                   breaks = icd9df$code_cutpoint, 
+                                   labels = icd9df$classification[-nrow(icd9df)], 
+                                   right  = TRUE)),
             ageC      = cut(age, 
                             breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
             zip3      = trunc(zipcode/100))
