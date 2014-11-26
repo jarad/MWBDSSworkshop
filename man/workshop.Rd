@@ -3,12 +3,12 @@
 \alias{workshop}
 \title{A function that prepares the workshop.}
 \usage{
-workshop(write_data = "all", write_scripts = "all", launch_index = TRUE)
+workshop(write_data = TRUE, write_scripts = TRUE, launch_index = TRUE)
 }
 \arguments{
-\item{write_data}{string. Write these data sets.}
+\item{write_data}{logical or string. If TRUE, writes all data sets. If FALSE, write no data sets. If string, vector of data sets to be written.}
 
-\item{write_scripts}{string. write these data sets}
+\item{write_scripts}{logical or string. If TRUE, writes all scripts. If FALSE, write no scripts. If string, vector of scripts to be written.}
 
 \item{launch_index}{logical. If TRUE, launches the workshop html index.}
 }
