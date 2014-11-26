@@ -23,7 +23,7 @@ vignette: >
 - [Graphical statistics](intro.html#graphical)
 - [Getting help](intro.html#help)
 
-## [Graphics with R (ggplot2)](graphics.html)
+## [Data Vizualization I (ggplot2)](graphics.html)
 
 - [Data types](graphics.html#types)
 - [Data frames](graphics.html#frames)
@@ -35,7 +35,7 @@ vignette: >
 - [Customizing (colors, characters, lines)](graphics.html#customizing)
 - [Getting help on ggplot2](graphics.html#help)
 
-## [Advanced graphics with R (ggplot2)](advanced_graphics.html)
+## [Data Vizualization II (ggplot2)](advanced_graphics.html)
 
 - [Workflow](advanced_graphics.html#workflow)
 - [Workflow for constructing a graph](advanced_graphics.html#graph_workflow)
@@ -44,10 +44,10 @@ vignette: >
 - [Making professional graphics](advanced_graphics.html#professional)
   - [Exporting graphs](advanced_graphics.html#exporting)
 
-## Advanced biosurveillance
+## [Advanced biosurveillance](biosurveillance.html)
 
+- [Exporting tables](biosurveillance.html#exporting_tables)
 - Algorithms <http://surveillance.r-forge.r-project.org/>
-- Exporting tables to Word
 - [Maps](biosurveillance.html#maps)
 - [Packages](biosurveillance.html#packages)
 - Shiny apps <http://spark.rstudio.com/ejahanpour/SampleData/>
