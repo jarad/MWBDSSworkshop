@@ -1,10 +1,10 @@
 ---
-title: "Graphics in R (ggplot2) - Activity Solutions"
+title: "Data Visualization I (ggplot2) - Activity Solutions"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Graphics in R (ggplot2) - Activity Solutions}
+  %\VignetteIndexEntry{Data Visualization I (ggplot2) - Activity Solutions}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 

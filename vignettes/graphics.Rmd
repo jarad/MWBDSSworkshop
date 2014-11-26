@@ -1,5 +1,5 @@
 ---
-title: "Graphics in R (ggplot2)"
+title: "Data Visualization I (ggplot2)"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
 output: 
@@ -8,7 +8,7 @@ output:
   pdf_document:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Graphics in R (ggplot2)}
+  %\VignetteIndexEntry{Data Visualization I (ggplot2)}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
