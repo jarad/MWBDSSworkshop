@@ -389,3 +389,27 @@ ggplot(GI_w, aes(x=weekD, y=count, color=alert)) +
   geom_point() + 
   scale_color_manual(values=c("black","red"))
 ```
+
+
+# <a name="batch"></a> R in batch
+
+For routine analysis, it can be helpful to run R in batch mode rather than interactively. To do this, create a script and save the script with a .R extension, e.g. `script.R`:
+
+```{r, eval=FALSE}
+# Read in the data perhaps as a csv file
+# Create some table and save them to html files
+# Create some figures and save them to jpegs
+# Run some outbreak detection algorithms and produce figures
+```
+
+Now, from the command line run
+
+    R CMD BATCH script.R
+    
+Now each week you can update the csv file and then just run the script which will create all new tables and figures. 
+
+
+# <a name="shiny"></a> Shiny apps
+
+R can be used to create HTML applications through the `shiny` package. The code is written entirely in R, although you can use cascading style sheets (CSS) if you want to update how it looks. [Here is an example](http://spark.rstudio.com/ejahanpour/SampleData/).
+
