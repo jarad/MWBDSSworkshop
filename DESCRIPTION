@@ -23,5 +23,6 @@ Suggests:
     plyr,
     reshape2,
     rmarkdown,
-    SpatialEpi
+    SpatialEpi,
+    xtable
 VignetteBuilder: knitr
