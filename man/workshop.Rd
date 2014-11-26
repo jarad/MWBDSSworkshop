@@ -3,8 +3,7 @@
 \alias{workshop}
 \title{A function that prepares the workshop.}
 \usage{
-workshop(write_data = "GI", write_scripts = c("intro", "graphics",
-  "advanced_graphics"), launch_index = TRUE)
+workshop(write_data = "all", write_scripts = "all", launch_index = TRUE)
 }
 \arguments{
 \item{write_data}{string. Write these data sets.}
