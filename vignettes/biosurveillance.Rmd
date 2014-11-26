@@ -15,11 +15,113 @@ vignette: >
 ```{r}
 library(ggplot2)
 library(plyr)
-library(maps)
 library(reshape2)
 library(ISDSWorkshop)
-workshop()
+workshop(launch_index=FALSE)
+
+# Read csv files
+GI     = read.csv("GI.csv")
+icd9df = read.csv("icd9.csv")
+
+# Mutate data.frame
+GI = mutate(GI,
+            date      = as.Date(date),
+            weekC     = cut(date, breaks="weeks"),
+            week      = as.numeric(weekC),
+            facility  = as.factor(facility),
+            icd9class = factor(cut(icd9, 
+                            breaks = icd9df$code_cutpoint, 
+                            labels = icd9df$classification[-nrow(icd9df)], 
+                            right  = TRUE)),
+            ageC      = cut(age, 
+                            breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
+            zip3      = trunc(zipcode/100))
 ```
+
+
+# <a name="exporting_tables"></a> Exporting tables
+
+There are many ways to exporting tables. Here I will cover two basic approachess that are simple and work well. 
+
+- cut-and-paste
+- create HTML table and cut-and-paste to Word
+
+There are more sophisticated approaches that I will not cover:
+
+- [using the rtf package](http://thomasleeper.com/Rcourse/Tutorials/wordoutput.html)
+- [writing a whole doc fie in R](http://www.r-statistics.com/2013/03/write-ms-word-document-using-r-with-as-little-overhead-as-possible/)
+
+## Cut-and-paste 
+
+You can cut-and-paste directly from R. 
+
+```{r}
+ga_l = ddply(GI, .(gender, ageC), summarize, count = length(id))
+ga_w = dcast(ga_l, gender~ageC) # Long to wide
+print(ga_w, row.names=FALSE)
+```
+
+Cut-and-pasting this table is done in ASCII format. This looks good in a **plain text** document, e.g. Notepad, TextEdit, and some email, but will not look good in other formats, e.g. docx.
+
+
+## Create HTML table
+
+```{r}
+library(xtable)
+tab = xtable(ga_w,
+             caption = "Total GI cases by Sex and Age Category",
+             label   = "myHTMLanchor",
+             align   = "ll|rrrrr") # rownames gets a column
+```
+
+Save the table to a file
+
+```{r}
+print(tab, file="table.html", type="html", include.rownames=FALSE)
+```
+
+
+## Output for this HTML table
+
+The HTML code looks like 
+
+```{r}
+print(tab, type="html", include.rownames=FALSE)
+```
+
+and the resulting table looks like 
+
+```{r, results='asis'}
+print(tab, type="html", include.rownames=FALSE)
+```
+
+
+## Copy-and-paste table to Word
+
+Now you can 
+
+1. Open the file (`table.html`)
+1. Copy-and-paste this table to Word. 
+
+
+## Activity - exporting tables
+
+Create a Word table for the number of cases by facility and age category
+
+```{r, echo=FALSE}
+# Summarize data by facility and age category
+
+# Reshape data from long to wide format
+
+# Create HTML table
+
+# Save HTML to file
+
+# Copy-and-paste table into Word
+```
+
+When you have completed the activity, compare your results to the [solutions](biosurveillance-solution.html#exporting_tables).
+
 
 # <a name="maps"></a> Maps
 
@@ -27,6 +129,7 @@ The packages `ggplot2` and `maps` can be used together to make maps.
 
 Map of the continental US
 ```{r}
+library(maps)
 states = map_data("state")
 ggplot(states, aes(x=long, y=lat, group=group)) + geom_polygon()
 ```

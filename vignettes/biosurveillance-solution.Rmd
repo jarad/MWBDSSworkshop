@@ -1,0 +1,61 @@
+---
+title: "Advanced Biosurveillance- Activity Solutions"
+author: "Jarad Niemi"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Advanced Biosurveillance - Activity Solutions}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(plyr)
+library(reshape2)
+library(xtable)
+library(ISDSWorkshop)
+
+workshop(write_data = c("GI","icd9"), 
+         write_scripts=NULL, 
+         launch_index=FALSE)
+
+# Read in csv files
+GI = read.csv('GI.csv')
+icd9df = read.csv("icd9.csv")
+
+# Mutate data.frame
+GI = mutate(GI,
+            date      = as.Date(date),
+            weekC     = cut(date, breaks="weeks"),
+            week      = as.numeric(weekC),
+            facility  = as.factor(facility),
+            icd9class = factor(cut(icd9, 
+                            breaks = icd9df$code_cutpoint, 
+                            labels = icd9df$classification[-nrow(icd9df)], 
+                            right  = TRUE)),
+            ageC      = cut(age, 
+                            breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
+            zip3      = trunc(zipcode/100))
+```
+
+
+# <a name="exporting_Tables"></a> Activity - exporting tables
+
+```{r}
+# Summarize data by facility and age category
+fa_l = ddply(GI, .(facility, ageC), summarize, count = length(id))
+
+# Reshape data from long to wide format
+fa_w = dcast(fa_l, facility~ageC) # Long to wide
+
+# Create HTML table
+tab = xtable(fa_w,
+             caption = "Total GI cases by Facility and Age Category",
+             label   = "myHTMLanchor",
+             align   = "ll|rrrrr") # rownames gets a column
+
+# Save HTML to file
+print(tab, file="table.html", type="html", include.rownames=FALSE)
+
+# Copy-and-paste table into Word
+```
