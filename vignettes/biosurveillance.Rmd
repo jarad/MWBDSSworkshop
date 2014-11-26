@@ -28,6 +28,7 @@ GI = mutate(GI,
             date      = as.Date(date),
             weekC     = cut(date, breaks="weeks"),
             week      = as.numeric(weekC),
+            weekD     = as.Date(weekC),
             facility  = as.factor(facility),
             icd9class = factor(cut(icd9, 
                             breaks = icd9df$code_cutpoint, 
@@ -279,3 +280,112 @@ install.packages("ISDSWorkshop_0.1.tar.gz",
 ```
 
 
+
+# Packages for surveillance
+
+Some [packages for performing surveillance](http://www.ij-healthgeographics.com/content/9/1/16) are 
+
+- [accrued](http://cran.r-project.org/web/packages/accrued/index.html)
+- [Epi](http://cran.r-project.org/web/packages/Epi/index.html)
+- [SpatialEpi](http://cran.r-project.org/web/packages/SpatialEpi/index.html)
+- [Surveillance](http://cran.r-project.org/web/packages/surveillance/index.html)
+
+
+## SpatialEpi - Kulldorff example
+
+The `SpatialEpi` package implements the Kulldorff cluster detection method in the `kulldorff()` function. 
+
+Setting up the analysis (taken directly from the example)
+```{r}
+## Load Pennsylvania Lung Cancer Data
+data(pennLC)
+data <- pennLC$data
+
+## Process geographical information and convert to grid
+geo <- pennLC$geo[,2:3]
+geo <- latlong2grid(geo)
+
+## Get aggregated counts of population and cases for each county
+population <- tapply(data$population, data$county, sum)
+cases      <- tapply(data$cases,      data$county, sum)
+
+## Based on the 16 strata levels, compute expected numbers of disease
+n.strata       <- 16
+expected.cases <- expected(data$population, data$cases, n.strata)
+
+## Set Parameters
+pop.upper.bound <- 0.5
+n.simulations   <- 999
+alpha.level     <- 0.05
+plot            <- TRUE
+```
+
+## SpatialEpi - Kulldorff example
+
+Plot the data
+
+```{r}
+clr = cases/population
+clr = 1-clr/max(clr) # make sure range is (0,1)
+plot(pennLC$spatial.polygon, axes=TRUE, col=rgb(1, clr, clr))
+```
+
+## SpatialEpi - Kulldorff example
+
+Run the analysis and plot the results (directly from the example)
+
+```{r}
+## Kulldorff using Binomial likelihoods
+binomial <- kulldorff(geo, cases, population, NULL, pop.upper.bound, n.simulations, 
+  alpha.level, plot)
+cluster <- binomial$most.likely.cluster$location.IDs.included
+
+## plot
+plot(pennLC$spatial.polygon,axes=TRUE)
+plot(pennLC$spatial.polygon[cluster],add=TRUE,col="red")
+title("Most Likely Cluster")
+```
+
+
+# <a name="functions"></a> Functions
+
+Packages are typically a collection of functions. But you can write your own. For example,
+
+```{r}
+add = function(a,b) {
+  return(a+b)
+}
+add(1,2)
+```
+
+or 
+
+```{r}
+add_vector = function(v) {
+  sum = 0
+  for (i in 1:length(v)) sum = sum + v[i]
+  return(sum)
+}
+```
+
+## A simple outbreak detection function
+
+Here is a simple outbreak detection function
+
+```{r}
+alert = function(y,threshold=100) {
+  # y is the time series 
+  # an alert is issue for any y above the threshold (default is 100)
+  factor(ifelse(y>threshold, "Yes", "No"))
+}
+```
+
+Run this on our GI data
+
+```{r}
+GI_w = ddply(GI, .(weekD), summarize, count = length(id))
+GI_w$alert = alert(y = GI_w$count, threshold = 150)
+ggplot(GI_w, aes(x=weekD, y=count, color=alert)) + 
+  geom_point() + 
+  scale_color_manual(values=c("black","red"))
+```

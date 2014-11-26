@@ -47,8 +47,8 @@ vignette: >
 ## [Advanced biosurveillance](biosurveillance.html)
 
 - [Exporting tables](biosurveillance.html#exporting_tables)
-- Algorithms <http://surveillance.r-forge.r-project.org/>
 - [Maps](biosurveillance.html#maps)
 - [Packages](biosurveillance.html#packages)
+- [Packages for Surveillance](biosurveillance.html#surveillance)
+- [Functions](biosurveillance.html#functions)
 - Shiny apps <http://spark.rstudio.com/ejahanpour/SampleData/>
-- functions
