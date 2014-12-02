@@ -36,10 +36,14 @@ Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct
                            "plyr","reshape2","rmarkdown","xtable",
                            "SpatialEpi", "xtable"))
         download.file("http://github.com/jarad/ISDSWorkshop/releases/download/v0.1/ISDSWorkshop_0.1.tar.gz",
-                      "ISDSWorkshop", method="wget")
-        install.packages("ISDSWorkshop", repos = NULL, type = "source")
+                      "ISDSWorkshop.tar.gz", method="wget")
+        install.packages("ISDSWorkshop.tar.gz", repos = NULL, type = "source")
 
-1. To check that everything installed properly, type `library(ISDSWorkshop)` at the command prompt. If there is no message, then everything installed properly.
+To check that everything installed properly, type 
+
+        library(ISDSWorkshop)
+        
+at the command prompt. If there is no message, then everything installed properly and you can exit out of R (say 'no' to saving workshop prompt).
 
 
 
