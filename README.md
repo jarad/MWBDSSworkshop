@@ -43,7 +43,7 @@ To check that everything installed properly, type
 
         library(ISDSWorkshop)
         
-at the command prompt. If there is no message, then everything installed properly and you can exit out of R (say 'no' to saving workshop prompt).
+at the command prompt. If there is no message, then everything installed properly and you can exit out of R (say 'no' to saving workshop prompt). You can also delete the ISDSWorkshop.tar.gz file that was downloaded.
 
 
 
