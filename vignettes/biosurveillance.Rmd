@@ -147,9 +147,8 @@ ggplot(counties, aes(x=long, y=lat, group=group)) + geom_polygon()
 
 Map of the counties in Iowa
 ```{r}
-counties = map_data("county")
 ggplot(subset(counties, region=="iowa"), 
-       aes(x=long, y=lat, group=group)) + geom_polygon()
+       aes(x=long, y=lat, group=group)) + geom_polygon(fill="red", color="black")
 ```
 
 ## Construct an appropriate data set
@@ -157,7 +156,7 @@ ggplot(subset(counties, region=="iowa"),
 To make an informative map, we need to add data. 
 
 ```{r}
-fluTrends = read.csv("fluTrends.csv")
+fluTrends = read.csv("fluTrends.csv", check.names=FALSE)
 fluTrends$Date = as.Date(fluTrends$Date)
 ```
 
@@ -177,14 +176,14 @@ flu_l = melt(flu_w, id.var='Date',
              value.name='index')
 ```
 
-## Combine data with map_data
+## Merge fluTrends data with map_data
 
 The region names in `map_data` are lower case, so use `tolower()` to convert all the region names in flu_l to lowercase. Then the `map_data` and fluTrends data are merged using `merge()`. 
 
 ```{r}
 head(unique(states$region))
 flu_l$region = tolower(flu_l$region)
-flu_l = merge(states, flu_l, sort=FALSE, by='region')
+states_merged = merge(states, flu_l, sort=FALSE, by='region')
 ```
 
 ## Make the plots
@@ -192,8 +191,8 @@ flu_l = merge(states, flu_l, sort=FALSE, by='region')
 Most recent Google Flu Trend data.
 
 ```{r}
-mx_date = max(flu_l$Date)
-ggplot(subset(flu_l, Date == mx_date), 
+mx_date = max(states_merged$Date)
+ggplot(subset(states_merged, Date == mx_date), 
        aes(x=long, y=lat, group=group, fill=index)) + 
   geom_polygon() + 
   labs(title=paste('Google Flu Trends on', mx_date), x='', y='') +
@@ -205,7 +204,7 @@ ggplot(subset(flu_l, Date == mx_date),
 Last 12 weeks.
 
 ```{r}
-ggplot(flu_l, 
+ggplot(states_merged, 
        aes(x=long, y=lat, group=group, fill=index)) + 
   geom_polygon() + 
   labs(title='Google Flu Trends', x='', y='') +
@@ -220,7 +219,44 @@ ggplot(flu_l,
 
 Try removing or modifying the code to determine what elements of the map are affected.
 
+Try downloaded the data directly from <http://www.google.org/flutrends/us/data.txt> using `read.csv' and then constructing a map of the most recent Google Flu Trends data. 
 
+<<echo=FALSE>>=
+# Here is some code to get you started
+library(maps)
+states = map_data("state")
+
+# Read in the data from http://www.google.org/flutrends/us/data.txt
+
+# ** you will need to figure this part out **
+# ** it is NOT trivial                     **
+fluTrends = read.csv("fluTrends.csv", check.names=FALSE)
+
+# Keep only the last row for the states
+nr = nrow(fluTrends)
+flu_w = fluTrends[nr, c(1,3:53)]
+
+fluTrends$Date = as.Date(fluTrends$Date)
+
+# Reshape to long format
+flu_l = melt(flu_w, id.var='Date',
+             variable.name='region', # to match map_data
+             value.name='index')
+
+# Merge flutrends data with map_data
+flu_l$region = tolower(flu_l$region)
+states_merged = merge(states, flu_l, sort=FALSE, by='region')
+
+# Construct plot
+ggplot(states_merged, aes(x=long, y=lat, group=group, fill=index)) + 
+  geom_polygon() + 
+  labs(title=paste('Google Flu Trends on', mx_date), x='', y='') +
+  theme_minimal() + 
+  theme(legend.title = element_blank()) +
+  coord_map("cylindrical") 
+@
+
+When you have completed the activity, compare your results to the [solutions](biosurveillance-solution.html#maps).
 
 
 
@@ -255,6 +291,10 @@ library(devtools)
 install_github('nandadorea/vetsyn')
 ```
 
+This will not install any vignettes which is why I didn't use this method for this workshop, but you could 
+
+
+
 ## Bioconductor 
 
 Bioconductor is a provides tools for high-throughput genomic data. There are over 900 packages available from bioconductor. To install bioconductor, use 
@@ -285,7 +325,7 @@ install.packages("ISDSWorkshop_0.1.tar.gz",
 
 
 
-# Packages for surveillance
+## Packages for surveillance
 
 Some [packages for performing surveillance](http://www.ij-healthgeographics.com/content/9/1/16) are 
 
@@ -353,6 +393,16 @@ title("Most Likely Cluster")
 ```
 
 
+## Activity - Install the `surveillance` package
+
+If you are connected to the internet, try installing the `surveillance` package. 
+If you are successful, look at its help file.
+
+```{r, echo=FALSE}
+# Install the surveillance package
+```
+
+
 # <a name="functions"></a> Functions
 
 Packages are typically a collection of functions. But you can write your own. For example,
@@ -403,8 +453,11 @@ For routine analysis, it can be helpful to run R in batch mode rather than inter
 
 ```{r, eval=FALSE}
 # Read in the data perhaps as a csv file
+
 # Create some table and save them to html files
+
 # Create some figures and save them to jpegs
+
 # Run some outbreak detection algorithms and produce figures
 ```
 
