@@ -29,13 +29,13 @@ Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct
 
 ## Install the ISDSWorkshop R package
 
-1. Start RStudio (or R GUI if you did not install RStudio). 
-1. At the command prompt (`>`) in the Console window of R, copy-paste the following code. This will download and install a number of packages including the ISDSWorkshop package. 
+Start RStudio (or R GUI if you did not install RStudio). 
+At the command prompt (`>`) in the Console window of R, copy-paste the following code. This will download and install a number of packages that we will need (this could take a while). 
 
-        packages = c("ggplot2","gridExtra","knitr","maps", "plyr","reshape2","rmarkdown","xtable", "SpatialEpi", "xtable", "downloader")
-        for (package in packages) {
-          if (!require(package)) install.packages(package, repos="http://cran.us.r-project.org")
-        }
+        packages = c("ggplot2","gridExtra","knitr","maps", "plyr","reshape2","rmarkdown",
+                     "xtable", "SpatialEpi", "xtable", "downloader")
+        new.packages <- packages[!(packages %in% installed.packages()[,"Package"])]
+        if(length(new.packages)) install.packages(new.packages)
         library(downloader)
         download("https://github.com/jarad/ISDSWorkshop/releases/download/v0.1/ISDSWorkshop_0.1.tar.gz",
                 "ISDSWorkshop.tar.gz", mode="wb")
@@ -45,7 +45,11 @@ To check that everything installed properly, type
 
         library(ISDSWorkshop)
         
-at the command prompt. If there is no message, then everything installed properly and you can exit out of R (say 'no' to saving workshop prompt). You can also delete the ISDSWorkshop.tar.gz file that was downloaded.
+at the command prompt. If there is no message, then everything installed properly and you can exit out of R using 
+
+        q("no")
+
+You can also delete the ISDSWorkshop.tar.gz file that was downloaded.
 
 
 
