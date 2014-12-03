@@ -34,9 +34,9 @@ Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct
 
         install.packages(c("ggplot2","gridExtra","knitr","maps",
                            "plyr","reshape2","rmarkdown","xtable",
-                           "SpatialEpi", "xtable"))
-        download.file("http://github.com/jarad/ISDSWorkshop/releases/download/v0.1/ISDSWorkshop_0.1.tar.gz",
-                      "ISDSWorkshop.tar.gz", method="wget")
+                           "SpatialEpi", "xtable", "downloader"))
+        download("https://github.com/jarad/ISDSWorkshop/releases/download/v0.1/ISDSWorkshop_0.1.tar.gz",
+                "ISDSWorkshop.tar.gz", mode="wb")
         install.packages("ISDSWorkshop.tar.gz", repos = NULL, type = "source")
 
 To check that everything installed properly, type 
