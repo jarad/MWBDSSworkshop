@@ -285,7 +285,7 @@ When categorical variables are encoded as numeric variables in the data set, R r
 
 ```{r}
 GI$facility = as.factor(GI$facility)
-table(GI$facility)
+head(table(GI$facility))
 ```
 
 
@@ -294,9 +294,9 @@ table(GI$facility)
 To obtain the original numeric variable use `as.character()` and `as.numeric()`
 
 ```{r}
-as.character(GI$facility)             # This returns the levels as a character vector
-as.numeric(GI$facility)               # This returns the numeric encoding
-as.numeric(as.character(GI$facility)) # This returns the original numeric factor levels
+head(as.character(GI$facility))             # This returns the levels as a character vector
+head(as.numeric(GI$facility))               # This returns the numeric encoding
+head(as.numeric(as.character(GI$facility))) # This returns the original numeric factor levels
 ```
 
 
@@ -306,7 +306,7 @@ Use the `cut()` function to create a factor from a continuous variable.
 
 ```{r}
 GI$ageC = cut(GI$age, c(-Inf, 5, 18, 45 ,60, Inf))
-table(GI$ageC)
+head(table(GI$ageC))
 ```
 
 This created a new variable in the GI `data.frame` called `ageC`. `Inf` represents infinity.
