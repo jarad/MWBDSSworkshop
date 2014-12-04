@@ -111,7 +111,7 @@ Now you can
 
 ## Activity - exporting tables
 
-Create a Word table for the number of cases by facility and age category
+Create a Word table for the number of cases by facility and age category.
 
 ```{r, echo=FALSE}
 # Summarize data by facility and age category
@@ -142,7 +142,7 @@ ggplot(states, aes(x=long, y=lat, group=group)) + geom_polygon()
 Map of the counties in the continental US
 ```{r}
 counties = map_data("county")
-ggplot(counties, aes(x=long, y=lat, group=group)) + geom_polygon()
+ggplot(counties, aes(x=long, y=lat, group=group)) + geom_polygon(color="white")
 ```
 
 Map of the counties in Iowa
@@ -159,7 +159,7 @@ To make an informative map, we need to add data.
 fluTrends = read.csv("fluTrends.csv", check.names=FALSE)
 ```
 
-For simplicity, only keep the most recent data on states. 
+For simplicity, only keep the most recent 12 weeks on states. 
 
 ```{r}
 nr = nrow(fluTrends)
@@ -234,8 +234,11 @@ When you have completed the activity, compare your results to the [solutions](bi
 A package provides additional functionality besides what base installation of R provides. You have already used a number of additional packages:
 
 - ggplot2
+- ISDSWorkshop
+- maps
 - plyr
 - reshape2
+- xtable
 
 The Comprehensive R Archive Network (CRAN) has over 6,000 packages. These packages can be installed using the `install.packages()` function, e.g. 
 
@@ -247,7 +250,7 @@ For many reasons, packages may not be on CRAN but may be available from other so
 
 - [Github](http://github.com/)
 - [Bioconductor](http://www.bioconductor.org/)
-- Source
+- Source file (tar.gz)
 
 
 ## Github
@@ -260,13 +263,13 @@ library(devtools)
 install_github('nandadorea/vetsyn')
 ```
 
-This will not install any vignettes which is why I didn't use this method for this workshop, but you could 
+This will not install any vignettes which is why I didn't use this method for this workshop.
 
 
 
 ## Bioconductor 
 
-Bioconductor is a provides tools for high-throughput genomic data. There are over 900 packages available from bioconductor. To install bioconductor, use 
+Bioconductor provides tools for high-throughput genomic data. There are over 900 packages available from bioconductor. To install bioconductor, use 
 
 ```{r, eval=FALSE}
 source("http://bioconductor.org/biocLite.R")
@@ -279,12 +282,12 @@ Then to install a package from bioconductor use
 biocLite("edgeR")
 ```
 
-The bioconductor repository may be useful in the future for public health officials.
+The bioconductor repository may be useful in the future for public health biosurveillance.
 
 
 ## Source
 
-All packages can be installed from their source. If a package is not available in a repository, then this is the only way to install the package. To install from source download the source file (.tar.gz) and then use the `install.packages()` function with arguments `repos=NULl` and `type="source"`. 
+All packages can be installed from their source. If a package is not available in a repository, then this is the only way to install the package. To install from source download the source file (.tar.gz) and then use the `install.packages()` function with arguments `repos=NULl` and `type="source"`. For example, to install the ISDSWorkshop package you used 
 
 ```{r, eval=FALSE}
 install.packages("ISDSWorkshop_0.1.tar.gz", 
@@ -301,7 +304,8 @@ Some [packages for performing surveillance](http://www.ij-healthgeographics.com/
 - [accrued](http://cran.r-project.org/web/packages/accrued/index.html)
 - [Epi](http://cran.r-project.org/web/packages/Epi/index.html)
 - [SpatialEpi](http://cran.r-project.org/web/packages/SpatialEpi/index.html)
-- [Surveillance](http://cran.r-project.org/web/packages/surveillance/index.html)
+- [surveillance](http://cran.r-project.org/web/packages/surveillance/index.html)
+- [vetsyn](https://github.com/nandadorea/vetsyn)
 
 
 ## SpatialEpi - Kulldorff example
@@ -372,6 +376,12 @@ If you are successful, look at its help file.
 ```
 
 
+When you have completed the activity, compare your results to the [solutions](biosurveillance-solution.html#packages).
+
+
+
+
+
 # <a name="functions"></a> Functions
 
 Packages are typically a collection of functions. But you can write your own. For example,
@@ -405,7 +415,7 @@ alert = function(y,threshold=100) {
 }
 ```
 
-Run this on our GI data
+Run this on our weekly GI data.
 
 ```{r}
 GI_w = ddply(GI, .(weekD), summarize, count = length(id))
