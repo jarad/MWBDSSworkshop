@@ -157,7 +157,6 @@ To make an informative map, we need to add data.
 
 ```{r}
 fluTrends = read.csv("fluTrends.csv", check.names=FALSE)
-fluTrends$Date = as.Date(fluTrends$Date)
 ```
 
 For simplicity, only keep the most recent data on states. 
@@ -191,6 +190,7 @@ states_merged = merge(states, flu_l, sort=FALSE, by='region')
 Most recent Google Flu Trend data.
 
 ```{r}
+states_merged$Date = as.Date(states_merged$Date)
 mx_date = max(states_merged$Date)
 ggplot(subset(states_merged, Date == mx_date), 
        aes(x=long, y=lat, group=group, fill=index)) + 
@@ -217,44 +217,13 @@ ggplot(states_merged,
 
 ## Activity 
 
-Try removing or modifying the code to determine what elements of the map are affected.
+Modify the code to determine what elements of the map are affected.
 
-Try downloaded the data directly from <http://www.google.org/flutrends/us/data.txt> using `read.csv' and then constructing a map of the most recent Google Flu Trends data. 
+Advanced: Download the data directly from <http://www.google.org/flutrends/us/data.txt> using `read.csv' and then construct a map of the most recent Google Flu Trends data. 
 
-<<echo=FALSE>>=
-# Here is some code to get you started
-library(maps)
-states = map_data("state")
-
-# Read in the data from http://www.google.org/flutrends/us/data.txt
-
-# ** you will need to figure this part out **
-# ** it is NOT trivial                     **
-fluTrends = read.csv("fluTrends.csv", check.names=FALSE)
-
-# Keep only the last row for the states
-nr = nrow(fluTrends)
-flu_w = fluTrends[nr, c(1,3:53)]
-
-fluTrends$Date = as.Date(fluTrends$Date)
-
-# Reshape to long format
-flu_l = melt(flu_w, id.var='Date',
-             variable.name='region', # to match map_data
-             value.name='index')
-
-# Merge flutrends data with map_data
-flu_l$region = tolower(flu_l$region)
-states_merged = merge(states, flu_l, sort=FALSE, by='region')
-
-# Construct plot
-ggplot(states_merged, aes(x=long, y=lat, group=group, fill=index)) + 
-  geom_polygon() + 
-  labs(title=paste('Google Flu Trends on', mx_date), x='', y='') +
-  theme_minimal() + 
-  theme(legend.title = element_blank()) +
-  coord_map("cylindrical") 
-@
+```{r, echo=FALSE}
+# Construct Google Flu Trends map
+```
 
 When you have completed the activity, compare your results to the [solutions](biosurveillance-solution.html#maps).
 
