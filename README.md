@@ -38,7 +38,7 @@ If everything installed correctly, you should see the message
 
 > ISDS R Workshop installed succesfully!
 
-You can exit out of R.  
+You can exit out of R by copy-pasting the following command. 
 
         q("no")
 
