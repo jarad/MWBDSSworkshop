@@ -79,9 +79,7 @@ fluTrends = read.csv(file="http://www.google.org/flutrends/us/data.txt",
 flu_w = fluTrends[nrow(fluTrends), c(1,3:53)]
 
 # Reshape to long format
-flu_l = melt(flu_w, id.var='Date',
-             variable.name='region', # to match map_data
-             value.name='index')
+flu_l = melt(flu_w, id.var='Date', variable.name='region', value.name='index')
 
 # Merge flutrends data with map_data
 flu_l$region = tolower(flu_l$region)
