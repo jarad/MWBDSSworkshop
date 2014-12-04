@@ -214,7 +214,7 @@ When you have completed the activity, compare your results to the [solutions](in
 
 In this section, we will learn how to read in csv or Excel files into R. We focus on csv files because less can go wrong. 
 
-## Changing your working directory
+## <a name="working_directory"></a> Changing your working directory
 
 One of the first tasks after starting R is to change the working directory. To set,
 

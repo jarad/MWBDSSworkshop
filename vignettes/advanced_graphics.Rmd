@@ -12,6 +12,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+Close down R, say 'No' to saving the workspace.
 
 # <a name="workflow"></a> Workflow
 
@@ -24,7 +25,11 @@ The typical workflow in R is
 1. Check data (interactively)
 1. Do analysis
 
+If you are using RStudio, I highly recommend you look into setting up [projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects). 
+
 ## Choose your working directory 
+
+Start R and then [choose your working directory](intro.html#working_directory).
 
 ```{r, eval=FALSE}
 setwd(choose.dir())
@@ -41,12 +46,14 @@ workshop(launch_index  = FALSE)
 
 ## Open the script
 
-Open the  `advanced_graphics.R` script.
+Open the `advanced_graphics.R` script.
 
-Notice that the top of the script has all of the packages that you will use 
+Notice that the top of the script has all of the packages that you will use.
 
 ```{r}
-# Pretend this is the top of the script
+#########################################
+# Pretend this is the top of the script #
+#########################################
 library(plyr)
 library(ggplot2)
 library(gridExtra)
@@ -55,9 +62,9 @@ library(gridExtra)
 
 ## Read in the data
 
-Typically, you will have a script that reads in the data and converts variables. 
+Typically, you will have a script that reads in the data, converts variables, and then performs statistical analyses.
 
-This time we will use the `mutate()` function from the `plyr` package. This function allows you to create new columns in a `data.frame`.
+This time we will use the `mutate()` function from the [plyr](http://cran.r-project.org/web/packages/plyr/index.html) package. This function allows you to create new columns in a `data.frame`.
 
 ```{r}
 # Read in csv files
@@ -84,10 +91,10 @@ GI = mutate(GI,
 
 ## Reading other scripts
 
-If the script to read in the data is extensive, it may be better to separate your scripts into two different files. Then, in the second file, i.e. the one that does an analysis, you can `source()` the one that just reads in the data, e.g.
+If the script to read in the data is extensive, it may be better to separate your scripts into two different files: one for reading in the data and converting variables and another (or more) to perform statistical analyses. Then, in the second file, i.e. the one that does an analysis, you can `source()` the one that just reads in the data, e.g.
 
 ```{r, eval=FALSE}
-source("read_data.R")
+source("read_data.R") 
 ```
 
 
@@ -118,10 +125,10 @@ When you have completed the activity, compare your results to the [solutions](ad
 
 # <a name="graph_workflow"></a> Graph workflow
 
-Now to construct a graph, the simple workflow is
+Now to construct a graph, the workflow is
 
-1. Construct an appropriate data set
-1. Construct the graph
+1. construct an appropriate data set and
+1. construct the graph.
 
 
 ## Construct the data set
@@ -169,7 +176,7 @@ Shapes:
 ggplot(GI_wf, aes(x=week, y=count, shape=facility)) + geom_point()
 ```
 
-ggplot only plots 6 different shapes and provides a warning
+ggplot2 only plots 6 different shapes and provides a warning.
 
 
 ## Activity - weekly GI counts by age category
@@ -201,7 +208,7 @@ When there are many levels of a single variable, `facet_wrap()` can often allow 
 ggplot(GI_wf, aes(x=week, y=count)) + geom_point() + facet_wrap(~facility)
 ```
 
-By default, faceting forces all axes to be exactly the same. If you want the axis to automatically scale for each facet, 
+By default, faceting forces all axes to be exactly the same. If you want the axis to automatically scale for each facet use `scales="free"`.
 
 ```{r}
 ggplot(GI_wf, aes(x=week, y=count)) + geom_point() + facet_wrap(~facility, scales="free")
@@ -225,7 +232,7 @@ ggplot(GI_sa, aes(x=week, y=count)) + geom_point() + facet_grid(gender~ageC)
 
 ## Using faceting and colors/shapes
 
-Alternatively, we could use faceting together with colors/shapes
+In addition, we could use faceting together with colors/shapes
 
 ```{r}
 ggplot(GI_sa, aes(x=week, y=count, shape=gender, color=gender)) + geom_point() + facet_wrap(~ageC)
@@ -251,7 +258,7 @@ Often our data set is large and we would like to [subset the data](intro.html#su
 
 - categorical, 
 - continuous (numeric), or 
-- Date variable.
+- `Date` variable.
 
 ## Subsetting by a categorical variable
 
@@ -282,7 +289,7 @@ conditions = levels(GI$icd9class)
 conditions
 ```
 
-So we want levels 1 and 3. 
+Say we want levels 1 and 3. 
 
 ```{r}
 IPDp = subset(GI, icd9class %in% levels(icd9class)[c(1,3)])
@@ -347,7 +354,7 @@ ggplot(Age30to60_w, aes(x=week, y=count)) + geom_point()
 
 ## Subsetting a date
 
-Subsetting a date works similar to subsetting a continuous (numeric) variable once you convert to comparison value to a `Date` using the `as.Date()` function.
+Subsetting a date works similar to subsetting a continuous (numeric) variable once you convert a comparison value to a `Date` using the `as.Date()` function.
 
 Let's create a `Date` vector containing the two values we will use for subsetting.
 
@@ -382,7 +389,7 @@ library(gridExtra)
 ```
 
 ```{r}
-grid.arrange(g1,g2,g3)
+grid.arrange(g1,g3,g2)
 ```
 
 
