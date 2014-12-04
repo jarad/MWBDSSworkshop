@@ -117,10 +117,10 @@ Many advanced calculator operations are also available.
 
 ```{r}
 (1+3)*2+100^2 # standard order of operations
-sin(2*pi)
+sin(2*pi) # the result is in scientific notation, i.e. -2.449294 x 10^-16 
 sqrt(4)
 10^2
-log(10)
+log(10) # the default is base e
 log(10,base=10)
 ```
 
@@ -213,25 +213,31 @@ setwd(choose.dir(getwd()))
 
 Make sure you have write access to this directory. 
 
-## Load the ISDSWorkshop package
+## Installing and loading a package
 
-Much of the functionality of R is contained in packages. The first time these packages are used, they need to be installed, e.g. 
+Much of the functionality of R is contained in packages. The first time these packages are used, they need to be installed, e.g. to install a package from [CRAN](http://cran.r-project.org/web/packages/) use 
 
 ```{r, eval=FALSE}
-install.packages("ISDSWorkshop")
+install.packages("plyr")
 ```
 
 Once installed, they needed to loaded into the R session. 
 
-```{r}
-library(ISDSWorkshop)
+```{r, eval=FALSE}
+library(plyr)
 ```
 
 
 
-## Start this workshop
+## Load and start this workshop
 
-This package contains a function to help you get started. 
+First load the package 
+
+```{r, warning=FALSE}
+library(ISDSWorkshop)
+```
+
+This package contains a function to help you get started, so run that function.
 
 ```{r, warning=FALSE}
 workshop()
@@ -239,8 +245,8 @@ workshop()
 
 This function did three things
 
-1. It opened the workshop HTML outline
-1. It created a GI.csv data file in your working directory
+1. It opened the workshop outline in a web browser
+1. It created a set of .csv data files in your working directory
 1. It created a set of .R scripts in your working directory. 
 
 
@@ -274,7 +280,7 @@ This created a `data.frame` object in R called GI.
 
 ## read.table
 
-The read.table function is a more general function for reading data into R and it has many options. We could have gotten the same results if we had used the following code:
+The `read.table()` function is a more general function for reading data into R and it has many options. We could have gotten the same results if we had used the following code:
 
 ```{r, tidy=FALSE}
 GI2 = read.table("GI.csv", 
@@ -338,12 +344,6 @@ d = read.table("filename.csv", # Make sure to change filename>to your filename a
 # Read in the csv file
 ```
 
-If you have extra time, try to read in the file <http://www.google.org/flutrends/us/data.txt> directly. 
-
-```{r, echo=FALSE}
-# Read in the txt file directly from its URL
-```
-
 
 When you have completed the activity, compare your results to the [solutions](intro-solution.html#read).
 
@@ -360,14 +360,14 @@ summary(GI)
 
 ## Descriptive statistics for continuous (numeric) variables
 
-To access a single column in the `data.frame` use  
+To access a single column in the `data.frame` use a dollar sign ($). 
 
 ```{r, eval=FALSE}
 GI$age
 GI[,5] # Since age is the 5th column
 ```
 
-Here are a number of descriptive statistics for `age`
+Here are a number of descriptive statistics for *age*
 
 ```{r}
 min(GI$age)
@@ -381,10 +381,23 @@ Anything look odd here?
 
 ## Descriptive statistics for categorical (non-numeric) variables
 
-The `table` function provides the number of observations at each level of the categorical variable.
+The `table()` function provides the number of observations at each level of the categorical variable.
+
+```{r}
+table(GI$gender)
+```
+
+which is the same as `summary()` if the variable is not coded as numeric
+
+```{r}
+summary(GI$gender)
+```
+
+If the variable is coded as numeric, but is really a categorical variable, then you can still use table, but summary won't give you the correct result.
 
 ```{r}
 table(GI$facility)
+summary(GI$facility)
 ```
 
 Apparently there is only 1 observation from facility 259, was that a typo?
@@ -424,7 +437,7 @@ all.equal(GI_AbdPain, GI_AbdPain1)
 
 ### Advanced subsetting
 
-We can subset continuous variables with using other logical statements
+We can subset continuous variables using other logical statements.
 
 ```{r, eval=FALSE}
 subset(GI, age <   5)
@@ -533,7 +546,7 @@ counts = table(GI$facility)
 barplot(counts, xlab="Facility", ylab="Count", main="Number of observations at each facility")
 ```
 
-## Activity
+## Activity 
 
 Construct a histogram and boxplot for age at facility 37.
 
@@ -572,7 +585,7 @@ In both cases, knowing the R keywords, e.g. a function name, will be extremely h
 
 If you know the function name, then you can use `?<function>`, e.g.
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 ?mean
 ```
 
@@ -589,7 +602,7 @@ The structure of help is
 
 If you cannot remember the function name, then you can use `help.search("<something>")`, e.g.
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 help.search("mean")
 ```
 

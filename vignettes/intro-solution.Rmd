@@ -72,16 +72,6 @@ names(fluTrends)
 # fluTrends$colname syntax
 ```
 
-Read in the `fluTrends.txt` file directly from its URL.
-
-```{r}
-# Read in the txt file directly from its URL
-fluTrends2 = read.csv('http://www.google.org/flutrends/us/data.txt',
-                      skip = 11,
-                      check.names=FALSE)
-all.equal(fluTrends, fluTrends2)
-```
-
 
 # <a name="descriptive"></a> Descriptive statistics
 
