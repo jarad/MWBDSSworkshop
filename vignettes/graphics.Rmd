@@ -13,7 +13,9 @@ vignette: >
 ---
 
 
-Before we get back into graphics, it is important to understand some of the fundamentals behind what R is doing. Please open the `graphics.R` script in your working directory. 
+Before we get back into graphics, it is important to understand some of the fundamentals behind what R is doing. 
+
+Please open the `graphics.R` script in your working directory. 
 
 # <a name="types"></a> Data types
 
@@ -42,7 +44,7 @@ b = "ISDS Workshop"
 c = TRUE
 ```
 
-Print the object
+Print the objects
 
 ```{r}
 a
@@ -72,7 +74,8 @@ length(c)
 
 ### Vector construction
 
-Create a numeric vector that is a sequence
+Create a numeric vector that is a sequence using : or `seq()`.
+
 ```{r}
 1:10
 5:-2
@@ -90,26 +93,42 @@ rep(1:4, each  = 2, times = 2)
 
 ### Accessing vector elements 
 
-Elements of a vector can be access using the index 
+Elements of a vector can be access using brackets, e.g. [index].
 
 ```{r}
 a = c("one","two","three","four","five")
+a[1]
 a[2:4]
 a[c(3,5)]
 a[rep(3,4)]
 ```
 
-or by using a logical vector
+Alternatively we can access elements using a logical vector where only TRUE elements are accessed.
 
 ```{r}
 a[c(TRUE, TRUE, FALSE, FALSE, FALSE)]
 ```
 
-You can also remove elements
+You can also remove elements using a negative sign -.
 
 ```{r}
 a[-1]
 ```
+
+### Modifying elements of a vector
+
+You can assign new values to elements in a vector using =.
+
+```{r}
+a[2] = "twenty-two"
+a
+a[3:4] = "three-four"
+a
+a[c(3,5)] =c("thirty-three","fifty-five")
+a
+```
+
+Notice that the second example assigned the value to both elements in the vector. 
 
 
 ## Matrices
@@ -119,6 +138,7 @@ Matrices can be constructed using `cbind()`, `rbind()`, and `matrix()`:
 ```{r}
 m1 = cbind(c(1,2), c(3,4))       # Row bind
 m2 = rbind(c(1,3), c(2,4))       # Column bind
+m1
 all.equal(m1, m2)
 m3 = matrix(1:4, nrow=2, ncol=2)
 all.equal(m1,m3)
@@ -131,7 +151,7 @@ m4
 
 ### Accessing matrix elements
 
-Elements of a matrix can be accessed using their indices `[row,column]`
+Elements of a matrix can be accessed using brackets separated by a comma, e.g. [row index, column index].
 
 ```{r}
 m = matrix(1:12, nrow=3, ncol=4)
@@ -163,6 +183,7 @@ Be careful not to forget the comma
 m[1:2]
 ```
 
+You can also construct a high-dimensional array using the `array()` function.
 
 ## Cannot mix types 
 
@@ -184,9 +205,11 @@ The logicals are converted to numeric (0 for FALSE and 1 for TRUE).
 c(TRUE, 1, "a")
 ```
 
+Everything is converted to a character. 
+
 ## Activity
 
-Reconstruct the following matrix using the matrix function, then 
+Reconstruct the following matrix using the `matrix()` function, then 
 
 1. Print the element in the 3rd-row and 4th column
 1. Print the 2nd column
@@ -234,19 +257,20 @@ dim(GI)
 If the above didn't work, run the following first, then retry. 
 
 ```{r, eval=FALSE}
+library(ISDSWorkshop)
 workshop(write_scripts=FALSE, launch_index=FALSE)
 ```
 
 
 ## Access `data.frame` elements
 
-Data frames can be accessed just like matrices
+data.frames can be accessed just like matrices, e.g. [row index, column index].
 
 ```{r}
 GI[1:2, 3:4]
 ```
 
-but can also be accessed by column names
+data.frames can also be accessed by column names
 
 ```{r}
 GI[1:2, c("facility","icd9","gender")]
@@ -265,9 +289,9 @@ str(GI)
 
 ## <a name="factor"></a> Factor
 
-A factor is a data type that represents a categorical variable in a `data.frame`. 
+A factor is a data type that represents a categorical variable. 
 
-The default is for any character vector to be converted to a factor when read into a `data.frame` in R. 
+The default is for any character vector to be converted to a factor when read using `read.csv()` or `read.table()`. 
 
 Internally, R codes a factor as an integer and then keeps a table that contains the conversion from that integer into the actual value of the factor.
 
@@ -281,11 +305,11 @@ as.numeric(GI$gender[1:3])
 
 ### Converting a numeric variable into a factor
 
-When categorical variables are encoded as numeric variables in the data set, R reads them in as numeric. To convert them to a factor use `as.factor()`. 
+When a categorical variable is encoded as a numeric variable in the original data set, R reads them in as numeric. To convert them to a factor use `as.factor()`. 
 
 ```{r}
 GI$facility = as.factor(GI$facility)
-head(table(GI$facility))
+summary(GI$facility)
 ```
 
 
@@ -295,7 +319,6 @@ To obtain the original numeric variable use `as.character()` and `as.numeric()`
 
 ```{r}
 head(as.character(GI$facility))             # This returns the levels as a character vector
-head(as.numeric(GI$facility))               # This returns the numeric encoding
 head(as.numeric(as.character(GI$facility))) # This returns the original numeric factor levels
 ```
 
@@ -309,7 +332,7 @@ GI$ageC = cut(GI$age, c(-Inf, 5, 18, 45 ,60, Inf))
 head(table(GI$ageC))
 ```
 
-This created a new variable in the GI `data.frame` called `ageC`. `Inf` represents infinity.
+This created a new variable in the GI `data.frame` called *ageC*. `Inf` represents infinity.
 
 
 
@@ -324,7 +347,7 @@ GI$date = as.Date(GI$date)
 str(GI$date)
 ```
 
-`as.Date()` will attempt to read dates as "%Y-%m-%d" then "%Y/%m/%d". If neither work, it will give an error. 
+`as.Date()` will attempt to read dates as "%Y-%m-%d" then "%Y/%m/%d". If neither works, it will give an error. 
 
 ```{r, eval=FALSE}
 ?as.Date
@@ -386,7 +409,7 @@ Create the wide `data.frame`:
 d = data.frame(week=1:3, GI=c(246,195,212), ILI=c(948, 1020, 1024))
 ```
 
-To turn the `data.frame` into long format, use `melt()`
+To turn the `data.frame` into long format using `melt()`.
 
 ```{r}
 m = melt(d, id.vars    = "week",     # The variables you want to remain on the columns
@@ -444,7 +467,8 @@ GI_count = ddply(GI,
                  .(week, gender, ageC),
                  summarize,
                  total = length(id))    # Count the number of lines in each week-gender-ageC combination
-GI_count
+nrow(GI_count)
+head(GI_count, 20)
 ```
 
 
@@ -479,21 +503,23 @@ library(ggplot2)
 
 A basic histogram in ggplot
 
-```{r, eval=FALSE, echo=FALSE}
-qplot(data=GI, x=age, geom="histogram", binwidth=1)
-```
-
 ```{r}
-ggplot(GI, aes(x = age)) + geom_histogram(binwidth=1)
+ggplot(data = GI, aes(x = age)) + geom_histogram(binwidth=1)
 ```
 
+For something that looks more similar to the histogram we saw before, you can use 
+
+```{r, eval=FALSE}
+qplot(data = GI, x=age, geom="histogram", binwidth=1)
+```
+```
 
 ## Boxplots
 
 A basic boxplot
 
 ```{r}
-ggplot(GI, aes(x = 1, y = age)) + geom_boxplot()
+ggplot(data = GI, aes(x = 1, y = age)) + geom_boxplot()
 ```
 
 
@@ -560,8 +586,7 @@ There are many ways to customize the appearance of ggplot2 plots:
 ## Colors
 
 ```{r}
-ggplot(GI, aes(x = age)) + geom_histogram(binwidth=1, color='red',   fill='blue')
-ggplot(GI, aes(x = age)) + geom_histogram(binwidth=1, color='white', fill='orange')
+ggplot(GI, aes(x = age)) + geom_histogram(binwidth=1, color='blue',   fill='yellow')
 ```
 
 ```{r}
@@ -592,6 +617,8 @@ ggplot2 uses the same shape codes as base graphics, see
 
 
 ## Line types
+
+Here I am also using a trick of setting up part of the plot and assigning it to the object `g`. Then you can add elements to the plot and if you don't assign it, the plot will be shown. 
 
 ```{r}
 g = ggplot(ddply(GI, .(week), summarize, count=length(id)),
@@ -647,5 +674,5 @@ These sites all provide code. The first two also provide the plots that are prod
 
 ## Activity
 
-Play around with ggplot2 to see what kind of changes you can make.
+Play around with ggplot2 to see what kind of plots you can make.
 

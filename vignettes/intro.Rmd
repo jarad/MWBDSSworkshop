@@ -139,7 +139,23 @@ a/b
 a*b
 ```
 
+## Assignment operators =, <-, and ->
 
+When assign variables values, you can also use arrows <- and -> and you will often see this in code, e.g. 
+
+```{r}
+a <- 1
+2 -> b
+c = 3 # is the same as <-
+```
+
+Now print them.
+
+```{r}
+a
+b
+c
+```
 
 ## Using informative variable names
 
