@@ -24,7 +24,10 @@ If you are using Linux, then I trust you know what you are doing. You can instal
 
 ## Install RStudio
 
-Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct platform under **Installers for ALL Platforms**. Install like any other program. 
+The installation of RStudio is optional, but highly recommended. 
+It just provides a different interface to R. 
+Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct platform under **Installers for ALL Platforms**. 
+Install like any other program. 
 
 
 ## Install the ISDSWorkshop R package
