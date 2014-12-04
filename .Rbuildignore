@@ -2,4 +2,3 @@ ISDSWorkshop.Rproj
 ^.*\.Rproj$
 ^\.Rproj\.user$
 TODO.md
-R/install_workshop.R
