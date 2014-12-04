@@ -34,11 +34,11 @@ At the command prompt (`>`) in the Console window of R, copy-paste the following
 
         source("http://www.jarad.me/install_workshop.R")
 
-To check that everything installed properly, type 
+If everything installed correctly, you should see the message
 
-        library(ISDSWorkshop)
-        
-at the command prompt. If there is no message, then everything installed properly and you can exit out of R using 
+> ISDS R Workshop installed succesfully!
+
+You can exit out of R.  
 
         q("no")
 
