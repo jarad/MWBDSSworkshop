@@ -198,8 +198,8 @@ where
 
 Calculate the probability the individual has the disease if the test is positive when
 
-- the specificity of the test is 0.99, 
-- the sensitivity of the test is 0.95, and
+- the specificity of the test is 0.95, 
+- the sensitivity of the test is 0.99, and
 - the prevalence of the disease is 0.001.
 
 ```{r, echo=FALSE}

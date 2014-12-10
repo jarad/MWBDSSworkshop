@@ -41,15 +41,15 @@ For those who are familiar with linear regression, this may look familiar.
 
 Calculate the probability the individual has the disease if the test is positive when
 
-- the specificity of the test is 0.99, 
-- the sensistivity of the test is 0.95, and
+- the specificity of the test is 0.95, 
+- the sensistivity of the test is 0.99, and
 - the prevalence of the disease is 0.001.
 
 ```{r}
-specificity = 0.99
-sensitivity = 0.95
+specificity = 0.95
+sensitivity = 0.99
 prevalence = 0.001
-probability = (specificity*prevalence) / (specificity*prevalence + (1-sensitivity)*(1-prevalence))
+probability = (sensitivity*prevalence) / (sensitivity*prevalence + (1-specificity)*(1-prevalence))
 probability
 ```
 
