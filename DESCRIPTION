@@ -21,6 +21,7 @@ Suggests:
     knitr,
     maps,
     plyr,
+    RColorBrewer,
     reshape2,
     rmarkdown,
     SpatialEpi,
