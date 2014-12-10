@@ -213,7 +213,7 @@ Reconstruct the following matrix using the `matrix()` function, then
 
 1. Print the element in the 3rd-row and 4th column
 1. Print the 2nd column
-1. Print all but the 4th row
+1. Print all but the 3rd row
 
 ```{r}
 m = rbind(c(1, 12, 8, 6),

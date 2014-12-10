@@ -30,7 +30,7 @@ n[3,4]
 n[,2]
 
 # Print all but the 3rd row
-n[-4,]
+n[-3,]
 ```
 
 
