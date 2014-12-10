@@ -329,7 +329,7 @@ Use the `cut()` function to create a factor from a continuous variable.
 
 ```{r}
 GI$ageC = cut(GI$age, c(-Inf, 5, 18, 45 ,60, Inf))
-head(table(GI$ageC))
+table(GI$ageC)
 ```
 
 This created a new variable in the GI `data.frame` called *ageC*. `Inf` represents infinity.
