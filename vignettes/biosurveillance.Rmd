@@ -16,6 +16,7 @@ vignette: >
 library(ggplot2)
 library(plyr)
 library(reshape2)
+library(RColorBrewer) 
 library(ISDSWorkshop)
 workshop(launch_index=FALSE)
 ```
@@ -198,7 +199,8 @@ ggplot(subset(states_merged, Date == mx_date),
   labs(title=paste('Google Flu Trends on', mx_date), x='', y='') +
   theme_minimal() + 
   theme(legend.title = element_blank()) +
-  coord_map("cylindrical") 
+  coord_map("cylindrical") + 
+  scale_fill_gradientn(colours=brewer.pal(9,"Reds")) # Thanks Annie Chen
 ```
 
 Last 12 weeks.
@@ -211,7 +213,8 @@ ggplot(states_merged,
   theme_minimal() + 
   theme(legend.title = element_blank()) +
   facet_wrap(~Date) + 
-  coord_map("cylindrical")
+  coord_map("cylindrical") + 
+  scale_fill_gradientn(colours=brewer.pal(9,"Reds")) 
 ```
 
 
