@@ -30,21 +30,30 @@ Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct
 ## Install the ISDSWorkshop R package
 
 Start RStudio (or R GUI if you did not install RStudio). 
-At the command prompt (`>`) in the Console window of R, copy-paste the following code. This will download and install a number of packages that we will need (this could take a while). 
+At the command prompt (`>`) in the Console window of R, copy-paste the following code. This will download and install a number of packages that we will need and create vignettes (this could take a while). 
 
-        source("http://www.jarad.me/install_workshop.R")
+    install.packages("devtools")
+    devtools::install_github("jarad/ISDSWorkshop", build_vignettes=TRUE)
+
+Please let me know if this does not work for you. 
+
+### Previous install instructions
+
+For a while, I will be keeping the 2014 version of the workshop and this install script:
+
+    source("http://www.jarad.me/install_workshop.R")
 
 If everything installed correctly, you should see the message
 
 > ISDS R Workshop installed succesfully!
 
-You can exit out of R by copy-pasting the following command. 
+You can delete the ISDSWorkshop.tar.gz file that was downloaded.
 
-        q("no")
+### Exit R
 
-You can also delete the ISDSWorkshop.tar.gz file that was downloaded.
+Regardless of which method above you used. You can exit out of R by copy-pasting the following command. 
 
-
+    q("no")
 
 ## Start the workshop
 
