@@ -25,7 +25,7 @@ If you are using Linux, then I trust you know what you are doing. You can instal
 ## Install RStudio
 
 The installation of RStudio is optional, but highly recommended. 
-It just provides a different interface to R. 
+It just provides a different interface to R, but has [projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) which help to quickly switch between (oddly enough) projects. 
 Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct platform under **Installers for ALL Platforms**. 
 Install like any other program. 
 
