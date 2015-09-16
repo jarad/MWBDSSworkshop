@@ -1,4 +1,3 @@
-ISDSWorkshop.Rproj
 
 # History files
 .Rhistory
@@ -14,3 +13,8 @@ ISDSWorkshop.Rproj
 # Ignore derivative files
 vignettes/*.html
 vignettes/*.md
+=======
+# RStudio file
+ISDSWorkshop.Rproj
+
+inst/

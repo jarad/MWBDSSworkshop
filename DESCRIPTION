@@ -1,14 +1,29 @@
 Package: ISDSWorkshop
 Type: Package
-Title: Demos from ISDS R Workshop
+Title: International Society for Disease Surveillance R Workshop
 Version: 0.1
-Date: 2014-06-23
+Date: 2014-06-30
 Author: Jarad Niemi
 Maintainer: Jarad Niemi <niemi@iastate.edu>
-Description: This package provides demos for the Introduction to R Workshop at the International Society for Disease Surveillance. 
-License: GPL (>= 2)
-VignetteBuilder: knitr
-Depends: 
-  R (>= 3.0.0)
+Description: An R package for the International Society for Disease
+    Surveillance R workshop. The package consists of three main vignettes:
+    intro, graphics, and advanced-graphics. These vignettes are meant
+    to introduce public health officials to the use of R for analyzing
+    syndromic surveillance data. In particular, the vignettes provide
+    examples of descriptive and graphical statistics and ways to export
+    these summaries to be incorporated in standard document formats.
+Depends:
+    R (>= 3.0)
+License: GPL (> 2)
 Suggests:
-  knitr
+    ggplot2,
+    gridExtra,
+    knitr,
+    maps,
+    plyr,
+    RColorBrewer,
+    reshape2,
+    rmarkdown,
+    SpatialEpi,
+    xtable
+VignetteBuilder: knitr

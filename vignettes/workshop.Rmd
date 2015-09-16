@@ -1,0 +1,55 @@
+---
+title: "Training Outline"
+author: "Jarad Niemi"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Training Outline}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+# International Society for Disease Surveillance
+# Introduction to R for Biosurveillance 
+# Pre-conference Training
+
+## [Introduction to R](intro.html)
+
+- [Introduction to R](intro.html#intro)
+- [Using R as a calculator](intro.html#calculator)
+- [Reading data into R](intro.html#reading)
+  - [Reading directly from Excel](intro.html#excel)
+- [Descriptive statistics](intro.html#descriptive)
+  - [Subsetting the data](intro.html#subsetting)
+- [Graphical statistics](intro.html#graphical)
+- [Getting help](intro.html#help)
+
+## [Data Vizualization I (ggplot2)](graphics.html)
+
+- [Data types](graphics.html#types)
+- [Data frames](graphics.html#frames)
+  - [Factors](graphics.html#factors)
+  - [Dates](graphics.html#dates)
+- [Reshaping data frames in R](graphics.html#reshaping)
+- [Aggregating data frames in R](graphics.html#aggregating)
+- [Basics of ggplot2](graphics.html#ggplot2)
+- [Customizing (colors, characters, lines)](graphics.html#customizing)
+- [Getting help on ggplot2](graphics.html#help)
+
+## [Data Vizualization II (ggplot2)](advanced_graphics.html)
+
+- [Workflow](advanced_graphics.html#workflow)
+- [Workflow for constructing a graph](advanced_graphics.html#graph_workflow)
+- [Faceting](advanced_graphics.html#faceting)
+- [Subsetting](advanced_graphics.html#subsetting)
+- [Making professional graphics](advanced_graphics.html#professional)
+  - [Exporting graphs](advanced_graphics.html#exporting)
+
+## [Advanced biosurveillance](biosurveillance.html)
+
+- [Exporting tables](biosurveillance.html#exporting_tables)
+- [Maps](biosurveillance.html#maps)
+- [Packages](biosurveillance.html#packages)
+- [Packages for Surveillance](biosurveillance.html#surveillance)
+- [Functions](biosurveillance.html#functions)
+- [R in batch](biosurveillance.html#batch)
+- [Shiny apps](biosurveillance.html#shiny) 
