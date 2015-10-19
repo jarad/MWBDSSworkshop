@@ -20,6 +20,7 @@ Suggests:
     gridExtra,
     knitr,
     maps,
+    mapproj,
     plyr,
     RColorBrewer,
     reshape2,
