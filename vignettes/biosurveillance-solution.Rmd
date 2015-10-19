@@ -45,7 +45,7 @@ GI = mutate(GI,
 fa_l = ddply(GI, .(facility, ageC), summarize, count = length(id))
 
 # Reshape data from long to wide format
-fa_w = dcast(fa_l, facility~ageC) # Long to wide
+fa_w = dcast(fa_l, facility~ageC, value.var='count') # Long to wide
 
 # Create HTML table
 tab = xtable(fa_w,
@@ -71,7 +71,7 @@ states = map_data("state")
 # Read in the data from http://www.google.org/flutrends/us/data.txt
 # ** you will need to figure this part out **
 # ** it is NOT trivial                     **
-fluTrends = read.csv(file="http://www.google.org/flutrends/us/data.txt", 
+fluTrends = read.csv(file="http://www.google.org/flutrends/about/data/flu/us/data.txt", 
                      skip = 11, 
                      check.names=FALSE)
 
