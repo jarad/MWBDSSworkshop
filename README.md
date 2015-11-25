@@ -1,10 +1,10 @@
 ISDSWorkshop
 ============
 
-An R package for the Introduction to R for Biosurveillance workshop for the International Society for Disease Surveillance.
+An R package for the Introduction to R for Biosurveillance [pre-conference training](http://www.syndromic.org/annual-conference/2015-isds-conference/pre-conference-trainings) for the [International Society for Disease Surveillance](http://www.syndromic.org/).
 
-Prior to the conference, please install R, Rstudio (not required, but highly recommended) and the ISDSWorkshop R package. 
-You will need to have internet access to install everything.
+Prior to the conference, please install R, Rstudio (not required, but highly recommended), and the ISDSWorkshop R package. 
+You will need to have internet access and administrator privileges to install everything.
 
 ## Install R (may require administrator privileges)
 
