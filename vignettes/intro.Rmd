@@ -646,11 +646,11 @@ Depending on how many packages you have loaded, you will find a lot or a little 
 
 ## Internet search for R help
 
-I google for "<something> R"", e.g. 
+I google for "<something> R", e.g. 
 
     calculate mean R
 
-The useful sites are 
+Some useful sites are 
 
 - <http://www.cookbook-r.com/>
 - <http://www.r-tutor.com/r-introduction>
