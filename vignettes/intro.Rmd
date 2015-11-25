@@ -212,9 +212,9 @@ When you have completed the activity, compare your results to the [solutions](in
 
 # <a name="reading"></a> Reading data into R
 
-In this section, we will learn how to read in csv or Excel files into R. We focus on csv files because less can go wrong. 
+In this section, we will learn how to read in csv or Excel files into R. We focus on csv files because they are simplest to import, they can be easily exported from Excel (or other software), and they are portable, i.e. they can be used in other software.
 
-## <a name="working_directory"></a> Changing your working directory
+## <a name="working_directory">Changing your working directory</a>
 
 One of the first tasks after starting R is to change the working directory. To set,
 
@@ -234,10 +234,10 @@ Make sure you have write access to this directory.
 Much of the functionality of R is contained in packages. The first time these packages are used, they need to be installed, e.g. to install a package from [CRAN](http://cran.r-project.org/web/packages/) use 
 
 ```{r, eval=FALSE}
-install.packages("plyr")
+install.packages('plyr')
 ```
 
-Once installed, they needed to loaded into the R session. 
+Once installed, a package needs to be loaded into each R session where the package is used.
 
 ```{r, eval=FALSE}
 library('plyr')
@@ -314,31 +314,49 @@ all.equal(GI, GI2)
 
 ## Exploring the data set
 
-There are a number of functions that will provide information about a data.frame. Here are a few:
+There are a number of functions that will provide information about a `data.frame`. Here are a few:
 
 ```{r}
 dim(GI)
-names(GI)
-head(GI)
-tail(GI)
+nrow(GI)
+ncol(GI)
+names(GI) # column names
+head(GI, n=5) # first 5 rows of the data.frame
+tail(GI, n=5) # last5 rows of the data.frame
 ```
 
 
-### <a name="excel"></a> Reading an Excel xlsx file into R
+## <a name="excel"></a> Reading an Excel xlsx file into R
+
+My main suggestion for reading Excel files into R is to 
+
+1. Save the Excel file as a csv
+1. Read the csv file into R using `read.csv`
+
+This approach will work regardless of any changes Excel makes in its document structure.
 
 Reading an Excel xlsx file into R is done using the `read.xlsx` function from the [xlsx](http://cran.r-project.org/web/packages/xlsx/index.html) R package. Unfortunately many scenarios can cause this process to not work. Thus, we do not focus on it in an introductory R course. When it works, it looks like this
 
 ```{r, eval=FALSE}
-d = read.xlsx("filename.xlsx", sheetIndex=1)
-```
-
-or 
-```{r, eval=FALSE}
+install.packages('xlsx')
+library('xlsx')
+d = read.xlsx("filename.xlsx", sheetIndex=1) # or
 d = read.xlsx("filename.xlsx", sheetName="sheetName")
 ```
 
-If these don't work, you can `Save as...` a csv file in Excel.
+Again, if these approaches don't work, you can `Save as...` a csv file in Excel.
 
+
+## Read SAS, Stata, or SPSS data files 
+
+The `haven` package provids functionality to read in SAS, Stata, and SPSS files. 
+An example of reading a SAS file is
+
+```{r, eval=FALSE}
+install.packages('haven')
+library('haven')
+d = read_sas('filename.sas7bdat)
+```
 
 ## Activity 
 
@@ -420,7 +438,7 @@ Apparently there is only 1 observation from facility 259, was that a typo?
 
 
 
-## <a name="subsetting"></a> Subsetting the data
+## <a name="subsetting">Subsetting the data</a>
 
 Rather than having descriptive statistics for the dataset as a whole, we may be interested in descriptive statistics for a `subset` of the data. 
 
@@ -628,7 +646,7 @@ Depending on how many packages you have loaded, you will find a lot or a little 
 
 ## Internet search for R help
 
-I typically do `<something> R`, e.g. 
+I google for "<something> R"", e.g. 
 
     calculate mean R
 
