@@ -38,7 +38,7 @@ n[-3,]
 # <a name="factor"></a> Factor activity
 
 ```{r, echo=FALSE}
-library(ISDSWorkshop)
+library('ISDSWorkshop')
 data(GI)
 write.csv(GI, file="GI.csv", row.names=FALSE)
 GI = read.csv("GI.csv")
@@ -64,7 +64,7 @@ table(GI$icd9code)
 # <a name="aggregate"></a> Aggregate activity
 
 ```{r, echo=FALSE}
-library(plyr)
+library('plyr')
 ```
 
 ```{r}
@@ -79,7 +79,7 @@ ddply(GI, .(gender, ageC, icd9code), summarize, total = length(id))
 Construct a histogram and boxplot for age at facility 37 using ggplot2.
 
 ```{r, echo=FALSE}
-library(ggplot2)
+library('ggplot2')
 ```
 
 ```{r}

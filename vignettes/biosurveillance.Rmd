@@ -13,11 +13,11 @@ vignette: >
 ---
 
 ```{r}
-library(ggplot2)
-library(plyr)
-library(reshape2)
-library(RColorBrewer) 
-library(ISDSWorkshop)
+library('ggplot2')
+library('plyr')
+library('reshape2')
+library('RColorBrewer') 
+library('ISDSWorkshop')
 workshop(launch_index=FALSE)
 ```
 
@@ -73,7 +73,7 @@ Cut-and-pasting this table is done in ASCII format. This looks good in a **plain
 ## Create HTML table
 
 ```{r}
-library(xtable)
+library('xtable')
 tab = xtable(ga_w,
              caption = "Total GI cases by Sex and Age Category",
              label   = "myHTMLanchor",
@@ -135,7 +135,7 @@ The packages `ggplot2` and `maps` can be used together to make maps.
 
 Map of the continental US
 ```{r}
-library(maps)
+library('maps')
 states = map_data("state")
 ggplot(states, aes(x=long, y=lat, group=group)) + geom_polygon()
 ```
@@ -262,7 +262,7 @@ To install a package from github, you can use the `install_github()` function fr
 
 ```{r, eval=FALSE}
 # install.packages("devtools")
-library(devtools)
+library('devtools')
 install_github('nandadorea/vetsyn')
 ```
 
@@ -317,7 +317,7 @@ The `SpatialEpi` package implements the Kulldorff cluster detection method in th
 
 Setting up the analysis (taken directly from the example)
 ```{r}
-library(SpatialEpi)
+library('SpatialEpi')
 
 ## Load Pennsylvania Lung Cancer Data
 data(pennLC)

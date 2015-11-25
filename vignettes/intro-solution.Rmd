@@ -9,7 +9,7 @@ vignette: >
 ---
 
 ```{r, echo=FALSE}
-library(ISDSWorkshop)
+library('ISDSWorkshop')
 workshop(launch_index=FALSE)
 ```
 

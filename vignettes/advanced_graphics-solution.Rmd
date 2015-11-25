@@ -9,9 +9,9 @@ vignette: >
 ---
 
 ```{r, echo=FALSE}
-library(ggplot2)
-library(plyr)
-library(ISDSWorkshop)
+library('ggplot2')
+library('plyr')
+library('ISDSWorkshop')
 
 workshop(launch_index  = FALSE)
 ```

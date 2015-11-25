@@ -240,7 +240,7 @@ install.packages("plyr")
 Once installed, they needed to loaded into the R session. 
 
 ```{r, eval=FALSE}
-library(plyr)
+library('plyr')
 ```
 
 
@@ -250,7 +250,7 @@ library(plyr)
 First load the package 
 
 ```{r, warning=FALSE}
-library(ISDSWorkshop)
+library('ISDSWorkshop')
 ```
 
 This package contains a function to help you get started, so run that function.

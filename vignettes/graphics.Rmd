@@ -245,7 +245,7 @@ A `data.frame` is a special type of matrix that allows different data types in d
 We have already seen a data frame with our GI data set. Let's read this data in again and take a look.
 
 ```{r, echo=FALSE}
-library(ISDSWorkshop)
+library('ISDSWorkshop')
 workshop(write_scripts=FALSE, launch_index=FALSE)
 ```
 
@@ -257,7 +257,7 @@ dim(GI)
 If the above didn't work, run the following first, then retry. 
 
 ```{r, eval=FALSE}
-library(ISDSWorkshop)
+library('ISDSWorkshop')
 workshop(write_scripts=FALSE, launch_index=FALSE)
 ```
 
@@ -390,7 +390,7 @@ which is a succinct representation of the data
 
 Long:
 ```{r, echo=FALSE}
-library(reshape2)
+library('reshape2')
 melt(d, id.vars="week", variable.name="syndrome", value.name="count")
 ```
 which is the form most statistical software wants, i.e. there is only one column for the response (count).
@@ -401,7 +401,7 @@ which is the form most statistical software wants, i.e. there is only one column
 The `reshape2` package provides functions to convert between the two representations. First, we need to load the package
 
 ```{r}
-library(reshape2)
+library('reshape2')
 ```
 
 Create the wide `data.frame`:
@@ -434,7 +434,7 @@ The GI data set that we have is already in long format and each row is an indivi
 We may want to aggregate this information. To do so, we will use the `ddply()` function in the `plyr` package.
 
 ```{r}
-library(plyr)
+library('plyr')
 ```
 
 For example, perhaps we wanted to know the total number of GI or ILI cases across the 3 weeks:
@@ -494,7 +494,7 @@ Once you have your data in long format, you can use the `ggplot2` package for gr
 
 Load the `ggplot2` package
 ```{r}
-library(ggplot2)
+library('ggplot2')
 ```
 
 

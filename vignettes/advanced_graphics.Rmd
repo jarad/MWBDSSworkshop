@@ -40,7 +40,7 @@ setwd(choose.dir())
 Now start the workshop to get your data files and scripts set up. Typically you would choose your working directory to be where you actually have your data and scripts.
 
 ```{r}
-library(ISDSWorkshop)
+library('ISDSWorkshop')
 workshop(launch_index  = FALSE)
 ```
 
@@ -54,9 +54,9 @@ Notice that the top of the script has all of the packages that you will use.
 #########################################
 # Pretend this is the top of the script #
 #########################################
-library(plyr)
-library(ggplot2)
-library(gridExtra)
+library('plyr')
+library('ggplot2')
+library('gridExtra')
 ```
 
 
@@ -385,7 +385,7 @@ g3 = ggplot(mid_w,   aes(x=week, y=count)) + geom_point()
 To arrange multiple plots, use the `grid.arrange` function in the `gridExtra` package.
 
 ```{r, eval=FALSE}
-library(gridExtra)
+library('gridExtra')
 ```
 
 ```{r}
