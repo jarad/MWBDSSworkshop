@@ -21,6 +21,7 @@ Suggests:
     knitr,
     maps,
     mapproj,
+    MMWRweek,
     plyr,
     RColorBrewer,
     reshape2,
