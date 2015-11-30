@@ -8,15 +8,15 @@ You will need to have internet access and administrator privileges to install ev
 
 ## Install R (may require administrator privileges)
 
-Please go to <http://www.r-project.org/> and click on [download R](http://cran.r-project.org/mirrors.html). You will be asked to select a [CRAN mirror](http://cran.r-project.org/mirrors.html). I select <http://streaming.stat.iastate.edu/CRAN/> since it is the location nearest to me geographically. Feel free to select this one or the one nearest to you. In the download and install R section, Click on the correct link depending on your operating system: Linux, (Mac) OS X, or Windows. 
+Please go to <http://www.r-project.org/> and click on [download R](http://cran.r-project.org/mirrors.html). You will be asked to select a [CRAN mirror](http://cran.r-project.org/mirrors.html). I select <https://rweb.crmda.ku.edu/cran/> as it is geographically close and uses the secure http protocol (HTTPS). In the download and install R section, Click on the correct link depending on your operating system: Linux, (Mac) OS X, or Windows. 
 
 ### Windows
 
-Click on **base** and then the link to Download R X.X.X for Windows (where the X will be numbers representing the current version of R). Install this program like any other program on Windows using the all defaults.
+Click on **base** and then the link to Download R X.X.X for Windows (where the X will be numbers representing the current version of R). Install this program like any other program on Windows using all the defaults.
 
 ### (Mac) OS X
 
-Click on the appropriate **.pkg** file depending on which version of Mac OS X you are using. Install this program like any other program on OS X using the all defaults. 
+Click on the appropriate **.pkg** file depending on which version of Mac OS X you are using. Install this program like any other program on OS X using all the defaults. 
 
 ### Linux
 
