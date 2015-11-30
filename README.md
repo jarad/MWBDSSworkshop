@@ -20,7 +20,7 @@ Click on the appropriate **.pkg** file depending on which version of Mac OS X yo
 
 ### Linux
 
-If you are using Linux, then I trust you know what you are doing. You can install R in this fashion or you can use a package manager. 
+If you are using Linux, then I trust you know what you are doing. You can install R from source or you can use a package manager. 
 
 ## Install RStudio (may require administrator privileges)
 
