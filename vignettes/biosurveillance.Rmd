@@ -12,6 +12,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+If you shut down R, you will need to change your working directory and run the following commands to load libraries,
+
 ```{r}
 library('ggplot2')
 library('plyr')
@@ -21,11 +23,15 @@ library('ISDSWorkshop')
 workshop(launch_index=FALSE)
 ```
 
+read in the data files, and
+
 ```{r}
 # Read csv files
 GI     = read.csv("GI.csv")
 icd9df = read.csv("icd9.csv")
 ```
+
+create the additional columns required for this portion of the workshop.
 
 ```{r}
 # Mutate data.frame
@@ -47,7 +53,7 @@ GI = mutate(GI,
 
 # <a name="exporting_tables"></a> Exporting tables
 
-There are many ways to exporting tables. Here I will cover two basic approachess that are simple and work well. 
+There are many ways to export tables (for use in Word). Here I will cover two basic approachess that are simple and work well. 
 
 - cut-and-paste
 - create HTML table and cut-and-paste to Word
@@ -114,7 +120,7 @@ Now you can
 
 Create a Word table for the number of cases by facility and age category.
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 # Summarize data by facility and age category
 
 # Reshape data from long to wide format
@@ -137,19 +143,22 @@ Map of the continental US
 ```{r}
 library('maps')
 states = map_data("state")
-ggplot(states, aes(x=long, y=lat, group=group)) + geom_polygon()
+ggplot(states, aes(x=long, y=lat, group=group)) + 
+  geom_polygon()
 ```
 
 Map of the counties in the continental US
 ```{r}
 counties = map_data("county")
-ggplot(counties, aes(x=long, y=lat, group=group)) + geom_polygon(color="white")
+ggplot(counties, aes(x=long, y=lat, group=group)) + 
+  geom_polygon(color="white")
 ```
 
 Map of the counties in Iowa
 ```{r}
 ggplot(subset(counties, region=="iowa"), 
-       aes(x=long, y=lat, group=group)) + geom_polygon(fill="red", color="black")
+       aes(x=long, y=lat, group=group)) + 
+  geom_polygon(fill="red", color="black")
 ```
 
 ## Construct an appropriate data set
@@ -222,9 +231,9 @@ ggplot(states_merged,
 
 Modify the code to determine what elements of the map are affected.
 
-Advanced: Download the data directly from <http://www.google.org/flutrends/us/data.txt> using `read.csv' and then construct a map of the most recent Google Flu Trends data. 
+Advanced: Download the data directly from <http://www.google.org/flutrends/about/data/flu/historic/us-historic-v3.txt> using `read.csv' and then construct a map of the most recent Google Flu Trends data. 
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 # Construct Google Flu Trends map
 ```
 
@@ -290,10 +299,10 @@ The bioconductor repository may be useful in the future for public health biosur
 
 ## Source
 
-All packages can be installed from their source. If a package is not available in a repository, then this is the only way to install the package. To install from source download the source file (.tar.gz) and then use the `install.packages()` function with arguments `repos=NULl` and `type="source"`. For example, to install the ISDSWorkshop package you used 
+All packages can be installed from their source. If a package is not available in a repository, then this is the only way to install the package. To install from source download the source file (.tar.gz) and then use the `install.packages()` function with arguments `repos=NULL` and `type="source"`. For example, from a source version of this workshop, you would use the following command:
 
 ```{r, eval=FALSE}
-install.packages("ISDSWorkshop_0.1.tar.gz", 
+install.packages("ISDSWorkshop_0.2.tar.gz", 
                  repos = NULL, 
                  type  = "source")
 ```
@@ -374,7 +383,7 @@ title("Most Likely Cluster")
 If you are connected to the internet, try installing the `surveillance` package. 
 If you are successful, look at its help file.
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 # Install the surveillance package
 ```
 
@@ -452,5 +461,14 @@ Now each week you can update the csv file and then just run the script which wil
 
 # <a name="shiny"></a> Shiny apps
 
-R can be used to create HTML applications through the `shiny` package. The code is written entirely in R, although you can use cascading style sheets (CSS) if you want to update how it looks. [Here is an example](http://spark.rstudio.com/ejahanpour/SampleData/).
+R can be used to create HTML applications through the `shiny` package. 
+The code is written entirely in R, although you can use cascading style sheets (CSS) if you want to update how it looks. 
+[Here is an example](https://michaud.shinyapps.io/CDCPlot/) that allows visualization of CDC data.
 
+These apps can also be run locally, e.g.
+
+```{r, eval=FALSE}
+install.packages('shiny')
+library(shiny)
+runGitHub('NLMichaud/WeeklyCDCPlot')
+```
