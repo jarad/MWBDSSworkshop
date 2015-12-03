@@ -47,10 +47,5 @@ Regardless of which method above you used. You can exit out of R by copy-pasting
 
     q("no")
 
-## Start the workshop
 
-To start the workshop (this will be done at the [ISDS pre-conference training](http://www.syndromic.org/annual-conference/2014-isds-conference)), start R, change your working directory, and type
-
-    library(ISDSWorkshop)
-    workshop()
 
