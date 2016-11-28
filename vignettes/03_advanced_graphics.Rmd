@@ -116,7 +116,7 @@ Create a new variable in the GI data set called `weekD` that is a `Date` object 
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](advanced_graphics-solution.html#Date).
+When you have completed the activity, compare your results to the [solutions](03_advanced_graphics-solution.html#Date).
 
 
 
@@ -189,7 +189,7 @@ Construct a data set and then a plot to look at weekly GI cases by age category.
 # Construct a plot to look at weekly GI cases by age category.
 ```
 
-When you have completed the activity, compare your results to the [solutions](advanced_graphics-solution.html#graph).
+When you have completed the activity, compare your results to the [solutions](03_advanced_graphics-solution.html#graph).
 
 
 
@@ -255,7 +255,7 @@ Construct a plot of weekly GI counts by zip3 and ageC.
 # Construct a plot of weekly GI counts by zip3 and ageC. 
 ```
 
-When you have completed the activity, compare your results to the [solutions](advanced_graphics-solution.html#facet).
+When you have completed the activity, compare your results to the [solutions](03_advanced_graphics-solution.html#facet).
 
 
 
@@ -423,7 +423,7 @@ Construct a plot for those in zipcode 206xx between Jan 1, 2008 and Dec 31, 2008
 # Construct the plot of weekly GI counts in zipcode 206xx.
 ```
 
-When you have completed the activity, compare your results to the [solutions](advanced_graphics-solution.html#subsetting).
+When you have completed the activity, compare your results to the [solutions](03_advanced_graphics-solution.html#subsetting).
 
 
 

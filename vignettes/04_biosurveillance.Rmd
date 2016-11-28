@@ -132,7 +132,7 @@ Create a Word table for the number of cases by facility and age category.
 # Copy-and-paste table into Word
 ```
 
-When you have completed the activity, compare your results to the [solutions](biosurveillance-solution.html#exporting_tables).
+When you have completed the activity, compare your results to the [solutions](04_biosurveillance-solution.html#exporting_tables).
 
 
 # <a name="maps"></a> Maps
@@ -237,7 +237,7 @@ Advanced: Download the data directly from <http://www.google.org/flutrends/about
 # Construct Google Flu Trends map
 ```
 
-When you have completed the activity, compare your results to the [solutions](biosurveillance-solution.html#maps).
+When you have completed the activity, compare your results to the [solutions](04_biosurveillance-solution.html#maps).
 
 
 
@@ -388,7 +388,7 @@ If you are successful, look at its help file.
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](biosurveillance-solution.html#packages).
+When you have completed the activity, compare your results to the [solutions](04_biosurveillance-solution.html#packages).
 
 
 

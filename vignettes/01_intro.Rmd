@@ -89,7 +89,7 @@ s$r.squared
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](intro-solution.html#introduction).
+When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#introduction).
 
 
 
@@ -207,7 +207,7 @@ Calculate the probability the individual has the disease if the test is positive
 # specificity is 0.99, sensitivity is 0.95, and prevalence is 0.001
 ```
 
-When you have completed the activity, compare your results to the [solutions](intro-solution.html#calculator).
+When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#calculator).
 
 
 # <a name="reading"></a> Reading data into R
@@ -382,7 +382,7 @@ d = read.table("filename.csv", # Make sure to change filename>to your filename a
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](intro-solution.html#read).
+When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#read).
 
 
 # <a name="descriptive"></a> Descriptive statistics
@@ -518,7 +518,7 @@ Find the min, max, mean, and median age for zipcode 20032.
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](intro-solution.html#descriptive).
+When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#descriptive).
 
 
 
@@ -614,7 +614,7 @@ Construct a bar chart for the zipcode at facility 37.
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](intro-solution.html#graphical).
+When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#graphical).
 
 
 

@@ -242,7 +242,7 @@ m
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](graphics-solution.html#matrix).
+When you have completed the activity, compare your results to the [solutions](02_graphics-solution.html#matrix).
 
 
 
@@ -391,7 +391,7 @@ Create a new variable in the GI data set called `icd9code` that cuts icd9 at 0, 
 
 
 
-When you have completed the activity, compare your results to the [solutions](graphics-solution.html#factor).
+When you have completed the activity, compare your results to the [solutions](02_graphics-solution.html#factor).
 
 
 
@@ -503,7 +503,7 @@ Aggregate the GI data set by gender, ageC, and icd9code (the ones created in the
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](graphics-solution.html#aggregate).
+When you have completed the activity, compare your results to the [solutions](02_graphics-solution.html#aggregate).
 
 
 
@@ -592,7 +592,7 @@ Construct a bar chart for the 3-digit zipcode at facility 37 using ggplot2
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](graphics-solution.html#ggplot2).
+When you have completed the activity, compare your results to the [solutions](02_graphics-solution.html#ggplot2).
 
 
 
