@@ -116,12 +116,12 @@ For now, you can ignore the [1] at the beginning of the line, we'll learn about 
 Many advanced calculator operations are also available.
 
 ```{r}
-(1+3)*2+100^2 # standard order of operations
-sin(2*pi) # the result is in scientific notation, i.e. -2.449294 x 10^-16 
+(1+3)*2 + 100^2  # standard order of operations
+sin(2*pi)        # the result is in scientific notation, i.e. -2.449294 x 10^-16 
 sqrt(4)
 10^2
-log(10) # the default is base e
-log(10,base=10)
+log(10)          # the default is base e
+log(10, base=10)
 ```
 
 
@@ -146,7 +146,7 @@ When assign variables values, you can also use arrows <- and -> and you will oft
 ```{r}
 a <- 1
 2 -> b
-c = 3 # is the same as <-
+c = 3  # is the same as <-
 ```
 
 Now print them.
@@ -240,7 +240,7 @@ install.packages('plyr')
 Once installed, a package needs to be loaded into each R session where the package is used.
 
 ```{r, eval=FALSE}
-library('plyr')
+library('dplyr')
 ```
 
 
@@ -413,6 +413,7 @@ max(GI$age)
 mean(GI$age)
 median(GI$age)
 quantile(GI$age, c(.025,.25,.5,.75,.975))
+summary(GI$age)
 ```
 
 Anything look odd here?
@@ -449,24 +450,38 @@ Rather than having descriptive statistics for the dataset as a whole, we may be 
 The following code creates a new `data.frame` that only contains observations from facility 37:
 
 ```{r}
-GI_37 = subset(GI, facility==37) # Notice the double equal sign!
-nrow(GI_37)                      # Number of rows (observations) in the new data set
+library('dplyr')
+
+GI_37 <- GI %>% 
+  filter(facility==37) # Notice the double equal sign!
+
+nrow(GI_37)            # Number of rows (observations) in the new data set
 ```
 
 The following code creates a new `data.frame` that only contains observations with chief_complaint "Abd Pain":
 
 ```{r}
-GI_AbdPain = subset(GI, chief_complaint == "Abd Pain") # Need to quote non-numeric variable level
+GI_AbdPain <- GI %>% 
+  filter(chief_complaint == "Abd Pain") # Need to quote non-numeric variable level
+
 nrow(GI_AbdPain)
 ```
 
-### Alternative way to subset
+### Alternative ways to subset
 
 ```{r}
 GI_37a = GI[GI$facility==37,]
 all.equal(GI_37, GI_37a)
+
+GI_37b = subset(GI, facility==37)
+all.equal(GI_37, GI_37b)
+
+
 GI_AbdPain1 = GI[GI$chief_complaint == "Abd Pain",]
 all.equal(GI_AbdPain, GI_AbdPain1)
+
+GI_AbdPain2 = subset(GI, chief_complain == "Abd Pain")
+all.equal(GI_AbdPain, GI_AbdPain2)
 ```
 
 ### Advanced subsetting
@@ -474,10 +489,11 @@ all.equal(GI_AbdPain, GI_AbdPain1)
 We can subset continuous variables using other logical statements.
 
 ```{r, eval=FALSE}
-subset(GI, age <   5)
-subset(GI, age >= 60)
-subset(GI, chief_complaint %in% c("Abd Pain","ABD PAIN"))
-subset(GI, !(facility %in% c(37,66))) # facility is NOT 37 or 66
+GI %>% filter(age <   5)
+GI %>% filter(age >= 60)
+GI %>% filter(chief_complaint %in% c("Abd Pain","ABD PAIN")) # Abd Pain or ABD PAIN
+GI %>% filter(tolower(chief_complaint) == "abd pain")        # any capitalization pattern
+GI %>% filter(!(facility %in% c(37,66)))                     # facility is NOT 37 or 66
 ```
 
 
@@ -510,7 +526,8 @@ When you have completed the activity, compare your results to the [solutions](in
 
 # <a name="graphical"></a> Graphical statistics
 
-Here we focus on the graphical options for the base package in R. Later we will use the ggplot2 package:
+Here we focus on the graphical options for the base package in R. 
+Later we will use the ggplot2 package:
 
 - Histograms (`hist`)
 - Boxplots (`boxplot`)
