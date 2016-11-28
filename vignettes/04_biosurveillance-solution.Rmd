@@ -18,23 +18,22 @@ library('ISDSWorkshop')
 
 workshop(launch_index=FALSE)
 
-# Read in csv files
-GI = read.csv('GI.csv')
+# Read csv files and create additional columns
 icd9df = read.csv("icd9.csv")
-
-# Mutate data.frame
-GI = mutate(GI,
-            date      = as.Date(date),
-            weekC     = cut(date, breaks="weeks"),
-            week      = as.numeric(weekC),
-            facility  = as.factor(facility),
-            icd9class = factor(cut(icd9, 
-                            breaks = icd9df$code_cutpoint, 
-                            labels = icd9df$classification[-nrow(icd9df)], 
-                            right  = TRUE)),
-            ageC      = cut(age, 
-                            breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
-            zip3      = trunc(zipcode/100))
+GI     = read.csv("GI.csv") %>%
+  mutate(
+    date      = as.Date(date),
+    weekC     = cut(date, breaks="weeks"),
+    week      = as.numeric(weekC),
+    weekD     = as.Date(weekC),
+    facility  = as.factor(facility),
+    icd9class = factor(cut(icd9, 
+                           breaks = icd9df$code_cutpoint, 
+                           labels = icd9df$classification[-nrow(icd9df)], 
+                           right  = TRUE)),
+    ageC      = cut(age, 
+                    breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
+    zip3      = trunc(zipcode/100))
 ```
 
 
@@ -42,10 +41,13 @@ GI = mutate(GI,
 
 ```{r}
 # Summarize data by facility and age category
-fa_l = ddply(GI, .(facility, ageC), summarize, count = length(id))
+fa_l <- GI %>%
+  group_by(facility, ageC) %>%
+  summarize(count = nrow(.))
 
 # Reshape data from long to wide format
-fa_w = dcast(fa_l, facility~ageC, value.var='count') # Long to wide
+fa_w <- fa_l %>%
+  spread(ageC, count)
 
 # Create HTML table
 tab = xtable(fa_w,
@@ -79,7 +81,8 @@ fluTrends = read.csv(file="http://www.google.org/flutrends/about/data/flu/us/dat
 flu_w = fluTrends[nrow(fluTrends), c(1,3:53)]
 
 # Reshape to long format
-flu_l = melt(flu_w, id.var='Date', variable.name='region', value.name='index')
+flu_l <- flu_w %>%
+  gather(region, index, -Date)
 
 # Merge flutrends data with map_data
 flu_l$region = tolower(flu_l$region)

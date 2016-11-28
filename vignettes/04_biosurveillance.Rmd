@@ -16,38 +16,32 @@ If you shut down R, you will need to change your working directory and run the f
 
 ```{r}
 library('ggplot2')
-library('plyr')
-library('reshape2')
+library('dplyr')
+library('tidyr')
 library('RColorBrewer') 
 library('ISDSWorkshop')
 workshop(launch_index=FALSE)
 ```
 
-read in the data files, and
+Read in the data files and create additional columns. 
 
 ```{r}
-# Read csv files
-GI     = read.csv("GI.csv")
+# Read csv files and create additional columns
 icd9df = read.csv("icd9.csv")
-```
-
-create the additional columns required for this portion of the workshop.
-
-```{r}
-# Mutate data.frame
-GI = mutate(GI,
-            date      = as.Date(date),
-            weekC     = cut(date, breaks="weeks"),
-            week      = as.numeric(weekC),
-            weekD     = as.Date(weekC),
-            facility  = as.factor(facility),
-            icd9class = factor(cut(icd9, 
-                            breaks = icd9df$code_cutpoint, 
-                            labels = icd9df$classification[-nrow(icd9df)], 
-                            right  = TRUE)),
-            ageC      = cut(age, 
-                            breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
-            zip3      = trunc(zipcode/100))
+GI     = read.csv("GI.csv") %>%
+  mutate(
+    date      = as.Date(date),
+    weekC     = cut(date, breaks="weeks"),
+    week      = as.numeric(weekC),
+    weekD     = as.Date(weekC),
+    facility  = as.factor(facility),
+    icd9class = factor(cut(icd9, 
+                           breaks = icd9df$code_cutpoint, 
+                           labels = icd9df$classification[-nrow(icd9df)], 
+                           right  = TRUE)),
+    ageC      = cut(age, 
+                    breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
+    zip3      = trunc(zipcode/100))
 ```
 
 
@@ -68,9 +62,13 @@ There are more sophisticated approaches that I will not cover:
 You can cut-and-paste directly from R. 
 
 ```{r}
-ga_l = ddply(GI, .(gender, ageC), summarize, count = length(id))
-ga_w = dcast(ga_l, gender~ageC) # Long to wide
-print(ga_w, row.names=FALSE)
+ga_l <- GI %>%
+  group_by(gender, ageC) %>%
+  summarize(count = nrow(.))
+
+ga_w <- ga_l %>%
+  spread(ageC, count) %>%
+  print(row.names = FALSE)
 ```
 
 Cut-and-pasting this table is done in ASCII format. This looks good in a **plain text** document, e.g. Notepad, TextEdit, and some email, but will not look good in other formats, e.g. docx.
@@ -143,22 +141,22 @@ Map of the continental US
 ```{r}
 library('maps')
 states = map_data("state")
-ggplot(states, aes(x=long, y=lat, group=group)) + 
+ggplot(states, aes(x = long, y = lat, group = group)) + 
   geom_polygon()
 ```
 
 Map of the counties in the continental US
 ```{r}
 counties = map_data("county")
-ggplot(counties, aes(x=long, y=lat, group=group)) + 
-  geom_polygon(color="white")
+ggplot(counties, aes(x = long, y = lat, group = group)) + 
+  geom_polygon(color = "white")
 ```
 
 Map of the counties in Iowa
 ```{r}
-ggplot(subset(counties, region=="iowa"), 
-       aes(x=long, y=lat, group=group)) + 
-  geom_polygon(fill="red", color="black")
+ggplot(counties %>% filter(region=="iowa"), 
+       aes(x = long, y = lat, group = group)) + 
+  geom_polygon(fill = "gray", color = "black")
 ```
 
 ## Construct an appropriate data set
@@ -180,9 +178,8 @@ dim(flu_w)
 Reshape to long format
 
 ```{r}
-flu_l = melt(flu_w, id.var='Date',
-             variable.name='region', # to match map_data
-             value.name='index')
+flu_l <- flu_w %>%
+  gather(region, index, -Date)
 ```
 
 ## Merge fluTrends data with map_data
@@ -197,13 +194,13 @@ states_merged = merge(states, flu_l, sort=FALSE, by='region')
 
 ## Make the plots
 
-Most recent Google Flu Trend data.
+Some Google Flu Trend data.
 
 ```{r}
 states_merged$Date = as.Date(states_merged$Date)
 mx_date = max(states_merged$Date)
-ggplot(subset(states_merged, Date == mx_date), 
-       aes(x=long, y=lat, group=group, fill=index)) + 
+ggplot(states_merged %>% filter(Date == mx_date), 
+       aes(x = long, y = lat, group = group, fill = index)) + 
   geom_polygon() + 
   labs(title=paste('Google Flu Trends on', mx_date), x='', y='') +
   theme_minimal() + 
@@ -248,11 +245,12 @@ A package provides additional functionality besides what base installation of R 
 - ggplot2
 - ISDSWorkshop
 - maps
-- plyr
-- reshape2
+- dplyr
+- tidyr
 - xtable
 
-The Comprehensive R Archive Network (CRAN) has over 6,000 packages. These packages can be installed using the `install.packages()` function, e.g. 
+The Comprehensive R Archive Network (CRAN) has over 9,594 packages. 
+These packages can be installed using the `install.packages()` function, e.g. 
 
 ```{r, eval=FALSE}
 install.packages("ggplot2")
@@ -274,9 +272,6 @@ To install a package from github, you can use the `install_github()` function fr
 library('devtools')
 install_github('nandadorea/vetsyn')
 ```
-
-This will not install any vignettes which is why I didn't use this method for this workshop.
-
 
 
 ## Bioconductor 
@@ -430,11 +425,15 @@ alert = function(y,threshold=100) {
 Run this on our weekly GI data.
 
 ```{r}
-GI_w = ddply(GI, .(weekD), summarize, count = length(id))
+GI_w <- GI %>%
+  group_by(weekD) %>%
+  summarize(count = nrow(.))
+
 GI_w$alert = alert(y = GI_w$count, threshold = 150)
-ggplot(GI_w, aes(x=weekD, y=count, color=alert)) + 
+
+ggplot(GI_w, aes(x = weekD, y = count, color = alert)) + 
   geom_point() + 
-  scale_color_manual(values=c("black","red"))
+  scale_color_manual(values = c("black","red"))
 ```
 
 
@@ -454,7 +453,7 @@ For routine analysis, it can be helpful to run R in batch mode rather than inter
 
 Now, from the command line run
 
-    R CMD BATCH script.R
+    Rscript script.R
     
 Now each week you can update the csv file and then just run the script which will create all new tables and figures. 
 
