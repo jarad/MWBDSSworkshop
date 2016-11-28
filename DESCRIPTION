@@ -13,9 +13,7 @@ Description: An R package for the International Society for Disease
     examples of descriptive and graphical statistics and ways to export
     these summaries to be incorporated in standard document formats.
 Depends:
-    R (>= 3.0)
-License: GPL (> 2)
-Suggests:
+    R (>= 3.0),
     ggplot2,
     gridExtra,
     knitr,
@@ -28,4 +26,6 @@ Suggests:
     rmarkdown,
     SpatialEpi,
     xtable
+License: GPL (> 2)
+Suggests:
 VignetteBuilder: knitr
