@@ -257,7 +257,7 @@ A `data.frame` is a special type of matrix that allows different data types in d
 
 We have already seen a `data.frame` with our GI data set. Let's read this data in again and take a look.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library('ISDSWorkshop')
 
 # may need to change your working directory 
@@ -294,7 +294,7 @@ GI[1:2, c("facility","icd9","gender")]
 
 or 
 
-```{r}
+```{r, message=FALSE}
 library('dplyr') 
 GI %>% 
   select(facility, icd9, gender) %>%
@@ -520,7 +520,7 @@ Now we can summarize
 ```{r}
 GI_count <- GI %>%
   group_by(week, gender, ageC) %>%
-  summarize(total = nrow(.))       # . in a placeholder for the dataset
+  summarize(total = n())       # . in a placeholder for the dataset
 
 nrow(GI_count)
 head(GI_count, 20)
@@ -694,7 +694,7 @@ it, the plot will be shown.
 ```{r}
 g = ggplot(GI %>% 
              group_by(week) %>%
-             summarize(count = nrow(.)),
+             summarize(count = n()), # counts the number of rows in each data.frame
        aes(x = as.numeric(week), 
            y = count)) +
   labs(x = 'Week #', 

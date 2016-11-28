@@ -64,7 +64,7 @@ You can cut-and-paste directly from R.
 ```{r}
 ga_l <- GI %>%
   group_by(gender, ageC) %>%
-  summarize(count = nrow(.))
+  summarize(count = n())
 
 ga_w <- ga_l %>%
   spread(ageC, count) %>%
@@ -427,7 +427,7 @@ Run this on our weekly GI data.
 ```{r}
 GI_w <- GI %>%
   group_by(weekD) %>%
-  summarize(count = nrow(.))
+  summarize(count = n())
 
 GI_w$alert = alert(y = GI_w$count, threshold = 150)
 

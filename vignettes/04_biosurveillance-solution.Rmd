@@ -43,7 +43,7 @@ GI     = read.csv("GI.csv") %>%
 # Summarize data by facility and age category
 fa_l <- GI %>%
   group_by(facility, ageC) %>%
-  summarize(count = nrow(.))
+  summarize(count = n())
 
 # Reshape data from long to wide format
 fa_w <- fa_l %>%

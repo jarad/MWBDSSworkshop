@@ -56,7 +56,7 @@ str(GI$weekD)
 # Construct a data set aggregated by week and age category
 GI_wa <- GI %>%
   group_by(week, ageC) %>%
-  summarize(count = nrow(.))
+  summarize(count = n())
 
 # Construct a plot to look at weekly GI cases by age category
 ggplot(GI_wa, aes(x = week, y = count, color = ageC)) + geom_point()
@@ -76,7 +76,7 @@ Construct a plot of weekly GI counts by zip3 and ageC.
 # Construct data set 
 GI_za <- GI %>%
   group_by(week, zip3, ageC) %>%
-  summarize(count = nrow(.))
+  summarize(count = n())
 
 # Construct plot of weekly GI counts by zip3 and ageC
 ggplot(GI_za, aes(x = week, y = count)) + 
@@ -97,7 +97,7 @@ zip206_w <- GI %>%
   filter(zip3 == 206, 
          format(date, "%Y%") == "2008") %>%
   group_by(week) %>% 
-  summarize(count = nrow(.))
+  summarize(count = n())
 
 
 # Construct the plot of weekly GI counts in zipcode 206xx.

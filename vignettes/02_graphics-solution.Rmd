@@ -71,7 +71,7 @@ library('plyr')
 # Aggregate the GI data set by gender, ageC, and icd9code (the ones created in the last activity).
 GI %>%
   group_by(gender, ageC, icd9code) %>%
-  summarize(total = nrow(.))
+  summarize(total = n())
 ```
 
 
