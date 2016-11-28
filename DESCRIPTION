@@ -15,17 +15,18 @@ Description: An R package for the International Society for Disease
 Depends:
     R (>= 3.0),
     ggplot2,
-    gridExtra,
+    dplyr,
+    tidyr
+Suggests:
     knitr,
     maps,
     mapproj,
     MMWRweek,
-    dplyr,
-    RColorBrewer,
-    tidyr,
     rmarkdown,
     SpatialEpi,
-    xtable
+    xtable,
+    RColorBrewer,
+    gridExtra
 License: GPL (> 2)
 Suggests:
 VignetteBuilder: knitr
