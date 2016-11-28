@@ -1,8 +1,8 @@
 Package: ISDSWorkshop
 Type: Package
 Title: International Society for Disease Surveillance R Workshop
-Version: 0.2
-Date: 2015-11-29
+Version: 0.3
+Date: 2016-11-28
 Author: Jarad Niemi
 Maintainer: Jarad Niemi <niemi@iastate.edu>
 Description: An R package for the International Society for Disease
@@ -20,9 +20,9 @@ Depends:
     maps,
     mapproj,
     MMWRweek,
-    plyr,
+    dplyr,
     RColorBrewer,
-    reshape2,
+    tidyr,
     rmarkdown,
     SpatialEpi,
     xtable
