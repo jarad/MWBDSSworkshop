@@ -694,7 +694,7 @@ it, the plot will be shown.
 ```{r}
 g = ggplot(GI %>% 
              group_by(week) %>%
-             summarize(coiunt = nrow(.)),
+             summarize(count = nrow(.)),
        aes(x = as.numeric(week), 
            y = count)) +
   labs(x = 'Week #', 

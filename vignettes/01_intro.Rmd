@@ -480,7 +480,7 @@ all.equal(GI_37, GI_37b)
 GI_AbdPain1 = GI[GI$chief_complaint == "Abd Pain",]
 all.equal(GI_AbdPain, GI_AbdPain1)
 
-GI_AbdPain2 = subset(GI, chief_complain == "Abd Pain")
+GI_AbdPain2 = subset(GI, chief_complaint == "Abd Pain")
 all.equal(GI_AbdPain, GI_AbdPain2)
 ```
 

@@ -354,7 +354,7 @@ ggplot(nIPD_w, aes(x=week, y=count)) +
 ### Subsetting by not in a set of categories
 
 ```{r}
-nIPD_w <- GI %>%
+nIPDp_w <- GI %>%
   filter(!(icd9class %in% levels(icd9class)[c(1,3)])) %>%
   group_by(week, icd9class) %>%
   summarize(count = nrow(.))
@@ -401,7 +401,7 @@ ggplot(Age_lte30_w, aes(x=week, y=count)) +
 
 ```{r}
 Age30to60_w <- GI %>%
-  filter(age > 30 age <= 60) %>% # This includes those who are 60, but not those who are 30
+  filter(age > 30, age <= 60) %>% # This includes those who are 60, but not those who are 30
   group_by(week) %>%
   summarize(count = nrow(.))
 
