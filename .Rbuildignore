@@ -1,5 +1,5 @@
-ISDSWorkshop.Rproj
 ^.*\.Rproj$
 ^\.Rproj\.user$
-TODO.md
-install_workshop.R
+^install_workshop\.R$
+^ISDSWorkshop\.Rproj$
+^TODO\.md$
