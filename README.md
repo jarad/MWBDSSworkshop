@@ -36,7 +36,7 @@ Start RStudio (or R GUI if you did not install RStudio).
 At the command prompt (`>`) in the Console window of R, copy-paste the following code. This will download and install a number of packages that we will need and create vignettes (this could take a while). 
 
     install.packages("devtools")
-    devtools::install_github("jarad/ISDSWorkshop")
+    devtools::install_github("jarad/ISDSWorkshop", build_vignettes=TRUE)
 
 If asked to create a `personal library`, please say `yes`. 
 
