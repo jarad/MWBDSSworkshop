@@ -24,18 +24,19 @@ icd9df = read.csv("icd9.csv")
 
 ```{r, echo=FALSE}
 # Mutate data.frame
-GI = mutate(GI,
-            date      = as.Date(date),
-            weekC     = cut(date, breaks="weeks"),
-            week      = as.numeric(weekC),
-            facility  = as.factor(facility),
-            icd9class = factor(cut(icd9, 
-                                   breaks = icd9df$code_cutpoint, 
-                                   labels = icd9df$classification[-nrow(icd9df)], 
-                                   right  = TRUE)),
-            ageC      = cut(age, 
-                            breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
-            zip3      = trunc(zipcode/100))
+GI <- GI %>%
+  mutate(
+    date      = as.Date(date),
+    weekC     = cut(date, breaks="weeks"),
+    week      = as.numeric(weekC),
+    facility  = as.factor(facility),
+    icd9class = factor(cut(icd9, 
+                           breaks = icd9df$code_cutpoint, 
+                           labels = icd9df$classification[-nrow(icd9df)], 
+                           right  = TRUE)),
+    ageC      = cut(age, 
+                    breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
+    zip3      = trunc(zipcode/100))
 ```
 
 
@@ -43,7 +44,7 @@ GI = mutate(GI,
 
 ```{r}
 # Create weekD variable in GI data set
-GI$weekD = as.Date(GI$weekC)
+GI$weekD = as.Date(GI$weekC) # could have used mutate
 str(GI$weekD)
 ```
 
@@ -53,14 +54,16 @@ str(GI$weekD)
 
 ```{r}
 # Construct a data set aggregated by week and age category
-GI_wa = ddply(GI, .(week, ageC), summarize, count = length(id))
+GI_wa <- GI %>%
+  group_by(week, ageC) %>%
+  summarize(count = nrow(.))
 
 # Construct a plot to look at weekly GI cases by age category
-ggplot(GI_wa, aes(x=week, y=count, color=ageC)) + geom_point()
+ggplot(GI_wa, aes(x = week, y = count, color = ageC)) + geom_point()
 
-ggplot(GI_wa, aes(x=week, y=count, shape=ageC)) + geom_point()
+ggplot(GI_wa, aes(x = week, y = count, shape = ageC)) + geom_point()
 
-ggplot(GI_wa, aes(x=week, y=count, shape=ageC, color=ageC)) + geom_point()
+ggplot(GI_wa, aes(x = week, y = count, shape = ageC, color = ageC)) + geom_point()
 ```
 
 
@@ -71,10 +74,14 @@ Construct a plot of weekly GI counts by zip3 and ageC.
 
 ```{r}
 # Construct data set 
-GI_za = ddply(GI, .(week, zip3, ageC), summarize, count=length(id))
+GI_za <- GI %>%
+  group_by(week, zip3, ageC) %>%
+  summarize(count = nrow(.))
 
 # Construct plot of weekly GI counts by zip3 and ageC
-ggplot(GI_za, aes(x=week, y=count)) + geom_point() + facet_grid(ageC~zip3)
+ggplot(GI_za, aes(x = week, y = count)) + 
+  geom_point() + 
+  facet_grid(ageC ~ zip3)
 ```
 
 
@@ -85,12 +92,15 @@ ggplot(GI_za, aes(x=week, y=count)) + geom_point() + facet_grid(ageC~zip3)
 Construct a plot for those in zipcode 206xx in 2008. 
 
 ```{r}
-# Subset the data to zipcode 206xx between Jan 1, 2008 and Dec 31, 2008
-zip206 = subset(GI, zip3==206 & date >= as.Date("2008-01-01") & date <= as.Date("2008-12-31"))
+# Subset the data to zipcode 206xx in 2008
+zip206_w <- GI %>%
+  filter(zip3 == 206, 
+         format(date, "%Y%") == "2008") %>%
+  group_by(week) %>% 
+  summarize(count = nrow(.))
 
-# Aggregate the date for each week in this time frame
-zip206_w = ddply(zip206, .(week), summarize, count = length(id))
 
 # Construct the plot of weekly GI counts in zipcode 206xx.
-ggplot(zip206_w, aes(x=week, y=count)) + geom_point()
+ggplot(zip206_w, aes(x=week, y=count)) + 
+  geom_point()
 ```

@@ -37,7 +37,9 @@ setwd(choose.dir())
 
 ## Start the workshop
 
-Now start the workshop to get your data files and scripts set up. Typically you would choose your working directory to be where you actually have your data and scripts.
+Now start the workshop to get your data files and scripts set up. 
+Typically you would choose your working directory to be where you actually have
+your data and scripts.
 
 ```{r, purl=FALSE}
 library('ISDSWorkshop')
@@ -51,7 +53,7 @@ Open the `advanced_graphics.R` script.
 Notice that the top of the script has all of the packages that you will use.
 
 ```{r}
-library('plyr')
+library('dplyr')
 library('ggplot2')
 library('gridExtra')
 ```
@@ -61,7 +63,8 @@ library('gridExtra')
 
 Typically, you will have a script that reads in the data, converts variables, and then performs statistical analyses.
 
-This time we will use the `mutate()` function from the [plyr](http://cran.r-project.org/web/packages/plyr/index.html) package. This function allows you to create new columns in a `data.frame`.
+This time we will use the `mutate()` function from the [dplyr](http://cran.r-project.org/web/packages/dplyr/index.html) package. 
+This function allows you to create new columns in a `data.frame`.
 
 ```{r}
 # Read in csv files
@@ -69,18 +72,19 @@ GI = read.csv('GI.csv')
 icd9df = read.csv("icd9.csv")
 
 # Add columns to the data.frame
-GI = mutate(GI,
-            date      = as.Date(date),
-            weekC     = cut(date, breaks="weeks"),
-            week      = as.numeric(weekC),
-            facility  = as.factor(facility),
-            icd9class = factor(cut(icd9, 
-                            breaks = icd9df$code_cutpoint, 
-                            labels = icd9df$classification[-nrow(icd9df)], 
-                            right  = TRUE)),
-            ageC      = cut(age, 
-                            breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
-            zip3      = trunc(zipcode/100))
+GI <- GI %>%
+  mutate(
+    date      = as.Date(date),
+    weekC     = cut(date, breaks="weeks"),
+    week      = as.numeric(weekC),
+    facility  = as.factor(facility),
+    icd9class = factor(cut(icd9, 
+                           breaks = icd9df$code_cutpoint, 
+                           labels = icd9df$classification[-nrow(icd9df)], 
+                           right  = TRUE)),
+    ageC      = cut(age, 
+                    breaks = c(-Inf, 5, 18, 45 ,60, Inf)),
+    zip3      = trunc(zipcode/100))
 ```
 
 
@@ -88,7 +92,11 @@ GI = mutate(GI,
 
 ## Reading other scripts
 
-If the script to read in the data is extensive, it may be better to separate your scripts into two different files: one for reading in the data and converting variables and another (or more) to perform statistical analyses. Then, in the second file, i.e. the one that does an analysis, you can `source()` the one that just reads in the data, e.g.
+If the script to read in the data is extensive, it may be better to separate
+your scripts into two different files: one for reading in the data and
+converting variables and another (or more) to perform statistical analyses.
+Then, in the second file, i.e. the one that does an analysis, you can `source()`
+the one that just reads in the data, e.g.
 
 ```{r, eval=FALSE, purl=FALSE}
 source("read_data.R") 
@@ -97,7 +105,8 @@ source("read_data.R")
 
 ## Check the data
 
-At this point, I typically check the data to make sure the `data.frame` is what I think it is. 
+At this point, I typically check the data to make sure the `data.frame` is what
+I think it is. 
 I usually do this in interactive mode, i.e. not in a script.
 
 ```{r}
@@ -109,7 +118,9 @@ summary(GI)
 
 ## Activity
 
-Create a new variable in the GI data set called `weekD` that is a `Date` object with each observation having the Monday of the week for that observation. Check that it is actually a date using the `str()` function.
+Create a new variable in the GI data set called `weekD` that is a `Date` object
+with each observation having the Monday of the week for that observation. Check
+that it is actually a date using the `str()` function.
 
 ```{r, eval=FALSE}
 # Create weekD variable in GI data set
@@ -133,7 +144,9 @@ Now to construct a graph, the workflow is
 Suppose we want to plot the number of weekly GI cases by facility. We need to aggregate the data by week and facility. 
 
 ```{r}
-GI_wf = ddply(GI, .(week, facility), summarize, count = length(id))
+GI_wf <- GI %>%
+  group_by(week, facility) %>%
+  summarize(count = nrow(.))
 ```
 
 In interactive mode, you should verify that this data set is correct, e.g. 
@@ -153,7 +166,7 @@ summary(GI_wf$facility)
 Now, we would like week on the x-axis and count on the y-axis. 
 
 ```{r}
-ggplot(GI_wf, aes(x=week, y=count)) + 
+ggplot(GI_wf, aes(x = week, y = count)) + 
   geom_point()
 ```
 
@@ -165,14 +178,14 @@ But, clearly we need to distinguish the facilities.
 Colors:
 
 ```{r}
-ggplot(GI_wf, aes(x=week, y=count, color=facility)) + 
+ggplot(GI_wf, aes(x = week, y = count, color = facility)) + 
   geom_point()
 ```
 
 Shapes:
 
 ```{r}
-ggplot(GI_wf, aes(x=week, y=count, shape=facility)) + 
+ggplot(GI_wf, aes(x = week, y = count, shape = facility)) + 
   geom_point()
 ```
 
@@ -225,15 +238,17 @@ When there are two variables (with not very many levels in each), `facet_grid()`
 Suppose we are interested in weekly GI counts by gender and age category. First, construct the data set
 
 ```{r}
-GI_sa = ddply(GI, .(week, gender, ageC), summarize, count = length(id))
+GI_sa <- GI %>%
+  group_by(week, gender, ageC) %>%
+  summarize(count = nrow(.))
 ```
 
 Next, construct the plot using `facet_grid(row~column)` syntax.
 
 ```{r}
-ggplot(GI_sa, aes(x=week, y=count)) + 
+ggplot(GI_sa, aes(x = week, y = count)) + 
   geom_point() + 
-  facet_grid(gender~ageC)
+  facet_grid(gender ~ ageC)
 ```
 
 ## Using faceting and colors/shapes
@@ -241,9 +256,9 @@ ggplot(GI_sa, aes(x=week, y=count)) +
 In addition, we could use faceting together with colors/shapes
 
 ```{r}
-ggplot(GI_sa, aes(x=week, y=count, shape=gender, color=gender)) + 
+ggplot(GI_sa, aes(x = week, y = count, shape = gender, color = gender)) + 
   geom_point() + 
-  facet_wrap(~ageC)
+  facet_wrap( ~ ageC)
 ```
 
 
@@ -282,8 +297,11 @@ For a categorical variable, you want to subset by
 Suppose we are only interested in counts specifically for infectious and parasitic diseases (IPD).
 
 ```{r}
-IPD = subset(GI, icd9class == "infectious and parasitic disease")
-IPD_w = ddply(IPD, .(week), summarize, count=length(id))
+IPD_w <- GI %>%
+  filter(icd9class == "infectious and parasitic disease") %>%
+  group_by(week) %>%
+  summarize(count = nrow(.))
+
 ggplot(IPD_w, aes(x=week, y=count)) + 
   geom_point()
 ```
@@ -301,24 +319,33 @@ conditions
 Say we want levels 1 and 3. 
 
 ```{r}
-IPDp = subset(GI, icd9class %in% levels(icd9class)[c(1,3)])
+IPDp <- GI %>%
+  filter(icd9class %in% levels(icd9class)[c(1,3)])
+
 summary(IPDp$icd9class)
 ```
 
 Now construct the graph
 
 ```{r}
-IPDp_w = ddply(IPDp, .(week, icd9class), summarize, count = length(id))
-ggplot(IPDp_w, aes(x=week, y=count)) + 
+IPDp_w <- IPDp %>%
+  group_by(week, icd9class) %>%
+  summarize(count = nrow(.))
+
+ggplot(IPDp_w, aes(x = week, y = count)) + 
   geom_point() + 
-  facet_wrap(~icd9class, scales="free")
+  facet_wrap(~ icd9class, scales = "free")
 ```
 
 ### Subsetting by not in a single category
 
 ```{r}
-nIPD = subset(GI, icd9class != "infectious and parasitic disease")
-nIPD_w = ddply(nIPD, .(week, icd9class), summarize, count = length(id))
+# Combine subsetting and summarizing
+nIPD_w <- GI %>%
+  filter(icd9class != "infectious and parasitic disease") %>%
+  group_by(week, icd9class) %>%
+  summarize(count = nrow(.))
+
 ggplot(nIPD_w, aes(x=week, y=count)) + 
   geom_point() + 
   facet_wrap(~icd9class, scales="free")
@@ -327,11 +354,14 @@ ggplot(nIPD_w, aes(x=week, y=count)) +
 ### Subsetting by not in a set of categories
 
 ```{r}
-nIPDp = subset(GI, !(icd9class %in% levels(icd9class)[c(1,3)]))
-nIPDp_w = ddply(nIPDp, .(week, icd9class), summarize, count = length(id))
-ggplot(nIPDp_w, aes(x=week, y=count)) + 
+nIPD_w <- GI %>%
+  filter(!(icd9class %in% levels(icd9class)[c(1,3)])) %>%
+  group_by(week, icd9class) %>%
+  summarize(count = nrow(.))
+
+ggplot(nIPDp_w, aes(x = week, y = count)) + 
   geom_point() + 
-  facet_wrap(~icd9class, scales="free")
+  facet_wrap(~ icd9class, scales = "free")
 ```
 
 
@@ -346,8 +376,11 @@ We may want to subset a continuous (numeric) variable by
 ### Subsetting larger than a number
 
 ```{r}
-Age60p = subset(GI, age > 60)
-Age60p_w = ddply(Age60p, .(week), summarize, count = length(id))
+Age60p_w <- GI %>%
+  filter(age > 60) %>%
+  group_by(week) %>%
+  summarize(count = nrow(.))
+
 ggplot(Age60p_w, aes(x=week, y=count)) + 
   geom_point()
 ```
@@ -355,8 +388,11 @@ ggplot(Age60p_w, aes(x=week, y=count)) +
 ### Subsetting less than or equal to a number 
 
 ```{r}
-Age_lte30 = subset(GI, age <= 30)
-Age_lte30_w = ddply(Age_lte30, .(week), summarize, count = length(id))
+Age_lte30_w <- GI %>%
+  filter(age <= 30) %>%
+  group_by(week) %>%
+  summarize(count = nrow(.))
+
 ggplot(Age_lte30_w, aes(x=week, y=count)) + 
   geom_point()
 ```
@@ -364,8 +400,11 @@ ggplot(Age_lte30_w, aes(x=week, y=count)) +
 ### Subsetting within a range
 
 ```{r}
-Age30to60 = subset(GI, age > 30 & age <= 60) # This includes those who are 60, but not those who are 30
-Age30to60_w = ddply(Age30to60, .(week), summarize, count = length(id))
+Age30to60_w <- GI %>%
+  filter(age > 30 age <= 60) %>% # This includes those who are 60, but not those who are 30
+  group_by(week) %>%
+  summarize(count = nrow(.))
+
 ggplot(Age30to60_w, aes(x=week, y=count)) + 
   geom_point()
 ```
@@ -383,17 +422,17 @@ two_dates = as.Date(c("2007-01-01", "2007-12-31"))
 ### Subsetting dates
 
 ```{r}
-early = subset(GI, date <  two_dates[1])
-late  = subset(GI, date >= two_dates[2])
-mid   = subset(GI, date >= two_dates[1] & date < two_dates[2])
+early <- GI %>% filter(date <  two_dates[1])
+late  <- GI %>% filter(date >= two_dates[1])
+mid   <- GI %>% filter(date >= two_dates[1], date < two_dates[2])
 ```
 
 Now make plots
 
 ```{r}
-early_w = ddply(early, .(week), summarize, count = length(id))
-late_w  = ddply(late,  .(week), summarize, count = length(id))
-mid_w   = ddply(mid,   .(week), summarize, count = length(id))
+early_w <- early %>% group_by(week) %>% summarize(count = nrow(.))
+late_w  <- late  %>% group_by(week) %>% summarize(count = nrow(.))
+mid_w   <- mid   %>% group_by(week) %>% summarize(count = nrow(.))
 
 g1 = ggplot(early_w, aes(x=week, y=count)) + geom_point()
 g2 = ggplot(late_w,  aes(x=week, y=count)) + geom_point()
@@ -443,15 +482,20 @@ Let's start with the following graph
 
 ```{r}
 GI$weekD = as.Date(GI$weekC) 
-GI_sum = ddply(GI, .(weekD, gender, ageC), summarize, count = length(id))
-ggplot(GI_sum, aes(x=weekD, y=count, color=gender)) + 
-  geom_point(size=3) + 
-  facet_grid(ageC~., scales="free_y")
+
+GI_sum <- GI %>%
+  group_by(weekD, gender, ageC) %>%
+  summarize(count = nrow(.))
+
+ggplot(GI_sum, aes(x = weekD, y = count, color = gender)) + 
+  geom_point(size = 3) + 
+  facet_grid(ageC ~ ., scales = "free_y")
 ```
 
 ## Change age category labels
 
-The easiest way to change some of the labels on the graph is to change the underlying data. Here we change the levels associated with the `ageC` variable. 
+The easiest way to change some of the labels on the graph is to change the 
+underlying data. Here we change the levels associated with the `ageC` variable. 
 
 ```{r}
 levels(GI_sum$ageC)
@@ -475,7 +519,7 @@ Intuitive colors can make a graph easier to read.
 
 
 ```{r}
-g = g + scale_color_manual(values=c("hotpink","blue"), name='Sex')
+g = g + scale_color_manual(values=c("hotpink","blue"), name='Gender')
 g
 ```
 
