@@ -8,9 +8,9 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library('ggplot2')
-library('plyr')
+library('dplyr')
 library('ISDSWorkshop')
 
 workshop(launch_index  = FALSE)
@@ -94,8 +94,9 @@ Construct a plot for those in zipcode 206xx in 2008.
 ```{r}
 # Subset the data to zipcode 206xx in 2008
 zip206_w <- GI %>%
-  filter(zip3 == 206, 
-         format(date, "%Y%") == "2008") %>%
+  mutate(year = as.numeric(format(date, "%Y"))) %>%
+  filter(zip3 == 206,
+         year == 2008) %>%
   group_by(week) %>% 
   summarize(count = n())
 

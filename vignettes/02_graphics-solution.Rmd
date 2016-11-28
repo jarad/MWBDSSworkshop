@@ -37,8 +37,10 @@ n[-3,]
 
 # <a name="factor"></a> Factor activity
 
-```{r, echo=FALSE}
+```{r, message=FALSE}
 library('ISDSWorkshop')
+library('dplyr')
+
 data(GI)
 write.csv(GI, file="GI.csv", row.names=FALSE)
 GI = read.csv("GI.csv")
@@ -96,5 +98,5 @@ Construct a bar chart for the zipcode at facility 37 using ggplot2
 
 ```{r}
 # Construct a bar chart for the zipcode at facility 37.
-ggplot(subset(GI, facility=37), aes(x=trunc(zipcode/100))) + geom_bar(binwidth=1)
+ggplot(subset(GI, facility=37), aes(x=trunc(zipcode/100))) + geom_bar()
 ```

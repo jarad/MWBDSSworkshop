@@ -8,11 +8,11 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library('ggplot2')
 library('maps')
-library('plyr')
-library('reshape2')
+library('dplyr')
+library('tidyr')
 library('xtable')
 library('ISDSWorkshop')
 

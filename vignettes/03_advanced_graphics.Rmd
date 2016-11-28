@@ -41,7 +41,7 @@ Now start the workshop to get your data files and scripts set up.
 Typically you would choose your working directory to be where you actually have
 your data and scripts.
 
-```{r, purl=FALSE}
+```{r, purl=FALSE, message=FALSE}
 library('ISDSWorkshop')
 workshop(launch_index  = FALSE)
 ```
@@ -52,7 +52,7 @@ Open the `advanced_graphics.R` script.
 
 Notice that the top of the script has all of the packages that you will use.
 
-```{r}
+```{r, message=FALSE}
 library('dplyr')
 library('ggplot2')
 library('gridExtra')

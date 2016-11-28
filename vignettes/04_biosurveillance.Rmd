@@ -14,7 +14,7 @@ vignette: >
 
 If you shut down R, you will need to change your working directory and run the following commands to load libraries,
 
-```{r}
+```{r, message=FALSE}
 library('ggplot2')
 library('dplyr')
 library('tidyr')
@@ -142,7 +142,7 @@ Map of the continental US
 library('maps')
 states = map_data("state")
 ggplot(states, aes(x = long, y = lat, group = group)) + 
-  geom_polygon()
+  geom_polygon(color="white")
 ```
 
 Map of the counties in the continental US
