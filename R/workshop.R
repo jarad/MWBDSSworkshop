@@ -1,21 +1,21 @@
-#'  A function that prepares the workshop.
-#' 
-#'  @param write_data logical or string. If TRUE, writes all data sets. If FALSE, write no data sets. If string, vector of data sets to be written.
-#'  @param write_scripts logical or string. If TRUE, writes all scripts. If FALSE, write no scripts. If string, vector of scripts to be written.
-#'  @param launch_index logical. If TRUE, launches the workshop html index.
-#'  @details By default, the function uses the \code{\link{data}} function to load data sets and 
-#'    then uses the \code{\link{write.csv}} function to write them to a file. 
-#'    It then launches the \code{\link{ISDSWorkshop}} html index 
-#'    using the \code{\link{vignette}} function. 
-#'  @seealso \code{\link{data}},\code{\link{GI}},\code{\link{write.csv}},\code{\link{ISDSWorkshop}}
-#'  @author Jarad Niemi <\url{http://jarad.me}>
-#'  @export
-#'  @examples
-#'  \dontrun{
-#'  workshop()
-#'  workshop(write_data = FALSE)
-#'  workshop(clean = FALSE) 
-#'  }
+#' A function that prepares the workshop.
+#'
+#' @param write_data logical or string. If TRUE, writes all data sets. If FALSE, write no data sets. If string, vector of data sets to be written.
+#' @param write_scripts logical or string. If TRUE, writes all scripts. If FALSE, write no scripts. If string, vector of scripts to be written.
+#' @param launch_index logical. If TRUE, launches the workshop html index.
+#' @details By default, the function uses the \code{\link{data}} function to load data sets and 
+#'  then uses the \code{\link{write.csv}} function to write them to a file. 
+#'  It then launches the \code{\link{ISDSWorkshop}} html index 
+#'  using the \code{\link{vignette}} function. 
+#' @seealso \code{\link{data}},\code{\link{GI}},\code{\link{write.csv}},\code{\link{ISDSWorkshop}}
+#' @author Jarad Niemi <\url{http://jarad.me}>
+#' @export
+#' @examples
+#' \dontrun{
+#' workshop()
+#' workshop(write_data = FALSE)
+#' workshop(clean = FALSE) 
+#' }
 workshop = function(write_data    = TRUE, 
                     write_scripts = TRUE, 
                     launch_index  = TRUE) {
@@ -44,10 +44,10 @@ workshop = function(write_data    = TRUE,
   
   # Write scripts
   if (write_scripts) 
-    write_scripts = c("intro.R",
-                      "graphics.R",
-                      "advanced_graphics.R",
-                      "biosurveillance.R")
+    write_scripts = c("01_intro.R",
+                      "02_graphics.R",
+                      "03_advanced_graphics.R",
+                      "04_advanced_R.R")
   
   for (script in write_scripts) 
     file.copy(from = system.file("doc", script, package="ISDSWorkshop"),
