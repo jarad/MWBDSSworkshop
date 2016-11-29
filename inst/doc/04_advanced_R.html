@@ -203,7 +203,8 @@ hr {
 <body>
 <h1>Advanced R</h1>
 
-<p>If you shut down R, you will need to change your working directory and run the following commands to load libraries,</p>
+<p>If you shut down R, you will need to change your working directory and run the 
+following commands to load libraries,</p>
 
 <pre><code class="r">library(&#39;ggplot2&#39;)
 library(&#39;dplyr&#39;)
@@ -213,9 +214,9 @@ library(&#39;ISDSWorkshop&#39;)
 workshop(launch_index=FALSE)
 </code></pre>
 
-<p>Read in the data files and create additional columns. </p>
+<p>Read in the data files and create additional variables </p>
 
-<pre><code class="r"># Read csv files and create additional columns
+<pre><code class="r"># Read csv files and create additional variables
 icd9df = read.csv(&quot;icd9.csv&quot;)
 GI     = read.csv(&quot;GI.csv&quot;) %&gt;%
   mutate(
@@ -235,7 +236,8 @@ GI     = read.csv(&quot;GI.csv&quot;) %&gt;%
 
 <h2><a name="exporting_tables"></a> Exporting tables</h2>
 
-<p>There are many ways to export tables (for use in Word). Here I will cover two basic approachess that are simple and work well. </p>
+<p>There are many ways to export tables (for use in Word). 
+Here I will cover two basic approachess that are simple and work well. </p>
 
 <ul>
 <li>cut-and-paste</li>
@@ -271,7 +273,9 @@ ga_w &lt;- ga_l %&gt;%
 ## 2   Male       2163     1860      3766      1543        1259
 </code></pre>
 
-<p>Cut-and-pasting this table is done in ASCII format. This looks good in a <strong>plain text</strong> document, e.g. Notepad, TextEdit, and some email, but will not look good in other formats, e.g. docx.</p>
+<p>Cut-and-pasting this table is done in ASCII format. 
+This looks good in a <strong>plain text</strong> document, e.g. Notepad, TextEdit, and some 
+email, but will not look good in other formats, e.g. docx.</p>
 
 <h3>Create HTML table</h3>
 
@@ -295,7 +299,7 @@ tab = xtable(ga_w,
 </code></pre>
 
 <pre><code>## &lt;!-- html table generated in R 3.2.5 by xtable 1.8-2 package --&gt;
-## &lt;!-- Mon Nov 28 21:15:36 2016 --&gt;
+## &lt;!-- Tue Nov 29 09:11:23 2016 --&gt;
 ## &lt;table border=1&gt;
 ## &lt;caption align=&quot;bottom&quot;&gt; Total GI cases by Sex and Age Category &lt;/caption&gt;
 ## &lt;tr&gt; &lt;th&gt; gender &lt;/th&gt; &lt;th&gt; (-Inf,5] &lt;/th&gt; &lt;th&gt; (5,18] &lt;/th&gt; &lt;th&gt; (18,45] &lt;/th&gt; &lt;th&gt; (45,60] &lt;/th&gt; &lt;th&gt; (60, Inf] &lt;/th&gt;  &lt;/tr&gt;
@@ -312,7 +316,7 @@ tab = xtable(ga_w,
 
 <!-- html table generated in R 3.2.5 by xtable 1.8-2 package -->
 
-<!-- Mon Nov 28 21:15:36 2016 -->
+<!-- Tue Nov 29 09:11:23 2016 -->
 
 <table border=1>
 <caption align="bottom"> Total GI cases by Sex and Age Category </caption>
@@ -346,7 +350,8 @@ tab = xtable(ga_w,
 # Copy-and-paste table into Word
 </code></pre>
 
-<p>When you have completed the activity, compare your results to the <a href="04_biosurveillance-solution.html#exporting_tables">solutions</a>.</p>
+<p>When you have completed the activity, compare your results to the 
+<a href="04_advanced_R-solution.html#exporting_tables">solutions</a>.</p>
 
 <h2><a name="maps"></a> Maps</h2>
 
@@ -405,7 +410,9 @@ dim(flu_w)
 
 <h3>Merge fluTrends data with map_data</h3>
 
-<p>The region names in <code>map_data</code> are lower case, so use <code>tolower()</code> to convert all the region names in flu_l to lowercase. Then the <code>map_data</code> and fluTrends data are merged using <code>merge()</code>. </p>
+<p>The region names in <code>map_data</code> are lower case, 
+so use <code>tolower()</code> to convert all the region names in flu_l to lowercase. 
+Then the <code>map_data</code> and fluTrends data are merged using <code>merge()</code>. </p>
 
 <pre><code class="r">head(unique(states$region))
 </code></pre>
@@ -455,16 +462,21 @@ ggplot(states_merged %&gt;% filter(Date == mx_date),
 
 <p>Modify the code to determine what elements of the map are affected.</p>
 
-<p>Advanced: Download the data directly from <a href="http://www.google.org/flutrends/about/data/flu/historic/us-historic-v3.txt">http://www.google.org/flutrends/about/data/flu/historic/us-historic-v3.txt</a> using read.csv&#39; and then construct a map of the most recent Google Flu Trends data. </p>
+<p>Advanced: Download the data directly from 
+<a href="http://www.google.org/flutrends/about/data/flu/historic/us-historic-v3.txt">http://www.google.org/flutrends/about/data/flu/historic/us-historic-v3.txt</a> 
+using read.csv&#39; and then construct a map of the most recent Google Flu Trends 
+data. </p>
 
 <pre><code class="r"># Construct Google Flu Trends map
 </code></pre>
 
-<p>When you have completed the activity, compare your results to the <a href="04_biosurveillance-solution.html#maps">solutions</a>.</p>
+<p>When you have completed the activity, compare your results to the 
+<a href="04_advanced_R-solution.html#maps">solutions</a>.</p>
 
 <h2><a name="Packages"></a> Packages</h2>
 
-<p>A package provides additional functionality besides what base installation of R provides. You have already used a number of additional packages:</p>
+<p>A package provides additional functionality besides what base installation of R 
+provides. You have already used a number of additional packages:</p>
 
 <ul>
 <li>ggplot2</li>
@@ -491,7 +503,9 @@ These packages can be installed using the <code>install.packages()</code> functi
 
 <h3>Github</h3>
 
-<p>To install a package from github, you can use the <code>install_github()</code> function from the <code>devtools</code> package. For example,</p>
+<p>To install a package from github, 
+you can use the <code>install_github()</code> function from the <code>devtools</code> package. 
+For example,</p>
 
 <pre><code class="r"># install.packages(&quot;devtools&quot;)
 library(&#39;devtools&#39;)
@@ -500,7 +514,9 @@ install_github(&#39;nandadorea/vetsyn&#39;)
 
 <h3>Bioconductor</h3>
 
-<p>Bioconductor provides tools for high-throughput genomic data. There are over 900 packages available from bioconductor. To install bioconductor, use </p>
+<p>Bioconductor provides tools for high-throughput genomic data. 
+There are over 1,296 packages available from bioconductor. 
+To install bioconductor, use </p>
 
 <pre><code class="r">source(&quot;http://bioconductor.org/biocLite.R&quot;)
 biocLite()
@@ -511,13 +527,20 @@ biocLite()
 <pre><code class="r">biocLite(&quot;edgeR&quot;)
 </code></pre>
 
-<p>The bioconductor repository may be useful in the future for public health biosurveillance.</p>
+<p>The bioconductor repository may be useful in the future for public health 
+biosurveillance.</p>
 
 <h3>Source</h3>
 
-<p>All packages can be installed from their source. If a package is not available in a repository, then this is the only way to install the package. To install from source download the source file (.tar.gz) and then use the <code>install.packages()</code> function with arguments <code>repos=NULL</code> and <code>type=&quot;source&quot;</code>. For example, from a source version of this workshop, you would use the following command:</p>
+<p>All packages can be installed from their source. 
+If a package is not available in a repository, 
+then this is the only way to install the package. 
+To install from source download the source file (.tar.gz) and then use the 
+<code>install.packages()</code> function with arguments <code>repos=NULL</code> and <code>type=&quot;source&quot;</code>. 
+For example, from a source version of this workshop, 
+you would use the following command:</p>
 
-<pre><code class="r">install.packages(&quot;ISDSWorkshop_0.2.tar.gz&quot;, 
+<pre><code class="r">install.packages(&quot;ISDSWorkshop_0.3.tar.gz&quot;, 
                  repos = NULL, 
                  type  = &quot;source&quot;)
 </code></pre>
@@ -536,7 +559,8 @@ biocLite()
 
 <h3>SpatialEpi - Kulldorff example</h3>
 
-<p>The <code>SpatialEpi</code> package implements the Kulldorff cluster detection method in the <code>kulldorff()</code> function. </p>
+<p>The <code>SpatialEpi</code> package implements the Kulldorff cluster detection method in 
+the <code>kulldorff()</code> function. </p>
 
 <p>Setting up the analysis (taken directly from the example)</p>
 
@@ -585,7 +609,7 @@ binomial &lt;- kulldorff(geo, cases, population, NULL, pop.upper.bound, n.simula
   alpha.level, plot)
 </code></pre>
 
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAAvVBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZpAAZrY6AAA6ADo6AGY6OgA6OmY6OpA6ZmY6ZrY6kJA6kNtmAABmADpmAGZmOgBmOjpmOpBmZjpmZmZmkJBmtrZmtv+QOgCQOjqQOmaQZgCQkDqQkGaQkNuQtpCQ27aQ29uQ2/+2ZgC2Zjq2kJC2tma2tra225C2/7a2///bkDrbkGbbtrbb25Db/7bb/9vb////AAD/tmb/tpD/trb/25D//7b//9v////P1UQ7AAAACXBIWXMAAAsSAAALEgHS3X78AAAPm0lEQVR4nO2dC3vbthlG6ayu1WzeKiXtmk3ybumkXcOtSapOl///s4YPACmKoiTTFSDa7znPk0giCZDG4YcLr8UWJCmuvQFwHRAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4UQYmfjMrirH7LIvi9nPXAotpe8p6UoQ0ramvPhwuVhTT9qw6Q5u8mbVShQUOMutgNSpu5v6ze8ON/ezXk+NLpmdw4m9+6YrD/HeWyqJoi196n8Vda/Ix8e1dZD/DDvGHa+ymWg7xT8KJ/84Vznrya19+ZTDlCuwfRWEBGRSXIXRDAlugtGizXcB9WBbFzfdefLkzHfaEpcvFf3MBWme4SxFW5Pc8vxW3n/wC62Zm1cbELQ5TfUbeYy0+bs6y+HLmli5ti+vs/fK/N/FxqfwMT/z70dQVx++s/BYxmH2xekP+56IRuqGcN7NpDOnbz8HBR3O1aFQGsQpwgWnf4sKfZnW2PkVckWVyIL69MWGDF40t2xNfbU6skYp6P6u30b5US+Uv6eGJ/34y3pav/uXKbzVysbCe3Mx9WC8LvytMQ9FWteZyr+4O7bRJsW91+mrW1gJ0GmbFwl74QKxS+BWFNQbxYY17me02Zmuaq1V0VfWWzuoYV71M66T2ZTVy2ZdFtYuc70FcnuGJny9cnN3+MLJgsbByqmzqTkOMoeCzKd7Cx+TZnFDmMX2Y2RTvI80mBPFVirA7LWyNbfEdG+NXX63iUHzYHFsiZB13J1tyGfY0WzIsla2AawYovnz178l4tS++qWFP/K6qt1b7vPhY1YelY6D2FV/N2p4SX21OEG+1e5f4aqn8JT1A8avRO/tvr6pvatjrN7uAiZ270n2xKnSnsaOqrzt3xiL6aoqvq3o3vSy6q/qG+ONVfbU5++LbVX21VOZi3g5SvHMZG+Fdf2onvu7cNTrPfqFl0Y74VueuGs4FjTHSFqFXvxMfs140vrQ7dw3xu1XsxIfVVJvTEt/q3FVL5S/pAYp3ZXgXA2c3gopl7Yo1Wqmjvj6A46aOqzZ4uzcCqxfbHcAxP7acZfipWdXH8ZYt/vtqjR9bw7mG+HoVbfHV5rSq+sZw7uu4J4/LRx4quCgDEw+5QLwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URD/XPjxstkh/rmQXXy8NeQat/lAg9zi7UZUY3nN53ZAfvHrtx/2PuFKEPGiZG/j422mtPFXhl69KIgXheGcKHTuRBnAcK5+ZN9lN+ViVA++PHzu7Xb1+qDiKscdEyO7HKr932Vx346AZagPN7PqGZWlryHL6tkrXWvtz4AifqDiS7el68n4keKdx37i3Z5ymGd55xeOhbRL5icsL9JODmg410pb9OVSf0Nre33VZDYW73zALRsbb5P9U7X83/XFt3OTVIm33sx0u3n4c3hole067+LjkoovvpnG+Z2HslwWu8mbh+rhtOs37tvi5v1zjPjHp+2b1RNX/WMnu/kh6ixCF7efo5Cyeri13x/Gfhn7uJnb3CjeLLmvm5k9c+suLOpz8IsW0zg/BvSyrsgNt4LV/R+L6pF61Zy43mdZ1T8+bSbx51iGwnZ2TNDC+6qJO4KbZh8uNK3FbnhxUy1e7Z+liznYoqGq92HdruvDYw5Xo2ls/1dfhRy21aqfp3hXwd2Vj6rqL77qJxHEm6i/zb3/6hUChlNgFqJx92GxX3tZ+AckNsSHHOowX4RiOBDvFVuGjZ3Mlq/6Rc9SvJWB1ViHndmBim+08dMqUOue6amIX098c9+KeJdDjPg4P4rfr+qtXvjtgfjFuF7rz/+7rjGcs7+0o0szTPHb0j950rpmvqE26U3xR9t4+3C19J74u+2ujY/zD0YLllncS0J02ITNHz7sOnnPUvyzi/gQjH4c/87X8aGCDoW/36v/8mEe2wL/PFrXoLnO+574kIMboVuvPsw/DIEyPB015OsHd3HCm+cs3opl/Jza+B74GD7coc/Q0cTngF79ZbDHCPs+X1+P/feUy4B4URAvCuJFQfzTONOzdl3yOOSL3+oJF+mSXwDEP43T/uxAT3nX+FZPuMyptQuA+DOs3/6pekNVOCobTqrFg7WNgfx+omqkH79VEy50au0CIP4M9gKYpRdrh2FW9x/DSbWG+MU4RvfusOvuQHv81piA+DNpByN+Wh0sdUP0MEp38bsTbz7bR9+qw671t90ExJ9LOxTx/uKHqb02bHX/6aE6ZtsQb6fLWy/yJeJ/RtoBiY8Rv3l4f/85nlRriK+jfVfVH23jEX8+7VDET+7qs3H+RY7hpFqs4+3UXTw912QzG9e9+nHo1VcTEH8u7VDEv/mursj9WdRwUi2eNfv6re/VH7yyPQzbY5+fcXyvtIMR35b6MkD8GRD/KF6e+JcK4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIFyW7eHsnb1F0vVMZ8TnJLd7ep220X9F3mBbxScktvnohZ/s1vIdpEZ8UIl6U7G28f/kybfzVoVcvCuJFYTgnCp07UQYwnCsqembVd9XQhIgXheGcKPTqRUG8KFcYzk03s6I4bOIRn5VrdO4Wrn+3uqdzd1WuMJzbPMw5O3d1slf1LtyXYzecuzuXFvFJyd+5W/jh3KF3xGeFXr0oiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBclifj1pOPNI49Me+xn3+RwmkQRvyyKm/kT03b/7JscTpOuqrfXCk6fmLbjZ9/kcJpE4lcji/iOl8s9Im33z77J4TSJ2viON4g+Mu2xn32Tw2no1YuSRvzSte5l394d4nOSpqp/Y85Xr/u08IjPSxLx9spoF/Y9G3rE5yRNVb+eFEXxql/AIz4rdO5EQbwoqXr1Rf+6HvE5SXQAp9ex2r20x372TQ6nSSO+16Ha/bTHfvZNDqdJU9Uvxk9Pe+Rn3+RwmkRVPW380KFXL0p28avRsdoA8TlJI34zK24/vuk6SROO5nYez0V8ThIdqx+v7j93HquvOvwdHX/E5yTVcM6J7xzUEfEDIWHEl51n5473+BGfk2RtfFH0vfwK8TlhOCcKwzlRch+5o3M3EBJGfNl1wL5jOFdUHM+q76rhLAnFM5wbMgnFLztP0jCcGwYp2/ieV2MgPicM50S5jvjOey0Qn5OUVX1XS35iFuJzkibiy7vqvwPWE6eciL86CS+2PHbJ5Xpy+wPir02qs3PbYxFvrEZdIz3E5yTh2bm+D0BCfE4YzomCeFFyX2x5Pu2Rn32Tw2lyX2x5Nu2xn32Tw2lyX2x5Nu2xn32Tw2myX2x5Lu2xn32Tw2m42FIUevWicH+8KGna+Ie+T67epT32s29yOA33x4tCGy8K4kVJIP5pXTvE5yWR+NV9/wfWIz4niBcF8aKkEH/8QtqzaY//7JscTkOvXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXpTs4lejY2+vQHxOcovfzKb+c3n4rmnE5yS3+OqldB0vp0N8Toh4UbK38cdfOIz4nNCrFwXxoryg4Vxfeub/wtDt3CH+kjxlOHckBBGfFCJeFN3hHOIvyTPq1SP+kiD+uXCN4dzNfAjH6hF/SR7VudvMxoi/NtcZzi3uEH9lrjScK3/xGvFX5QrDubF9lIfjOcTnhF69KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXJbv41agwXn04lxbxScktfjOb+s/l7eczaZOL70vP/AdObvHrtx/2PrcNA62sICU/nl3isuJPRDzkJHsbv5743amjjYecDKhXDzlBvCiIFwXxoiBeFMSLgnhREC8K4kVBvCiIF2W44lOfnhIn99m5q2RF/snzR7xo/ogXzR/xovkjXjR/xIvmj3jR/DmAIwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRbmU+PWkSHkf9er1h4TrsId+TBPmvww3GycsI38ze6/8LyTeVlzeXSavDpZWcMnWsX4z366+mifL3/Zal3HKMirdjtsv/wuJt+dl+KhMwuLmvcs72TqWVlqLadK/wWWcMP/Vr76Z9iyfC4lf3X/2gZMK+4OSrsNlnDR/F4rp8t88/NVFe7/8LyTeHpSSWnzKdWxm45T5r0Y384T5l2Or5vvlT8Qb68k48d+QskZxGW+uFfFp2/ggPt06ViN7wFPifkq6PkTpr6ofX6WNt6oyYa/e/0HJ1hG8p8s/1sEpy8givl/+jOOriJmm+xvcClwb/yLH8fDcQLwoiBcF8aIgXhTEi4J4URAvCuJFQbwoiBcF8aIgXhTEi4J4URAvCuKblOEde9vl9LrbkQFd8R2Xp5Xj6tti3J730kD8juXYLl8KV62VLz3mtcWvJ9VNbV98O988zLfbn+b/8/uDXav8otEWvwi3UdjHzTxWAT/5K9NT3iQwCKTF25XozrB9uHAPr022i5S3u3cpv1ikxfur9R/8LS61+NVv/mlzEf9iORLxi+l/Q+Aj/oXS3ca76P9p/ve0NwIOAm3xu179lw+hV++G8n5ER69eBH8fduOoDeN4ATazcG/b9j919b7+yxW3JwuIb1D36Jav0t3xPRAQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRUG8KIgXBfGiIF4UxIuCeFEQLwriRfk/yTE5fNIOOXkAAAAASUVORK5CYII=" alt="plot of chunk unnamed-chunk-26"/></p>
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-26"/></p>
 
 <pre><code class="r">cluster &lt;- binomial$most.likely.cluster$location.IDs.included
 
@@ -605,11 +629,14 @@ If you are successful, look at its help file.</p>
 <pre><code class="r"># Install the surveillance package
 </code></pre>
 
-<p>When you have completed the activity, compare your results to the <a href="04_biosurveillance-solution.html#packages">solutions</a>.</p>
+<p>When you have completed the activity, compare your results to the 
+<a href="04_advanced_R-solution.html#packages">solutions</a>.</p>
 
 <h2><a name="functions"></a> Functions</h2>
 
-<p>Packages are typically a collection of functions. But you can write your own. For example,</p>
+<p>Packages are typically a collection of functions. 
+But you can write your own. 
+For example,</p>
 
 <pre><code class="r">add = function(a,b) {
   return(a+b)
@@ -657,7 +684,10 @@ ggplot(GI_w, aes(x = weekD, y = count, color = alert)) +
 
 <h2><a name="batch"></a> R in batch</h2>
 
-<p>For routine analysis, it can be helpful to run R in batch mode rather than interactively. To do this, create a script and save the script with a .R extension, e.g. <code>script.R</code>:</p>
+<p>For routine analysis, 
+it can be helpful to run R in batch mode rather than interactively. 
+To do this, create a script and save the script with a .R extension, 
+e.g. <code>script.R</code>:</p>
 
 <pre><code class="r"># Read in the data perhaps as a csv file
 
@@ -673,18 +703,27 @@ ggplot(GI_w, aes(x = weekD, y = count, color = alert)) +
 <pre><code>Rscript script.R
 </code></pre>
 
-<p>Now each week you can update the csv file and then just run the script which will create all new tables and figures. </p>
+<p>Or, from within R run</p>
+
+<pre><code class="r">source(&quot;script.R&quot;)
+</code></pre>
+
+<p>Now each week you can update the csv file and then just run the script which 
+will create all new tables and figures. </p>
 
 <h2><a name="shiny"></a> Shiny apps</h2>
 
 <p>R can be used to create HTML applications through the <code>shiny</code> package. 
-The code is written entirely in R, although you can use cascading style sheets (CSS) if you want to update how it looks. 
-<a href="https://michaud.shinyapps.io/CDCPlot/">Here is an example</a> that allows visualization of CDC data.</p>
+The code is written entirely in R, 
+although you can use cascading style sheets (CSS) if you want to update how it 
+looks. 
+<a href="https://michaud.shinyapps.io/CDCPlot/">Here is an example</a> that allows 
+visualization of CDC data.</p>
 
 <p>These apps can also be run locally, e.g.</p>
 
 <pre><code class="r">install.packages(&#39;shiny&#39;)
-library(shiny)
+library(&#39;shiny&#39;)
 runGitHub(&#39;NLMichaud/WeeklyCDCPlot&#39;)
 </code></pre>
 

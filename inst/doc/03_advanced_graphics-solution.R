@@ -3,7 +3,7 @@ library('ggplot2')
 library('dplyr')
 library('ISDSWorkshop')
 
-workshop(launch_index  = FALSE)
+workshop(launch_index  = FALSE) # to make sure scripts and csv files are available
 
 ## ---- echo=FALSE---------------------------------------------------------
 # Read in csv files
@@ -56,7 +56,7 @@ ggplot(GI_za, aes(x = week, y = count)) +
   facet_grid(ageC ~ zip3)
 
 ## ------------------------------------------------------------------------
-# Subset the data to zipcode 206xx in 2008
+# Filter the data to zipcode 206xx in 2008
 zip206_w <- GI %>%
   mutate(year = as.numeric(format(date, "%Y"))) %>%
   filter(zip3 == 206,
@@ -66,6 +66,6 @@ zip206_w <- GI %>%
 
 
 # Construct the plot of weekly GI counts in zipcode 206xx.
-ggplot(zip206_w, aes(x=week, y=count)) + 
+ggplot(zip206_w, aes(x = week, y = count)) + 
   geom_point()
 

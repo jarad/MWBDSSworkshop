@@ -7,7 +7,7 @@ library('ISDSWorkshop')
 workshop(launch_index=FALSE)
 
 ## ------------------------------------------------------------------------
-# Read csv files and create additional columns
+# Read csv files and create additional variables
 icd9df = read.csv("icd9.csv")
 GI     = read.csv("GI.csv") %>%
   mutate(
@@ -135,7 +135,7 @@ ggplot(states_merged,
 #  biocLite("edgeR")
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  install.packages("ISDSWorkshop_0.2.tar.gz",
+#  install.packages("ISDSWorkshop_0.3.tar.gz",
 #                   repos = NULL,
 #                   type  = "source")
 
@@ -224,7 +224,10 @@ ggplot(GI_w, aes(x = weekD, y = count, color = alert)) +
 #  # Run some outbreak detection algorithms and produce figures
 
 ## ---- eval=FALSE---------------------------------------------------------
+#  source("script.R")
+
+## ---- eval=FALSE---------------------------------------------------------
 #  install.packages('shiny')
-#  library(shiny)
+#  library('shiny')
 #  runGitHub('NLMichaud/WeeklyCDCPlot')
 

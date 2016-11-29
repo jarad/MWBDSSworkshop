@@ -23,7 +23,7 @@ library('ISDSWorkshop')
 library('dplyr')
 
 data(GI)
-write.csv(GI, file="GI.csv", row.names=FALSE)
+write.csv(GI, file="GI.csv", row.names=FALSE) # In case the file isn't already there
 GI = read.csv("GI.csv")
 GI$ageC = cut(GI$age, c(-Inf, 5, 18, 45 ,60, Inf)) 
 
@@ -54,12 +54,12 @@ library('ggplot2')
 
 ## ------------------------------------------------------------------------
 # Construct a histogram for age at facility 37.
-ggplot(subset(GI, facility==37), aes(x=age)) + geom_histogram(binwidth=1)
+ggplot(GI %>% filter(facility == 37), aes(x = age)) + geom_histogram(binwidth = 1)
 
 # Construct a boxplot for age at facility 37. 
-ggplot(subset(GI, facility==37), aes(x=1, y=age)) + geom_boxplot()
+ggplot(GI %>% filter(facility == 37), aes(x = 1, y = age)) + geom_boxplot()
 
 ## ------------------------------------------------------------------------
 # Construct a bar chart for the zipcode at facility 37.
-ggplot(subset(GI, facility=37), aes(x=trunc(zipcode/100))) + geom_bar()
+ggplot(GI %>% filter(facility == 37), aes(x = trunc(zipcode/100))) + geom_bar()
 

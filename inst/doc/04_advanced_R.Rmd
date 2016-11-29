@@ -2,19 +2,17 @@
 title: "Advanced Biosurveillance"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
-output: 
-  html_document:
-    toc: true
-  pdf_document:
-    toc: true
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Advanced Biosurveillance}
   %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 # Advanced R
 
-If you shut down R, you will need to change your working directory and run the following commands to load libraries,
+If you shut down R, you will need to change your working directory and run the 
+following commands to load libraries,
 
 ```{r, message=FALSE}
 library('ggplot2')
@@ -25,10 +23,10 @@ library('ISDSWorkshop')
 workshop(launch_index=FALSE)
 ```
 
-Read in the data files and create additional columns. 
+Read in the data files and create additional variables 
 
 ```{r}
-# Read csv files and create additional columns
+# Read csv files and create additional variables
 icd9df = read.csv("icd9.csv")
 GI     = read.csv("GI.csv") %>%
   mutate(
@@ -49,7 +47,8 @@ GI     = read.csv("GI.csv") %>%
 
 ## <a name="exporting_tables"></a> Exporting tables
 
-There are many ways to export tables (for use in Word). Here I will cover two basic approachess that are simple and work well. 
+There are many ways to export tables (for use in Word). 
+Here I will cover two basic approachess that are simple and work well. 
 
 - cut-and-paste
 - create HTML table and cut-and-paste to Word
@@ -73,7 +72,9 @@ ga_w <- ga_l %>%
   print(row.names = FALSE)
 ```
 
-Cut-and-pasting this table is done in ASCII format. This looks good in a **plain text** document, e.g. Notepad, TextEdit, and some email, but will not look good in other formats, e.g. docx.
+Cut-and-pasting this table is done in ASCII format. 
+This looks good in a **plain text** document, e.g. Notepad, TextEdit, and some 
+email, but will not look good in other formats, e.g. docx.
 
 
 ### Create HTML table
@@ -132,7 +133,8 @@ Create a Word table for the number of cases by facility and age category.
 # Copy-and-paste table into Word
 ```
 
-When you have completed the activity, compare your results to the [solutions](04_biosurveillance-solution.html#exporting_tables).
+When you have completed the activity, compare your results to the 
+[solutions](04_advanced_R-solution.html#exporting_tables).
 
 
 ## <a name="maps"></a> Maps
@@ -186,7 +188,9 @@ flu_l <- flu_w %>%
 
 ### Merge fluTrends data with map_data
 
-The region names in `map_data` are lower case, so use `tolower()` to convert all the region names in flu_l to lowercase. Then the `map_data` and fluTrends data are merged using `merge()`. 
+The region names in `map_data` are lower case, 
+so use `tolower()` to convert all the region names in flu_l to lowercase. 
+Then the `map_data` and fluTrends data are merged using `merge()`. 
 
 ```{r}
 head(unique(states$region))
@@ -230,19 +234,24 @@ ggplot(states_merged,
 
 Modify the code to determine what elements of the map are affected.
 
-Advanced: Download the data directly from <http://www.google.org/flutrends/about/data/flu/historic/us-historic-v3.txt> using `read.csv' and then construct a map of the most recent Google Flu Trends data. 
+Advanced: Download the data directly from 
+<http://www.google.org/flutrends/about/data/flu/historic/us-historic-v3.txt> 
+using `read.csv' and then construct a map of the most recent Google Flu Trends 
+data. 
 
 ```{r, eval=FALSE}
 # Construct Google Flu Trends map
 ```
 
-When you have completed the activity, compare your results to the [solutions](04_biosurveillance-solution.html#maps).
+When you have completed the activity, compare your results to the 
+[solutions](04_advanced_R-solution.html#maps).
 
 
 
 ## <a name="Packages"></a> Packages
 
-A package provides additional functionality besides what base installation of R provides. You have already used a number of additional packages:
+A package provides additional functionality besides what base installation of R 
+provides. You have already used a number of additional packages:
 
 - ggplot2
 - ISDSWorkshop
@@ -267,7 +276,9 @@ For many reasons, packages may not be on CRAN but may be available from other so
 
 ### Github
 
-To install a package from github, you can use the `install_github()` function from the `devtools` package. For example,
+To install a package from github, 
+you can use the `install_github()` function from the `devtools` package. 
+For example,
 
 ```{r, eval=FALSE}
 # install.packages("devtools")
@@ -278,8 +289,9 @@ install_github('nandadorea/vetsyn')
 
 ### Bioconductor 
 
-Bioconductor provides tools for high-throughput genomic data. There are over 900 packages available from bioconductor. To install bioconductor, use 
-
+Bioconductor provides tools for high-throughput genomic data. 
+There are over 1,296 packages available from bioconductor. 
+To install bioconductor, use 
 ```{r, eval=FALSE}
 source("http://bioconductor.org/biocLite.R")
 biocLite()
@@ -291,15 +303,22 @@ Then to install a package from bioconductor use
 biocLite("edgeR")
 ```
 
-The bioconductor repository may be useful in the future for public health biosurveillance.
+The bioconductor repository may be useful in the future for public health 
+biosurveillance.
 
 
 ### Source
 
-All packages can be installed from their source. If a package is not available in a repository, then this is the only way to install the package. To install from source download the source file (.tar.gz) and then use the `install.packages()` function with arguments `repos=NULL` and `type="source"`. For example, from a source version of this workshop, you would use the following command:
+All packages can be installed from their source. 
+If a package is not available in a repository, 
+then this is the only way to install the package. 
+To install from source download the source file (.tar.gz) and then use the 
+`install.packages()` function with arguments `repos=NULL` and `type="source"`. 
+For example, from a source version of this workshop, 
+you would use the following command:
 
 ```{r, eval=FALSE}
-install.packages("ISDSWorkshop_0.2.tar.gz", 
+install.packages("ISDSWorkshop_0.3.tar.gz", 
                  repos = NULL, 
                  type  = "source")
 ```
@@ -319,7 +338,8 @@ Some [packages for performing surveillance](http://www.ij-healthgeographics.com/
 
 ### SpatialEpi - Kulldorff example
 
-The `SpatialEpi` package implements the Kulldorff cluster detection method in the `kulldorff()` function. 
+The `SpatialEpi` package implements the Kulldorff cluster detection method in 
+the `kulldorff()` function. 
 
 Setting up the analysis (taken directly from the example)
 ```{r}
@@ -385,7 +405,8 @@ If you are successful, look at its help file.
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](04_biosurveillance-solution.html#packages).
+When you have completed the activity, compare your results to the 
+[solutions](04_advanced_R-solution.html#packages).
 
 
 
@@ -393,7 +414,9 @@ When you have completed the activity, compare your results to the [solutions](04
 
 ## <a name="functions"></a> Functions
 
-Packages are typically a collection of functions. But you can write your own. For example,
+Packages are typically a collection of functions. 
+But you can write your own. 
+For example,
 
 ```{r}
 add = function(a,b) {
@@ -441,7 +464,10 @@ ggplot(GI_w, aes(x = weekD, y = count, color = alert)) +
 
 ## <a name="batch"></a> R in batch
 
-For routine analysis, it can be helpful to run R in batch mode rather than interactively. To do this, create a script and save the script with a .R extension, e.g. `script.R`:
+For routine analysis, 
+it can be helpful to run R in batch mode rather than interactively. 
+To do this, create a script and save the script with a .R extension, 
+e.g. `script.R`:
 
 ```{r, eval=FALSE}
 # Read in the data perhaps as a csv file
@@ -457,19 +483,29 @@ Now, from the command line run
 
     Rscript script.R
     
-Now each week you can update the csv file and then just run the script which will create all new tables and figures. 
+Or, from within R run
+
+```{r, eval=FALSE}
+source("script.R")
+```
+    
+Now each week you can update the csv file and then just run the script which 
+will create all new tables and figures. 
 
 
 ## <a name="shiny"></a> Shiny apps
 
 R can be used to create HTML applications through the `shiny` package. 
-The code is written entirely in R, although you can use cascading style sheets (CSS) if you want to update how it looks. 
-[Here is an example](https://michaud.shinyapps.io/CDCPlot/) that allows visualization of CDC data.
+The code is written entirely in R, 
+although you can use cascading style sheets (CSS) if you want to update how it 
+looks. 
+[Here is an example](https://michaud.shinyapps.io/CDCPlot/) that allows 
+visualization of CDC data.
 
 These apps can also be run locally, e.g.
 
 ```{r, eval=FALSE}
 install.packages('shiny')
-library(shiny)
+library('shiny')
 runGitHub('NLMichaud/WeeklyCDCPlot')
 ```

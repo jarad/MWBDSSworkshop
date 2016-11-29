@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Introduction to R - Solutions</title>
+<title>Introduction to R - Activity Solutions</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,13 +201,13 @@ hr {
 </head>
 
 <body>
-<h1>Introduction to R - Solutions</h1>
+<h1>Introduction to R - Activity Solutions</h1>
 
 <h2><a name="introduction"></a> Introduction</h2>
 
 <pre><code class="r">x = 1:10
-y = rep(c(1,2), each=5)
-m = lm(y~x)
+y = rep(c(1,2), each = 5)
+m = lm(y ~ x)
 s = summary(m)
 </code></pre>
 
@@ -462,7 +462,7 @@ names(fluTrends)
 </code></pre>
 
 <pre><code class="r"># To maintain pretty column names, use 
-fluTrends = read.csv(&#39;fluTrends.csv&#39;, check.names=FALSE)
+fluTrends = read.csv(&#39;fluTrends.csv&#39;, check.names = FALSE)
 names(fluTrends)
 </code></pre>
 
@@ -629,13 +629,20 @@ names(fluTrends)
 </code></pre>
 
 <pre><code class="r"># unfortunately these names won&#39;t work with the 
-# fluTrends$colname syntax
+# fluTrends$colname syntax, but you can use back-ticks
+summary(fluTrends$`United States`)
+</code></pre>
+
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     576     940    1481    1814    2131   10560
 </code></pre>
 
 <h2><a name="descriptive"></a> Descriptive statistics</h2>
 
 <pre><code class="r"># Min, max, mean, and median age for zipcode 20032.
-GI_20032 = subset(GI, zipcode==20032)
+GI_20032 &lt;- GI %&gt;%
+  filter(zipcode == 20032)
+
 min(   GI_20032$age)
 </code></pre>
 
@@ -674,7 +681,9 @@ min(   GI_20032$age)
 <p>Construct a histogram and boxplot for age at facility 37.</p>
 
 <pre><code class="r"># Construct a histogram and boxplot for age at facility 37.
-GI_37 = subset(GI, facility==37)
+GI_37 &lt;- GI %&gt;%
+  filter(facility == 37) 
+
 hist(GI_37$age)
 </code></pre>
 
@@ -694,7 +703,8 @@ barplot(table(GI_37$zipcode))
 
 <p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-10"/></p>
 
-<p>Perhaps this plot isn&#39;t so useful. Maybe it would be better to just use the first 3 zipcode digits</p>
+<p>Perhaps this plot isn&#39;t so useful. 
+Maybe it would be better to just use the first 3 zipcode digits</p>
 
 <pre><code class="r"># Construct a bar chart for the first three digits of zipcode at facility 37.
 barplot(table(trunc(GI_37$zipcode/100)))
