@@ -42,16 +42,24 @@ workshop = function(write_data    = TRUE,
               file = 'fluTrends.csv', row.names=FALSE)
   }
   
+  
   # Write scripts
-  if (write_scripts) 
+  if (write_scripts) {
     write_scripts = c("01_intro.R",
                       "02_graphics.R",
                       "03_advanced_graphics.R",
                       "04_advanced_R.R")
+  } else {
+    write_scripts = NULL
+  }
   
-  for (script in write_scripts) 
+  for (i in seq_along(write_scripts)) {
+    script = write_scripts[i]
     file.copy(from = system.file("doc", script, package="ISDSWorkshop"),
-              to   = script)
+              to   = script,
+              overwrite = TRUE)
+  }
+  
   
   # Launch workshop index
   if (launch_index) 
