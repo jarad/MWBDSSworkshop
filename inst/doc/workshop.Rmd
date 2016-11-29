@@ -1,0 +1,55 @@
+---
+title: "Training Outline"
+author: "Jarad Niemi"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Training Outline}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+# International Society for Disease Surveillance
+# Introduction to R for Biosurveillance 
+# Pre-conference Training
+
+## [Introduction to R](01_intro.html)
+
+- [Introduction to R](01_intro.html#intro)
+- [Using R as a calculator](01_intro.html#calculator)
+- [Reading data into R](01_intro.html#reading)
+  - [Reading directly from Excel](01_intro.html#excel)
+- [Descriptive statistics](01_intro.html#descriptive)
+  - [Subsetting the data](01_intro.html#subsetting)
+- [Graphical statistics](01_intro.html#graphical)
+- [Getting help](01_intro.html#help)
+
+## [Data Vizualization I (ggplot2)](02_graphics.html)
+
+- [Data types](02_graphics.html#types)
+- [Data frames](02_graphics.html#frames)
+  - [Factors](02_graphics.html#factors)
+  - [Dates](02_graphics.html#dates)
+- [Reshaping data frames in R](02_graphics.html#reshaping)
+- [Aggregating data frames in R](02_graphics.html#aggregating)
+- [Basics of ggplot2](02_graphics.html#ggplot2)
+- [Customizing (colors, characters, lines)](02_graphics.html#customizing)
+- [Getting help on ggplot2](02_graphics.html#help)
+
+## [Data Vizualization II (ggplot2)](03_advanced_graphics.html)
+
+- [Workflow](03_advanced_graphics.html#workflow)
+- [Workflow for constructing a graph](03_advanced_graphics.html#graph_workflow)
+- [Faceting](03_advanced_graphics.html#faceting)
+- [Subsetting](03_advanced_graphics.html#subsetting)
+- [Making professional graphics](03_advanced_graphics.html#professional)
+  - [Exporting graphs](03_advanced_graphics.html#exporting)
+
+## [Advanced biosurveillance](04_biosurveillance.html)
+
+- [Exporting tables](04_biosurveillance.html#exporting_tables)
+- [Maps](04_biosurveillance.html#maps)
+- [Packages](04_biosurveillance.html#packages)
+- [Packages for Surveillance](04_biosurveillance.html#surveillance)
+- [Functions](04_biosurveillance.html#functions)
+- [R in batch](04_biosurveillance.html#batch)
+- [Shiny apps](04_biosurveillance.html#shiny) 
