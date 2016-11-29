@@ -9,7 +9,7 @@ vignette: >
 ---
 
 # International Society for Disease Surveillance
-# Introduction to R for Biosurveillance 
+# Introduction to R
 # Pre-conference Training
 
 ## [Introduction to R](01_intro.html)
@@ -44,12 +44,12 @@ vignette: >
 - [Making professional graphics](03_advanced_graphics.html#professional)
   - [Exporting graphs](03_advanced_graphics.html#exporting)
 
-## [Advanced R](04_biosurveillance.html)
+## [Advanced R](04_advanced_R.html)
 
-- [Exporting tables](04_biosurveillance.html#exporting_tables)
-- [Maps](04_biosurveillance.html#maps)
-- [Packages](04_biosurveillance.html#packages)
-- [Packages for Surveillance](04_biosurveillance.html#surveillance)
-- [Functions](04_biosurveillance.html#functions)
-- [R in batch](04_biosurveillance.html#batch)
-- [Shiny apps](04_biosurveillance.html#shiny) 
+- [Exporting tables](04_advanced_R.html#exporting_tables)
+- [Maps](04_advanced_R.html#maps)
+- [Packages](04_advanced_R.html#packages)
+- [Packages for Surveillance](04_advanced_R.html#surveillance)
+- [Functions](04_advanced_R.html#functions)
+- [R in batch](04_advanced_R.html#batch)
+- [Shiny apps](04_advanced_R.html#shiny) 
