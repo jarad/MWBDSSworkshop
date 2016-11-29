@@ -8,13 +8,13 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library('ISDSWorkshop')
 workshop(launch_index=FALSE)
 ```
+# Introduction to R - Solutions
 
-
-# <a name="introduction"></a> Introduction
+## <a name="introduction"></a> Introduction
 
 ```{r}
 x = 1:10
@@ -37,7 +37,7 @@ For those who are familiar with linear regression, this may look familiar.
 
 
 
-# <a name="calculator"></a> Calculator
+## <a name="calculator"></a> Calculator
 
 Calculate the probability the individual has the disease if the test is positive when
 
@@ -56,7 +56,7 @@ probability
 Yes, it is only about 2%!
 
 
-# <a name="read"></a> Read csv file
+## <a name="read"></a> Read csv file
 
 Read in the `fluTrends.csv` file.
 
@@ -73,7 +73,7 @@ names(fluTrends)
 ```
 
 
-# <a name="descriptive"></a> Descriptive statistics
+## <a name="descriptive"></a> Descriptive statistics
 
 ```{r, echo=FALSE}
 GI = read.csv("GI.csv")
@@ -97,7 +97,7 @@ summary(GI_20032$age)
 
 
 
-# <a name="graphical"></a> Graphical statistics
+## <a name="graphical"></a> Graphical statistics
 
 Construct a histogram and boxplot for age at facility 37.
 

@@ -8,6 +8,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+# Advanced R - Solutions
+
 ```{r, echo=FALSE, message=FALSE}
 library('ggplot2')
 library('maps')
@@ -37,7 +39,7 @@ GI     = read.csv("GI.csv") %>%
 ```
 
 
-# <a name="exporting_Tables"></a> Activity - exporting tables
+## <a name="exporting_Tables"></a> Activity - exporting tables
 
 ```{r}
 # Summarize data by facility and age category
@@ -64,7 +66,7 @@ print(tab, file="table.html", type="html", include.rownames=FALSE)
 
 
 
-# <a name="maps"></a> Activity - Google Flu Trends map
+## <a name="maps"></a> Activity - Google Flu Trends map
 
 ```{r}
 # Here is some code to get you started
@@ -103,7 +105,7 @@ ggplot(states_merged, aes(x=long, y=lat, group=group, fill=index)) +
 
 
 
-# <a name="packages"></a> Activity - Install the surveillance package
+## <a name="packages"></a> Activity - Install the surveillance package
 
 ```{r, eval=FALSE}
 install.packages("surveillance")

@@ -8,6 +8,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+# Data Visualization II (ggplot2) - Solutions
+
 ```{r, echo=FALSE, message=FALSE}
 library('ggplot2')
 library('dplyr')
@@ -40,7 +42,7 @@ GI <- GI %>%
 ```
 
 
-# <a name="Date"></a> Activity - convert back to dates
+## <a name="Date"></a> Activity - convert back to dates
 
 ```{r}
 # Create weekD variable in GI data set
@@ -50,7 +52,7 @@ str(GI$weekD)
 
 
 
-# <a name="graph"></a> Activity - weekly GI cases by ageC
+## <a name="graph"></a> Activity - weekly GI cases by ageC
 
 ```{r}
 # Construct a data set aggregated by week and age category
@@ -68,7 +70,7 @@ ggplot(GI_wa, aes(x = week, y = count, shape = ageC, color = ageC)) + geom_point
 
 
 
-# <a name="facet"></a> Activity - weekly GI counts by zip3 and ageC
+## <a name="facet"></a> Activity - weekly GI counts by zip3 and ageC
 
 Construct a plot of weekly GI counts by zip3 and ageC. 
 
@@ -87,7 +89,7 @@ ggplot(GI_za, aes(x = week, y = count)) +
 
 
 
-# <a name="subsetting"></a> Activity - subsetted graphs
+## <a name="subsetting"></a> Activity - subsetted graphs
 
 Construct a plot for those in zipcode 206xx in 2008. 
 

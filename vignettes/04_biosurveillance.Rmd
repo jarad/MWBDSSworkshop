@@ -12,6 +12,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+# Advanced R
+
 If you shut down R, you will need to change your working directory and run the following commands to load libraries,
 
 ```{r, message=FALSE}
@@ -45,7 +47,7 @@ GI     = read.csv("GI.csv") %>%
 ```
 
 
-# <a name="exporting_tables"></a> Exporting tables
+## <a name="exporting_tables"></a> Exporting tables
 
 There are many ways to export tables (for use in Word). Here I will cover two basic approachess that are simple and work well. 
 
@@ -57,7 +59,7 @@ There are more sophisticated approaches that I will not cover:
 - [using the rtf package](http://thomasleeper.com/Rcourse/Tutorials/wordoutput.html)
 - [writing a whole doc fie in R](http://www.r-statistics.com/2013/03/write-ms-word-document-using-r-with-as-little-overhead-as-possible/)
 
-## Cut-and-paste 
+### Cut-and-paste 
 
 You can cut-and-paste directly from R. 
 
@@ -74,7 +76,7 @@ ga_w <- ga_l %>%
 Cut-and-pasting this table is done in ASCII format. This looks good in a **plain text** document, e.g. Notepad, TextEdit, and some email, but will not look good in other formats, e.g. docx.
 
 
-## Create HTML table
+### Create HTML table
 
 ```{r}
 library('xtable')
@@ -91,7 +93,7 @@ print(tab, file="table.html", type="html", include.rownames=FALSE)
 ```
 
 
-## Output for this HTML table
+### Output for this HTML table
 
 The HTML code looks like 
 
@@ -106,7 +108,7 @@ print(tab, type="html", include.rownames=FALSE)
 ```
 
 
-## Copy-and-paste table to Word
+### Copy-and-paste table to Word
 
 Now you can 
 
@@ -114,7 +116,7 @@ Now you can
 1. Copy-and-paste this table to Word. 
 
 
-## Activity - exporting tables
+### Activity - exporting tables
 
 Create a Word table for the number of cases by facility and age category.
 
@@ -133,7 +135,7 @@ Create a Word table for the number of cases by facility and age category.
 When you have completed the activity, compare your results to the [solutions](04_biosurveillance-solution.html#exporting_tables).
 
 
-# <a name="maps"></a> Maps
+## <a name="maps"></a> Maps
 
 The packages `ggplot2` and `maps` can be used together to make maps.
 
@@ -159,7 +161,7 @@ ggplot(counties %>% filter(region=="iowa"),
   geom_polygon(fill = "gray", color = "black")
 ```
 
-## Construct an appropriate data set
+### Construct an appropriate data set
 
 To make an informative map, we need to add data. 
 
@@ -182,7 +184,7 @@ flu_l <- flu_w %>%
   gather(region, index, -Date)
 ```
 
-## Merge fluTrends data with map_data
+### Merge fluTrends data with map_data
 
 The region names in `map_data` are lower case, so use `tolower()` to convert all the region names in flu_l to lowercase. Then the `map_data` and fluTrends data are merged using `merge()`. 
 
@@ -192,7 +194,7 @@ flu_l$region = tolower(flu_l$region)
 states_merged = merge(states, flu_l, sort=FALSE, by='region')
 ```
 
-## Make the plots
+### Make the plots
 
 Some Google Flu Trend data.
 
@@ -224,7 +226,7 @@ ggplot(states_merged,
 ```
 
 
-## Activity 
+### Activity 
 
 Modify the code to determine what elements of the map are affected.
 
@@ -238,7 +240,7 @@ When you have completed the activity, compare your results to the [solutions](04
 
 
 
-# <a name="Packages"></a> Packages
+## <a name="Packages"></a> Packages
 
 A package provides additional functionality besides what base installation of R provides. You have already used a number of additional packages:
 
@@ -263,7 +265,7 @@ For many reasons, packages may not be on CRAN but may be available from other so
 - Source file (tar.gz)
 
 
-## Github
+### Github
 
 To install a package from github, you can use the `install_github()` function from the `devtools` package. For example,
 
@@ -274,7 +276,7 @@ install_github('nandadorea/vetsyn')
 ```
 
 
-## Bioconductor 
+### Bioconductor 
 
 Bioconductor provides tools for high-throughput genomic data. There are over 900 packages available from bioconductor. To install bioconductor, use 
 
@@ -292,7 +294,7 @@ biocLite("edgeR")
 The bioconductor repository may be useful in the future for public health biosurveillance.
 
 
-## Source
+### Source
 
 All packages can be installed from their source. If a package is not available in a repository, then this is the only way to install the package. To install from source download the source file (.tar.gz) and then use the `install.packages()` function with arguments `repos=NULL` and `type="source"`. For example, from a source version of this workshop, you would use the following command:
 
@@ -304,7 +306,7 @@ install.packages("ISDSWorkshop_0.2.tar.gz",
 
 
 
-## Packages for surveillance
+### Packages for surveillance
 
 Some [packages for performing surveillance](http://www.ij-healthgeographics.com/content/9/1/16) are 
 
@@ -315,7 +317,7 @@ Some [packages for performing surveillance](http://www.ij-healthgeographics.com/
 - [vetsyn](https://github.com/nandadorea/vetsyn)
 
 
-## SpatialEpi - Kulldorff example
+### SpatialEpi - Kulldorff example
 
 The `SpatialEpi` package implements the Kulldorff cluster detection method in the `kulldorff()` function. 
 
@@ -346,7 +348,7 @@ alpha.level     <- 0.05
 plot            <- TRUE
 ```
 
-## SpatialEpi - Kulldorff example
+### SpatialEpi - Kulldorff example
 
 Plot the data
 
@@ -356,7 +358,7 @@ clr = 1-clr/max(clr) # make sure range is (0,1)
 plot(pennLC$spatial.polygon, axes=TRUE, col=rgb(1, clr, clr))
 ```
 
-## SpatialEpi - Kulldorff example
+### SpatialEpi - Kulldorff example
 
 Run the analysis and plot the results (directly from the example)
 
@@ -373,7 +375,7 @@ title("Most Likely Cluster")
 ```
 
 
-## Activity - Install the `surveillance` package
+### Activity - Install the `surveillance` package
 
 If you are connected to the internet, try installing the `surveillance` package. 
 If you are successful, look at its help file.
@@ -389,7 +391,7 @@ When you have completed the activity, compare your results to the [solutions](04
 
 
 
-# <a name="functions"></a> Functions
+## <a name="functions"></a> Functions
 
 Packages are typically a collection of functions. But you can write your own. For example,
 
@@ -410,7 +412,7 @@ add_vector = function(v) {
 }
 ```
 
-## A simple outbreak detection function
+### A simple outbreak detection function
 
 Here is a simple outbreak detection function
 
@@ -437,7 +439,7 @@ ggplot(GI_w, aes(x = weekD, y = count, color = alert)) +
 ```
 
 
-# <a name="batch"></a> R in batch
+## <a name="batch"></a> R in batch
 
 For routine analysis, it can be helpful to run R in batch mode rather than interactively. To do this, create a script and save the script with a .R extension, e.g. `script.R`:
 
@@ -458,7 +460,7 @@ Now, from the command line run
 Now each week you can update the csv file and then just run the script which will create all new tables and figures. 
 
 
-# <a name="shiny"></a> Shiny apps
+## <a name="shiny"></a> Shiny apps
 
 R can be used to create HTML applications through the `shiny` package. 
 The code is written entirely in R, although you can use cascading style sheets (CSS) if you want to update how it looks. 

@@ -2,14 +2,11 @@
 title: "Introduction to R"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
-output: 
-  html_document:
-    toc: true
-  pdf_document:
-    toc: true
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to R}
   %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 
@@ -25,8 +22,17 @@ help.start()
 
 In this documentation, the above command will be executed at the command prompt, see below. 
 
+## Brief introduction to R
 
-## R interface
+From `help.start()`:
+
+> R is an integrated suite of software facilities for data manipulation, calculation and graphical display.
+
+and from <https://www.rstudio.com/products/RStudio/>:
+
+> RStudio is an integrated development environment (IDE) for R. 
+
+### R interface
 
 In contrast to many other statistical software packages that use a point-and-click interface, e.g. SPSS, JMP, Stata, etc, R has a command-line interface. The command line has a command prompt, e.g. `>`, see below.
 
@@ -48,11 +54,11 @@ help() # Use up arrow and fix
 ```
 
 
-## R GUI (or [RStudio](http://www.rstudio.com/))
+### R GUI (or [RStudio](http://www.rstudio.com/))
 
 Most likely, you are using a graphical user interface (GUI) and therefore, in addition, to the command line, you also have a windowed version of R with some point-and-click options, e.g. File, Edit, and Help.
 
-In particular, there is an editor to create a new R script. So rather than entering commands on the command line, you will write commands in the script and then send those commands to the command line using `Ctrl-R` (PC) or `Command-Enter` (Mac).
+In particular, there is an editor to create a new R script. So rather than entering commands on the command line, you will write commands in a script and then send those commands to the command line using `Ctrl-R` (PC) or `Command-Enter` (Mac).
 
 ```{r}
 a = 1 
@@ -65,7 +71,7 @@ Multiple lines can be run in sequence by selecting them and then using `Ctrl-R` 
 
 
 
-## Intro Activity
+### Intro Activity
 
 One of the most effective ways to use this documentation is to cut-and-paste the commands into a script and then execute them. 
 
@@ -95,9 +101,9 @@ When you have completed the activity, compare your results to the [solutions](01
 
 
 
-# <a name="calculator"></a> Using R as a calculator
+## <a name="calculator"></a> Using R as a calculator
 
-## Basic calculator operations
+### Basic calculator operations
 
 All basic calculator operations can be performed in R. 
 
@@ -111,7 +117,7 @@ All basic calculator operations can be performed in R.
 For now, you can ignore the [1] at the beginning of the line, we'll learn about that when we get to vectors. 
 
 
-## Advanced calculator operations
+### Advanced calculator operations
 
 Many advanced calculator operations are also available.
 
@@ -126,7 +132,7 @@ log(10, base=10)
 
 
 
-## Using variables
+### Using variables
 
 A real advantage to using R rather than a calculator (or calculator app) is the ability to store quantities using variables.
 
@@ -139,7 +145,7 @@ a/b
 a*b
 ```
 
-## Assignment operators =, <-, and ->
+### Assignment operators =, <-, and ->
 
 When assign variables values, you can also use arrows <- and -> and you will often see this in code, e.g. 
 
@@ -157,7 +163,7 @@ b
 c
 ```
 
-## Using informative variable names
+### Using informative variable names
 
 While using variables alone is useful, it is much more useful to use informative variables names.
 
@@ -175,9 +181,9 @@ attack_rate
 
 
 
-## Calculator Activity
+### Calculator Activity
 
-### [Bayes' Rule](http://en.wikipedia.org/wiki/Bayes%27_theorem)
+#### [Bayes' Rule](http://en.wikipedia.org/wiki/Bayes%27_theorem)
 
 Suppose an individual tests positive for a disease, what is the probability the individual has the disease? Let 
 
@@ -210,11 +216,11 @@ Calculate the probability the individual has the disease if the test is positive
 When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#calculator).
 
 
-# <a name="reading"></a> Reading data into R
+## <a name="reading"></a> Reading data into R
 
 In this section, we will learn how to read in csv or Excel files into R. We focus on csv files because they are simplest to import, they can be easily exported from Excel (or other software), and they are portable, i.e. they can be used in other software.
 
-## <a name="working_directory">Changing your working directory</a>
+### <a name="working_directory">Changing your working directory</a>
 
 One of the first tasks after starting R is to change the working directory. To set,
 
@@ -229,7 +235,7 @@ setwd(choose.dir(getwd()))
 
 Make sure you have write access to this directory. 
 
-## Installing and loading a package
+### Installing and loading a package
 
 Much of the functionality of R is contained in packages. The first time these packages are used, they need to be installed, e.g. to install a package from [CRAN](http://cran.r-project.org/web/packages/) use 
 
@@ -245,7 +251,7 @@ library('dplyr')
 
 
 
-## Load and start this workshop
+### Load and start this workshop
 
 First load the package 
 
@@ -266,7 +272,7 @@ This function did three things
 1. It created a set of .R scripts in your working directory. 
 
 
-## Open an R script
+### Open an R script
 
 As we progress through the workshop, the code for a particular module will be available in the R script for that module. 
 
@@ -283,7 +289,7 @@ You will notice that nothing after a `#` will be evaluated by R. That is because
 
 
 
-## Reading a csv file into R
+### Reading a csv file into R
 
 csv stands for comma-separated value file and is a standard file format for data. To read this in to R, use 
 
@@ -294,7 +300,7 @@ GI = read.csv("GI.csv")
 This created a `data.frame` object in R called GI. 
 
 
-## read.table
+### read.table
 
 The `read.table()` function is a more general function for reading data into R and it has many options. We could have gotten the same results if we had used the following code:
 
@@ -311,7 +317,7 @@ all.equal(GI, GI2)
 ```
 
 
-### <a name="excel">Reading an Excel xlsx file into R</a>
+#### <a name="excel">Reading an Excel xlsx file into R</a>
 
 My main suggestion for reading Excel files into R is to 
 
@@ -332,7 +338,7 @@ d = read.xlsx("filename.xlsx", sheetName="sheetName")
 Again, if these approaches don't work, you can `Save as...` a csv file in Excel.
 
 
-### Read SAS, Stata, or SPSS data files
+#### Read SAS, Stata, or SPSS data files
 
 The `haven` package provids functionality to read in SAS, Stata, and SPSS files. 
 An example of reading a SAS file is
@@ -340,13 +346,13 @@ An example of reading a SAS file is
 ```{r, eval=FALSE}
 install.packages('haven')
 library('haven')
-d = read_sas('filename.sas7bdat)
+d = read_sas('filename.sas7bdat')
 ```
 
 
 
 
-## Exploring the data set
+### Exploring the data set
 
 There are a number of functions that will provide information about a `data.frame`. Here are a few:
 
@@ -361,7 +367,7 @@ tail(GI, n=5) # last5 rows of the data.frame
 
 
 
-## Activity 
+### Activity 
 
 If you brought your own Excel file, open it and save a sheet as a csv file in your working directory. If you brought your own csv file, save it in your working directory. If you did not bring your own file, use the `fluTrends.csv` file in your working directory. 
 
@@ -385,7 +391,7 @@ d = read.table("filename.csv", # Make sure to change filename>to your filename a
 When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#read).
 
 
-# <a name="descriptive"></a> Descriptive statistics
+## <a name="descriptive"></a> Descriptive statistics
 
 When reading your data set into R, you will likely want to perform some descriptive statistics. The single most useful command to assess the whole data set is the `summary()` command:
 
@@ -395,7 +401,7 @@ summary(GI)
 
 
 
-## Descriptive statistics for continuous (numeric) variables
+### Descriptive statistics for continuous (numeric) variables
 
 To access a single column in the `data.frame` use a dollar sign ($). 
 
@@ -418,7 +424,7 @@ summary(GI$age)
 
 Anything look odd here?
 
-## Descriptive statistics for categorical (non-numeric) variables
+### Descriptive statistics for categorical (non-numeric) variables
 
 The `table()` function provides the number of observations at each level of the categorical variable.
 
@@ -443,7 +449,7 @@ Apparently there is only 1 observation from facility 259, was that a typo?
 
 
 
-## <a name="subsetting">Subsetting the data</a>
+### <a name="subsetting">Subsetting the data</a>
 
 Rather than having descriptive statistics for the dataset as a whole, we may be interested in descriptive statistics for a `subset` of the data. 
 
@@ -467,7 +473,7 @@ GI_AbdPain <- GI %>%
 nrow(GI_AbdPain)
 ```
 
-### Alternative ways to subset
+#### Alternative ways to subset
 
 ```{r}
 GI_37a = GI[GI$facility==37,]
@@ -484,7 +490,7 @@ GI_AbdPain2 = subset(GI, chief_complaint == "Abd Pain")
 all.equal(GI_AbdPain, GI_AbdPain2)
 ```
 
-### Advanced subsetting
+#### Advanced subsetting
 
 We can subset continuous variables using other logical statements.
 
@@ -498,7 +504,7 @@ GI %>% filter(!(facility %in% c(37,66)))                     # facility is NOT 3
 
 
 
-## Descriptive statistics on the subset
+### Descriptive statistics on the subset
 
 Now we can calculate descriptive statistics on this subset, e.g.
 
@@ -509,7 +515,7 @@ summary(GI_AbdPain$age)
 
 
 
-## Activity
+### Activity
 
 Find the min, max, mean, and median age for zipcode 20032.
 
@@ -524,7 +530,7 @@ When you have completed the activity, compare your results to the [solutions](01
 
 
 
-# <a name="graphical"></a> Graphical statistics
+## <a name="graphical"></a> Graphical statistics
 
 Here we focus on the graphical options for the base package in R. 
 Later we will use the ggplot2 package:
@@ -535,7 +541,7 @@ Later we will use the ggplot2 package:
 - Bar charts (`barplot`)
 
 
-## Histograms
+### Histograms
 
 For continuous variables, histograms are useful for visualizing the distribution of the variable
 
@@ -556,7 +562,7 @@ hist(GI$age, 0:158)
 ```
 
 
-## Boxplots
+### Boxplots
 
 Boxplots are another way to visualize the distribution for continuous variables.
 
@@ -567,7 +573,7 @@ boxplot(GI$age)
 Now we can see the outliers. 
 
 
-### Multiple boxplots
+#### Multiple boxplots
 
 Here we create separate boxplots for each facility and label the x and y axes. 
 
@@ -576,7 +582,7 @@ boxplot(age~facility, GI, xlab="Facility", ylab="Age")
 ```
 
 
-## Scatterplots
+### Scatterplots
 
 Scatterplots are useful for looking at the relationship of two continuous variables. 
 
@@ -588,7 +594,7 @@ plot(age~date, GI)
 We will talk more later about dealing with dates later.
 
 
-## Bar charts
+### Bar charts
 
 For looking at the counts of categorical variables, we use bar charts.
 
@@ -597,7 +603,7 @@ counts = table(GI$facility)
 barplot(counts, xlab="Facility", ylab="Count", main="Number of observations at each facility")
 ```
 
-## Activity 
+### Activity 
 
 Construct a histogram and boxplot for age at facility 37.
 
@@ -619,7 +625,7 @@ When you have completed the activity, compare your results to the [solutions](01
 
 
 
-# <a name="help"></a> Getting help
+## <a name="help"></a> Getting help
 
 As you work with R, there will be many times when you need to get help. 
 
@@ -632,7 +638,7 @@ My basic approach is
 In all cases, knowing the R keywords, e.g. a function name, will be extremely helpful.
 
 
-## Help within R I
+### Help within R I
 
 If you know the function name, then you can use `?<function>`, e.g.
 
@@ -649,7 +655,7 @@ The structure of help is
 - Examples: examples of how to use the function
 
 
-## Help within R II
+### Help within R II
 
 If you cannot remember the function name, then you can use `help.search("<something>")`, e.g.
 
@@ -661,7 +667,7 @@ Depending on how many packages you have loaded, you will find a lot or a little 
 
 
 
-## Internet search for R help
+### Internet search for R help
 
 I google for `<something> R`, e.g. 
 
