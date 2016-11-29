@@ -21,7 +21,8 @@ workshop = function(write_data    = TRUE,
                     launch_index  = TRUE) {
   
   # Write data
-  if (write_data) write_data = c('GI','icd9','fluTrends')
+  if (write_data) 
+    write_data = c('GI','icd9','fluTrends')
   
   if ("GI" %in% write_data) {
     data('GI', package='ISDSWorkshop', envir=environment())
@@ -42,15 +43,17 @@ workshop = function(write_data    = TRUE,
   }
   
   # Write scripts
-  if (write_scripts) write_scripts = c("intro",
-                                       "graphics",
-                                       "advanced_graphics",
-                                       "biosurveillance")
+  if (write_scripts) 
+    write_scripts = c("intro.R",
+                      "graphics.R",
+                      "advanced_graphics.R",
+                      "biosurveillance.R")
   
   for (script in write_scripts) 
-    file.copy(from = paste(find.package("ISDSWorkshop"), "/doc/", script, ".R", sep=""),
-              to   = paste(script,".R", sep=""))
+    file.copy(from = system.file("doc", script, package="ISDSWorkshop"),
+              to   = script)
   
   # Launch workshop index
-  if (launch_index) vignette('workshop')
+  if (launch_index) 
+    browseURL(system.file("doc", "workshop.html", package="ISDSWorkshop"))
 }
