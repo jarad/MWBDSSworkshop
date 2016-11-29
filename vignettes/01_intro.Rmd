@@ -114,7 +114,8 @@ All basic calculator operations can be performed in R.
 1*2
 ```
 
-For now, you can ignore the [1] at the beginning of the line, we'll learn about that when we get to vectors. 
+For now, you can ignore the [1] at the beginning of the line, 
+we'll learn about that when we get to vectors. 
 
 
 ### Advanced calculator operations

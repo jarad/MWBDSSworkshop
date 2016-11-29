@@ -1,16 +1,16 @@
 ---
-title: "Training Outline"
+title: "ISDS Introduction to R Workshop Outline"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Training Outline}
+  %\VignetteIndexEntry{ISDS Introduction to R Workshop Outline}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
 # International Society for Disease Surveillance
 # Introduction to R
-# Pre-conference Training
+# Pre-conference Workshop
 
 ## [Introduction to R](01_intro.html)
 
