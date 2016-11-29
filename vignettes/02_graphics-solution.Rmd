@@ -66,7 +66,7 @@ table(GI$icd9code)
 # <a name="aggregate"></a> Aggregate activity
 
 ```{r, echo=FALSE}
-library('plyr')
+library('dplyr')
 ```
 
 ```{r}
