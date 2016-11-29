@@ -147,7 +147,8 @@ a*b
 
 ### Assignment operators =, <-, and ->
 
-When assign variables values, you can also use arrows <- and -> and you will often see this in code, e.g. 
+When assigning variables values, you can also use arrows <- and -> and you will 
+often see this in code, e.g. 
 
 ```{r}
 a <- 1
@@ -165,7 +166,8 @@ c
 
 ### Using informative variable names
 
-While using variables alone is useful, it is much more useful to use informative variables names.
+While using variables alone is useful, it is much more useful to use informative
+variables names.
 
 ```{r}
 population = 1000
@@ -185,7 +187,8 @@ attack_rate
 
 #### [Bayes' Rule](http://en.wikipedia.org/wiki/Bayes%27_theorem)
 
-Suppose an individual tests positive for a disease, what is the probability the individual has the disease? Let 
+Suppose an individual tests positive for a disease, what is the probability the 
+individual has the disease? Let 
 
 - $D$ indicates the individual has the disease
 - $N$ means the individual does not have the disease
@@ -194,7 +197,8 @@ Suppose an individual tests positive for a disease, what is the probability the 
 
 The above probability can be calculated using [Bayes' Rule](http://en.wikipedia.org/wiki/Bayes%27_rule):
 
-\[ P(D|+) = \frac{P(+|D)P(D)}{P(+|D)P(D)+P(+|N)P(N)} = \frac{P(+|D)P(D)}{P(+|D)P(D)+(1-P(-|N))\times(1-P(D))} \]
+\[ P(D|+) = \frac{P(+|D)P(D)}{P(+|D)P(D)+P(+|N)P(N)} = 
+\frac{P(+|D)P(D)}{P(+|D)P(D)+(1-P(-|N))\times(1-P(D))} \]
 
 where
 
@@ -210,13 +214,13 @@ Calculate the probability the individual has the disease if the test is positive
 
 ```{r, echo=FALSE}
 # Find the probability the individual has the disease if 
-# specificity is 0.99, sensitivity is 0.95, and prevalence is 0.001
+# specificity is 0.95, sensitivity is 0.99, and prevalence is 0.001
 ```
 
 When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#calculator).
 
 
-## <a name="reading"></a> Reading data into R
+## <a name="reading">Reading data into R</a>
 
 In this section, we will learn how to read in csv or Excel files into R. We focus on csv files because they are simplest to import, they can be easily exported from Excel (or other software), and they are portable, i.e. they can be used in other software.
 
@@ -240,7 +244,7 @@ Make sure you have write access to this directory.
 Much of the functionality of R is contained in packages. The first time these packages are used, they need to be installed, e.g. to install a package from [CRAN](http://cran.r-project.org/web/packages/) use 
 
 ```{r, eval=FALSE}
-install.packages('plyr')
+install.packages('dplyr')
 ```
 
 Once installed, a package needs to be loaded into each R session where the package is used.
@@ -265,20 +269,25 @@ This package contains a function to help you get started, so run that function.
 workshop()
 ```
 
-This function did three things
+This function did three things:
 
-1. It opened the workshop outline in a web browser
-1. It created a set of .csv data files in your working directory
+1. It opened the workshop outline in a web browser.
+1. It created a set of .csv data files in your working directory.
 1. It created a set of .R scripts in your working directory. 
 
 
 ### Open an R script
 
-As we progress through the workshop, the code for a particular module will be available in the R script for that module. 
+As we progress through the workshop, the code for a particular module will be
+available in the R script for that module. 
 
-In R, open the module called `intro.R` and scroll down to the `workshop()` command. From here on out, as I run commands you should run the commands as well by using Ctrl-R (Windows) or Command-Enter (Mac) with the appropriate line(s) highlighted. 
+In R/RStudio, open the module called `01_intro.R` and scroll down to the 
+`workshop()` command. From here on out, as I run commands you should run the 
+commands as well by using Ctrl-R (Windows) or Command-Enter (Mac) with the 
+appropriate line(s) highlighted. 
 
-You will notice that nothing after a `#` will be evaluated by R. That is because the `#` character indicates a comment in the code. For example,
+You will notice that nothing after a `#` will be evaluated by R. That is because
+the `#` character indicates a comment in the code. For example,
 
 ```{r}
 # This is just a comment. 
@@ -289,9 +298,19 @@ You will notice that nothing after a `#` will be evaluated by R. That is because
 
 
 
-### Reading a csv file into R
+### Reading data into R
 
-csv stands for comma-separated value file and is a standard file format for data. To read this in to R, use 
+Data are stored in many different formats. 
+I will focus on data stored in a csv file, but mention approaches to reading in
+data stored in Excel, SAS, Stata, SPSS, and database formats.
+
+#### Reading a csv file into R
+
+The most common way I read data into R is through a csv file. 
+csv stands for comma-separated value file and is a standard file format for
+data. The utils package (which is installed and loaded with base R) has a 
+function called `read.csv` for reading csv files into R. 
+For example, 
 
 ```{r}
 GI = read.csv("GI.csv")
@@ -299,10 +318,9 @@ GI = read.csv("GI.csv")
 
 This created a `data.frame` object in R called GI. 
 
-
-### read.table
-
-The `read.table()` function is a more general function for reading data into R and it has many options. We could have gotten the same results if we had used the following code:
+The utils package has the `read.table()` function which is a more general 
+function for reading data into R and it has many options. 
+We could have gotten the same results if we had used the following code:
 
 ```{r, tidy=FALSE}
 GI2 = read.table("GI.csv", 
@@ -316,17 +334,31 @@ To check if the two data sets are equal, use the following
 all.equal(GI, GI2)
 ```
 
+The `read.csv` function is available in base R, but these days I will often
+use the `read_csv` function in the 
+[readr](https://cran.r-project.org/web/packages/readr/index.html).
 
-#### <a name="excel">Reading an Excel xlsx file into R</a>
+```{r, eval=FALSE}
+install.packages("readr") # run this command if the readr package is not installed
+library('readr')
+GI <- read_csv("GI.csv")
+```
+
+### <a name="excel">Read Excel xlsx file</a>
 
 My main suggestion for reading Excel files into R is to 
 
 1. Save the Excel file as a csv
 1. Read the csv file into R using `read.csv`
 
-This approach will work regardless of any changes Excel makes in its document structure.
+This approach will work regardless of any changes Excel makes in its document 
+structure.
 
-Reading an Excel xlsx file into R is done using the `read.xlsx` function from the [xlsx](http://cran.r-project.org/web/packages/xlsx/index.html) R package. Unfortunately many scenarios can cause this process to not work. Thus, we do not focus on it in an introductory R course. When it works, it looks like this
+Reading an Excel xlsx file into R is done using the `read.xlsx` function from 
+the [xlsx](http://cran.r-project.org/web/packages/xlsx/index.html) R package. 
+Unfortunately many scenarios can cause this process to not work. 
+Thus, we do not focus on it in an introductory R course. When it works, it looks 
+like this
 
 ```{r, eval=FALSE}
 install.packages('xlsx')
@@ -338,9 +370,10 @@ d = read.xlsx("filename.xlsx", sheetName="sheetName")
 Again, if these approaches don't work, you can `Save as...` a csv file in Excel.
 
 
-#### Read SAS, Stata, or SPSS data files
+### Read SAS, Stata, or SPSS data files
 
-The `haven` package provids functionality to read in SAS, Stata, and SPSS files. 
+The `haven` package provides functionality to read in SAS, Stata, and SPSS 
+files. 
 An example of reading a SAS file is
 
 ```{r, eval=FALSE}
@@ -349,12 +382,46 @@ library('haven')
 d = read_sas('filename.sas7bdat')
 ```
 
+#### Read a database file
 
+There are many different types of databases, so the code you will need will be
+specific to the type of database you are trying to access. 
+
+The [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) package,  
+which we will discussing today, has a [number of functions to read from some 
+databases](https://cran.r-project.org/web/packages/dplyr/vignettes/databases.html).
+The code will look something like
+```{r, eval=FALSE}
+library('dplyr')
+my_db <- src_sqlite("my_db.sqlite3", create = T)
+```
+
+The [RODBC](https://cran.r-project.org/web/packages/RODBC/index.html) package 
+has a 
+[number of functions to read from some databases](http://www.statmethods.net/input/dbinterface.html).
+The code might look something like
+
+```{r, eval=FALSE}
+install.packages("RODBC")
+library('RODBC')
+
+# RODBC Example
+# import 2 tables (Crime and Punishment) from a DBMS
+# into R data frames (and call them crimedat and pundat)
+
+library(RODBC)
+myconn <-odbcConnect("mydsn", uid="Rob", pwd="aardvark")
+crimedat <- sqlFetch(myconn, "Crime")
+pundat <- sqlQuery(myconn, "select * from Punishment")
+close(myconn)
+```
 
 
 ### Exploring the data set
 
-There are a number of functions that will provide information about a `data.frame`. Here are a few:
+There are a number of functions that will provide information about a 
+`data.frame`. 
+Here are a few:
 
 ```{r}
 dim(GI)
@@ -369,9 +436,15 @@ tail(GI, n=5) # last5 rows of the data.frame
 
 ### Activity 
 
-If you brought your own Excel file, open it and save a sheet as a csv file in your working directory. If you brought your own csv file, save it in your working directory. If you did not bring your own file, use the `fluTrends.csv` file in your working directory. 
+If you brought your own Excel file, open it and save a sheet as a csv file in 
+your working directory. 
+If you brought your own csv file, save it in your working directory. 
+If you did not bring your own file, use the `fluTrends.csv` file in your working 
+directory. 
 
-Try to use the read.csv function to read the file into R. There are a number of different options in the csv file that may be useful:
+Try to use the read.csv function to read the file into R. 
+There are a number of different options in the `read.table()` function that may 
+be useful:
 
 ```{r, eval=FALSE, tidy=FALSE}
 d = read.table("filename.csv", # Make sure to change filename>to your filename and 
@@ -382,18 +455,30 @@ d = read.table("filename.csv", # Make sure to change filename>to your filename a
                )
 ```
 
+You may also need to look at the help file for `read.table()` to find additional
+options that you need.
+
+```{r, eval=FALSE}
+?read.table
+```
+
+
 
 ```{r, echo=FALSE}
 # Read in the csv file
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#read).
+When you have completed the activity, compare your results to the 
+[solutions](01_intro-solution.html#read).
 
 
 ## <a name="descriptive"></a> Descriptive statistics
 
-When reading your data set into R, you will likely want to perform some descriptive statistics. The single most useful command to assess the whole data set is the `summary()` command:
+When reading your data set into R, you will likely want to perform some 
+descriptive statistics. 
+The single most useful command to assess the whole data set is the `summary()` 
+command:
 
 ```{r}
 summary(GI)
@@ -426,7 +511,8 @@ Anything look odd here?
 
 ### Descriptive statistics for categorical (non-numeric) variables
 
-The `table()` function provides the number of observations at each level of the categorical variable.
+The `table()` function provides the number of observations at each level of a 
+categorical variable.
 
 ```{r}
 table(GI$gender)
@@ -438,7 +524,8 @@ which is the same as `summary()` if the variable is not coded as numeric
 summary(GI$gender)
 ```
 
-If the variable is coded as numeric, but is really a categorical variable, then you can still use table, but summary won't give you the correct result.
+If the variable is coded as numeric, but is really a categorical variable, then 
+you can still use table, but summary won't give you the correct result.
 
 ```{r}
 table(GI$facility)
@@ -449,22 +536,26 @@ Apparently there is only 1 observation from facility 259, was that a typo?
 
 
 
-### <a name="subsetting">Subsetting the data</a>
+### <a name="subsetting">Filtering the data</a>
 
-Rather than having descriptive statistics for the dataset as a whole, we may be interested in descriptive statistics for a `subset` of the data. 
+Rather than having descriptive statistics for the dataset as a whole, we may be
+interested in descriptive statistics for a subset of the data, i.e. you want to
+`filter()` the data. 
 
-The following code creates a new `data.frame` that only contains observations from facility 37:
+The following code creates a new `data.frame()` that only contains observations 
+from facility 37:
 
 ```{r}
 library('dplyr')
 
 GI_37 <- GI %>% 
-  filter(facility==37) # Notice the double equal sign!
+  filter(facility == 37) # Notice the double equal sign!
 
-nrow(GI_37)            # Number of rows (observations) in the new data set
+nrow(GI_37)              # Number of rows (observations) in the new data set
 ```
 
-The following code creates a new `data.frame` that only contains observations with chief_complaint "Abd Pain":
+The following code creates a new `data.frame` that only contains observations 
+with chief_complaint "Abd Pain":
 
 ```{r}
 GI_AbdPain <- GI %>% 
@@ -473,7 +564,10 @@ GI_AbdPain <- GI %>%
 nrow(GI_AbdPain)
 ```
 
-#### Alternative ways to subset
+#### Alternative ways to filter
+
+There are many other ways to subset/filter the data, but these days I almost 
+exclusively use `dplyr::filter()` as I find the code is much easier to read.
 
 ```{r}
 GI_37a = GI[GI$facility==37,]
@@ -490,7 +584,7 @@ GI_AbdPain2 = subset(GI, chief_complaint == "Abd Pain")
 all.equal(GI_AbdPain, GI_AbdPain2)
 ```
 
-#### Advanced subsetting
+#### Advanced filtering
 
 We can subset continuous variables using other logical statements.
 
@@ -524,7 +618,8 @@ Find the min, max, mean, and median age for zipcode 20032.
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#descriptive).
+When you have completed the activity, compare your results to the 
+[solutions](01_intro-solution.html#descriptive).
 
 
 
@@ -532,18 +627,20 @@ When you have completed the activity, compare your results to the [solutions](01
 
 ## <a name="graphical"></a> Graphical statistics
 
-Here we focus on the graphical options for the base package in R. 
-Later we will use the ggplot2 package:
+Here we focus on the graphical options available in the base package `graphics`. 
 
-- Histograms (`hist`)
-- Boxplots (`boxplot`)
-- Scatter plots (`plot`)
-- Bar charts (`barplot`)
+- Histograms (`hist()`)
+- Boxplots (`boxplot()`)
+- Scatter plots (`plot()`)
+- Bar charts (`barplot()`)
 
+Although I sometimes use these base graphics, I end up switching to `ggplot2`
+graphics very quickly. 
 
 ### Histograms
 
-For continuous variables, histograms are useful for visualizing the distribution of the variable
+For continuous variables, histograms are useful for visualizing the 
+distribution of the variable.
 
 ```{r}
 hist(GI$age)
@@ -578,17 +675,18 @@ Now we can see the outliers.
 Here we create separate boxplots for each facility and label the x and y axes. 
 
 ```{r}
-boxplot(age~facility, GI, xlab="Facility", ylab="Age")
+boxplot(age ~ facility, data  = GI, xlab = "Facility", ylab = "Age")
 ```
 
 
 ### Scatterplots
 
-Scatterplots are useful for looking at the relationship of two continuous variables. 
+Scatterplots are useful for looking at the relationship of two continuous 
+variables. 
 
 ```{r}
 GI$date = as.Date(GI$date)
-plot(age~date, GI)
+plot(age ~ date, data = GI)
 ```
 
 We will talk more later about dealing with dates later.
@@ -600,7 +698,10 @@ For looking at the counts of categorical variables, we use bar charts.
 
 ```{r}
 counts = table(GI$facility)
-barplot(counts, xlab="Facility", ylab="Count", main="Number of observations at each facility")
+barplot(counts, 
+        xlab = "Facility", 
+        ylab = "Count", 
+        main = "Number of observations at each facility")
 ```
 
 ### Activity 
@@ -620,7 +721,8 @@ Construct a bar chart for the zipcode at facility 37.
 ```
 
 
-When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#graphical).
+When you have completed the activity, compare your results to the 
+[solutions](01_intro-solution.html#graphical).
 
 
 
@@ -635,7 +737,8 @@ My basic approach is
 1. Perform an internet search for an answer
 1. Find somebody else who knows
 
-In all cases, knowing the R keywords, e.g. a function name, will be extremely helpful.
+In all cases, knowing the R keywords, e.g. a function name, will be extremely 
+helpful.
 
 
 ### Help within R I
@@ -657,13 +760,15 @@ The structure of help is
 
 ### Help within R II
 
-If you cannot remember the function name, then you can use `help.search("<something>")`, e.g.
+If you cannot remember the function name, then you can use 
+`help.search("<something>")`, e.g.
 
 ```{r, eval=FALSE}
 help.search("mean")
 ```
 
-Depending on how many packages you have loaded, you will find a lot or a little here. 
+Depending on how many packages you have installed, you will find a lot or a 
+little here. 
 
 
 
