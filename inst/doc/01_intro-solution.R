@@ -1,4 +1,4 @@
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE, message=FALSE------------------------------------------
 library('ISDSWorkshop')
 workshop(launch_index=FALSE)
 

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title><a name="introduction"></a> Introduction</title>
+<title>Introduction to R - Solutions</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,39 +201,9 @@ hr {
 </head>
 
 <body>
-<pre><code>## Loading required package: ggplot2
-</code></pre>
+<h1>Introduction to R - Solutions</h1>
 
-<pre><code>## Loading required package: dplyr
-</code></pre>
-
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;
-</code></pre>
-
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag
-</code></pre>
-
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union
-</code></pre>
-
-<pre><code>## Loading required package: tidyr
-</code></pre>
-
-<pre><code>## 
-## Attaching package: &#39;tidyr&#39;
-</code></pre>
-
-<pre><code>## The following object is masked _by_ &#39;.GlobalEnv&#39;:
-## 
-##     population
-</code></pre>
-
-<h1><a name="introduction"></a> Introduction</h1>
+<h2><a name="introduction"></a> Introduction</h2>
 
 <pre><code class="r">x = 1:10
 y = rep(c(1,2), each=5)
@@ -298,7 +268,7 @@ s = summary(m)
 
 <p>For those who are familiar with linear regression, this may look familiar. </p>
 
-<h1><a name="calculator"></a> Calculator</h1>
+<h2><a name="calculator"></a> Calculator</h2>
 
 <p>Calculate the probability the individual has the disease if the test is positive when</p>
 
@@ -320,7 +290,7 @@ probability
 
 <p>Yes, it is only about 2%!</p>
 
-<h1><a name="read"></a> Read csv file</h1>
+<h2><a name="read"></a> Read csv file</h2>
 
 <p>Read in the <code>fluTrends.csv</code> file.</p>
 
@@ -662,7 +632,7 @@ names(fluTrends)
 # fluTrends$colname syntax
 </code></pre>
 
-<h1><a name="descriptive"></a> Descriptive statistics</h1>
+<h2><a name="descriptive"></a> Descriptive statistics</h2>
 
 <pre><code class="r"># Min, max, mean, and median age for zipcode 20032.
 GI_20032 = subset(GI, zipcode==20032)
@@ -699,7 +669,7 @@ min(   GI_20032$age)
 ##    0.00    9.00   26.50   28.48   41.00   93.00
 </code></pre>
 
-<h1><a name="graphical"></a> Graphical statistics</h1>
+<h2><a name="graphical"></a> Graphical statistics</h2>
 
 <p>Construct a histogram and boxplot for age at facility 37.</p>
 

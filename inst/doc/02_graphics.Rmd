@@ -12,12 +12,13 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+# <a name="intro"></a> Data Visualization I (ggplot2)
 
 Before we get back into graphics, it is important to understand some of the fundamentals behind what R is doing. 
 
 Please open the `graphics.R` script in your working directory. 
 
-# <a name="types">Data types</a>
+## <a name="types">Data types</a>
 
 Objects in R can be broadly classified according to their dimensions:
 
@@ -35,7 +36,7 @@ and according to the type of variable they contain:
 - factor
 
 
-## Scalars
+### Scalars
 
 Scalars have a single value assigned to the object in R. 
 
@@ -54,7 +55,7 @@ c
 ```
 
 
-## Vectors
+### Vectors
 
 The `c()` function creates a vector in R
 
@@ -81,7 +82,7 @@ class(c)
 ```
 
 
-### Vector construction
+#### Vector construction
 
 Create a numeric vector that is a sequence using : or `seq()`.
 
@@ -100,7 +101,7 @@ rep(1:4, each  = 2, times = 2)
 ```
 
 
-### Accessing vector elements 
+#### Accessing vector elements 
 
 Elements of a vector can be accessed using brackets, e.g. [index].
 
@@ -125,7 +126,7 @@ a[-1]
 a[-(2:3)]
 ```
 
-### Modifying elements of a vector
+#### Modifying elements of a vector
 
 You can assign new values to elements in a vector using = or <-.
 
@@ -140,7 +141,7 @@ a
 
 
 
-## Matrices
+### Matrices
 
 Matrices can be constructed using `cbind()`, `rbind()`, and `matrix()`:
 
@@ -162,7 +163,7 @@ m4
 ```
 
 
-### Accessing matrix elements
+#### Accessing matrix elements
 
 Elements of a matrix can be accessed using brackets separated by a comma, e.g. [row index, column index].
 
@@ -198,7 +199,7 @@ m[1:4]
 
 You can also construct an object with more than 2 dimensions using the `array()` function.
 
-## Cannot mix types 
+### Cannot mix types 
 
 You cannot mix types within a vector, matrix, or array
 
@@ -220,7 +221,7 @@ c(TRUE, 1, "a")
 
 Everything is converted to a character. 
 
-## Activity
+### Activity
 
 Reconstruct the following matrix using the `matrix()` function, then 
 
@@ -251,7 +252,7 @@ When you have completed the activity, compare your results to the [solutions](02
 
 
 
-# <a name="frames">Data frames</a>
+## <a name="frames">Data frames</a>
 
 A `data.frame` is a special type of matrix that allows different data types in different columns.
 
@@ -278,7 +279,7 @@ dim(GI)
 ```
 
 
-## Access `data.frame` elements
+### Access `data.frame` elements
 
 A `data.frame` can be accessed just like a matrix, e.g. [row index, column index].
 
@@ -302,7 +303,7 @@ GI %>%
 ```
 
 
-## Different data types in different columns
+### Different data types in different columns
 
 The function `str()` allows you to see the structure of any object in R. 
 Using `str()` on a `data.frame` object tells you 
@@ -319,7 +320,7 @@ str(GI)
 
 
 
-## <a name="factor">Factor</a>
+### <a name="factor">Factor</a>
 
 A factor is a data type that represents a categorical variable. 
 
@@ -337,7 +338,7 @@ as.numeric(GI$gender[1:3]) # internal coding
 
 
 
-### Converting a numeric variable into a factor
+#### Converting a numeric variable into a factor
 
 When a categorical variable is encoded as a numeric variable in the original data set, R reads them in as numeric. To convert them to a factor use `as.factor()`. 
 
@@ -347,7 +348,7 @@ summary(GI$facility)
 ```
 
 
-### Converting back to the original numeric variable
+#### Converting back to the original numeric variable
 
 To obtain the original numeric variable use `as.character()` and `as.numeric()`
 
@@ -357,7 +358,7 @@ head(as.numeric(as.character(GI$facility))) # This returns the original numeric 
 ```
 
 
-### Creating your own factor
+#### Creating your own factor
 
 Use the `cut()` function to create a factor from a continuous variable.
 
@@ -373,7 +374,7 @@ This created a new variable in the GI `data.frame` called *ageC*.
 
 
 
-## <a name="dates">Dates</a>
+### <a name="dates">Dates</a>
 
 In order to use dates properly, they need to be converted into type `Date`. 
 
@@ -396,7 +397,7 @@ as.Date("12/09/14", format="%m/%d/%y")
 ```
 
 
-## Activity 
+### Activity 
 
 Create a new variable in the GI data set called `icd9code` that cuts icd9 at 0, 140, 240, 280, 290, 320, 360, 390, 460, 520, 580, 630, 680, 710, 740, 760, 780, 800, and Inf. Find the icd9code that is the most numerous in the GI data set.
 
@@ -413,7 +414,7 @@ When you have completed the activity, compare your results to the [solutions](02
 
 
 
-# <a name="reshaping">Reshaping data frames in R</a>
+## <a name="reshaping">Reshaping data frames in R</a>
 
 There are two general representations of tabular data.
 
@@ -435,7 +436,7 @@ d %>%
 which is the form most statistical software wants, i.e. there is only one column for the response (count).
 
 
-## Wide to long
+### Wide to long
 
 The `tidyr` package provides functions to convert between the two 
 representations. First, we need to load the package
@@ -472,7 +473,7 @@ m2 <- d %>%
 all.equal(m,m2)
 ```
 
-## Long to wide
+### Long to wide
 
 If we want to convert back, use `spread()`
 
@@ -482,7 +483,7 @@ m %>%
 ```
 
 
-# <a name="aggregating">Aggregating data frames in R</a>
+## <a name="aggregating">Aggregating data frames in R</a>
 
 The GI data set that we have is already in long format and each row is an individual. 
 We may want to aggregate this information. 
@@ -502,7 +503,7 @@ m %>%                           # We need to use the melted (long) version of th
 ```
 
 
-## Aggregating the GI data set
+### Aggregating the GI data set
 
 Let's aggregate the GI data set by week, gender, and age category.
 
@@ -527,7 +528,7 @@ head(GI_count, 20)
 ```
 
 
-## Activity
+### Activity
 
 Aggregate the GI data set by gender, ageC, and icd9code (the ones created in the last activity).
 
@@ -543,7 +544,7 @@ When you have completed the activity, compare your results to the [solutions](02
 
 
 
-# <a name="ggplot2">Basics of `ggplot2`</a>
+## <a name="ggplot2">Basics of `ggplot2`</a>
 
 Previously we produced graphics using the `base` graphics system. 
 Although I still use this for producing quick plots, I invariably end up using the `ggplot2` package.
@@ -557,7 +558,7 @@ library('ggplot2')
 
 
 
-## Histogram
+### Histogram
 
 A basic histogram in ggplot
 
@@ -575,7 +576,7 @@ Many websites and even the `ggplot2` manual have examples using `qplot`.
 I believe this is mainly to ease the transition for individuals who are familiar with `base` graphics.
 If you are just starting out with R, I recommend using the `ggplot` function in `ggplot2` from the beginning.
 
-## Boxplots
+### Boxplots
 
 A basic boxplot
 
@@ -584,7 +585,7 @@ ggplot(data = GI, aes(x = 1, y = age)) + geom_boxplot()
 ```
 
 
-## Multiple boxplots
+### Multiple boxplots
 
 ```{r}
 ggplot(GI, aes(x = facility, y = age)) + geom_boxplot()
@@ -592,13 +593,13 @@ ggplot(GI, aes(x = facility, y = age)) + geom_boxplot()
 
 
 
-## Scatterplots
+### Scatterplots
 
 ```{r}
 ggplot(GI, aes(x=date, y=age)) + geom_point()
 ```
 
-## Bar charts
+### Bar charts
 
 With ggplot, there is no need to count first.
 
@@ -608,7 +609,7 @@ ggplot(GI, aes(x=facility)) + geom_bar()
 
 
 
-## Activity
+### Activity
 
 
 Construct a histogram and boxplot for age at facility 37 using ggplot2.
@@ -631,7 +632,7 @@ When you have completed the activity, compare your results to the [solutions](02
 
 
 
-# <a name="customizing">Customizing ggplot2 plots</a>
+## <a name="customizing">Customizing ggplot2 plots</a>
 
 There are many ways to customize the appearance of ggplot2 plots:
 
@@ -644,7 +645,7 @@ There are many ways to customize the appearance of ggplot2 plots:
 
 
 
-## Colors
+### Colors
 
 ```{r}
 ggplot(GI, aes(x = age)) + 
@@ -661,7 +662,7 @@ To find all the colors that R knows, use
 colors()
 ```
 
-## Labels
+### Labels
 
 ```{r}
 ggplot(GI, aes(x = facility, y = age)) + 
@@ -672,7 +673,7 @@ ggplot(GI, aes(x = facility, y = age)) +
 ```
 
 
-## Characters
+### Characters
 
 ```{r}
 ggplot(GI, aes(x=date, y=age)) + geom_point(shape = 2, color = 'red')
@@ -685,7 +686,7 @@ ggplot2 uses the same shape codes as base graphics, see
 ```
 
 
-## Line types
+### Line types
 
 Here I am also using a trick of setting up part of the plot and assigning it to
 the object `g`. Then you can add elements to the plot and if you don't assign
@@ -707,7 +708,7 @@ g + geom_line(size=2, color='firebrick', linetype=2)
 Linetype options can be found in `?par` under `lty`. 
 But it is probably easier to just google it, e.g. <http://www.cookbook-r.com/Graphs/Shapes_and_line_types/>.
 
-## Themes
+### Themes
 
 ```{r}
 g = g + geom_line(size = 1, color = 'firebrick')
@@ -724,7 +725,7 @@ For other themes, see
 
 
 
-# <a name="help">Getting help on ggplot2</a>
+## <a name="help">Getting help on ggplot2</a>
 
 Although the general R help can still be used, e.g. 
 
@@ -740,7 +741,7 @@ It is much more helpful to google for an answer
 
 The top hits will all have the code along with what the code produces.
 
-## Helpful sites
+### Helpful sites
 
 These sites all provide code. The first two also provide the plots that are produced.
 
@@ -750,7 +751,7 @@ These sites all provide code. The first two also provide the plots that are prod
 
 
 
-## Activity
+### Activity
 
 Play around with ggplot2 to see what kind of plots you can make.
 

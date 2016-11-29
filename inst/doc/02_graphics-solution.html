@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title><a name="matrix"></a> Matrix activity</title>
+<title>Data Visualization I (ggplot2) - Solutions</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,7 +201,9 @@ hr {
 </head>
 
 <body>
-<h1><a name="matrix"></a> Matrix activity</h1>
+<h1>Data Visualization I (ggplot2) - Solutions</h1>
+
+<h2><a name="matrix"></a> Matrix activity</h2>
 
 <pre><code class="r">m = rbind(c(1, 12, 8, 6),
           c(4, 10, 2, 9),
@@ -255,7 +257,7 @@ n[-3,]
 ## [2,]    4   10    2    9
 </code></pre>
 
-<h1><a name="factor"></a> Factor activity</h1>
+<h2><a name="factor"></a> Factor activity</h2>
 
 <pre><code class="r">library(&#39;ISDSWorkshop&#39;)
 library(&#39;dplyr&#39;)
@@ -296,7 +298,7 @@ table(GI$icd9code)
 ##        1611        7242       12229         162
 </code></pre>
 
-<h1><a name="aggregate"></a> Aggregate activity</h1>
+<h2><a name="aggregate"></a> Aggregate activity</h2>
 
 <pre><code class="r"># Aggregate the GI data set by gender, ageC, and icd9code (the ones created in the last activity).
 GI %&gt;%
@@ -322,7 +324,7 @@ GI %&gt;%
 ## # ... with 30 more rows
 </code></pre>
 
-<h1><a name="ggplot2"></a> ggplot2 activity</h1>
+<h2><a name="ggplot2"></a> ggplot2 activity</h2>
 
 <p>Construct a histogram and boxplot for age at facility 37 using ggplot2.</p>
 

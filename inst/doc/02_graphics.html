@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title><a name="types">Data types</a></title>
+<title><a name="intro"></a> Data Visualization I (ggplot2)</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,11 +201,13 @@ hr {
 </head>
 
 <body>
+<h1><a name="intro"></a> Data Visualization I (ggplot2)</h1>
+
 <p>Before we get back into graphics, it is important to understand some of the fundamentals behind what R is doing. </p>
 
 <p>Please open the <code>graphics.R</code> script in your working directory. </p>
 
-<h1><a name="types">Data types</a></h1>
+<h2><a name="types">Data types</a></h2>
 
 <p>Objects in R can be broadly classified according to their dimensions:</p>
 
@@ -226,7 +228,7 @@ hr {
 <li>factor</li>
 </ul>
 
-<h2>Scalars</h2>
+<h3>Scalars</h3>
 
 <p>Scalars have a single value assigned to the object in R. </p>
 
@@ -255,7 +257,7 @@ c = TRUE
 <pre><code>## [1] TRUE
 </code></pre>
 
-<h2>Vectors</h2>
+<h3>Vectors</h3>
 
 <p>The <code>c()</code> function creates a vector in R</p>
 
@@ -304,7 +306,7 @@ c = c(TRUE, FALSE, TRUE)
 <pre><code>## [1] &quot;logical&quot;
 </code></pre>
 
-<h3>Vector construction</h3>
+<h4>Vector construction</h4>
 
 <p>Create a numeric vector that is a sequence using : or <code>seq()</code>.</p>
 
@@ -350,7 +352,7 @@ c = c(TRUE, FALSE, TRUE)
 <pre><code>##  [1] 1 1 2 2 3 3 4 4 1 1 2 2 3 3 4 4
 </code></pre>
 
-<h3>Accessing vector elements</h3>
+<h4>Accessing vector elements</h4>
 
 <p>Elements of a vector can be accessed using brackets, e.g. [index].</p>
 
@@ -401,7 +403,7 @@ a[1]
 <pre><code>## [1] &quot;one&quot;  &quot;four&quot; &quot;five&quot;
 </code></pre>
 
-<h3>Modifying elements of a vector</h3>
+<h4>Modifying elements of a vector</h4>
 
 <p>You can assign new values to elements in a vector using = or &lt;-.</p>
 
@@ -427,7 +429,7 @@ a
 ## [5] &quot;fifty-five&quot;
 </code></pre>
 
-<h2>Matrices</h2>
+<h3>Matrices</h3>
 
 <p>Matrices can be constructed using <code>cbind()</code>, <code>rbind()</code>, and <code>matrix()</code>:</p>
 
@@ -478,7 +480,7 @@ all.equal(m3, m4)
 ## [2,]    3    4
 </code></pre>
 
-<h3>Accessing matrix elements</h3>
+<h4>Accessing matrix elements</h4>
 
 <p>Elements of a matrix can be accessed using brackets separated by a comma, e.g. [row index, column index].</p>
 
@@ -538,7 +540,7 @@ m
 
 <p>You can also construct an object with more than 2 dimensions using the <code>array()</code> function.</p>
 
-<h2>Cannot mix types</h2>
+<h3>Cannot mix types</h3>
 
 <p>You cannot mix types within a vector, matrix, or array</p>
 
@@ -566,7 +568,7 @@ m
 
 <p>Everything is converted to a character. </p>
 
-<h2>Activity</h2>
+<h3>Activity</h3>
 
 <p>Reconstruct the following matrix using the <code>matrix()</code> function, then </p>
 
@@ -590,7 +592,7 @@ m
 
 <p>When you have completed the activity, compare your results to the <a href="02_graphics-solution.html#matrix">solutions</a>.</p>
 
-<h1><a name="frames">Data frames</a></h1>
+<h2><a name="frames">Data frames</a></h2>
 
 <p>A <code>data.frame</code> is a special type of matrix that allows different data types in different columns.</p>
 
@@ -603,7 +605,7 @@ dim(GI)
 <pre><code>## [1] 21244     9
 </code></pre>
 
-<h2>Access <code>data.frame</code> elements</h2>
+<h3>Access <code>data.frame</code> elements</h3>
 
 <p>A <code>data.frame</code> can be accessed just like a matrix, e.g. [row index, column index].</p>
 
@@ -638,7 +640,7 @@ GI %&gt;%
 ## 2       67 558.90 Female
 </code></pre>
 
-<h2>Different data types in different columns</h2>
+<h3>Different data types in different columns</h3>
 
 <p>The function <code>str()</code> allows you to see the structure of any object in R. 
 Using <code>str()</code> on a <code>data.frame</code> object tells you </p>
@@ -666,7 +668,7 @@ Using <code>str()</code> on a <code>data.frame</code> object tells you </p>
 ##  $ gender         : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 1 2 2 1 1 2 2 2 2 ...
 </code></pre>
 
-<h2><a name="factor">Factor</a></h2>
+<h3><a name="factor">Factor</a></h3>
 
 <p>A factor is a data type that represents a categorical variable. </p>
 
@@ -700,7 +702,7 @@ You can change this behavior by setting <code>stringsAsFactors = FALSE</code>.</
 <pre><code>## [1] 2 1 2
 </code></pre>
 
-<h3>Converting a numeric variable into a factor</h3>
+<h4>Converting a numeric variable into a factor</h4>
 
 <p>When a categorical variable is encoded as a numeric variable in the original data set, R reads them in as numeric. To convert them to a factor use <code>as.factor()</code>. </p>
 
@@ -714,7 +716,7 @@ summary(GI$facility)
 ##   67
 </code></pre>
 
-<h3>Converting back to the original numeric variable</h3>
+<h4>Converting back to the original numeric variable</h4>
 
 <p>To obtain the original numeric variable use <code>as.character()</code> and <code>as.numeric()</code></p>
 
@@ -730,7 +732,7 @@ summary(GI$facility)
 <pre><code>## [1]  67  67 123 123 309  66
 </code></pre>
 
-<h3>Creating your own factor</h3>
+<h4>Creating your own factor</h4>
 
 <p>Use the <code>cut()</code> function to create a factor from a continuous variable.</p>
 
@@ -745,7 +747,7 @@ table(GI$ageC)
 
 <p>This created a new variable in the GI <code>data.frame</code> called <em>ageC</em>. </p>
 
-<h2><a name="dates">Dates</a></h2>
+<h3><a name="dates">Dates</a></h3>
 
 <p>In order to use dates properly, they need to be converted into type <code>Date</code>. </p>
 
@@ -767,7 +769,7 @@ If neither works, it will give an error. </p>
 <pre><code class="r">as.Date(&quot;12/09/14&quot;, format=&quot;%m/%d/%y&quot;)
 </code></pre>
 
-<h2>Activity</h2>
+<h3>Activity</h3>
 
 <p>Create a new variable in the GI data set called <code>icd9code</code> that cuts icd9 at 0, 140, 240, 280, 290, 320, 360, 390, 460, 520, 580, 630, 680, 710, 740, 760, 780, 800, and Inf. Find the icd9code that is the most numerous in the GI data set.</p>
 
@@ -778,7 +780,7 @@ If neither works, it will give an error. </p>
 
 <p>When you have completed the activity, compare your results to the <a href="02_graphics-solution.html#factor">solutions</a>.</p>
 
-<h1><a name="reshaping">Reshaping data frames in R</a></h1>
+<h2><a name="reshaping">Reshaping data frames in R</a></h2>
 
 <p>There are two general representations of tabular data.</p>
 
@@ -805,7 +807,7 @@ If neither works, it will give an error. </p>
 
 <p>which is the form most statistical software wants, i.e. there is only one column for the response (count).</p>
 
-<h2>Wide to long</h2>
+<h3>Wide to long</h3>
 
 <p>The <code>tidyr</code> package provides functions to convert between the two 
 representations. First, we need to load the package</p>
@@ -842,7 +844,7 @@ all.equal(m,m2)
 <pre><code>## [1] TRUE
 </code></pre>
 
-<h2>Long to wide</h2>
+<h3>Long to wide</h3>
 
 <p>If we want to convert back, use <code>spread()</code></p>
 
@@ -856,7 +858,7 @@ all.equal(m,m2)
 ## 3    3 212 1024
 </code></pre>
 
-<h1><a name="aggregating">Aggregating data frames in R</a></h1>
+<h2><a name="aggregating">Aggregating data frames in R</a></h2>
 
 <p>The GI data set that we have is already in long format and each row is an individual. 
 We may want to aggregate this information. 
@@ -880,7 +882,7 @@ To do so, we will use the <code>group_by()</code> and <code>summarize()</code> f
 ## 2      ILI  2992
 </code></pre>
 
-<h2>Aggregating the GI data set</h2>
+<h3>Aggregating the GI data set</h3>
 
 <p>Let&#39;s aggregate the GI data set by week, gender, and age category.</p>
 
@@ -934,13 +936,13 @@ nrow(GI_count)
 ## 20 2005-03-07   Male (60, Inf]     6
 </code></pre>
 
-<h2>Activity</h2>
+<h3>Activity</h3>
 
 <p>Aggregate the GI data set by gender, ageC, and icd9code (the ones created in the last activity).</p>
 
 <p>When you have completed the activity, compare your results to the <a href="02_graphics-solution.html#aggregate">solutions</a>.</p>
 
-<h1><a name="ggplot2">Basics of <code>ggplot2</code></a></h1>
+<h2><a name="ggplot2">Basics of <code>ggplot2</code></a></h2>
 
 <p>Previously we produced graphics using the <code>base</code> graphics system. 
 Although I still use this for producing quick plots, I invariably end up using the <code>ggplot2</code> package.
@@ -951,7 +953,7 @@ This package requires a <code>data.frame</code> in long format. </p>
 <pre><code class="r">library(&#39;ggplot2&#39;)
 </code></pre>
 
-<h2>Histogram</h2>
+<h3>Histogram</h3>
 
 <p>A basic histogram in ggplot</p>
 
@@ -969,7 +971,7 @@ This package requires a <code>data.frame</code> in long format. </p>
 I believe this is mainly to ease the transition for individuals who are familiar with <code>base</code> graphics.
 If you are just starting out with R, I recommend using the <code>ggplot</code> function in <code>ggplot2</code> from the beginning.</p>
 
-<h2>Boxplots</h2>
+<h3>Boxplots</h3>
 
 <p>A basic boxplot</p>
 
@@ -978,21 +980,21 @@ If you are just starting out with R, I recommend using the <code>ggplot</code> f
 
 <p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-52"/></p>
 
-<h2>Multiple boxplots</h2>
+<h3>Multiple boxplots</h3>
 
 <pre><code class="r">ggplot(GI, aes(x = facility, y = age)) + geom_boxplot()
 </code></pre>
 
 <p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-53"/></p>
 
-<h2>Scatterplots</h2>
+<h3>Scatterplots</h3>
 
 <pre><code class="r">ggplot(GI, aes(x=date, y=age)) + geom_point()
 </code></pre>
 
 <p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-54"/></p>
 
-<h2>Bar charts</h2>
+<h3>Bar charts</h3>
 
 <p>With ggplot, there is no need to count first.</p>
 
@@ -1001,7 +1003,7 @@ If you are just starting out with R, I recommend using the <code>ggplot</code> f
 
 <p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-55"/></p>
 
-<h2>Activity</h2>
+<h3>Activity</h3>
 
 <p>Construct a histogram and boxplot for age at facility 37 using ggplot2.</p>
 
@@ -1017,7 +1019,7 @@ If you are just starting out with R, I recommend using the <code>ggplot</code> f
 
 <p>When you have completed the activity, compare your results to the <a href="02_graphics-solution.html#ggplot2">solutions</a>.</p>
 
-<h1><a name="customizing">Customizing ggplot2 plots</a></h1>
+<h2><a name="customizing">Customizing ggplot2 plots</a></h2>
 
 <p>There are many ways to customize the appearance of ggplot2 plots:</p>
 
@@ -1030,7 +1032,7 @@ If you are just starting out with R, I recommend using the <code>ggplot</code> f
 <li>Themes</li>
 </ul>
 
-<h2>Colors</h2>
+<h3>Colors</h3>
 
 <pre><code class="r">ggplot(GI, aes(x = age)) + 
   geom_histogram(binwidth = 1, color = &#39;blue&#39;,   fill = &#39;yellow&#39;)
@@ -1049,7 +1051,7 @@ If you are just starting out with R, I recommend using the <code>ggplot</code> f
 <pre><code class="r">colors()
 </code></pre>
 
-<h2>Labels</h2>
+<h3>Labels</h3>
 
 <pre><code class="r">ggplot(GI, aes(x = facility, y = age)) + 
   geom_boxplot() + 
@@ -1060,7 +1062,7 @@ If you are just starting out with R, I recommend using the <code>ggplot</code> f
 
 <p><img src="data:image/png;base64,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Vcnygror//I6qTsTm5srcyWHrCunN6UDqJhMNhdHbrJASeanslx81JKZQu+tiRKszYh7pBTGtOq2yuyIz+ay4nUf33aAOrfkTi/txF/o11qpWnM+LTmprpPlBVXq+o+v07o343ZzSbXWufypWh8mPcefFRYH+gxwVnaON+PVrCjKphh91GI5zaFz+iEXcUW3C46j0mKl5/jNXFZ8XEvaAaba7PTUelWvzi6lyzeLVX3luu8sWdzmip5VrnlzOYdyt5hlybrcWnxZG1VufdR8nQ8N0VnJRU3cI6Wt0P9f0ZBcLis+fr7OFa8kuI4XGogXGogXGogXGogXGogXGlLFX92dzWb3M1vuvVH//PSb840tP6qddk4GhxsixIq/d166bXO7Ej9Xj5+9HBJsqBAufjGbzfXwv/NSj/jPfz3b/buaCJbzKBUfnR5uF7WfECteTfW750r/6vHL1aOTaDE3U/2be+dqiH94EstOxC/uN1U2xhAr3ox45X/nxDy/Fa+sp1sQP7kwapd34uGeE6/meeOaqX6CkYifR8udk3iqX+6+uRW/evT5S7MPi7vJhRG/Oph9cnC4sbi799PB7rk64Sf7cDknKj48nabrTCC+EMvZfNsIAwTihQbihQbihQbihQbihcb/Ad/T7fgTrJatAAAAAElFTkSuQmCC" alt="plot of chunk unnamed-chunk-61"/></p>
 
-<h2>Characters</h2>
+<h3>Characters</h3>
 
 <pre><code class="r">ggplot(GI, aes(x=date, y=age)) + geom_point(shape = 2, color = &#39;red&#39;)
 </code></pre>
@@ -1072,7 +1074,7 @@ If you are just starting out with R, I recommend using the <code>ggplot</code> f
 <pre><code class="r">?points
 </code></pre>
 
-<h2>Line types</h2>
+<h3>Line types</h3>
 
 <p>Here I am also using a trick of setting up part of the plot and assigning it to
 the object <code>g</code>. Then you can add elements to the plot and if you don&#39;t assign
@@ -1099,7 +1101,7 @@ g + geom_line()
 <p>Linetype options can be found in <code>?par</code> under <code>lty</code>. 
 But it is probably easier to just google it, e.g. <a href="http://www.cookbook-r.com/Graphs/Shapes_and_line_types/">http://www.cookbook-r.com/Graphs/Shapes_and_line_types/</a>.</p>
 
-<h2>Themes</h2>
+<h3>Themes</h3>
 
 <pre><code class="r">g = g + geom_line(size = 1, color = &#39;firebrick&#39;)
 g + theme_bw()
@@ -1113,7 +1115,7 @@ g + theme_bw()
 ?theme_bw
 </code></pre>
 
-<h1><a name="help">Getting help on ggplot2</a></h1>
+<h2><a name="help">Getting help on ggplot2</a></h2>
 
 <p>Although the general R help can still be used, e.g. </p>
 
@@ -1129,7 +1131,7 @@ ggplot2 line colors
 
 <p>The top hits will all have the code along with what the code produces.</p>
 
-<h2>Helpful sites</h2>
+<h3>Helpful sites</h3>
 
 <p>These sites all provide code. The first two also provide the plots that are produced.</p>
 
@@ -1139,7 +1141,7 @@ ggplot2 line colors
 <li><a href="http://stackoverflow.com/questions/tagged/ggplot2">http://stackoverflow.com/questions/tagged/ggplot2</a></li>
 </ul>
 
-<h2>Activity</h2>
+<h3>Activity</h3>
 
 <p>Play around with ggplot2 to see what kind of plots you can make.</p>
 

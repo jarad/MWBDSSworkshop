@@ -116,7 +116,7 @@ all.equal(GI, GI2)
 ## ---- eval=FALSE---------------------------------------------------------
 #  install.packages('haven')
 #  library('haven')
-#  d = read_sas('filename.sas7bdat)
+#  d = read_sas('filename.sas7bdat')
 
 ## ------------------------------------------------------------------------
 dim(GI)

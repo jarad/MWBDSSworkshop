@@ -215,7 +215,21 @@ hr {
 
 <p>In this documentation, the above command will be executed at the command prompt, see below. </p>
 
-<h2>R interface</h2>
+<h2>Brief introduction to R</h2>
+
+<p>From <code>help.start()</code>:</p>
+
+<blockquote>
+<p>R is an integrated suite of software facilities for data manipulation, calculation and graphical display.</p>
+</blockquote>
+
+<p>and from <a href="https://www.rstudio.com/products/RStudio/">https://www.rstudio.com/products/RStudio/</a>:</p>
+
+<blockquote>
+<p>RStudio is an integrated development environment (IDE) for R. </p>
+</blockquote>
+
+<h3>R interface</h3>
 
 <p>In contrast to many other statistical software packages that use a point-and-click interface, e.g. SPSS, JMP, Stata, etc, R has a command-line interface. The command line has a command prompt, e.g. <code>&gt;</code>, see below.</p>
 
@@ -233,11 +247,11 @@ hr {
 help() # Use up arrow and fix
 </code></pre>
 
-<h2>R GUI (or <a href="http://www.rstudio.com/">RStudio</a>)</h2>
+<h3>R GUI (or <a href="http://www.rstudio.com/">RStudio</a>)</h3>
 
 <p>Most likely, you are using a graphical user interface (GUI) and therefore, in addition, to the command line, you also have a windowed version of R with some point-and-click options, e.g. File, Edit, and Help.</p>
 
-<p>In particular, there is an editor to create a new R script. So rather than entering commands on the command line, you will write commands in the script and then send those commands to the command line using <code>Ctrl-R</code> (PC) or <code>Command-Enter</code> (Mac).</p>
+<p>In particular, there is an editor to create a new R script. So rather than entering commands on the command line, you will write commands in a script and then send those commands to the command line using <code>Ctrl-R</code> (PC) or <code>Command-Enter</code> (Mac).</p>
 
 <pre><code class="r">a = 1 
 b = 2
@@ -249,7 +263,7 @@ a+b
 
 <p>Multiple lines can be run in sequence by selecting them and then using <code>Ctrl-R</code> (PC) or <code>Command-Enter</code> (Mac).</p>
 
-<h2>Intro Activity</h2>
+<h3>Intro Activity</h3>
 
 <p>One of the most effective ways to use this documentation is to cut-and-paste the commands into a script and then execute them. </p>
 
@@ -272,9 +286,9 @@ s$r.squared
 
 <p>When you have completed the activity, compare your results to the <a href="01_intro-solution.html#introduction">solutions</a>.</p>
 
-<h1><a name="calculator"></a> Using R as a calculator</h1>
+<h2><a name="calculator"></a> Using R as a calculator</h2>
 
-<h2>Basic calculator operations</h2>
+<h3>Basic calculator operations</h3>
 
 <p>All basic calculator operations can be performed in R. </p>
 
@@ -304,7 +318,7 @@ s$r.squared
 
 <p>For now, you can ignore the [1] at the beginning of the line, we&#39;ll learn about that when we get to vectors. </p>
 
-<h2>Advanced calculator operations</h2>
+<h3>Advanced calculator operations</h3>
 
 <p>Many advanced calculator operations are also available.</p>
 
@@ -344,7 +358,7 @@ s$r.squared
 <pre><code>## [1] 1
 </code></pre>
 
-<h2>Using variables</h2>
+<h3>Using variables</h3>
 
 <p>A real advantage to using R rather than a calculator (or calculator app) is the ability to store quantities using variables.</p>
 
@@ -374,7 +388,7 @@ a+b
 <pre><code>## [1] 2
 </code></pre>
 
-<h2>Assignment operators =, &lt;-, and -&gt;</h2>
+<h3>Assignment operators =, &lt;-, and -&gt;</h3>
 
 <p>When assign variables values, you can also use arrows &lt;- and -&gt; and you will often see this in code, e.g. </p>
 
@@ -403,7 +417,7 @@ c = 3  # is the same as &lt;-
 <pre><code>## [1] 3
 </code></pre>
 
-<h2>Using informative variable names</h2>
+<h3>Using informative variable names</h3>
 
 <p>While using variables alone is useful, it is much more useful to use informative variables names.</p>
 
@@ -426,9 +440,9 @@ death_rate
 <pre><code>## [1] 0.2
 </code></pre>
 
-<h2>Calculator Activity</h2>
+<h3>Calculator Activity</h3>
 
-<h3><a href="http://en.wikipedia.org/wiki/Bayes%27_theorem">Bayes&#39; Rule</a></h3>
+<h4><a href="http://en.wikipedia.org/wiki/Bayes%27_theorem">Bayes&#39; Rule</a></h4>
 
 <p>Suppose an individual tests positive for a disease, what is the probability the individual has the disease? Let </p>
 
@@ -461,11 +475,11 @@ death_rate
 
 <p>When you have completed the activity, compare your results to the <a href="01_intro-solution.html#calculator">solutions</a>.</p>
 
-<h1><a name="reading"></a> Reading data into R</h1>
+<h2><a name="reading"></a> Reading data into R</h2>
 
 <p>In this section, we will learn how to read in csv or Excel files into R. We focus on csv files because they are simplest to import, they can be easily exported from Excel (or other software), and they are portable, i.e. they can be used in other software.</p>
 
-<h2><a name="working_directory">Changing your working directory</a></h2>
+<h3><a name="working_directory">Changing your working directory</a></h3>
 
 <p>One of the first tasks after starting R is to change the working directory. To set,</p>
 
@@ -482,7 +496,7 @@ death_rate
 
 <p>Make sure you have write access to this directory. </p>
 
-<h2>Installing and loading a package</h2>
+<h3>Installing and loading a package</h3>
 
 <p>Much of the functionality of R is contained in packages. The first time these packages are used, they need to be installed, e.g. to install a package from <a href="http://cran.r-project.org/web/packages/">CRAN</a> use </p>
 
@@ -494,7 +508,7 @@ death_rate
 <pre><code class="r">library(&#39;dplyr&#39;)
 </code></pre>
 
-<h2>Load and start this workshop</h2>
+<h3>Load and start this workshop</h3>
 
 <p>First load the package </p>
 
@@ -514,7 +528,7 @@ death_rate
 <li>It created a set of .R scripts in your working directory. </li>
 </ol>
 
-<h2>Open an R script</h2>
+<h3>Open an R script</h3>
 
 <p>As we progress through the workshop, the code for a particular module will be available in the R script for that module. </p>
 
@@ -532,7 +546,7 @@ death_rate
 <pre><code class="r"># 1+2
 </code></pre>
 
-<h2>Reading a csv file into R</h2>
+<h3>Reading a csv file into R</h3>
 
 <p>csv stands for comma-separated value file and is a standard file format for data. To read this in to R, use </p>
 
@@ -541,7 +555,7 @@ death_rate
 
 <p>This created a <code>data.frame</code> object in R called GI. </p>
 
-<h2>read.table</h2>
+<h3>read.table</h3>
 
 <p>The <code>read.table()</code> function is a more general function for reading data into R and it has many options. We could have gotten the same results if we had used the following code:</p>
 
@@ -558,7 +572,7 @@ death_rate
 <pre><code>## [1] TRUE
 </code></pre>
 
-<h3><a name="excel">Reading an Excel xlsx file into R</a></h3>
+<h4><a name="excel">Reading an Excel xlsx file into R</a></h4>
 
 <p>My main suggestion for reading Excel files into R is to </p>
 
@@ -579,17 +593,17 @@ d = read.xlsx(&quot;filename.xlsx&quot;, sheetName=&quot;sheetName&quot;)
 
 <p>Again, if these approaches don&#39;t work, you can <code>Save as...</code> a csv file in Excel.</p>
 
-<h3>Read SAS, Stata, or SPSS data files</h3>
+<h4>Read SAS, Stata, or SPSS data files</h4>
 
 <p>The <code>haven</code> package provids functionality to read in SAS, Stata, and SPSS files. 
 An example of reading a SAS file is</p>
 
 <pre><code class="r">install.packages(&#39;haven&#39;)
 library(&#39;haven&#39;)
-d = read_sas(&#39;filename.sas7bdat)
+d = read_sas(&#39;filename.sas7bdat&#39;)
 </code></pre>
 
-<h2>Exploring the data set</h2>
+<h3>Exploring the data set</h3>
 
 <p>There are a number of functions that will provide information about a <code>data.frame</code>. Here are a few:</p>
 
@@ -653,7 +667,7 @@ d = read_sas(&#39;filename.sas7bdat)
 ## 21244                      Diarrhea       GI   Male
 </code></pre>
 
-<h2>Activity</h2>
+<h3>Activity</h3>
 
 <p>If you brought your own Excel file, open it and save a sheet as a csv file in your working directory. If you brought your own csv file, save it in your working directory. If you did not bring your own file, use the <code>fluTrends.csv</code> file in your working directory. </p>
 
@@ -669,7 +683,7 @@ d = read_sas(&#39;filename.sas7bdat)
 
 <p>When you have completed the activity, compare your results to the <a href="01_intro-solution.html#read">solutions</a>.</p>
 
-<h1><a name="descriptive"></a> Descriptive statistics</h1>
+<h2><a name="descriptive"></a> Descriptive statistics</h2>
 
 <p>When reading your data set into R, you will likely want to perform some descriptive statistics. The single most useful command to assess the whole data set is the <code>summary()</code> command:</p>
 
@@ -702,7 +716,7 @@ d = read_sas(&#39;filename.sas7bdat)
 ## 
 </code></pre>
 
-<h2>Descriptive statistics for continuous (numeric) variables</h2>
+<h3>Descriptive statistics for continuous (numeric) variables</h3>
 
 <p>To access a single column in the <code>data.frame</code> use a dollar sign ($). </p>
 
@@ -753,7 +767,7 @@ GI[,5]     # since age is the 5th column
 
 <p>Anything look odd here?</p>
 
-<h2>Descriptive statistics for categorical (non-numeric) variables</h2>
+<h3>Descriptive statistics for categorical (non-numeric) variables</h3>
 
 <p>The <code>table()</code> function provides the number of observations at each level of the categorical variable.</p>
 
@@ -795,7 +809,7 @@ GI[,5]     # since age is the 5th column
 
 <p>Apparently there is only 1 observation from facility 259, was that a typo?</p>
 
-<h2><a name="subsetting">Subsetting the data</a></h2>
+<h3><a name="subsetting">Subsetting the data</a></h3>
 
 <p>Rather than having descriptive statistics for the dataset as a whole, we may be interested in descriptive statistics for a <code>subset</code> of the data. </p>
 
@@ -823,7 +837,7 @@ nrow(GI_AbdPain)
 <pre><code>## [1] 1390
 </code></pre>
 
-<h3>Alternative ways to subset</h3>
+<h4>Alternative ways to subset</h4>
 
 <pre><code class="r">GI_37a = GI[GI$facility==37,]
 all.equal(GI_37, GI_37a)
@@ -853,7 +867,7 @@ all.equal(GI_AbdPain, GI_AbdPain2)
 <pre><code>## [1] &quot;Attributes: &lt; Component \&quot;row.names\&quot;: Mean relative difference: 13.83397 &gt;&quot;
 </code></pre>
 
-<h3>Advanced subsetting</h3>
+<h4>Advanced subsetting</h4>
 
 <p>We can subset continuous variables using other logical statements.</p>
 
@@ -864,7 +878,7 @@ GI %&gt;% filter(tolower(chief_complaint) == &quot;abd pain&quot;)        # any 
 GI %&gt;% filter(!(facility %in% c(37,66)))                     # facility is NOT 37 or 66
 </code></pre>
 
-<h2>Descriptive statistics on the subset</h2>
+<h3>Descriptive statistics on the subset</h3>
 
 <p>Now we can calculate descriptive statistics on this subset, e.g.</p>
 
@@ -882,13 +896,13 @@ GI %&gt;% filter(!(facility %in% c(37,66)))                     # facility is NO
 ##    0.00    7.00   27.00   28.61   45.00  157.00
 </code></pre>
 
-<h2>Activity</h2>
+<h3>Activity</h3>
 
 <p>Find the min, max, mean, and median age for zipcode 20032.</p>
 
 <p>When you have completed the activity, compare your results to the <a href="01_intro-solution.html#descriptive">solutions</a>.</p>
 
-<h1><a name="graphical"></a> Graphical statistics</h1>
+<h2><a name="graphical"></a> Graphical statistics</h2>
 
 <p>Here we focus on the graphical options for the base package in R. 
 Later we will use the ggplot2 package:</p>
@@ -900,7 +914,7 @@ Later we will use the ggplot2 package:</p>
 <li>Bar charts (<code>barplot</code>)</li>
 </ul>
 
-<h2>Histograms</h2>
+<h3>Histograms</h3>
 
 <p>For continuous variables, histograms are useful for visualizing the distribution of the variable</p>
 
@@ -923,7 +937,7 @@ Later we will use the ggplot2 package:</p>
 
 <p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-43"/></p>
 
-<h2>Boxplots</h2>
+<h3>Boxplots</h3>
 
 <p>Boxplots are another way to visualize the distribution for continuous variables.</p>
 
@@ -934,7 +948,7 @@ Later we will use the ggplot2 package:</p>
 
 <p>Now we can see the outliers. </p>
 
-<h3>Multiple boxplots</h3>
+<h4>Multiple boxplots</h4>
 
 <p>Here we create separate boxplots for each facility and label the x and y axes. </p>
 
@@ -943,7 +957,7 @@ Later we will use the ggplot2 package:</p>
 
 <p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-45"/></p>
 
-<h2>Scatterplots</h2>
+<h3>Scatterplots</h3>
 
 <p>Scatterplots are useful for looking at the relationship of two continuous variables. </p>
 
@@ -955,7 +969,7 @@ plot(age~date, GI)
 
 <p>We will talk more later about dealing with dates later.</p>
 
-<h2>Bar charts</h2>
+<h3>Bar charts</h3>
 
 <p>For looking at the counts of categorical variables, we use bar charts.</p>
 
@@ -965,7 +979,7 @@ barplot(counts, xlab=&quot;Facility&quot;, ylab=&quot;Count&quot;, main=&quot;Nu
 
 <p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-47"/></p>
 
-<h2>Activity</h2>
+<h3>Activity</h3>
 
 <p>Construct a histogram and boxplot for age at facility 37.</p>
 
@@ -973,7 +987,7 @@ barplot(counts, xlab=&quot;Facility&quot;, ylab=&quot;Count&quot;, main=&quot;Nu
 
 <p>When you have completed the activity, compare your results to the <a href="01_intro-solution.html#graphical">solutions</a>.</p>
 
-<h1><a name="help"></a> Getting help</h1>
+<h2><a name="help"></a> Getting help</h2>
 
 <p>As you work with R, there will be many times when you need to get help. </p>
 
@@ -987,7 +1001,7 @@ barplot(counts, xlab=&quot;Facility&quot;, ylab=&quot;Count&quot;, main=&quot;Nu
 
 <p>In all cases, knowing the R keywords, e.g. a function name, will be extremely helpful.</p>
 
-<h2>Help within R I</h2>
+<h3>Help within R I</h3>
 
 <p>If you know the function name, then you can use <code>?&lt;function&gt;</code>, e.g.</p>
 
@@ -1005,7 +1019,7 @@ barplot(counts, xlab=&quot;Facility&quot;, ylab=&quot;Count&quot;, main=&quot;Nu
 <li>Examples: examples of how to use the function</li>
 </ul>
 
-<h2>Help within R II</h2>
+<h3>Help within R II</h3>
 
 <p>If you cannot remember the function name, then you can use <code>help.search(&quot;&lt;something&gt;&quot;)</code>, e.g.</p>
 
@@ -1014,7 +1028,7 @@ barplot(counts, xlab=&quot;Facility&quot;, ylab=&quot;Count&quot;, main=&quot;Nu
 
 <p>Depending on how many packages you have loaded, you will find a lot or a little here. </p>
 
-<h2>Internet search for R help</h2>
+<h3>Internet search for R help</h3>
 
 <p>I google for <code>&lt;something&gt; R</code>, e.g. </p>
 

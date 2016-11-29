@@ -8,9 +8,9 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+# Data Visualization I (ggplot2) - Solutions
 
-
-# <a name="matrix"></a> Matrix activity
+## <a name="matrix"></a> Matrix activity
 
 ```{r}
 m = rbind(c(1, 12, 8, 6),
@@ -35,7 +35,7 @@ n[-3,]
 
 
 
-# <a name="factor"></a> Factor activity
+## <a name="factor"></a> Factor activity
 
 ```{r, message=FALSE}
 library('ISDSWorkshop')
@@ -63,7 +63,7 @@ table(GI$icd9code)
 
 
 
-# <a name="aggregate"></a> Aggregate activity
+## <a name="aggregate"></a> Aggregate activity
 
 ```{r, echo=FALSE}
 library('dplyr')
@@ -78,7 +78,7 @@ GI %>%
 
 
 
-# <a name="ggplot2"></a> ggplot2 activity
+## <a name="ggplot2"></a> ggplot2 activity
 
 Construct a histogram and boxplot for age at facility 37 using ggplot2.
 

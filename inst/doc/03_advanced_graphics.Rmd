@@ -12,9 +12,11 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+# Data Visualization II (ggplot2)
+
 Close down R, say 'No' to saving the workspace.
 
-# <a name="workflow"></a> Workflow
+## <a name="workflow"></a> Workflow
 
 The typical workflow in R is 
 
@@ -27,7 +29,7 @@ The typical workflow in R is
 
 If you are using RStudio, I highly recommend you look into setting up [projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects). 
 
-## Choose your working directory 
+### Choose your working directory 
 
 Start R and then [choose your working directory](intro.html#working_directory).
 
@@ -35,7 +37,7 @@ Start R and then [choose your working directory](intro.html#working_directory).
 setwd(choose.dir())
 ```
 
-## Start the workshop
+### Start the workshop
 
 Now start the workshop to get your data files and scripts set up. 
 Typically you would choose your working directory to be where you actually have
@@ -46,7 +48,7 @@ library('ISDSWorkshop')
 workshop(launch_index  = FALSE)
 ```
 
-## Open the script
+### Open the script
 
 Open the `advanced_graphics.R` script.
 
@@ -59,7 +61,7 @@ library('gridExtra')
 ```
 
 
-## Read in the data
+### Read in the data
 
 Typically, you will have a script that reads in the data, converts variables, and then performs statistical analyses.
 
@@ -90,7 +92,7 @@ GI <- GI %>%
 
 
 
-## Reading other scripts
+### Reading other scripts
 
 If the script to read in the data is extensive, it may be better to separate
 your scripts into two different files: one for reading in the data and
@@ -103,7 +105,7 @@ source("read_data.R")
 ```
 
 
-## Check the data
+### Check the data
 
 At this point, I typically check the data to make sure the `data.frame` is what
 I think it is. 
@@ -116,7 +118,7 @@ summary(GI)
 ```
 
 
-## Activity
+### Activity
 
 Create a new variable in the GI data set called `weekD` that is a `Date` object
 with each observation having the Monday of the week for that observation. Check
@@ -131,7 +133,7 @@ When you have completed the activity, compare your results to the [solutions](03
 
 
 
-# <a name="graph_workflow"></a> Graph workflow
+## <a name="graph_workflow"></a> Graph workflow
 
 Now to construct a graph, the workflow is
 
@@ -139,7 +141,7 @@ Now to construct a graph, the workflow is
 1. construct the graph.
 
 
-## Construct the data set
+### Construct the data set
 
 Suppose we want to plot the number of weekly GI cases by facility. We need to aggregate the data by week and facility. 
 
@@ -161,7 +163,7 @@ summary(GI_wf)
 summary(GI_wf$facility)
 ```
 
-## Construct the graph
+### Construct the graph
 
 Now, we would like week on the x-axis and count on the y-axis. 
 
@@ -173,7 +175,7 @@ ggplot(GI_wf, aes(x = week, y = count)) +
 But, clearly we need to distinguish the facilities. 
 
 
-## Try colors and shapes to distinguish facilities
+### Try colors and shapes to distinguish facilities
 
 Colors:
 
@@ -192,7 +194,7 @@ ggplot(GI_wf, aes(x = week, y = count, shape = facility)) +
 ggplot2 only plots 6 different shapes and provides a warning.
 
 
-## Activity - weekly GI counts by age category
+### Activity - weekly GI counts by age category
 
 Construct a data set and then a plot to look at weekly GI cases by age category.
 
@@ -206,14 +208,14 @@ When you have completed the activity, compare your results to the [solutions](03
 
 
 
-# <a name="faceting"></a> Faceting
+## <a name="faceting"></a> Faceting
 
 Faceting is a technique to view many small graphs on a single page.
 
 In ggplot, there are two different ways to construct facets: `facet_wrap()` and `facet_grid()`. The former performs the faceting for a single variable and constructs the matrix of plots automatically. The latter performs faceting for two variables putting one vertically and the other horizontally.
 
 
-## Faceting on a single variable
+### Faceting on a single variable
 
 When there are many levels of a single variable, `facet_wrap()` can often allow comparisons across that variable.
 
@@ -231,7 +233,7 @@ ggplot(GI_wf, aes(x=week, y=count)) +
   facet_wrap(~facility, scales="free")
 ```
 
-## Faceting on two variables
+### Faceting on two variables
 
 When there are two variables (with not very many levels in each), `facet_grid()` can allow relevant comparisons.
 
@@ -251,7 +253,7 @@ ggplot(GI_sa, aes(x = week, y = count)) +
   facet_grid(gender ~ ageC)
 ```
 
-## Using faceting and colors/shapes
+### Using faceting and colors/shapes
 
 In addition, we could use faceting together with colors/shapes
 
@@ -262,7 +264,7 @@ ggplot(GI_sa, aes(x = week, y = count, shape = gender, color = gender)) +
 ```
 
 
-## Activity - weekly GI counts by zip3 and ageC
+### Activity - weekly GI counts by zip3 and ageC
 
 Construct a plot of weekly GI counts by zip3 and ageC. 
 
@@ -275,7 +277,7 @@ When you have completed the activity, compare your results to the [solutions](03
 
 
 
-# <a name="subsetting"></a> Subsetting
+## <a name="subsetting"></a> Subsetting
 
 Often our data set is large and we would like to [subset the data](intro.html#subsetting) to focus on a particular group or time frame. You may want to subset by a
 
@@ -283,7 +285,7 @@ Often our data set is large and we would like to [subset the data](intro.html#su
 - continuous (numeric), or 
 - `Date` variable.
 
-## Subsetting by a categorical variable
+### Subsetting by a categorical variable
 
 For a categorical variable, you want to subset by 
 
@@ -292,7 +294,7 @@ For a categorical variable, you want to subset by
 - not in a single category
 - not in a set of categories
 
-### Subsetting by a single category
+#### Subsetting by a single category
 
 Suppose we are only interested in counts specifically for infectious and parasitic diseases (IPD).
 
@@ -307,7 +309,7 @@ ggplot(IPD_w, aes(x=week, y=count)) +
 ```
 
 
-### Subsetting by a set of categories
+#### Subsetting by a set of categories
 
 Suppose we are interested in looking at both IPD and ill-defined conditions
 
@@ -337,7 +339,7 @@ ggplot(IPDp_w, aes(x = week, y = count)) +
   facet_wrap(~ icd9class, scales = "free")
 ```
 
-### Subsetting by not in a single category
+#### Subsetting by not in a single category
 
 ```{r}
 # Combine subsetting and summarizing
@@ -351,7 +353,7 @@ ggplot(nIPD_w, aes(x=week, y=count)) +
   facet_wrap(~icd9class, scales="free")
 ```
 
-### Subsetting by not in a set of categories
+#### Subsetting by not in a set of categories
 
 ```{r}
 nIPDp_w <- GI %>%
@@ -365,7 +367,7 @@ ggplot(nIPDp_w, aes(x = week, y = count)) +
 ```
 
 
-## Subsetting by a continuous (numeric) variable
+### Subsetting by a continuous (numeric) variable
 
 We may want to subset a continuous (numeric) variable by
 
@@ -373,7 +375,7 @@ We may want to subset a continuous (numeric) variable by
 - Small than (or equal to) a number
 - In a range of numbers (with our without endpoints)
 
-### Subsetting larger than a number
+#### Subsetting larger than a number
 
 ```{r}
 Age60p_w <- GI %>%
@@ -385,7 +387,7 @@ ggplot(Age60p_w, aes(x=week, y=count)) +
   geom_point()
 ```
 
-### Subsetting less than or equal to a number 
+#### Subsetting less than or equal to a number 
 
 ```{r}
 Age_lte30_w <- GI %>%
@@ -397,7 +399,7 @@ ggplot(Age_lte30_w, aes(x=week, y=count)) +
   geom_point()
 ```
 
-### Subsetting within a range
+#### Subsetting within a range
 
 ```{r}
 Age30to60_w <- GI %>%
@@ -409,7 +411,7 @@ ggplot(Age30to60_w, aes(x=week, y=count)) +
   geom_point()
 ```
 
-## Subsetting a date
+### Subsetting a date
 
 Subsetting a date works similar to subsetting a continuous (numeric) variable once you convert a comparison value to a `Date` using the `as.Date()` function.
 
@@ -419,7 +421,7 @@ Let's create a `Date` vector containing the two values we will use for subsettin
 two_dates = as.Date(c("2007-01-01", "2007-12-31"))
 ```
 
-### Subsetting dates
+#### Subsetting dates
 
 ```{r}
 early <- GI %>% filter(date <  two_dates[1])
@@ -450,7 +452,7 @@ grid.arrange(g1,g3,g2)
 ```
 
 
-## Activity - subsetted graphs
+### Activity - subsetted graphs
 
 Construct a plot for those in zipcode 206xx between Jan 1, 2008 and Dec 31, 2008. 
 
@@ -466,7 +468,7 @@ When you have completed the activity, compare your results to the [solutions](03
 
 
 
-# <a name="professional"></a> Making professional looking graphics
+## <a name="professional"></a> Making professional looking graphics
 
 To make the graphics we are producing look professional, we will need to [customize](graphics.html#customizing) the graph according to the final production platform, e.g. website, word document, pdf document, etc. This will be highly specific to your use. Nonetheless, likely you will use the following `ggplot2` functions:
 
@@ -476,7 +478,7 @@ To make the graphics we are producing look professional, we will need to [custom
 
 But there are many others. One thing you will notice is that we can keep updating the graph by updating the R object that holds the graph. 
 
-## Base graphic 
+### Base graphic 
 
 Let's start with the following graph
 
@@ -492,7 +494,7 @@ ggplot(GI_sum, aes(x = weekD, y = count, color = gender)) +
   facet_grid(ageC ~ ., scales = "free_y")
 ```
 
-## Change age category labels
+### Change age category labels
 
 The easiest way to change some of the labels on the graph is to change the 
 underlying data. Here we change the levels associated with the `ageC` variable. 
@@ -513,7 +515,7 @@ g
 `g` is the R object that contains the graph
 
 
-## Change colors 
+### Change colors 
 
 Intuitive colors can make a graph easier to read. 
 
@@ -524,7 +526,7 @@ g
 ```
 
 
-## Change title/axis labels and put legend on the bottom
+### Change title/axis labels and put legend on the bottom
 
 Use proper names and capitalization in title and axis labels.
 
@@ -535,7 +537,7 @@ g = g +
 g
 ```
 
-## Try alternate themes
+### Try alternate themes
 
 Try alternate themes:
 
@@ -551,7 +553,7 @@ To see a list of possibilities:
 ```
 
 
-## Adjust font sizes
+### Adjust font sizes
 
 Depending on the final platform, font sizes may need to be adjusted.
 
@@ -563,7 +565,7 @@ g
 ```
 
 
-## <a name="exporting"></a> Exporting graphs
+### <a name="exporting"></a> Exporting graphs
 
 To export the graphs, use the `ggsave()` function which saves the last plot that you displayed. As a default, it uses the size of the current graphics device, but you will likely want to modify this. 
 
