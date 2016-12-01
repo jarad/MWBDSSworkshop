@@ -39,7 +39,15 @@ You will need internet access during this process.
     install.packages("devtools")
     devtools::install_github("jarad/ISDSWorkshop")
 
+If it asks you to choose a repository, 
+just choose a repository that is geographically close to you.
 If asked to create a `personal library`, please say `yes`. 
+
+If you receive an error with the second step above, please try the following:
+
+    install.packages(c("dplyr","ggplot2","tidyr"))
+    devtools::install_github("jarad/ISDSWorkshop")
+
 
 ### Exit R
 
