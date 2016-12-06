@@ -18,7 +18,6 @@ following commands to load libraries,
 library('ggplot2')
 library('dplyr')
 library('tidyr')
-library('RColorBrewer') 
 library('ISDSWorkshop')
 workshop(launch_index=FALSE)
 ```
@@ -205,14 +204,18 @@ Some Google Flu Trend data.
 ```{r}
 states_merged$Date = as.Date(states_merged$Date)
 mx_date = max(states_merged$Date)
-ggplot(states_merged %>% filter(Date == mx_date), 
+g = ggplot(states_merged %>% filter(Date == mx_date), 
        aes(x = long, y = lat, group = group, fill = index)) + 
   geom_polygon() + 
   labs(title=paste('Google Flu Trends on', mx_date), x='', y='') +
   theme_minimal() + 
   theme(legend.title = element_blank()) +
-  coord_map("cylindrical") + 
-  scale_fill_gradientn(colours=brewer.pal(9,"Reds")) # Thanks Annie Chen
+  coord_map("cylindrical")
+
+if (require('RColorBrewer'))
+  g = g + scale_fill_gradientn(colours=RColorBrewer::brewer.pal(9,"Reds")) # Thanks Annie Chen
+
+g
 ```
 
 Last 12 weeks.
