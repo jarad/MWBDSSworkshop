@@ -1,10 +1,10 @@
 ---
-title: "Advanced Biosurveillance"
+title: "Intermediate R"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Advanced Biosurveillance}
+  %\VignetteIndexEntry{Intermediate R}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---

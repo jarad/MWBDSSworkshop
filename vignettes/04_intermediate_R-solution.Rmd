@@ -1,10 +1,10 @@
 ---
-title: "Advanced Biosurveillance- Activity Solutions"
+title: "Intermediate R - Activity Solutions"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Advanced Biosurveillance - Activity Solutions}
+  %\VignetteIndexEntry{Intermediate R - Activity Solutions}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -13,7 +13,6 @@ vignette: >
 
 ```{r, echo=FALSE, message=FALSE}
 library('ggplot2')
-library('maps')
 library('dplyr')
 library('tidyr')
 library('xtable')
