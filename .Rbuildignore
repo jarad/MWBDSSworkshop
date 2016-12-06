@@ -3,3 +3,4 @@
 ^install_workshop\.R$
 ^ISDSWorkshop\.Rproj$
 ^TODO\.md$
+^data-raw$
