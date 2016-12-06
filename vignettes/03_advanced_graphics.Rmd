@@ -62,7 +62,6 @@ the script at the top of the script.
 ```{r, message=FALSE}
 library('dplyr')
 library('ggplot2')
-library('gridExtra')
 ```
 
 
@@ -473,12 +472,10 @@ g3 = ggplot(mid_w,   aes(x = week, y = count)) + geom_point()
 
 To arrange multiple plots, use the `grid.arrange` function in the `gridExtra` package.
 
-```{r, eval=FALSE}
-library('gridExtra')
-```
-
 ```{r}
-grid.arrange(g1,g3,g2)
+# you may need to run install.packages("gridExtra")
+if (require('gridExtra'))
+  gridExtra::grid.arrange(g1,g3,g2)
 ```
 
 This set of figures would have been a lot easier to construct if we had simply
