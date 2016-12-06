@@ -36,24 +36,43 @@ Start RStudio (or R GUI if you did not install RStudio).
 At the command prompt (`>`) in the Console window of R, copy-paste the following code. This will download and install a number of packages that we will need and create vignettes (this could take a while). 
 You will need internet access during this process.
 
-    install.packages("devtools")
+    install.packages(c("devtools","dplyr","ggplot2","tidyr"))
     devtools::install_github("jarad/ISDSWorkshop")
 
 If it asks you to choose a repository, 
-just choose a repository that is geographically close to you.
-If asked to create a `personal library`, please say `yes`. 
+choose a repository that is geographically close to you.
+If asked to create a `personal library`, say `yes`. 
 
-If you receive an error with the second step above, please try the following:
 
-    install.packages(c("dplyr","ggplot2","tidyr"))
-    devtools::install_github("jarad/ISDSWorkshop")
+### (Optional) Install additional packages
+
+There are a few other packages that will be used lightly or referenced during
+the workshop. 
+These packages are listed under "Suggests:" in the 
+[DESCRIPTION file](https://github.com/jarad/ISDSWorkshop/blob/master/DESCRIPTION).
+To install these packages, in R run
+
+    ISDSWorkshop::install_additional_packages()
+    
+A warning will be issued for any packages that could not be installed.
+
+
+### (Optional) Test your installation
+
+If you want to test that everything is working, in R run 
+
+    ISDSWorkshop::workshop(FALSE, FALSE)
+
+which should open a web-browser with an outline for the workshop. 
+
 
 
 ### Exit R
 
-Regardless of which method above you used. You can exit out of R by copy-pasting the following command. 
+Regardless of which method above you used, exit R by running
 
     q("no")
 
+in R.
 
 

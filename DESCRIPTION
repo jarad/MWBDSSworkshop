@@ -13,20 +13,21 @@ Description: An R package for the International Society for Disease
     examples of descriptive and graphical statistics and ways to export
     these summaries to be incorporated in standard document formats.
 Depends:
-    R (>= 3.0),
+    R (>= 3.0)
+Suggests:
     ggplot2,
     dplyr,
-    tidyr
-Suggests:
-    knitr,
-    maps,
-    mapproj,
+    tidyr,
     MMWRweek,
-    rmarkdown,
-    SpatialEpi,
-    xtable,
     RColorBrewer,
-    gridExtra
+    gridExtra,
+    xtable,
+    maps,
+    maptools,
+    mapproj,
+    SpatialEpi,
+    knitr,
+    rmarkdown
 License: GPL (> 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
