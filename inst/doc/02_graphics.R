@@ -1,3 +1,7 @@
+## ---- eval=FALSE---------------------------------------------------------
+## setwd(choose.dir(getwd())) # change your working directory
+## ISDSWorkshop::workshop()   # write the files (and open up the workshop outline)
+
 ## ------------------------------------------------------------------------
 a = 3.14159265 
 b = "ISDS Workshop" 
@@ -26,7 +30,7 @@ class(c)
 ## ------------------------------------------------------------------------
 1:10
 5:-2
-seq(2, 5, by=.05)
+seq(from = 2, to = 5, by = .05)
 
 ## ------------------------------------------------------------------------
 rep(1:4, times = 2)
@@ -62,10 +66,10 @@ m2 = rbind(c(1,3), c(2,4))       # Row bind
 m1
 all.equal(m1, m2)
 
-m3 = matrix(1:4, nrow=2, ncol=2)
-all.equal(m1,m3)
+m3 = matrix(1:4, nrow = 2, ncol = 2)
+all.equal(m1, m3)
 
-m4 = matrix(1:4, nrow=2, ncol=2, byrow=TRUE)
+m4 = matrix(1:4, nrow = 2, ncol = 2, byrow = TRUE)
 all.equal(m3, m4)
 
 m3
@@ -140,7 +144,15 @@ GI[1:2, c("facility","icd9","gender")]
 library('dplyr') 
 GI %>% 
   select(facility, icd9, gender) %>%
-  head(2)
+  head(n = 2)
+
+## ---- eval=FALSE---------------------------------------------------------
+## # Approach 1
+## head(select(GI, facility, icd9, gender), n = 2)
+## 
+## # Approach 2
+## GI_select <- select(GI, facility, icd9, gender)
+## head(GI_select, n = 2)
 
 ## ------------------------------------------------------------------------
 str(GI)
@@ -168,24 +180,26 @@ GI$date = as.Date(GI$date)
 str(GI$date)
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  ?as.Date
+## ?as.Date
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  as.Date("12/09/14", format="%m/%d/%y")
+## as.Date("12/09/14", format="%m/%d/%y")
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  # Create icd9code
-#  
-#  # Find the icd9code that is most numerous
+## # Create icd9code
+## 
+## # Find the icd9code that is most numerous
 
 ## ---- echo=FALSE---------------------------------------------------------
-d = data.frame(week=1:3, GI=c(246,195,212), ILI=c(948, 1020, 1024))
+d = data.frame(week = 1:3, 
+               GI = c(246,195,212), 
+               ILI = c(948, 1020, 1024))
 d
 
 ## ---- echo=FALSE---------------------------------------------------------
 library('tidyr')
 d %>% 
-  gather(syndrome, count, -week)
+  gather(key = syndrome, value = count, -week)
 
 ## ------------------------------------------------------------------------
 library('tidyr')
@@ -197,22 +211,22 @@ d = data.frame(week = 1:3,
 
 ## ------------------------------------------------------------------------
 m <- d %>%
-  gather(syndrome, # Creates a column called syndrome
-         count,    # Creates a column called count
-         -week)    # Keeps the column `week` as a column
-                   # All other columns (GI and ILI) are gathered
+  gather(key = syndrome, # Creates a column called syndrome
+         value = count,  # Creates a column called count
+         -week)          # Keeps the column `week` as a column
+                         # All other columns (GI and ILI) are gathered
 
 ## ------------------------------------------------------------------------
 m2 <- d %>%
-  gather(syndrome, # Creates a column called syndrome
-         count,    # Creates a column called count
-         GI, ILI)    # Gathers these columns
+  gather(key = syndrome, # Creates a column called syndrome
+         value = count,  # Creates a column called count
+         GI, ILI)        # Gathers these columns
 
 all.equal(m,m2)
 
 ## ------------------------------------------------------------------------
 m %>%
-  spread(syndrome, count)
+  spread(key = syndrome, value = count)
 
 ## ------------------------------------------------------------------------
 library('dplyr')
@@ -229,9 +243,9 @@ GI$week = cut(GI$date,
               start.on.monday = TRUE) 
 
 ## ------------------------------------------------------------------------
-GI_count <- GI %>%
-  group_by(week, gender, ageC) %>%
-  summarize(total = n())       # . in a placeholder for the dataset
+GI_count <- GI %>%                 # each row is a single observation
+  group_by(week, gender, ageC) %>% # split the data by these variables
+  summarize(total = n())           # this counts the number of rows, see ?n
 
 nrow(GI_count)
 head(GI_count, 20)
@@ -246,7 +260,7 @@ library('ggplot2')
 ggplot(data = GI, aes(x = age)) + geom_histogram(binwidth = 1)
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  qplot(data = GI, x = age, geom = "histogram", binwidth = 1)
+## qplot(data = GI, x = age, geom = "histogram", binwidth = 1)
 
 ## ------------------------------------------------------------------------
 ggplot(data = GI, aes(x = 1, y = age)) + geom_boxplot()
@@ -261,12 +275,12 @@ ggplot(GI, aes(x=date, y=age)) + geom_point()
 ggplot(GI, aes(x=facility)) + geom_bar()
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  # Construct a histogram for age at facility 37.
-#  
-#  # Construct a boxplot for age at facility 37.
+## # Construct a histogram for age at facility 37.
+## 
+## # Construct a boxplot for age at facility 37.
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  # Construct a bar chart for the 3-digit zipcode at facility 37
+## # Construct a bar chart for the 3-digit zipcode at facility 37
 
 ## ------------------------------------------------------------------------
 ggplot(GI, aes(x = age)) + 
@@ -277,27 +291,27 @@ ggplot(GI, aes(x=date, y=age)) +
   geom_point(color = 'purple')
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  colors()
+## colors()
 
 ## ------------------------------------------------------------------------
 ggplot(GI, aes(x = facility, y = age)) + 
   geom_boxplot() + 
-  labs(x = 'Facility ID', 
-       y = 'Age (in years)', 
-      title = 'Age by Facility ID')
+  labs(x     = 'Facility ID', 
+       y     = 'Age (in years)', 
+       title = 'Age by Facility ID')
 
 ## ------------------------------------------------------------------------
 ggplot(GI, aes(x=date, y=age)) + geom_point(shape = 2, color = 'red')
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  ?points
+## ?points
 
 ## ------------------------------------------------------------------------
 g = ggplot(GI %>% 
              group_by(week) %>%
-             summarize(count = n()), # counts the number of rows in each data.frame
-       aes(x = as.numeric(week), 
-           y = count)) +
+             summarize(count = n()), 
+           aes(x = as.numeric(week), 
+               y = count)) +
   labs(x = 'Week #', 
        y = 'Weekly count')
 
@@ -309,10 +323,10 @@ g = g + geom_line(size = 1, color = 'firebrick')
 g + theme_bw()
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  ?theme
-#  ?theme_bw
+## ?theme
+## ?theme_bw
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  ?ggplot
-#  ?geom_point
+## ?ggplot
+## ?geom_point
 

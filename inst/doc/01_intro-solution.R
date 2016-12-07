@@ -1,4 +1,5 @@
 ## ---- echo=FALSE, message=FALSE------------------------------------------
+library('dplyr')
 library('ISDSWorkshop')
 workshop(launch_index=FALSE)
 

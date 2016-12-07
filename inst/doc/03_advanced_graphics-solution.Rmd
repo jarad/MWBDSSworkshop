@@ -2,7 +2,7 @@
 title: "Data Visualization II (ggplot2) - Activity Solutions"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::html_document
 vignette: >
   %\VignetteIndexEntry{Data Visualization II (ggplot2) - Activity Solutions}
   %\VignetteEngine{knitr::rmarkdown}
@@ -21,7 +21,7 @@ workshop(launch_index  = FALSE) # to make sure scripts and csv files are availab
 
 ```{r, echo=FALSE}
 # Read in csv files
-GI     = read.csv('GI.csv')
+GI     = read.csv("GI.csv")
 icd9df = read.csv("icd9.csv")
 ```
 

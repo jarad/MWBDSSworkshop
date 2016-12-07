@@ -7,7 +7,7 @@ workshop(launch_index  = FALSE) # to make sure scripts and csv files are availab
 
 ## ---- echo=FALSE---------------------------------------------------------
 # Read in csv files
-GI     = read.csv('GI.csv')
+GI     = read.csv("GI.csv")
 icd9df = read.csv("icd9.csv")
 
 ## ---- echo=FALSE---------------------------------------------------------

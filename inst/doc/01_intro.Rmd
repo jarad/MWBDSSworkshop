@@ -2,7 +2,7 @@
 title: "Introduction to R"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::html_document
 vignette: >
   %\VignetteIndexEntry{Introduction to R}
   %\VignetteEngine{knitr::rmarkdown}

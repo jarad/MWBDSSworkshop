@@ -2,7 +2,7 @@
 title: "Data Visualization I (ggplot2)"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::html_document
 vignette: >
   %\VignetteIndexEntry{Data Visualization I (ggplot2)}
   %\VignetteEngine{knitr::rmarkdown}
@@ -448,7 +448,7 @@ package.
 
 Create a new variable in the GI data set called `icd9code` that cuts icd9 at 
 0, 140, 240, 280, 290, 320, 360, 390, 460, 520, 580, 630, 680, 710, 740, 760, 
-780, 800, and Inf. 
+780, 800, 1000, and Inf. 
 Find the `icd9code` that is the most numerous in the GI data set.
 
 ```{r, eval=FALSE}

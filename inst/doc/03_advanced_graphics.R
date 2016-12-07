@@ -12,7 +12,7 @@ icd9df = read.csv("icd9.csv")
 GI <- GI %>%
   mutate(
     date      = as.Date(date),
-    weekC     = cut(date, breaks="weeks"),
+    weekC     = cut(date, breaks="weeks"), 
     week      = as.numeric(weekC),
     facility  = as.factor(facility),
     icd9class = factor(cut(icd9, 
@@ -29,7 +29,7 @@ str(GI)
 summary(GI)
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  # Create weekD variable in GI data set
+## # Create weekD variable in GI data set
 
 ## ------------------------------------------------------------------------
 GI_wf <- GI %>%
@@ -37,13 +37,13 @@ GI_wf <- GI %>%
   summarize(count = n())
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  nrow(GI_wf) # Should have number of weeks times number of facilities rows
-#  ncol(GI_wf) # Should have 3 columns: week, facility, count
-#  dim(GI_wf)
-#  head(GI_wf)
-#  tail(GI_wf)
-#  summary(GI_wf)
-#  summary(GI_wf$facility)
+## nrow(GI_wf) # Should have number of weeks times number of facilities rows
+## ncol(GI_wf) # Should have 3 columns: week, facility, count
+## dim(GI_wf)
+## head(GI_wf)
+## tail(GI_wf)
+## summary(GI_wf)
+## summary(GI_wf$facility)
 
 ## ------------------------------------------------------------------------
 ggplot(GI_wf, aes(x = week, y = count)) + 
@@ -58,19 +58,19 @@ ggplot(GI_wf, aes(x = week, y = count, shape = facility)) +
   geom_point()
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  # Construct a data set aggregated by week and age category
-#  
-#  # Construct a plot to look at weekly GI cases by age category.
+## # Construct a data set aggregated by week and age category
+## 
+## # Construct a plot to look at weekly GI cases by age category.
 
 ## ------------------------------------------------------------------------
-ggplot(GI_wf, aes(x=week, y=count)) + 
+ggplot(GI_wf, aes(x = week, y = count)) + 
   geom_point() + 
-  facet_wrap(~facility)
+  facet_wrap(~ facility)
 
 ## ------------------------------------------------------------------------
-ggplot(GI_wf, aes(x=week, y=count)) + 
+ggplot(GI_wf, aes(x = week, y = count)) + 
   geom_point() + 
-  facet_wrap(~facility, scales="free")
+  facet_wrap(~ facility, scales = "free")
 
 ## ------------------------------------------------------------------------
 GI_sa <- GI %>%
@@ -85,10 +85,10 @@ ggplot(GI_sa, aes(x = week, y = count)) +
 ## ------------------------------------------------------------------------
 ggplot(GI_sa, aes(x = week, y = count, shape = gender, color = gender)) + 
   geom_point() + 
-  facet_wrap( ~ ageC)
+  facet_wrap(~ ageC)
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  # Construct a plot of weekly GI counts by zip3 and ageC.
+## # Construct a plot of weekly GI counts by zip3 and ageC.
 
 ## ------------------------------------------------------------------------
 IPD_w <- GI %>%
@@ -96,7 +96,7 @@ IPD_w <- GI %>%
   group_by(week) %>%
   summarize(count = n())
 
-ggplot(IPD_w, aes(x=week, y=count)) + 
+ggplot(IPD_w, aes(x = week, y = count)) + 
   geom_point()
 
 ## ------------------------------------------------------------------------
@@ -119,15 +119,15 @@ ggplot(IPDp_w, aes(x = week, y = count)) +
   facet_wrap(~ icd9class, scales = "free")
 
 ## ------------------------------------------------------------------------
-# Combine subsetting and summarizing
+# Combine filtering and summarizing
 nIPD_w <- GI %>%
   filter(icd9class != "infectious and parasitic disease") %>%
   group_by(week, icd9class) %>%
   summarize(count = n())
 
-ggplot(nIPD_w, aes(x=week, y=count)) + 
+ggplot(nIPD_w, aes(x = week, y = count)) + 
   geom_point() + 
-  facet_wrap(~icd9class, scales="free")
+  facet_wrap(~ icd9class, scales = "free")
 
 ## ------------------------------------------------------------------------
 nIPDp_w <- GI %>%
@@ -145,7 +145,7 @@ Age60p_w <- GI %>%
   group_by(week) %>%
   summarize(count = n())
 
-ggplot(Age60p_w, aes(x=week, y=count)) + 
+ggplot(Age60p_w, aes(x = week, y = count)) + 
   geom_point()
 
 ## ------------------------------------------------------------------------
@@ -154,7 +154,7 @@ Age_lte30_w <- GI %>%
   group_by(week) %>%
   summarize(count = n())
 
-ggplot(Age_lte30_w, aes(x=week, y=count)) + 
+ggplot(Age_lte30_w, aes(x = week, y = count)) + 
   geom_point()
 
 ## ------------------------------------------------------------------------
@@ -163,7 +163,7 @@ Age30to60_w <- GI %>%
   group_by(week) %>%
   summarize(count = n())
 
-ggplot(Age30to60_w, aes(x=week, y=count)) + 
+ggplot(Age30to60_w, aes(x = week, y = count)) + 
   geom_point()
 
 ## ------------------------------------------------------------------------
@@ -171,7 +171,7 @@ two_dates = as.Date(c("2007-01-01", "2007-12-31"))
 
 ## ------------------------------------------------------------------------
 early <- GI %>% filter(date <  two_dates[1])
-late  <- GI %>% filter(date >= two_dates[1])
+late  <- GI %>% filter(date >= two_dates[2])
 mid   <- GI %>% filter(date >= two_dates[1], date < two_dates[2])
 
 ## ------------------------------------------------------------------------
@@ -179,22 +179,39 @@ early_w <- early %>% group_by(week) %>% summarize(count = n())
 late_w  <- late  %>% group_by(week) %>% summarize(count = n())
 mid_w   <- mid   %>% group_by(week) %>% summarize(count = n())
 
-g1 = ggplot(early_w, aes(x=week, y=count)) + geom_point()
-g2 = ggplot(late_w,  aes(x=week, y=count)) + geom_point()
-g3 = ggplot(mid_w,   aes(x=week, y=count)) + geom_point()
+g1 = ggplot(early_w, aes(x = week, y = count)) + geom_point()
+g2 = ggplot(late_w,  aes(x = week, y = count)) + geom_point()
+g3 = ggplot(mid_w,   aes(x = week, y = count)) + geom_point()
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  library('gridExtra')
+## library('gridExtra')
 
 ## ------------------------------------------------------------------------
 grid.arrange(g1,g3,g2)
 
+## ------------------------------------------------------------------------
+cut_dates <- c(as.Date("1900-01-01"),
+               two_dates,
+               Sys.Date())
+
+GI_time <- GI %>% 
+  mutate(time = cut(date, 
+                    breaks = cut_dates, 
+                    labels = c("early","mid","late"))) %>%
+  group_by(week, time) %>%
+  summarize(count = n())
+
+ggplot(GI_time,
+       aes(x = week, y = count)) +
+  geom_point() +
+  facet_wrap(~ time, ncol = 1, scales = "free")
+
 ## ---- eval=FALSE---------------------------------------------------------
-#  # Subset the data to zipcode 206xx between Jan 1, 2008 and Dec 31, 2008
-#  
-#  # Aggregate the date for each week in this time frame
-#  
-#  # Construct the plot of weekly GI counts in zipcode 206xx.
+## # Filter the data to zipcode 206xx between Jan 1, 2008 and Dec 31, 2008
+## 
+## # Aggregate the date for each week in this time frame
+## 
+## # Construct the plot of weekly GI counts in zipcode 206xx.
 
 ## ------------------------------------------------------------------------
 GI$weekD = as.Date(GI$weekC) 
@@ -213,9 +230,9 @@ levels(GI_sum$ageC) = paste("Age:", c("<5","5-18","18-45","45-60",">60"))
 table(GI_sum$ageC)
 
 ## ------------------------------------------------------------------------
-g = ggplot(GI_sum, aes(x=weekD, y=count, color=gender)) + 
-  geom_point(size=3) + 
-  facet_grid(ageC~., scales="free_y")
+g = ggplot(GI_sum, aes(x = weekD, y = count, color = gender)) + 
+  geom_point(size = 3) + 
+  facet_grid(ageC ~ ., scales = "free_y")
 g
 
 ## ------------------------------------------------------------------------
@@ -224,8 +241,8 @@ g
 
 ## ------------------------------------------------------------------------
 g = g + 
-  labs(title="Weekly GI cases", x="Year", y="Weekly count") + 
-  theme(legend.position="bottom")
+  labs(title = "Weekly GI cases", x = "Year", y = "Weekly count") + 
+  theme(legend.position = "bottom")
 g
 
 ## ------------------------------------------------------------------------
@@ -233,12 +250,15 @@ g = g + theme_bw()
 g
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  ?theme_bw
+## ?theme_bw
+## ?theme
 
 ## ------------------------------------------------------------------------
-g = g + theme(title=element_text(size=rel(2)),
+g = g + theme(title = element_text(size=rel(2)),
               text = element_text(size=16),
-              legend.background = element_rect(fill="white", size=.5, color="black"))
+              legend.background = element_rect(fill  = "white", 
+                                               size  = .5, 
+                                               color = "black"))
 g
 
 ## ------------------------------------------------------------------------
