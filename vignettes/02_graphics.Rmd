@@ -9,8 +9,6 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-# <a name="intro"></a> Data Visualization I (ggplot2)
-
 Before we get back into graphics, it is important to understand some of the 
 fundamentals behind what R is doing. 
 

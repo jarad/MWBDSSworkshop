@@ -9,8 +9,6 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-# Data Visualization II (ggplot2) - Activity Solutions
-
 ```{r, echo=FALSE, message=FALSE}
 library('ggplot2')
 library('dplyr')

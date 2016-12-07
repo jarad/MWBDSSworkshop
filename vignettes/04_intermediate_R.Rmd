@@ -9,8 +9,6 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-# Advanced R
-
 If you shut down R, you will need to change your working directory and run the 
 following commands to load libraries,
 

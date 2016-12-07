@@ -9,8 +9,6 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-# Data Visualization II (ggplot2)
-
 Close down R, say 'No' to saving the workspace.
 In fact, I recommend you change your settings so that 
 

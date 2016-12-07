@@ -14,7 +14,6 @@ library('dplyr')
 library('ISDSWorkshop')
 workshop(launch_index=FALSE)
 ```
-# Introduction to R - Activity Solutions
 
 ## <a name="introduction"></a> Introduction
 

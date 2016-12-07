@@ -9,9 +9,6 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-
-# <a name="intro"></a> Introduction to R 
-
 ## Detailed introduction
 
 For an extremely detailed introduction, please see
