@@ -2,7 +2,7 @@
 title: "Data Visualization I (ggplot2)"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::html_document
 vignette: >
   %\VignetteIndexEntry{Data Visualization I (ggplot2)}
   %\VignetteEngine{knitr::rmarkdown}
