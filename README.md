@@ -1,9 +1,12 @@
-ISDSWorkshop
+Midwest Big Data Summer School - R Workshop
 ============
 
-An R package for the Introduction to R for Biosurveillance [pre-conference training](http://www.syndromic.org/annual-conference/2015-isds-conference/pre-conference-trainings) for the [International Society for Disease Surveillance](http://www.syndromic.org/).
+An R package for the Midwest Big Data Summer School [pre-conference training](http://mbds.cs.iastate.edu/2019/) R workshop.
 
-Prior to the conference, please install R, Rstudio (not required, but highly recommended), and the ISDSWorkshop R package. 
+Prior to the workshop, 
+please install R, 
+Rstudio (not required, but highly recommended), 
+and the MWBDSSworkshop R package. 
 You will need to have internet access and administrator privileges to install everything.
 
 ## Install R (may require administrator privileges)
@@ -30,14 +33,14 @@ Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct
 Install like any other program. 
 
 
-## Install the ISDSWorkshop R package (should not require administrator privileges)
+## Install the MWBDSSworkshop R package (should not require administrator privileges)
 
 Start RStudio (or R GUI if you did not install RStudio). 
 At the command prompt (`>`) in the Console window of R, copy-paste the following code. This will download and install a number of packages that we will need and create vignettes (this could take a while). 
 You will need internet access during this process.
 
-    install.packages(c("devtools","dplyr","ggplot2","tidyr"))
-    devtools::install_github("jarad/ISDSWorkshop")
+    install.packages(c("devtools","tidyverse"))
+    devtools::install_github("jarad/MWBDSSworkshop")
 
 If it asks you to choose a repository, 
 choose a repository that is geographically close to you.
@@ -49,10 +52,10 @@ If asked to create a `personal library`, say `yes`.
 There are a few other packages that will be used lightly or referenced during
 the workshop. 
 These packages are listed under "Suggests:" in the 
-[DESCRIPTION file](https://github.com/jarad/ISDSWorkshop/blob/master/DESCRIPTION).
+[DESCRIPTION file](https://github.com/jarad/MWBDSSworkshop/blob/master/DESCRIPTION).
 To install these packages, in R run
 
-    ISDSWorkshop::install_additional_packages()
+    MWBDSSworkshop::install_additional_packages()
     
 A warning will be issued for any packages that could not be installed.
 
@@ -61,7 +64,7 @@ A warning will be issued for any packages that could not be installed.
 
 If you want to test that everything is working, in R run 
 
-    ISDSWorkshop::workshop(FALSE, FALSE)
+    MWBDSSworkshop::workshop(FALSE, FALSE)
 
 which should open a web-browser with an outline for the workshop. 
 
