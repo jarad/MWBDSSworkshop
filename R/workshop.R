@@ -5,9 +5,9 @@
 #' @param launch_index logical. If TRUE, launches the workshop html index.
 #' @details By default, the function uses the \code{\link{data}} function to load data sets and 
 #'  then uses the \code{\link{write.csv}} function to write them to a file. 
-#'  It then launches the \code{\link{ISDSWorkshop}} html index 
+#'  It then launches the \code{\link{MWBDSSworkshop}} html index 
 #'  using the \code{\link{vignette}} function. 
-#' @seealso \code{\link{data}},\code{\link{GI}},\code{\link{write.csv}},\code{\link{ISDSWorkshop}}
+#' @seealso \code{\link{data}},\code{\link{GI}},\code{\link{write.csv}},\code{\link{MWBDSSworkshop}}
 #' @author Jarad Niemi <\url{http://jarad.me}>
 #' @export
 #' @examples
@@ -16,8 +16,8 @@
 #' workshop(write_data = FALSE)
 #' workshop(clean = FALSE) 
 #' }
-workshop = function(write_data    = TRUE, 
-                    write_scripts = TRUE, 
+workshop = function(write_data    = FALSE, 
+                    write_scripts = FALSE, 
                     launch_index  = TRUE) {
   
   # Write data
@@ -25,19 +25,19 @@ workshop = function(write_data    = TRUE,
     write_data = c('GI','icd9','fluTrends')
   
   if ("GI" %in% write_data) {
-    data('GI', package='ISDSWorkshop', envir=environment())
+    data('GI', package='MWBDSSworkshop', envir=environment())
     write.csv(get('GI', envir = environment()), 
               file="GI.csv", row.names=FALSE)
   }
   
   if ("icd9" %in% write_data) {
-    data('icd9', package='ISDSWorkshop', envir=environment())
+    data('icd9', package='MWBDSSworkshop', envir=environment())
     write.csv(get('icd9', envir = environment()), 
               file='icd9.csv', row.names=FALSE)
   }
   
   if ("fluTrends" %in% write_data) {
-    data('fluTrends', package='ISDSWorkshop', envir=environment())
+    data('fluTrends', package='MWBDSSworkshop', envir=environment())
     write.csv(get('fluTrends', envir=environment()),
               file = 'fluTrends.csv', row.names=FALSE)
   }
@@ -55,7 +55,7 @@ workshop = function(write_data    = TRUE,
   
   for (i in seq_along(write_scripts)) {
     script = write_scripts[i]
-    file.copy(from = system.file("doc", script, package="ISDSWorkshop"),
+    file.copy(from = system.file("doc", script, package="MWBDSSworkshop"),
               to   = script,
               overwrite = TRUE)
   }
@@ -63,5 +63,5 @@ workshop = function(write_data    = TRUE,
   
   # Launch workshop index
   if (launch_index) 
-    browseURL(system.file("doc", "workshop.html", package="ISDSWorkshop"))
+    browseURL(system.file("doc", "workshop.html", package="MWBDSSworkshop"))
 }

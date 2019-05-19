@@ -1,4 +1,4 @@
-Package: MWBSSworkshop
+Package: MWBDSSworkshop
 Type: Package
 Title: Midwest Big Data Summer School R Workshop
 Version: 0.4
@@ -7,7 +7,7 @@ Author: Jarad Niemi
 Maintainer: Jarad Niemi <niemi@iastate.edu>
 Description: An R package for the Midwest Big Data Summer School R workshop. 
     The package consists of three main vignettes:
-    intro, grammer of graphics, and regression models. These vignettes are meant
+    introduction, graphics, and regression models. These vignettes are meant
     to introduce young researchers to the use of R for analyzing
     syndromic surveillance data. In particular, the vignettes provide
     examples of descriptive and graphical statistics and ways to export
@@ -26,4 +26,4 @@ Suggests:
     rmarkdown
 License: GPL (> 2)
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1

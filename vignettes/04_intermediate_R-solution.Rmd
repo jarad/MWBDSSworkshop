@@ -10,11 +10,9 @@ vignette: >
 ---
 
 ```{r, echo=FALSE, message=FALSE}
-library('ggplot2')
-library('dplyr')
-library('tidyr')
+library('tidyverse')
 library('xtable')
-library('ISDSWorkshop')
+library('MWBDSSworkshop')
 
 workshop(launch_index=FALSE)
 

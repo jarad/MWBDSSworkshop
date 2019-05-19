@@ -13,10 +13,8 @@ If you shut down R, you will need to change your working directory and run the
 following commands to load libraries,
 
 ```{r, message=FALSE}
-library('ggplot2')
-library('dplyr')
-library('tidyr')
-library('ISDSWorkshop')
+library('tidyverse')
+library('MWBDSSworkshop')
 workshop(launch_index=FALSE)
 ```
 
@@ -255,7 +253,7 @@ A package provides additional functionality besides what base installation of R
 provides. You have already used a number of additional packages:
 
 - ggplot2
-- ISDSWorkshop
+- MWBDSSworkshop
 - maps
 - dplyr
 - tidyr
@@ -319,7 +317,7 @@ For example, from a source version of this workshop,
 you would use the following command:
 
 ```{r, eval=FALSE}
-install.packages("ISDSWorkshop_0.3.tar.gz", 
+install.packages("MWBDSSworkshop_0.3.tar.gz", 
                  repos = NULL, 
                  type  = "source")
 ```

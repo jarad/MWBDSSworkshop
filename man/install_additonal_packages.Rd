@@ -18,10 +18,9 @@ throughout the workshop, but are not absolutely necessary for the workshop.
 install_additional_packages()
 }
 }
+\seealso{
+\code{\link{MWBDSSworkshop}}
+}
 \author{
 Jarad Niemi <\url{http://jarad.me}>
 }
-\seealso{
-\code{\link{ISDSWorkshop}}
-}
-
