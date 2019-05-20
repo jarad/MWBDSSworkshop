@@ -1,10 +1,9 @@
 Midwest Big Data Summer School - R Workshop
 ============
 
-An R package for the Midwest Big Data Summer School [pre-conference training](http://mbds.cs.iastate.edu/2019/) R workshop.
+An R package for the [Midwest Big Data Summer School pre-conference training R workshop](http://mbds.cs.iastate.edu/2019/).
 
-Prior to the workshop, 
-please install R, 
+Prior to the workshop, please install R, 
 Rstudio (not required, but highly recommended), 
 and the MWBDSSworkshop R package. 
 You will need to have internet access and administrator privileges to install everything.
@@ -28,18 +27,58 @@ If you are using Linux, then I trust you know what you are doing. You can instal
 ## Install RStudio (may require administrator privileges)
 
 The installation of RStudio is optional, but highly recommended. 
-It provides an improved interface to R, but has [projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) which help to quickly switch between (oddly enough) projects. 
-Go to <http://www.rstudio.com/products/rstudio/download/> and choose the correct platform under **Installers for ALL Platforms**. 
+It provides an improved interface to R, but has [projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) which help to quickly switch between projects. 
+Go to <https://www.rstudio.com/products/rstudio/download/#download> and choose the correct platform under **Installers for ALL Platforms**. 
 Install like any other program. 
 
 
-## Install the MWBDSSworkshop R package (should not require administrator privileges)
+## Install CRAN packages (should not require administrator privileges)
 
 Start RStudio (or R GUI if you did not install RStudio). 
 At the command prompt (`>`) in the Console window of R, copy-paste the following code. This will download and install a number of packages that we will need and create vignettes (this could take a while). 
 You will need internet access during this process.
 
     install.packages(c("devtools","tidyverse"))
+
+If it asks you to choose a repository, 
+choose a repository that is geographically close to you.
+If asked to create a `personal library`, say `yes`. 
+
+This will install a "large" number of packages as these packages depend on a 
+number of other packages. 
+
+### Test your installation
+
+If you want to test that everything is working, in R run 
+
+    library("tidyverse")
+
+which should print out a number of lines that include header lines titled 
+"Attaching packages" and "Conflicts".
+
+### Exit R
+
+Regardless of which method above you used, exit R by running
+
+    q("no")
+
+in R.
+
+You should be ready to go. 
+
+
+# ON THE DAY OF THE WORKSHOP
+
+To make sure you have the most up to date version of the workshop, 
+wait until the day of the workshop to install the Midwest Big Data Summer 
+School workshop R package.
+
+## Install the MWBDSSworkshop R package
+
+Start RStudio (or R GUI if you did not install RStudio). 
+At the command prompt (`>`) in the Console window of R, copy-paste the following code. This will download and install a number of packages that we will need and create vignettes (this could take a while). 
+You will need internet access during this process.
+
     devtools::install_github("jarad/MWBDSSworkshop")
 
 If it asks you to choose a repository, 
