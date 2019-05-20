@@ -94,7 +94,9 @@ These packages are listed under "Suggests:" in the
 [DESCRIPTION file](https://github.com/jarad/MWBDSSworkshop/blob/master/DESCRIPTION).
 To install these packages, in R run
 
-    MWBDSSworkshop::install_additional_packages()
+    install.packages(c("xtable","lme4","randomForest",
+                       "maps","maptools","mapproj",
+                       "gridExtra","RColorBrewer"))
     
 A warning will be issued for any packages that could not be installed.
 
