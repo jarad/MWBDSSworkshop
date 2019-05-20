@@ -17,7 +17,7 @@ If you cannot find this file, you may need to do some or all of the following:
 
 ```{r, eval=FALSE}
 setwd(choose.dir(getwd())) # change your working directory
-ISDSWorkshop::workshop()   # write the files (and open up the workshop outline)
+MWBDSSworkshop::workshop()   # write the files (and open up the workshop outline)
 ```
 
 ## <a name="types">Data types</a>
@@ -272,7 +272,7 @@ We have already seen a `data.frame` with our GI data set.
 Let's read this data in again and take a look.
 
 ```{r, echo=FALSE, message=FALSE}
-library('ISDSWorkshop')
+library('MWBDSSworkshop')
 
 # may need to change your working directory 
 # check your working directory using 

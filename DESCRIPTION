@@ -1,33 +1,29 @@
-Package: ISDSWorkshop
+Package: MWBDSSworkshop
 Type: Package
-Title: International Society for Disease Surveillance R Workshop
-Version: 0.3
-Date: 2016-11-28
+Title: Midwest Big Data Summer School R Workshop
+Version: 0.4
+Date: 2017-05-19
 Author: Jarad Niemi
 Maintainer: Jarad Niemi <niemi@iastate.edu>
-Description: An R package for the International Society for Disease
-    Surveillance R workshop. The package consists of three main vignettes:
-    intro, graphics, and advanced-graphics. These vignettes are meant
-    to introduce public health officials to the use of R for analyzing
+Description: An R package for the Midwest Big Data Summer School R workshop. 
+    The package consists of three main vignettes:
+    introduction, graphics, and regression models. These vignettes are meant
+    to introduce young researchers to the use of R for analyzing
     syndromic surveillance data. In particular, the vignettes provide
     examples of descriptive and graphical statistics and ways to export
     these summaries to be incorporated in standard document formats.
 Depends:
     R (>= 3.0)
 Suggests:
-    ggplot2,
-    dplyr,
-    tidyr,
-    MMWRweek,
+    tidyverse,
     RColorBrewer,
     gridExtra,
     xtable,
     maps,
     maptools,
     mapproj,
-    SpatialEpi,
     knitr,
     rmarkdown
 License: GPL (> 2)
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1

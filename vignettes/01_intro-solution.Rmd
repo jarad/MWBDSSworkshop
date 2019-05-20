@@ -11,8 +11,8 @@ vignette: >
 
 ```{r, echo=FALSE, message=FALSE}
 library('dplyr')
-library('ISDSWorkshop')
-workshop(launch_index=FALSE)
+library('MWBDSSworkshop')
+workshop(write_data = TRUE, launch_index=FALSE)
 ```
 
 ## <a name="introduction"></a> Introduction

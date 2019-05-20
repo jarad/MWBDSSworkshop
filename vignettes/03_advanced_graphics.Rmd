@@ -45,7 +45,7 @@ Typically you would choose your working directory to be where you actually have
 your data and scripts.
 
 ```{r, purl=FALSE, message=FALSE, purl=FALSE}
-library('ISDSWorkshop')
+library('MWBDSSworkshop')
 workshop(launch_index  = FALSE) # If you need the outline, set this to TRUE
 ```
 

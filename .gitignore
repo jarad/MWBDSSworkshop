@@ -15,4 +15,6 @@ vignettes/*.html
 vignettes/*.md
 =======
 # RStudio file
-ISDSWorkshop.Rproj
+MWBDSSworkshop.Rproj
+
+.DS_Store

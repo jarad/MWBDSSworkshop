@@ -1,14 +1,14 @@
 ---
-title: "ISDS Introduction to R Workshop Outline"
+title: "Midwest Big Data Summer School - Introduction to R Workshop Outline"
 author: "Jarad Niemi"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document
 vignette: >
-  %\VignetteIndexEntry{ISDS Introduction to R Workshop Outline}
+  %\VignetteIndexEntry{MWBDSS Introduction to R Workshop Outline}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
-# International Society for Disease Surveillance
+# Midwest Big Data Summer School
 # Introduction to R
 # Pre-conference Workshop
 

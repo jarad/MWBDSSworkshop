@@ -18,14 +18,13 @@ Downloaded from <http://www.google.org/flutrends/us/data.txt> on 26 Nov
 For each column, an index of the current influenza activity level
 for that region. The index is based on google search engine queries.
 }
+\references{
+Ginsberg, Jeremy, Matthew H. Mohebbi, Rajan S. Patel, Lynnette Brammer, Mark S. Smolinski, and Larry Brilliant. "Detecting influenza epidemics using search engine query data." Nature 457, no. 7232 (2008): 1012-1014.
+}
 \author{
 Jarad Niemi 
 \itemize{
   \item Date Date. The week of the observations
 }
 }
-\references{
-Ginsberg, Jeremy, Matthew H. Mohebbi, Rajan S. Patel, Lynnette Brammer, Mark S. Smolinski, and Larry Brilliant. "Detecting influenza epidemics using search engine query data." Nature 457, no. 7232 (2008): 1012-1014.
-}
 \keyword{datasets}
-

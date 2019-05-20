@@ -37,7 +37,7 @@ n[-3,]
 ## <a name="factor"></a> Factor activity
 
 ```{r, message=FALSE}
-library('ISDSWorkshop')
+library('MWBDSSworkshop')
 library('dplyr')
 
 data(GI)
