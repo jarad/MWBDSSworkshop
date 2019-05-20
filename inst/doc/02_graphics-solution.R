@@ -19,7 +19,7 @@ n[,2]
 n[-3,]
 
 ## ---- message=FALSE------------------------------------------------------
-library('ISDSWorkshop')
+library('MWBDSSworkshop')
 library('dplyr')
 
 data(GI)

@@ -1,11 +1,9 @@
 ## ---- message=FALSE------------------------------------------------------
-library('dplyr')
-library('ggplot2')
-library('gridExtra')
+library('tidyverse') # loads dplyr/ggplot2/readr
 
 ## ------------------------------------------------------------------------
 # Read in csv files
-GI = read.csv('GI.csv')
+GI     = read.csv("GI.csv")
 icd9df = read.csv("icd9.csv")
 
 # Add columns to the data.frame
@@ -29,7 +27,7 @@ str(GI)
 summary(GI)
 
 ## ---- eval=FALSE---------------------------------------------------------
-## # Create weekD variable in GI data set
+#  # Create weekD variable in GI data set
 
 ## ------------------------------------------------------------------------
 GI_wf <- GI %>%
@@ -37,13 +35,13 @@ GI_wf <- GI %>%
   summarize(count = n())
 
 ## ---- eval=FALSE---------------------------------------------------------
-## nrow(GI_wf) # Should have number of weeks times number of facilities rows
-## ncol(GI_wf) # Should have 3 columns: week, facility, count
-## dim(GI_wf)
-## head(GI_wf)
-## tail(GI_wf)
-## summary(GI_wf)
-## summary(GI_wf$facility)
+#  nrow(GI_wf) # Should have number of weeks times number of facilities rows
+#  ncol(GI_wf) # Should have 3 columns: week, facility, count
+#  dim(GI_wf)
+#  head(GI_wf)
+#  tail(GI_wf)
+#  summary(GI_wf)
+#  summary(GI_wf$facility)
 
 ## ------------------------------------------------------------------------
 ggplot(GI_wf, aes(x = week, y = count)) + 
@@ -58,9 +56,9 @@ ggplot(GI_wf, aes(x = week, y = count, shape = facility)) +
   geom_point()
 
 ## ---- eval=FALSE---------------------------------------------------------
-## # Construct a data set aggregated by week and age category
-## 
-## # Construct a plot to look at weekly GI cases by age category.
+#  # Construct a data set aggregated by week and age category
+#  
+#  # Construct a plot to look at weekly GI cases by age category.
 
 ## ------------------------------------------------------------------------
 ggplot(GI_wf, aes(x = week, y = count)) + 
@@ -88,7 +86,7 @@ ggplot(GI_sa, aes(x = week, y = count, shape = gender, color = gender)) +
   facet_wrap(~ ageC)
 
 ## ---- eval=FALSE---------------------------------------------------------
-## # Construct a plot of weekly GI counts by zip3 and ageC.
+#  # Construct a plot of weekly GI counts by zip3 and ageC.
 
 ## ------------------------------------------------------------------------
 IPD_w <- GI %>%
@@ -183,11 +181,10 @@ g1 = ggplot(early_w, aes(x = week, y = count)) + geom_point()
 g2 = ggplot(late_w,  aes(x = week, y = count)) + geom_point()
 g3 = ggplot(mid_w,   aes(x = week, y = count)) + geom_point()
 
-## ---- eval=FALSE---------------------------------------------------------
-## library('gridExtra')
-
 ## ------------------------------------------------------------------------
-grid.arrange(g1,g3,g2)
+# you may need to run install.packages("gridExtra")
+if (require('gridExtra'))
+  gridExtra::grid.arrange(g1,g3,g2)
 
 ## ------------------------------------------------------------------------
 cut_dates <- c(as.Date("1900-01-01"),
@@ -207,11 +204,11 @@ ggplot(GI_time,
   facet_wrap(~ time, ncol = 1, scales = "free")
 
 ## ---- eval=FALSE---------------------------------------------------------
-## # Filter the data to zipcode 206xx between Jan 1, 2008 and Dec 31, 2008
-## 
-## # Aggregate the date for each week in this time frame
-## 
-## # Construct the plot of weekly GI counts in zipcode 206xx.
+#  # Filter the data to zipcode 206xx between Jan 1, 2008 and Dec 31, 2008
+#  
+#  # Aggregate the date for each week in this time frame
+#  
+#  # Construct the plot of weekly GI counts in zipcode 206xx.
 
 ## ------------------------------------------------------------------------
 GI$weekD = as.Date(GI$weekC) 
@@ -250,8 +247,8 @@ g = g + theme_bw()
 g
 
 ## ---- eval=FALSE---------------------------------------------------------
-## ?theme_bw
-## ?theme
+#  ?theme_bw
+#  ?theme
 
 ## ------------------------------------------------------------------------
 g = g + theme(title = element_text(size=rel(2)),

@@ -10,7 +10,7 @@
 #' install_additional_packages()
 #' }
 install_additonal_packages = function() {
-  package_list <- c("xtable",
+  package_list <- c("xtable","lme4","randomForest",
                     "maps","maptools","mapproj",
                     "gridExtra","RColorBrewer")
   

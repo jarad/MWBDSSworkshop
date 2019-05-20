@@ -5,7 +5,7 @@ An R package for the [Midwest Big Data Summer School R workshop](http://mbds.cs.
 
 Prior to the workshop, please install R, 
 RStudio (not required, but highly recommended), 
-and (on the day of the workshop) the MWBDSSworkshop R package. 
+and the MWBDSSworkshop R package. 
 You will need to have internet access and administrator privileges to install everything.
 
 ## Install R (may require administrator privileges)
@@ -23,6 +23,7 @@ Click on the appropriate **.pkg** file depending on which version of Mac OS X yo
 ### Linux
 
 If you are using Linux, then I trust you know what you are doing. You can install R from source or you can use a package manager. 
+
 
 ## Install RStudio (may require administrator privileges)
 
@@ -67,7 +68,8 @@ in R.
 You should be ready to go. 
 
 
-# ON THE DAY OF THE WORKSHOP
+
+# Install MWBDSSworkshop and other packages
 
 To make sure you have the most up to date version of the workshop, 
 wait until the day of the workshop to install the Midwest Big Data Summer 

@@ -1,13 +1,13 @@
 Package: MWBDSSworkshop
 Type: Package
 Title: Midwest Big Data Summer School R Workshop
-Version: 0.4
-Date: 2017-05-19
+Version: 0.4.2
+Date: 2019-05-20
 Author: Jarad Niemi
 Maintainer: Jarad Niemi <niemi@iastate.edu>
 Description: An R package for the Midwest Big Data Summer School R workshop. 
     The package consists of three main vignettes:
-    introduction, graphics, and regression models. These vignettes are meant
+    introduction, graphics, and advanced methods. These vignettes are meant
     to introduce young researchers to the use of R for analyzing
     syndromic surveillance data. In particular, the vignettes provide
     examples of descriptive and graphical statistics and ways to export
@@ -19,6 +19,8 @@ Suggests:
     RColorBrewer,
     gridExtra,
     xtable,
+    lme4,
+    randomForest,
     maps,
     maptools,
     mapproj,

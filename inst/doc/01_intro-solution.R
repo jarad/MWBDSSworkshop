@@ -1,7 +1,7 @@
 ## ---- echo=FALSE, message=FALSE------------------------------------------
 library('dplyr')
-library('ISDSWorkshop')
-workshop(launch_index=FALSE)
+library('MWBDSSworkshop')
+workshop(write_data = TRUE, launch_index=FALSE)
 
 ## ------------------------------------------------------------------------
 x = 1:10
@@ -25,11 +25,11 @@ probability
 
 ## ------------------------------------------------------------------------
 # Read in the csv file
-fluTrends = read.csv('fluTrends.csv')
+fluTrends = read.csv("fluTrends.csv")
 names(fluTrends)
 
 # To maintain pretty column names, use 
-fluTrends = read.csv('fluTrends.csv', check.names = FALSE)
+fluTrends = read.csv("fluTrends.csv", check.names = FALSE)
 names(fluTrends)
 # unfortunately these names won't work with the 
 # fluTrends$colname syntax, but you can use back-ticks

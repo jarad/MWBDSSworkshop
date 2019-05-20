@@ -1,20 +1,17 @@
+Meta
+doc
 
 # History files
 .Rhistory
-
 # Example code in package build process
 *-Ex.R
-
 # R data files from past sessions
 .Rdata
 .Rproj.user
-
-
 # Ignore derivative files
 vignettes/*.html
 vignettes/*.md
 =======
 # RStudio file
 MWBDSSworkshop.Rproj
-
 .DS_Store
