@@ -13,8 +13,7 @@
 #' @examples
 #' \dontrun{
 #' workshop()
-#' workshop(write_data = FALSE)
-#' workshop(clean = FALSE) 
+#' workshop(write_data = TRUE, write_scripts = TRUE)
 #' }
 workshop = function(write_data    = FALSE, 
                     write_scripts = FALSE, 

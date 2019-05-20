@@ -26,8 +26,7 @@ By default, the function uses the \code{\link{data}} function to load data sets 
 \examples{
 \dontrun{
 workshop()
-workshop(write_data = FALSE)
-workshop(clean = FALSE) 
+workshop(write_data = TRUE, write_scripts = TRUE)
 }
 }
 \seealso{
