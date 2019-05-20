@@ -1,11 +1,11 @@
 Midwest Big Data Summer School - R Workshop
 ============
 
-An R package for the [Midwest Big Data Summer School pre-conference training R workshop](http://mbds.cs.iastate.edu/2019/).
+An R package for the [Midwest Big Data Summer School R workshop](http://mbds.cs.iastate.edu/2019/).
 
 Prior to the workshop, please install R, 
-Rstudio (not required, but highly recommended), 
-and the MWBDSSworkshop R package. 
+RStudio (not required, but highly recommended), 
+and (on the day of the workshop) the MWBDSSworkshop R package. 
 You will need to have internet access and administrator privileges to install everything.
 
 ## Install R (may require administrator privileges)
