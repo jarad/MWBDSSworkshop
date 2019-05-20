@@ -303,9 +303,9 @@ data stored in Excel, SAS, Stata, SPSS, and database formats.
 
 #### Reading a csv file into R
 
-The most common way I read data into R is through a csv file. 
-csv stands for comma-separated value file and is a standard file format for
-data. The utils package (which is installed and loaded with base R) has a 
+The most common way I read data into R is through a csv,
+comma-separated value, file. 
+The utils package (which is installed and loaded with base R) has a 
 function called `read.csv` for reading csv files into R. 
 For example, 
 
@@ -336,12 +336,18 @@ use the `read_csv` function in the
 [readr](https://cran.r-project.org/web/packages/readr/index.html).
 
 ```{r, eval=FALSE}
-install.packages("readr") # run this command if the readr package is not installed
-library('readr')
+library("readr")
 GI <- read_csv("GI.csv")
 ```
 
-### <a name="excel">Read Excel xlsx file</a>
+This function has two main differences compared to the `read.csv` function:
+
+- does not run [`make.names`](https://stat.ethz.ch/R-manual/R-devel/RHOME/library/base/html/make.names.html) on the column names
+- does not convert character columns to factors
+
+
+
+### <a name="excel">Read Excel files</a>
 
 My main suggestion for reading Excel files into R is to 
 
@@ -351,18 +357,21 @@ My main suggestion for reading Excel files into R is to
 This approach will work regardless of any changes Excel makes in its document 
 structure.
 
-Reading an Excel xlsx file into R is done using the `read.xlsx` function from 
-the [xlsx](http://cran.r-project.org/web/packages/xlsx/index.html) R package. 
+Reading an Excel xlsx file into R can be done using the `read_excel` function 
+from the [readxl](https://cran.r-project.org/web/packages/readxl/index.html) R 
+package. 
 Unfortunately many scenarios can cause this process to not work. 
-Thus, we do not focus on it in an introductory R course. When it works, it looks 
-like this
+Thus, we do not focus on this method in an introductory R course. 
+When it works, it looks like this
 
 ```{r, eval=FALSE}
-install.packages('xlsx')
-library('xlsx')
-d = read.xlsx("filename.xlsx", sheetIndex=1) # or
-d = read.xlsx("filename.xlsx", sheetName="sheetName")
+install.packages("readxl")
+library("readxl")
+d = read_excel("filename.xlsx", sheetIndex=1) # or
+d = read_excel("filename.xlsx", sheetName="sheetName")
 ```
+
+More information can be found [here](https://readxl.tidyverse.org/).
 
 Again, if these approaches don't work, you can `Save as...` a csv file in Excel.
 
@@ -389,7 +398,7 @@ which we will discussing today, has a [number of functions to read from some
 databases](https://cran.r-project.org/web/packages/dplyr/vignettes/databases.html).
 The code will look something like
 ```{r, eval=FALSE}
-library('dplyr')
+library("dplyr")
 my_db <- src_sqlite("my_db.sqlite3", create = T)
 ```
 
@@ -400,13 +409,13 @@ The code might look something like
 
 ```{r, eval=FALSE}
 install.packages("RODBC")
-library('RODBC')
+library("RODBC")
 
 # RODBC Example
 # import 2 tables (Crime and Punishment) from a DBMS
 # into R data frames (and call them crimedat and pundat)
 
-library(RODBC)
+library("RODBC")
 myconn <-odbcConnect("mydsn", uid="Rob", pwd="aardvark")
 crimedat <- sqlFetch(myconn, "Crime")
 pundat <- sqlQuery(myconn, "select * from Punishment")
