@@ -1,3 +1,3 @@
 fluTrends = read.csv("fluTrends.csv")
 
-devtools::use_data(fluTrends)
+usethis::use_data(fluTrends)
