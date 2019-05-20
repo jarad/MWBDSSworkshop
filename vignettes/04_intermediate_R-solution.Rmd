@@ -14,7 +14,7 @@ library('tidyverse')
 library('xtable')
 library('MWBDSSworkshop')
 
-workshop(launch_index=FALSE)
+workshop(write_data = TRUE, launch_index=FALSE)
 
 # Read csv files and create additional columns
 icd9df = read.csv("icd9.csv")
