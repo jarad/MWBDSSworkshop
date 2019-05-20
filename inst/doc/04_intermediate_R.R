@@ -1,9 +1,6 @@
 ## ---- message=FALSE------------------------------------------------------
-library('ggplot2')
-library('dplyr')
-library('tidyr')
-library('ISDSWorkshop')
-workshop(launch_index=FALSE)
+library("tidyverse")
+library("MWBDSSworkshop")
 
 ## ------------------------------------------------------------------------
 # Read csv files and create additional variables
@@ -79,8 +76,8 @@ ggplot(counties %>% filter(region=="iowa"),
 fluTrends = read.csv("fluTrends.csv", check.names=FALSE)
 
 ## ------------------------------------------------------------------------
-nr = nrow(fluTrends)
-flu_w = fluTrends[(nr-11):nr, c(1,3:53)]
+flu_w = fluTrends %>%
+  tail(n = 12) 
 dim(flu_w)
 
 ## ------------------------------------------------------------------------
@@ -90,13 +87,14 @@ flu_l <- flu_w %>%
 ## ------------------------------------------------------------------------
 head(unique(states$region))
 flu_l$region = tolower(flu_l$region)
-states_merged = merge(states, flu_l, sort=FALSE, by='region')
+states_merged = states %>%
+  merge(flu_l, sort = FALSE, by = 'region')
 
 ## ------------------------------------------------------------------------
 states_merged$Date = as.Date(states_merged$Date)
 mx_date = max(states_merged$Date)
 g = ggplot(states_merged %>% filter(Date == mx_date), 
-       aes(x = long, y = lat, group = group, fill = index)) + 
+       aes(x = long, y = lat, group = region, fill = index)) + 
   geom_polygon() + 
   labs(title=paste('Google Flu Trends on', mx_date), x='', y='') +
   theme_minimal() + 
@@ -138,53 +136,9 @@ ggplot(states_merged,
 #  biocLite("edgeR")
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  install.packages("ISDSWorkshop_0.3.tar.gz",
+#  install.packages("MWBDSSworkshop_0.4.tar.gz",
 #                   repos = NULL,
 #                   type  = "source")
-
-## ------------------------------------------------------------------------
-library('SpatialEpi')
-
-## Load Pennsylvania Lung Cancer Data
-data(pennLC)
-data <- pennLC$data
-
-## Process geographical information and convert to grid
-geo <- pennLC$geo[,2:3]
-geo <- latlong2grid(geo)
-
-## Get aggregated counts of population and cases for each county
-population <- tapply(data$population, data$county, sum)
-cases      <- tapply(data$cases,      data$county, sum)
-
-## Based on the 16 strata levels, compute expected numbers of disease
-n.strata       <- 16
-expected.cases <- expected(data$population, data$cases, n.strata)
-
-## Set Parameters
-pop.upper.bound <- 0.5
-n.simulations   <- 999
-alpha.level     <- 0.05
-plot            <- TRUE
-
-## ------------------------------------------------------------------------
-clr = cases/population
-clr = 1-clr/max(clr) # make sure range is (0,1)
-plot(pennLC$spatial.polygon, axes=TRUE, col=rgb(1, clr, clr))
-
-## ------------------------------------------------------------------------
-## Kulldorff using Binomial likelihoods
-binomial <- kulldorff(geo, cases, population, NULL, pop.upper.bound, n.simulations, 
-  alpha.level, plot)
-cluster <- binomial$most.likely.cluster$location.IDs.included
-
-## plot
-plot(pennLC$spatial.polygon,axes=TRUE)
-plot(pennLC$spatial.polygon[cluster],add=TRUE,col="red")
-title("Most Likely Cluster")
-
-## ---- eval=FALSE---------------------------------------------------------
-#  # Install the surveillance package
 
 ## ------------------------------------------------------------------------
 add = function(a,b) {
@@ -233,4 +187,108 @@ ggplot(GI_w, aes(x = weekD, y = count, color = alert)) +
 #  install.packages('shiny')
 #  library('shiny')
 #  runGitHub('NLMichaud/WeeklyCDCPlot')
+
+## ------------------------------------------------------------------------
+visits_by_age = GI %>%
+  filter(age > 18, age < 80) %>%
+  group_by(age) %>%
+  summarize(count = n()) 
+
+## ------------------------------------------------------------------------
+ggplot(visits_by_age, aes(x = age, y = count)) + 
+  geom_point() + 
+  scale_y_log10()
+
+## ------------------------------------------------------------------------
+m = lm(log(count) ~ age, data = visits_by_age)
+summary(m)
+
+## ------------------------------------------------------------------------
+ggplot(visits_by_age, aes(x = age, y = count)) + 
+  geom_point() + 
+  scale_y_log10() +
+  stat_smooth(method = "lm") # use `se=FALSE` if you do not want to see the uncertainty 
+
+## ------------------------------------------------------------------------
+opar = par(mfrow=c(2,3)) # Create a 2x3 grid of plots
+plot(m, 1:6, ask=FALSE)  # 6 residual plots
+par(opar)                # Revert to original graphics settings
+
+## ------------------------------------------------------------------------
+m = lm(log(count) ~ age + I(age^2), data = visits_by_age)
+summary(m)
+
+## ------------------------------------------------------------------------
+ggplot(visits_by_age, aes(x = age, y = count)) + 
+  geom_point() + 
+  scale_y_log10() +
+  stat_smooth(method = "lm", formula = y ~ x + I(x^2)) 
+
+## ------------------------------------------------------------------------
+m = loess(log(count) ~ age, data = visits_by_age)
+summary(m)
+
+## ------------------------------------------------------------------------
+ggplot(visits_by_age, aes(x = age, y = count)) + 
+  geom_point() + 
+  scale_y_log10() +
+  stat_smooth()  # default is loess
+
+## ------------------------------------------------------------------------
+m = glm(count ~ age + I(age^2), data = visits_by_age, family = "poisson")
+summary(m)
+
+## ------------------------------------------------------------------------
+ggplot(visits_by_age, aes(x = age, y = count)) + 
+  geom_point() + 
+  stat_smooth(method = "glm", formula = y ~ x + I(x^2), 
+              method.args = list(family = "poisson"))
+
+## ------------------------------------------------------------------------
+visits_by_age_and_facility = GI %>% 
+  filter(age > 18, age < 80) %>%
+  filter(facility != 259) %>%       # only 1 observation in this facility
+  group_by(facility, age) %>%
+  summarize(count = n())
+
+## ------------------------------------------------------------------------
+ggplot(visits_by_age_and_facility, aes(x = age, y = count)) + 
+  facet_wrap(~facility) +
+  scale_y_log10() +
+  geom_point()
+
+## ------------------------------------------------------------------------
+library("lme4")
+m = lmer(log(count) ~ age + I(age^2) + (age+I(age^2)|facility), 
+         data = visits_by_age_and_facility)
+
+## ------------------------------------------------------------------------
+visits_by_age_and_facility = visits_by_age_and_facility %>%
+  mutate(age = scale(age))
+
+m = lmer(log(count) ~ age + I(age^2) + (age+I(age^2)|facility), 
+         data = visits_by_age_and_facility)
+summary(m)
+
+## ------------------------------------------------------------------------
+visits = GI %>%
+  filter(age > 18, age < 80) %>%
+  filter(facility != 259) %>%       # only 1 observation in this facility
+  group_by(facility, age, gender) %>%
+  summarize(count = n())
+
+## ------------------------------------------------------------------------
+ggplot(visits, aes(x = age, y = count, color = gender, shape = gender)) + 
+  facet_wrap(~facility) +
+  scale_y_log10() +
+  geom_point()
+
+## ------------------------------------------------------------------------
+library("randomForest")
+m = randomForest(log(count) ~ age + gender + facility, data = visits)
+m
+importance(m)
+
+## ------------------------------------------------------------------------
+dim(visits)
 

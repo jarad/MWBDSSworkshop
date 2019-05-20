@@ -31,11 +31,7 @@ If you are using RStudio, I highly recommend you look into setting up [projects]
 
 ### Choose your working directory 
 
-Start R and then [choose your working directory](intro.html#working_directory).
-
-```{r, eval=FALSE, purl=FALSE}
-setwd(choose.dir())
-```
+Start R and then [choose your working directory](01_intro.html#working_directory).
 
 
 ### Start the workshop
@@ -46,7 +42,7 @@ your data and scripts.
 
 ```{r, purl=FALSE, message=FALSE, purl=FALSE}
 library('MWBDSSworkshop')
-workshop(launch_index  = FALSE) # If you need the outline, set this to TRUE
+workshop(write_data = TRUE, write_scripts = TRUE, launch_index  = FALSE) 
 ```
 
 
@@ -58,8 +54,7 @@ A convention is to put `library()` calls for all packages that you will use in
 the script at the top of the script.
 
 ```{r, message=FALSE}
-library('dplyr')
-library('ggplot2')
+library('tidyverse') # loads dplyr/ggplot2/readr
 ```
 
 
@@ -74,7 +69,7 @@ This function allows you to create new columns in a `data.frame`.
 
 ```{r}
 # Read in csv files
-GI = read.csv('GI.csv')
+GI     = read.csv("GI.csv")
 icd9df = read.csv("icd9.csv")
 
 # Add columns to the data.frame
@@ -248,7 +243,7 @@ ggplot(GI_wf, aes(x = week, y = count)) +
 
 ### Faceting on two variables
 
-When there are two variables (with not very many levels in each), 
+When there are two variables (with few levels in each), 
 `facet_grid()` can allow relevant comparisons.
 
 Suppose we are interested in weekly GI counts by gender and age category. 

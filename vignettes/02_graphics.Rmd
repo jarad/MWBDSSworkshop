@@ -13,14 +13,16 @@ Before we get back into graphics, it is important to understand some of the
 fundamentals behind what R is doing. 
 
 Please open the `02_graphics.R` script in your working directory. 
-If you cannot find this file, you may need to do some or all of the following:
+If you cannot find this file, you may need to do the following:
+
+1. [change your working directory](02_intro.html#working_directory)
+1. write the workshop data and scripts
 
 ```{r, eval=FALSE}
-setwd(choose.dir(getwd())) # change your working directory
-MWBDSSworkshop::workshop()   # write the files (and open up the workshop outline)
+MWBDSSworkshop::workshop(write_data = TRUE, write_scripts = TRUE) 
 ```
 
-## <a name="types">Data types</a>
+## <a name="types"></a> Data types
 
 Objects in R can be broadly classified according to their dimensions:
 
@@ -263,7 +265,7 @@ When you have completed the activity, compare your results to the
 
 
 
-## <a name="frames">Data frames</a>
+## <a name="frames"></a> Data frames
 
 A `data.frame` is a special type of matrix that allows different data types in 
 different columns.
@@ -271,20 +273,6 @@ different columns.
 We have already seen a `data.frame` with our GI data set. 
 Let's read this data in again and take a look.
 
-```{r, echo=FALSE, message=FALSE}
-library('MWBDSSworkshop')
-
-# may need to change your working directory 
-# check your working directory using 
-#
-# getwd()
-#
-# and choose a directory using
-#
-# setwd(choose.dir(getwd()))
-
-workshop(write_scripts = FALSE, launch_index = FALSE)
-```
 
 ```{r}
 GI = read.csv("GI.csv")
@@ -354,14 +342,14 @@ str(GI)
 
 
 
-### <a name="factor">Factor</a>
+### <a name="factor"></a> Factor
 
 A factor is a data type that represents a categorical variable. 
 
 The default is for any character vector to be converted to a factor when read 
 using `read.csv()` or `read.table()`. 
-You can change this behavior by setting `stringsAsFactors = FALSE` and
-this is the default in `readr::read_csv()`.
+You can change this behavior by setting `stringsAsFactors = FALSE`, 
+which is the default in `readr::read_csv()`.
 
 Internally, R codes a factor as an integer and then keeps a table that contains 
 the conversion from that integer into the actual value of the factor.
@@ -413,7 +401,7 @@ This created a new variable in the GI `data.frame` called *ageC*.
 
 
 
-### <a name="dates">Dates</a>
+### <a name="dates"></a> Dates
 
 In order to use dates properly, they need to be converted into type `Date`. 
 
@@ -438,9 +426,7 @@ as.Date("12/09/14", format="%m/%d/%y")
 For those who work with dates often, check out the 
 [lubridate](https://cran.r-project.org/web/packages/lubridate/index.html)
 package. 
-To convert from dates to MMWR weeks, check out the 
-[MMWRweek](https://cran.r-project.org/web/packages/MMWRweek/index.html)
-package. 
+
 
 ### Activity 
 
@@ -461,7 +447,7 @@ When you have completed the activity, compare your results to the
 
 
 
-## <a name="reshaping">Reshaping data frames in R</a>
+## <a name="reshaping"></a> Reshaping data frames in R
 
 There are two general representations of tabular data.
 
@@ -477,9 +463,8 @@ which is a succinct representation of the data
 
 Long:
 ```{r, echo=FALSE}
-library('tidyr')
 d %>% 
-  gather(key = syndrome, value = count, -week)
+  tidyr::gather(key = syndrome, value = count, -week)
 ```
 
 which is the form most statistical software wants, 
@@ -500,6 +485,7 @@ Create the wide `data.frame`:
 d = data.frame(week = 1:3, 
                GI   = c(246,195,212), 
                ILI  = c(948, 1020, 1024))
+d
 ```
 
 To turn the `data.frame` into long format, use `gather()`.
@@ -541,7 +527,7 @@ function because data are usually stored in a succinct format but then I need
 the data in long format for summaries or figures or statistical analyses.
 
 
-## <a name="aggregating">Aggregating data frames in R</a>
+## <a name="aggregating"></a> Aggregating data frames in R
 
 The GI data set that we have is already in long format and each row is an 
 individual. 
@@ -606,7 +592,7 @@ When you have completed the activity, compare your results to the
 
 
 
-## <a name="ggplot2">Basics of `ggplot2`</a>
+## <a name="ggplot2"></a> Basics of `ggplot2`
 
 Previously we produced graphics using the base `graphics` system. 
 Although I still use this for producing quick plots, 
@@ -701,7 +687,7 @@ When you have completed the activity, compare your results to the
 
 
 
-## <a name="customizing">Customizing ggplot2 plots</a>
+## <a name="customizing"></a> Customizing ggplot2 plots
 
 There are many ways to customize the appearance of ggplot2 plots:
 
@@ -796,7 +782,7 @@ For other themes, see
 
 
 
-## <a name="help">Getting help on ggplot2</a>
+## <a name="help"></a> Getting help on ggplot2
 
 Although the general R help can still be used, e.g. 
 

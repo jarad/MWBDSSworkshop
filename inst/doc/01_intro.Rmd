@@ -9,14 +9,11 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-
-# <a name="intro"></a> Introduction to R 
-
 ## Detailed introduction
 
 For an extremely detailed introduction, please see
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, purl=FALSE}
 help.start()
 ```
 
@@ -36,19 +33,19 @@ and from <https://www.rstudio.com/products/RStudio/>:
 
 In contrast to many other statistical software packages that use a point-and-click interface, e.g. SPSS, JMP, Stata, etc, R has a command-line interface. The command line has a command prompt, e.g. `>`, see below.
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, purl=FALSE}
 >
 ```
 
 This means, that you will be entering commands on this command line and hitting enter to execute them, e.g. 
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, purl=FALSE}
 help()
 ```
 
 Use the **up arrow** to recover past commands.
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, purl=FALSE}
 hepl()
 help() # Use up arrow and fix
 ```
@@ -60,7 +57,7 @@ Most likely, you are using a graphical user interface (GUI) and therefore, in ad
 
 In particular, there is an editor to create a new R script. So rather than entering commands on the command line, you will write commands in a script and then send those commands to the command line using `Ctrl-R` (PC) or `Command-Enter` (Mac).
 
-```{r}
+```{r, purl=FALSE}
 a = 1 
 b = 2
 a+b
@@ -77,7 +74,7 @@ One of the most effective ways to use this documentation is to cut-and-paste the
 
 Cut-and-paste the following commands into a **new script** and then run those commands directly from the script using `Ctrl-R` (PC) or `Command-Enter` (Mac).
 
-```{r}
+```{r, purl=FALSE}
 x = 1:10
 y = rep(c(1,2), each=5)
 m = lm(y~x)
@@ -86,7 +83,7 @@ s = summary(m)
 
 Now, look at the result of each line
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, purl=FALSE}
 x
 y
 m
@@ -107,7 +104,7 @@ When you have completed the activity, compare your results to the [solutions](01
 
 All basic calculator operations can be performed in R. 
 
-```{r}
+```{r, purl=FALSE}
 1+2
 1-2
 1/2
@@ -122,7 +119,7 @@ we'll learn about that when we get to vectors.
 
 Many advanced calculator operations are also available.
 
-```{r}
+```{r, purl=FALSE}
 (1+3)*2 + 100^2  # standard order of operations
 sin(2*pi)        # the result is in scientific notation, i.e. -2.449294 x 10^-16 
 sqrt(4)
@@ -137,7 +134,7 @@ log(10, base=10)
 
 A real advantage to using R rather than a calculator (or calculator app) is the ability to store quantities using variables.
 
-```{r}
+```{r, purl=FALSE}
 a = 1
 b = 2
 a+b
@@ -151,7 +148,7 @@ a*b
 When assigning variables values, you can also use arrows <- and -> and you will 
 often see this in code, e.g. 
 
-```{r}
+```{r, purl=FALSE}
 a <- 1
 2 -> b
 c = 3  # is the same as <-
@@ -159,7 +156,7 @@ c = 3  # is the same as <-
 
 Now print them.
 
-```{r}
+```{r, purl=FALSE}
 a
 b
 c
@@ -170,7 +167,7 @@ c
 While using variables alone is useful, it is much more useful to use informative
 variables names.
 
-```{r}
+```{r, purl=FALSE}
 population = 1000
 number_infected = 200
 deaths = 3
@@ -213,7 +210,7 @@ Calculate the probability the individual has the disease if the test is positive
 - the sensitivity of the test is 0.99, and
 - the prevalence of the disease is 0.001.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, purl=FALSE}
 # Find the probability the individual has the disease if 
 # specificity is 0.95, sensitivity is 0.99, and prevalence is 0.001
 ```
@@ -221,22 +218,22 @@ Calculate the probability the individual has the disease if the test is positive
 When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#calculator).
 
 
-## <a name="reading">Reading data into R</a>
+## <a name="reading"></a> Reading data into R
 
 In this section, we will learn how to read in csv or Excel files into R. We focus on csv files because they are simplest to import, they can be easily exported from Excel (or other software), and they are portable, i.e. they can be used in other software.
 
-### <a name="working_directory">Changing your working directory</a>
+### <a name="working_directory"></a> Changing your working directory
 
-One of the first tasks after starting R is to change the working directory. To set,
+One of the first tasks after starting R is to change the working directory. 
+This directory will contain the files and scripts you will use for your current
+project.
+Today, that project is this workshop, so you might put a folder on your desktop
+named `MWBDSSworkshop` and use this as your working directory.
+To set the working directory,
 
 - in RStudio: Session > Set Working Directory > Choose Directory... (Ctrl + Shift + H)
 - in R GUI (Windows): File > Change Dir... 
 - in R GUI (Mac): Misc > Change Working Directory...
-
-Or, you can just run the following command
-```{r, eval=FALSE}
-setwd(choose.dir(getwd()))
-```
 
 Make sure you have write access to this directory. 
 
@@ -244,13 +241,13 @@ Make sure you have write access to this directory.
 
 Much of the functionality of R is contained in packages. The first time these packages are used, they need to be installed, e.g. to install a package from [CRAN](http://cran.r-project.org/web/packages/) use 
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, purl=FALSE}
 install.packages('dplyr')
 ```
 
 Once installed, a package needs to be loaded into each R session where the package is used.
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, purl=FALSE}
 library('dplyr')
 ```
 
@@ -261,20 +258,20 @@ library('dplyr')
 First load the package 
 
 ```{r, warning=FALSE}
-library('ISDSWorkshop')
+library("MWBDSSworkshop")
 ```
 
 This package contains a function to help you get started, so run that function.
 
 ```{r, warning=FALSE}
-workshop()
+workshop(write_data = TRUE, write_scripts = TRUE)
 ```
 
 This function did three things:
 
-1. It opened the workshop outline in a web browser.
 1. It created a set of .csv data files in your working directory.
-1. It created a set of .R scripts in your working directory. 
+1. It created a set of .R scripts in your working directory.
+1. It opened the workshop outline in a web browser. 
 
 
 ### Open an R script
@@ -282,8 +279,7 @@ This function did three things:
 As we progress through the workshop, the code for a particular module will be
 available in the R script for that module. 
 
-In R/RStudio, open the module called `01_intro.R` and scroll down to the 
-`workshop()` command. From here on out, as I run commands you should run the 
+In R/RStudio, open the module called `01_intro.R`. From here on out, as I run commands you should run the 
 commands as well by using Ctrl-R (Windows) or Command-Enter (Mac) with the 
 appropriate line(s) highlighted. 
 
@@ -307,9 +303,9 @@ data stored in Excel, SAS, Stata, SPSS, and database formats.
 
 #### Reading a csv file into R
 
-The most common way I read data into R is through a csv file. 
-csv stands for comma-separated value file and is a standard file format for
-data. The utils package (which is installed and loaded with base R) has a 
+The most common way I read data into R is through a csv,
+comma-separated value, file. 
+The utils package (which is installed and loaded with base R) has a 
 function called `read.csv` for reading csv files into R. 
 For example, 
 
@@ -337,15 +333,22 @@ all.equal(GI, GI2)
 
 The `read.csv` function is available in base R, but these days I will often
 use the `read_csv` function in the 
-[readr](https://cran.r-project.org/web/packages/readr/index.html).
+[readr](https://cran.r-project.org/web/packages/readr/index.html) 
+package.
 
 ```{r, eval=FALSE}
-install.packages("readr") # run this command if the readr package is not installed
-library('readr')
-GI <- read_csv("GI.csv")
+library("readr")
+GI = read_csv("GI.csv")
 ```
 
-### <a name="excel">Read Excel xlsx file</a>
+This function has two main differences compared to the `read.csv` function:
+
+- does NOT use [`make.names`](https://stat.ethz.ch/R-manual/R-devel/RHOME/library/base/html/make.names.html) on the column names 
+- does NOT convert character columns to factors
+
+
+
+#### <a name="excel"></a> Read Excel files
 
 My main suggestion for reading Excel files into R is to 
 
@@ -355,23 +358,26 @@ My main suggestion for reading Excel files into R is to
 This approach will work regardless of any changes Excel makes in its document 
 structure.
 
-Reading an Excel xlsx file into R is done using the `read.xlsx` function from 
-the [xlsx](http://cran.r-project.org/web/packages/xlsx/index.html) R package. 
+Reading an Excel xlsx file into R can be done using the `read_excel` function 
+from the [readxl](https://cran.r-project.org/web/packages/readxl/index.html) R 
+package. 
 Unfortunately many scenarios can cause this process to not work. 
-Thus, we do not focus on it in an introductory R course. When it works, it looks 
-like this
+Thus, we do not focus on this method in an introductory R course. 
+When it works, it looks like this
 
 ```{r, eval=FALSE}
-install.packages('xlsx')
-library('xlsx')
-d = read.xlsx("filename.xlsx", sheetIndex=1) # or
-d = read.xlsx("filename.xlsx", sheetName="sheetName")
+install.packages("readxl")
+library("readxl")
+d = read_excel("filename.xlsx", sheetIndex=1) # or
+d = read_excel("filename.xlsx", sheetName="sheetName")
 ```
+
+More information can be found [here](https://readxl.tidyverse.org/).
 
 Again, if these approaches don't work, you can `Save as...` a csv file in Excel.
 
 
-### Read SAS, Stata, or SPSS data files
+#### Read SAS, Stata, or SPSS data files
 
 The `haven` package provides functionality to read in SAS, Stata, and SPSS 
 files. 
@@ -393,7 +399,7 @@ which we will discussing today, has a [number of functions to read from some
 databases](https://cran.r-project.org/web/packages/dplyr/vignettes/databases.html).
 The code will look something like
 ```{r, eval=FALSE}
-library('dplyr')
+library("dplyr")
 my_db <- src_sqlite("my_db.sqlite3", create = T)
 ```
 
@@ -404,13 +410,13 @@ The code might look something like
 
 ```{r, eval=FALSE}
 install.packages("RODBC")
-library('RODBC')
+library("RODBC")
 
 # RODBC Example
 # import 2 tables (Crime and Punishment) from a DBMS
 # into R data frames (and call them crimedat and pundat)
 
-library(RODBC)
+library("RODBC")
 myconn <-odbcConnect("mydsn", uid="Rob", pwd="aardvark")
 crimedat <- sqlFetch(myconn, "Crime")
 pundat <- sqlQuery(myconn, "select * from Punishment")
@@ -428,9 +434,10 @@ Here are a few:
 dim(GI)
 nrow(GI)
 ncol(GI)
-names(GI) # column names
-head(GI, n=5) # first 5 rows of the data.frame
-tail(GI, n=5) # last5 rows of the data.frame
+names(GI)       # column names
+head(GI, n = 5) # first 5 rows of the data.frame
+tail(GI, n = 5) # last5 rows of the data.frame
+str(GI)
 ```
 
 
@@ -443,7 +450,7 @@ If you brought your own csv file, save it in your working directory.
 If you did not bring your own file, use the `fluTrends.csv` file in your working 
 directory. 
 
-Try to use the read.csv function to read the file into R. 
+Try to use the `read.csv` or `read.table` function to read the file into R. 
 There are a number of different options in the `read.table()` function that may 
 be useful:
 
@@ -572,22 +579,26 @@ exclusively use `dplyr::filter()` as I find the code is much easier to read.
 
 ```{r}
 GI_37a = GI[GI$facility==37,]
+rownames(GI_37a) = 1:nrow(GI_37a)
 all.equal(GI_37, GI_37a)
 
 GI_37b = subset(GI, facility==37)
+rownames(GI_37b) = 1:nrow(GI_37b)
 all.equal(GI_37, GI_37b)
 
 
 GI_AbdPain1 = GI[GI$chief_complaint == "Abd Pain",]
+rownames(GI_AbdPain1) = 1:nrow(GI_AbdPain1)
 all.equal(GI_AbdPain, GI_AbdPain1)
 
 GI_AbdPain2 = subset(GI, chief_complaint == "Abd Pain")
+rownames(GI_AbdPain2) = 1:nrow(GI_AbdPain2)
 all.equal(GI_AbdPain, GI_AbdPain2)
 ```
 
 #### Advanced filtering
 
-We can subset continuous variables using other logical statements.
+We can subset variables using other logical statements.
 
 ```{r, eval=FALSE}
 GI %>% filter(age <   5)
@@ -786,4 +797,3 @@ Some useful sites are
 - <http://www.statmethods.net/>
 - <http://stackoverflow.com/questions/tagged/r>
 - <http://www.ats.ucla.edu/stat/r/>
-- <https://sites.google.com/site/rapplicationforbiosurveillance/home/discussions>
