@@ -62,5 +62,6 @@ workshop = function(write_data    = FALSE,
   
   # Launch workshop index
   if (launch_index) 
-    browseURL(system.file("doc", "outline.html", package="MWBDSSworkshop"))
+    try(browseURL(system.file("doc", "outline.html", package="MWBDSSworkshop")))
+    
 }
