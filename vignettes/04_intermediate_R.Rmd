@@ -13,9 +13,8 @@ If you shut down R, you will need to change your working directory and run the
 following commands to load libraries,
 
 ```{r, message=FALSE}
-library('tidyverse')
-library('MWBDSSworkshop')
-workshop(launch_index=FALSE)
+library("tidyverse")
+library("MWBDSSworkshop")
 ```
 
 Read in the data files and create additional variables 
@@ -184,13 +183,14 @@ flu_l <- flu_w %>%
 ### Merge fluTrends data with map_data
 
 The region names in `map_data` are lower case, 
-so use `tolower()` to convert all the region names in flu_l to lowercase. 
+so use `tolower()` to convert all the region names in `flu_l` to lowercase. 
 Then the `map_data` and fluTrends data are merged using `merge()`. 
 
 ```{r}
 head(unique(states$region))
 flu_l$region = tolower(flu_l$region)
-states_merged = merge(states, flu_l, sort=FALSE, by='region')
+states_merged = states %>%
+  merge(flu_l, sort = FALSE, by = 'region')
 ```
 
 ### Make the plots
@@ -310,102 +310,19 @@ biosurveillance.
 
 All packages can be installed from their source. 
 If a package is not available in a repository, 
-then this is the only way to install the package. 
+then this is one way to install the package. 
 To install from source download the source file (.tar.gz) and then use the 
 `install.packages()` function with arguments `repos=NULL` and `type="source"`. 
 For example, from a source version of this workshop, 
 you would use the following command:
 
 ```{r, eval=FALSE}
-install.packages("MWBDSSworkshop_0.3.tar.gz", 
+install.packages("MWBDSSworkshop_0.4.tar.gz", 
                  repos = NULL, 
                  type  = "source")
 ```
 
 
-
-### Packages for surveillance
-
-Some [packages for performing surveillance](http://www.ij-healthgeographics.com/content/9/1/16) are 
-
-- [accrued](http://cran.r-project.org/web/packages/accrued/index.html)
-- [Epi](http://cran.r-project.org/web/packages/Epi/index.html)
-- [SpatialEpi](http://cran.r-project.org/web/packages/SpatialEpi/index.html)
-- [surveillance](http://cran.r-project.org/web/packages/surveillance/index.html)
-- [vetsyn](https://github.com/nandadorea/vetsyn)
-
-
-### SpatialEpi - Kulldorff example
-
-The `SpatialEpi` package implements the Kulldorff cluster detection method in 
-the `kulldorff()` function. 
-
-Setting up the analysis (taken directly from the example)
-```{r}
-library('SpatialEpi')
-
-## Load Pennsylvania Lung Cancer Data
-data(pennLC)
-data <- pennLC$data
-
-## Process geographical information and convert to grid
-geo <- pennLC$geo[,2:3]
-geo <- latlong2grid(geo)
-
-## Get aggregated counts of population and cases for each county
-population <- tapply(data$population, data$county, sum)
-cases      <- tapply(data$cases,      data$county, sum)
-
-## Based on the 16 strata levels, compute expected numbers of disease
-n.strata       <- 16
-expected.cases <- expected(data$population, data$cases, n.strata)
-
-## Set Parameters
-pop.upper.bound <- 0.5
-n.simulations   <- 999
-alpha.level     <- 0.05
-plot            <- TRUE
-```
-
-### SpatialEpi - Kulldorff example
-
-Plot the data
-
-```{r}
-clr = cases/population
-clr = 1-clr/max(clr) # make sure range is (0,1)
-plot(pennLC$spatial.polygon, axes=TRUE, col=rgb(1, clr, clr))
-```
-
-### SpatialEpi - Kulldorff example
-
-Run the analysis and plot the results (directly from the example)
-
-```{r}
-## Kulldorff using Binomial likelihoods
-binomial <- kulldorff(geo, cases, population, NULL, pop.upper.bound, n.simulations, 
-  alpha.level, plot)
-cluster <- binomial$most.likely.cluster$location.IDs.included
-
-## plot
-plot(pennLC$spatial.polygon,axes=TRUE)
-plot(pennLC$spatial.polygon[cluster],add=TRUE,col="red")
-title("Most Likely Cluster")
-```
-
-
-### Activity - Install the `surveillance` package
-
-If you are connected to the internet, try installing the `surveillance` package. 
-If you are successful, look at its help file.
-
-```{r, eval=FALSE}
-# Install the surveillance package
-```
-
-
-When you have completed the activity, compare your results to the 
-[solutions](04_advanced_R-solution.html#packages).
 
 
 
@@ -507,4 +424,208 @@ These apps can also be run locally, e.g.
 install.packages('shiny')
 library('shiny')
 runGitHub('NLMichaud/WeeklyCDCPlot')
+```
+
+
+## Regression
+
+Regression is a set of techniques for relating the mean/quantile of a response
+variable to a set of explanatory variables. 
+
+### Simple linear regression
+
+Simple linear regression looks at the relationship between a single explanatory
+variable and a continuous response. 
+The mean of the response is a straight line function of the explanatory 
+variable. 
+
+Let's look at the relationship between age and number of GI visits. 
+First, we need to construct the appropriate `data.frame`.
+
+```{r}
+visits_by_age = GI %>%
+  filter(age > 18, age < 80) %>%
+  group_by(age) %>%
+  summarize(count = n()) 
+```
+
+Plot the data.
+
+```{r}
+ggplot(visits_by_age, aes(x = age, y = count)) + 
+  geom_point() + 
+  scale_y_log10()
+```
+
+Let's use this to run a regression of log(count) on age. 
+
+```{r}
+m = lm(log(count) ~ age, data = visits_by_age)
+summary(m)
+```
+
+To visualize this use 
+
+```{r}
+ggplot(visits_by_age, aes(x = age, y = count)) + 
+  geom_point() + 
+  scale_y_log10() +
+  stat_smooth(method = "lm") # use `se=FALSE` if you do not want to see the uncertainty 
+```
+
+Default diagnostics. 
+
+```{r}
+opar = par(mfrow=c(2,3)) # Create a 2x3 grid of plots
+plot(1:6, m, ask=FALSE)  # 6 residual plots
+par(opar)                # Revert to original graphics settings
+```
+
+
+### Multiple regression
+
+When you have more than one explanatory variable and a continuous response,
+you can use multiple regression.
+
+```{r}
+m = lm(log(count) ~ age + I(age^2), data = visits_by_age)
+summary(m)
+```
+
+To visualize this use 
+
+```{r}
+ggplot(visits_by_age, aes(x = age, y = count)) + 
+  geom_point() + 
+  scale_y_log10() +
+  stat_smooth(method = "lm", formula = y ~ x + I(x^2)) 
+```
+
+This fit is still not very good. 
+You could use a `loess` smoother. 
+
+```{r}
+m = loess(log(count) ~ age, data = visits_by_age)
+summary(m)
+```
+
+```{r}
+ggplot(visits_by_age, aes(x = age, y = count)) + 
+  geom_point() + 
+  scale_y_log10() +
+  stat_smooth()  # default is loess
+```
+
+
+
+### Poisson regression
+
+A better model for these data is the Poisson regression model.
+
+```{r}
+m = glm(count ~ age + I(age^2), data = visits_by_age, family = "poisson")
+summary(m)
+```
+
+To visualize
+
+```{r}
+ggplot(visits_by_age, aes(x = age, y = count)) + 
+  geom_point() + 
+  stat_smooth(method = "glm", formula = y ~ x + I(x^2), 
+              method.args = list(family = "poisson"))
+```
+
+## Mixed effect models
+
+Random effects allow you to model correlation in your data. 
+For example, we might expect counts within a facility to be more similar
+than counts at different facilities. 
+Thus, we might improve our model by introducing a random effect for facility.
+
+First, construct the appropriate data set. 
+
+```{r}
+visits_by_age_and_facility = GI %>% 
+  filter(age > 18, age < 80) %>%
+  filter(facility != 259) %>%       # only 1 observation in this facility
+  group_by(facility, age) %>%
+  summarize(count = n())
+```
+
+Plot the data
+
+```{r}
+ggplot(visits_by_age_and_facility, aes(x = age, y = count)) + 
+  facet_wrap(~facility) +
+  scale_y_log10() +
+  geom_point()
+```
+
+Now, use the [lme4](https://cran.r-project.org/web/packages/lme4/index.html) or
+the [nlme](https://cran.r-project.org/web/packages/nlme/index.html) package to
+fit the model.
+
+First, we'll try a 
+
+```{r}
+library("lme4")
+m = lmer(log(count) ~ age + I(age^2) + (age+I(age^2)|facility), 
+         data = visits_by_age_and_facility)
+```
+
+Let's go with the suggetion and rescale age. 
+
+```{r}
+visits_by_age_and_facility = visits_by_age_and_facility %>%
+  mutate(age = scale(age))
+
+m = lmer(log(count) ~ age + I(age^2) + (age+I(age^2)|facility), 
+         data = visits_by_age_and_facility)
+summary(m)
+```
+
+
+
+## Random forests
+
+Let's suppose we are interested in predicting the number of GI visits by age, 
+facility, and gender. 
+We could use a (mixed effects) regression model and it might do quite well. 
+But there are a variety of techniques that have been introduced that typically
+do a better job at prediction.
+These techniques typically have a reduced ability to interpret the results.
+
+First, construct the appropriate data set
+
+```{r}
+visits = GI %>%
+  filter(age > 18, age < 80) %>%
+  filter(facility != 259) %>%       # only 1 observation in this facility
+  group_by(facility, age, gender) %>%
+  summarize(count = n())
+```
+
+Let's take a look at the data
+
+```{r}
+ggplot(visits, aes(x = age, y = count, color = gender, shape = gender)) + 
+  facet_wrap(~facility) +
+  scale_y_log10() +
+  geom_point()
+```
+
+Now let's construct a random forest.
+
+```{r}
+library("randomForest")
+m = randomForest(log(count) ~ age + gender + facility, data = visits)
+m
+importance(m)
+```
+
+This is a pretty small data set to be used for a random forest. 
+
+```{r}
+dim(visits)
 ```
