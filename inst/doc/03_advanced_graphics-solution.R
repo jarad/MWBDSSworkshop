@@ -1,9 +1,9 @@
 ## ---- echo=FALSE, message=FALSE------------------------------------------
 library('ggplot2')
 library('dplyr')
-library('ISDSWorkshop')
+library('MWBDSSworkshop')
 
-workshop(launch_index  = FALSE) # to make sure scripts and csv files are available
+workshop(write_data = TRUE, launch_index  = FALSE) # to make sure csv files are available
 
 ## ---- echo=FALSE---------------------------------------------------------
 # Read in csv files

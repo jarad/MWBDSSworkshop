@@ -1,6 +1,5 @@
 ## ---- eval=FALSE---------------------------------------------------------
-## setwd(choose.dir(getwd())) # change your working directory
-## ISDSWorkshop::workshop()   # write the files (and open up the workshop outline)
+#  MWBDSSworkshop::workshop(write_data = TRUE, write_scripts = TRUE)
 
 ## ------------------------------------------------------------------------
 a = 3.14159265 
@@ -116,20 +115,6 @@ m
 
 # Print all but the 3rd row
 
-## ---- echo=FALSE, message=FALSE------------------------------------------
-library('ISDSWorkshop')
-
-# may need to change your working directory 
-# check your working directory using 
-#
-# getwd()
-#
-# and choose a directory using
-#
-# setwd(choose.dir(getwd()))
-
-workshop(write_scripts = FALSE, launch_index = FALSE)
-
 ## ------------------------------------------------------------------------
 GI = read.csv("GI.csv")
 dim(GI)
@@ -147,12 +132,12 @@ GI %>%
   head(n = 2)
 
 ## ---- eval=FALSE---------------------------------------------------------
-## # Approach 1
-## head(select(GI, facility, icd9, gender), n = 2)
-## 
-## # Approach 2
-## GI_select <- select(GI, facility, icd9, gender)
-## head(GI_select, n = 2)
+#  # Approach 1
+#  head(select(GI, facility, icd9, gender), n = 2)
+#  
+#  # Approach 2
+#  GI_select <- select(GI, facility, icd9, gender)
+#  head(GI_select, n = 2)
 
 ## ------------------------------------------------------------------------
 str(GI)
@@ -180,15 +165,15 @@ GI$date = as.Date(GI$date)
 str(GI$date)
 
 ## ---- eval=FALSE---------------------------------------------------------
-## ?as.Date
+#  ?as.Date
 
 ## ---- eval=FALSE---------------------------------------------------------
-## as.Date("12/09/14", format="%m/%d/%y")
+#  as.Date("12/09/14", format="%m/%d/%y")
 
 ## ---- eval=FALSE---------------------------------------------------------
-## # Create icd9code
-## 
-## # Find the icd9code that is most numerous
+#  # Create icd9code
+#  
+#  # Find the icd9code that is most numerous
 
 ## ---- echo=FALSE---------------------------------------------------------
 d = data.frame(week = 1:3, 
@@ -197,9 +182,8 @@ d = data.frame(week = 1:3,
 d
 
 ## ---- echo=FALSE---------------------------------------------------------
-library('tidyr')
 d %>% 
-  gather(key = syndrome, value = count, -week)
+  tidyr::gather(key = syndrome, value = count, -week)
 
 ## ------------------------------------------------------------------------
 library('tidyr')
@@ -208,6 +192,7 @@ library('tidyr')
 d = data.frame(week = 1:3, 
                GI   = c(246,195,212), 
                ILI  = c(948, 1020, 1024))
+d
 
 ## ------------------------------------------------------------------------
 m <- d %>%
@@ -260,7 +245,7 @@ library('ggplot2')
 ggplot(data = GI, aes(x = age)) + geom_histogram(binwidth = 1)
 
 ## ---- eval=FALSE---------------------------------------------------------
-## qplot(data = GI, x = age, geom = "histogram", binwidth = 1)
+#  qplot(data = GI, x = age, geom = "histogram", binwidth = 1)
 
 ## ------------------------------------------------------------------------
 ggplot(data = GI, aes(x = 1, y = age)) + geom_boxplot()
@@ -275,12 +260,12 @@ ggplot(GI, aes(x=date, y=age)) + geom_point()
 ggplot(GI, aes(x=facility)) + geom_bar()
 
 ## ---- eval=FALSE---------------------------------------------------------
-## # Construct a histogram for age at facility 37.
-## 
-## # Construct a boxplot for age at facility 37.
+#  # Construct a histogram for age at facility 37.
+#  
+#  # Construct a boxplot for age at facility 37.
 
 ## ---- eval=FALSE---------------------------------------------------------
-## # Construct a bar chart for the 3-digit zipcode at facility 37
+#  # Construct a bar chart for the 3-digit zipcode at facility 37
 
 ## ------------------------------------------------------------------------
 ggplot(GI, aes(x = age)) + 
@@ -291,7 +276,7 @@ ggplot(GI, aes(x=date, y=age)) +
   geom_point(color = 'purple')
 
 ## ---- eval=FALSE---------------------------------------------------------
-## colors()
+#  colors()
 
 ## ------------------------------------------------------------------------
 ggplot(GI, aes(x = facility, y = age)) + 
@@ -304,7 +289,7 @@ ggplot(GI, aes(x = facility, y = age)) +
 ggplot(GI, aes(x=date, y=age)) + geom_point(shape = 2, color = 'red')
 
 ## ---- eval=FALSE---------------------------------------------------------
-## ?points
+#  ?points
 
 ## ------------------------------------------------------------------------
 g = ggplot(GI %>% 
@@ -323,10 +308,10 @@ g = g + geom_line(size = 1, color = 'firebrick')
 g + theme_bw()
 
 ## ---- eval=FALSE---------------------------------------------------------
-## ?theme
-## ?theme_bw
+#  ?theme
+#  ?theme_bw
 
 ## ---- eval=FALSE---------------------------------------------------------
-## ?ggplot
-## ?geom_point
+#  ?ggplot
+#  ?geom_point
 

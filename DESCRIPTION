@@ -1,8 +1,8 @@
 Package: MWBDSSworkshop
 Type: Package
 Title: Midwest Big Data Summer School R Workshop
-Version: 0.4.1
-Date: 2019-05-19
+Version: 0.4.2
+Date: 2019-05-20
 Author: Jarad Niemi
 Maintainer: Jarad Niemi <niemi@iastate.edu>
 Description: An R package for the Midwest Big Data Summer School R workshop. 
