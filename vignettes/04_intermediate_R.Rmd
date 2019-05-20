@@ -168,8 +168,8 @@ fluTrends = read.csv("fluTrends.csv", check.names=FALSE)
 For simplicity, only keep the most recent 12 weeks on states. 
 
 ```{r}
-nr = nrow(fluTrends)
-flu_w = fluTrends[(nr-11):nr, c(1,3:53)]
+flu_w = fluTrends %>%
+  tail(n = 12) 
 dim(flu_w)
 ```
 
@@ -201,7 +201,7 @@ Some Google Flu Trend data.
 states_merged$Date = as.Date(states_merged$Date)
 mx_date = max(states_merged$Date)
 g = ggplot(states_merged %>% filter(Date == mx_date), 
-       aes(x = long, y = lat, group = group, fill = index)) + 
+       aes(x = long, y = lat, group = region, fill = index)) + 
   geom_polygon() + 
   labs(title=paste('Google Flu Trends on', mx_date), x='', y='') +
   theme_minimal() + 
@@ -234,7 +234,7 @@ ggplot(states_merged,
 Modify the code to determine what elements of the map are affected.
 
 Advanced: Download the data directly from 
-<http://www.google.org/flutrends/about/data/flu/historic/us-historic-v3.txt> 
+<http://www.google.org/flutrends/about/data/flu/historic/us-historic-v2.txt> 
 using `read.csv' and then construct a map of the most recent Google Flu Trends 
 data. 
 
@@ -427,12 +427,12 @@ runGitHub('NLMichaud/WeeklyCDCPlot')
 ```
 
 
-## Regression
+## <a name="regression"></a> Regression
 
 Regression is a set of techniques for relating the mean/quantile of a response
 variable to a set of explanatory variables. 
 
-### Simple linear regression
+### <a name="slr"></a> Simple linear regression
 
 Simple linear regression looks at the relationship between a single explanatory
 variable and a continuous response. 
@@ -477,12 +477,12 @@ Default diagnostics.
 
 ```{r}
 opar = par(mfrow=c(2,3)) # Create a 2x3 grid of plots
-plot(1:6, m, ask=FALSE)  # 6 residual plots
+plot(m, 1:6, ask=FALSE)  # 6 residual plots
 par(opar)                # Revert to original graphics settings
 ```
 
 
-### Multiple regression
+### <a name="multiple_regression"></a> Multiple regression
 
 When you have more than one explanatory variable and a continuous response,
 you can use multiple regression.
@@ -501,6 +501,8 @@ ggplot(visits_by_age, aes(x = age, y = count)) +
   stat_smooth(method = "lm", formula = y ~ x + I(x^2)) 
 ```
 
+### <a name="smoothing"></a> Regression smoothers
+
 This fit is still not very good. 
 You could use a `loess` smoother. 
 
@@ -518,7 +520,7 @@ ggplot(visits_by_age, aes(x = age, y = count)) +
 
 
 
-### Poisson regression
+### <a name="poisson_regression"></a> Poisson regression
 
 A better model for these data is the Poisson regression model.
 
@@ -536,7 +538,7 @@ ggplot(visits_by_age, aes(x = age, y = count)) +
               method.args = list(family = "poisson"))
 ```
 
-## Mixed effect models
+### <a name="mixed_effect"></a> Mixed effect models
 
 Random effects allow you to model correlation in your data. 
 For example, we might expect counts within a facility to be more similar
@@ -587,7 +589,7 @@ summary(m)
 
 
 
-## Random forests
+### <a name="random_forests"></a> Random forests
 
 Let's suppose we are interested in predicting the number of GI visits by age, 
 facility, and gender. 

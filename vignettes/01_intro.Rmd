@@ -218,11 +218,11 @@ Calculate the probability the individual has the disease if the test is positive
 When you have completed the activity, compare your results to the [solutions](01_intro-solution.html#calculator).
 
 
-## <a name="reading">Reading data into R</a>
+## <a name="reading"></a> Reading data into R
 
 In this section, we will learn how to read in csv or Excel files into R. We focus on csv files because they are simplest to import, they can be easily exported from Excel (or other software), and they are portable, i.e. they can be used in other software.
 
-### <a name="working_directory">Changing your working directory</a>
+### <a name="working_directory"></a> Changing your working directory
 
 One of the first tasks after starting R is to change the working directory. 
 This directory will contain the files and scripts you will use for your current
@@ -333,21 +333,22 @@ all.equal(GI, GI2)
 
 The `read.csv` function is available in base R, but these days I will often
 use the `read_csv` function in the 
-[readr](https://cran.r-project.org/web/packages/readr/index.html).
+[readr](https://cran.r-project.org/web/packages/readr/index.html) 
+package.
 
 ```{r, eval=FALSE}
 library("readr")
-GI <- read_csv("GI.csv")
+GI = read_csv("GI.csv")
 ```
 
 This function has two main differences compared to the `read.csv` function:
 
-- does not run [`make.names`](https://stat.ethz.ch/R-manual/R-devel/RHOME/library/base/html/make.names.html) on the column names
-- does not convert character columns to factors
+- does NOT use [`make.names`](https://stat.ethz.ch/R-manual/R-devel/RHOME/library/base/html/make.names.html) on the column names 
+- does NOT convert character columns to factors
 
 
 
-### <a name="excel">Read Excel files</a>
+#### <a name="excel"></a> Read Excel files
 
 My main suggestion for reading Excel files into R is to 
 
@@ -376,7 +377,7 @@ More information can be found [here](https://readxl.tidyverse.org/).
 Again, if these approaches don't work, you can `Save as...` a csv file in Excel.
 
 
-### Read SAS, Stata, or SPSS data files
+#### Read SAS, Stata, or SPSS data files
 
 The `haven` package provides functionality to read in SAS, Stata, and SPSS 
 files. 
@@ -433,9 +434,10 @@ Here are a few:
 dim(GI)
 nrow(GI)
 ncol(GI)
-names(GI) # column names
-head(GI, n=5) # first 5 rows of the data.frame
-tail(GI, n=5) # last5 rows of the data.frame
+names(GI)       # column names
+head(GI, n = 5) # first 5 rows of the data.frame
+tail(GI, n = 5) # last5 rows of the data.frame
+str(GI)
 ```
 
 
@@ -448,7 +450,7 @@ If you brought your own csv file, save it in your working directory.
 If you did not bring your own file, use the `fluTrends.csv` file in your working 
 directory. 
 
-Try to use the read.csv function to read the file into R. 
+Try to use the `read.csv` or `read.table` function to read the file into R. 
 There are a number of different options in the `read.table()` function that may 
 be useful:
 
@@ -577,22 +579,26 @@ exclusively use `dplyr::filter()` as I find the code is much easier to read.
 
 ```{r}
 GI_37a = GI[GI$facility==37,]
+rownames(GI_37a) = 1:nrow(GI_37a)
 all.equal(GI_37, GI_37a)
 
 GI_37b = subset(GI, facility==37)
+rownames(GI_37b) = 1:nrow(GI_37b)
 all.equal(GI_37, GI_37b)
 
 
 GI_AbdPain1 = GI[GI$chief_complaint == "Abd Pain",]
+rownames(GI_AbdPain1) = 1:nrow(GI_AbdPain1)
 all.equal(GI_AbdPain, GI_AbdPain1)
 
 GI_AbdPain2 = subset(GI, chief_complaint == "Abd Pain")
+rownames(GI_AbdPain2) = 1:nrow(GI_AbdPain2)
 all.equal(GI_AbdPain, GI_AbdPain2)
 ```
 
 #### Advanced filtering
 
-We can subset continuous variables using other logical statements.
+We can subset variables using other logical statements.
 
 ```{r, eval=FALSE}
 GI %>% filter(age <   5)
@@ -791,4 +797,3 @@ Some useful sites are
 - <http://www.statmethods.net/>
 - <http://stackoverflow.com/questions/tagged/r>
 - <http://www.ats.ucla.edu/stat/r/>
-- <https://sites.google.com/site/rapplicationforbiosurveillance/home/discussions>
