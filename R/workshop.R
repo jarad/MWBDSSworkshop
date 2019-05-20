@@ -48,7 +48,7 @@ workshop = function(write_data    = FALSE,
     write_scripts = c("01_intro.R",
                       "02_graphics.R",
                       "03_advanced_graphics.R",
-                      "04_advanced_R.R")
+                      "04_intermediate_R.R")
   } else {
     write_scripts = NULL
   }
