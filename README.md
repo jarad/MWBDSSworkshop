@@ -64,7 +64,7 @@ A warning will be issued for any packages that could not be installed.
 
 If you want to test that everything is working, in R run 
 
-    MWBDSSworkshop::workshop(FALSE, FALSE)
+    MWBDSSworkshop::workshop()
 
 which should open a web-browser with an outline for the workshop. 
 
