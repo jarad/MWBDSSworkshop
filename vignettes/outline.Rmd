@@ -27,7 +27,7 @@ vignette: >
 
 - [Data types](02_graphics.html#types)
 - [Data frames](02_graphics.html#frames)
-    - [Factors](02_graphics.html#factors)
+    - [Factors](02_graphics.html#factor)
     - [Dates](02_graphics.html#dates)
 - [Reshaping data frames in R](02_graphics.html#reshaping)
 - [Aggregating data frames in R](02_graphics.html#aggregating)

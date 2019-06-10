@@ -10,7 +10,7 @@ You will need to have internet access and administrator privileges to install ev
 
 ## Install R (may require administrator privileges)
 
-Please go to <http://www.r-project.org/> and click on [download R](http://cran.r-project.org/mirrors.html). You will be asked to select a [CRAN mirror](http://cran.r-project.org/mirrors.html). I select <https://rweb.crmda.ku.edu/cran/> as it is geographically close and uses the secure http protocol (HTTPS). In the download and install R section, Click on the correct link depending on your operating system: Linux, (Mac) OS X, or Windows. 
+Please go to <http://www.r-project.org/> and click on [download R](http://cran.r-project.org/mirrors.html). You will be asked to select a [CRAN mirror](http://cran.r-project.org/mirrors.html). I select <https://mirror.las.iastate.edu/CRAN/> as it is geographically close and uses the secure http protocol (HTTPS). In the download and install R section, Click on the correct link depending on your operating system: Linux, (Mac) OS X, or Windows. 
 
 ### Windows
 
